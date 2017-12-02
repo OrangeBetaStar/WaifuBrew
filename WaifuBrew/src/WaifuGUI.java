@@ -46,14 +46,14 @@ public class WaifuGUI extends JFrame {
 
     private void createMenus() {
         JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu();
 
-        /*
-        JMenuItem drawingItem = new JMenuItem("New");
-        drawingItem.addActionListener(new NewDrawingAction());
-        drawingMenu.add(drawingItem);
-        menuBar.add(drawingMenu);
+        JMenuItem items = new JMenuItem("New");
+        //drawingItem.addActionListener(new NewDrawingAction());
+        menu.add(items);
+        menuBar.add(menu);
         this.setJMenuBar(menuBar);
-        */
+
     }
 
 
