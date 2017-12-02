@@ -1,16 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 public class WaifuGUI extends JFrame {
     //private variables
@@ -53,14 +43,43 @@ public class WaifuGUI extends JFrame {
         menu.add(items);
         menuBar.add(menu);
         this.setJMenuBar(menuBar);
-
     }
 
+    public void setWaifu(Waifu waifu) {
+        if (waifu != null && this.currentWaifu != null //&& this.currentWaifu.equals(waifu) == false
+                 || this.currentWaifu.getMood() != waifu.getMood()) {
+            this.currentWaifu = waifu;
+            displayImage(waifu.name, waifu.getMood());
+        }
+    }
 
+    private void displayImage(String name, Mood mood) {
+        ImageIcon image = new ImageIcon("C:\\Users\\Perry Liao\\Documents\\GitHub\\WaifuBrew\\WaifuBrew\\photos\\" +
+                name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
+        JLabel imageLabel = new JLabel(image);
+        imageLabel.setBounds(WIDTH/2, HEIGHT/2, WIDTH, HEIGHT);
+        imageLabel.setVisible(true);
+        add(imageLabel);
+    }
 
+    private boolean isValidClicc(MouseEvent e) {
+        return e.getX() >= 0 && e.getX() < this.WIDTH &&
+                e.getY() >= 0 && e.getY() < this.HEIGHT;
+    }
+
+    private void runNext(MouseEvent e) {
+        if (isValidClicc(e)) {
+            setWaifu(this.currentWaifu);
+            // change pic
+        }
+    }
     // Main application
     public static void main(String args[]) {
         new WaifuGUI();
+        WaifuGUI test = new WaifuGUI();
+        Waifu asdf = new Waifu("nico",45, 140, new int[] {74, 60, 71}, Mood.HAPPY);
+        asdf.setMood(Mood.ANGRY);
+        test.setWaifu(asdf);
     }
 
 }

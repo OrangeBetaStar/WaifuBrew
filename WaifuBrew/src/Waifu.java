@@ -1,16 +1,13 @@
 public class Waifu {
     int weight; //it's kg
     int height; //it's cm
-    int[] threeSizes = new int[3];
+    int threeSizes[] = {0,0,0};
     String name;
     Mood mood;
 
     public Waifu(){
         weight = 0;
         height = 0;
-        threeSizes[0] = 0;
-        threeSizes[1] = 0;
-        threeSizes[2] = 0;
         name = "";
         mood = Mood.NORMAL;
     }

@@ -11,6 +11,8 @@ public class WaifuBrew {
     public static void main(String[] args) {
         createWaifu();
         visual();
+
+
     }
 
     public static void visual() {
@@ -19,11 +21,10 @@ public class WaifuBrew {
     }
 
     public static void createWaifu(){
-        Waifu asdf = new Waifu("asdf",45, 140);
+        Waifu asdf = new Waifu("nico",45, 140, new int[] {74, 60, 71}, Mood.HAPPY);
         System.out.println("Height is " + asdf.getHeight() + "cm.");
 
         Tsundere shana = new Tsundere("perry", 60, 170);
         System.out.println("Wieght is " + shana.getWeight());
-
     }
 }
