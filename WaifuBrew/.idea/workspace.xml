@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/mood.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Waifu.class" afterPath="$PROJECT_DIR$/out/production/WaifuBrew/Waifu.class" />
-      <change beforePath="$PROJECT_DIR$/src/Tsundere.java" afterPath="$PROJECT_DIR$/src/Tsundere.java" />
-      <change beforePath="$PROJECT_DIR$/src/Waifu.java" afterPath="$PROJECT_DIR$/src/Waifu.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Tsundere.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Waifu.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/WaifuBrew.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/WaifuGUI.class" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/src/Mood.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/src/Waifu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
               <folding>
                 <element signature="e#959#960#0" expanded="true" />
                 <element signature="e#988#989#0" expanded="true" />
@@ -376,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512246389468</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update 1.03:&#10;&#10;Added Enum.">
+      <created>1512248137913</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1512248137913</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -418,7 +425,8 @@
     <MESSAGE value="GUI works!" />
     <MESSAGE value="Update 1.01" />
     <MESSAGE value="Update 1.02:&#10;&#10;Update to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update 1.02:&#10;&#10;Update to GUI" />
+    <MESSAGE value="Update 1.03:&#10;&#10;Added Enum." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 1.03:&#10;&#10;Added Enum." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -507,7 +515,7 @@
     <entry file="file://$PROJECT_DIR$/src/Mood.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -523,7 +531,7 @@
     <entry file="file://$PROJECT_DIR$/src/Waifu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
           <folding>
             <element signature="e#959#960#0" expanded="true" />
             <element signature="e#988#989#0" expanded="true" />
