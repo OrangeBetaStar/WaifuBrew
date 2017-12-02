@@ -1,3 +1,8 @@
+/*
+ * Project by Sidetail & Gaia
+
+*/
+
 import javax.swing.JFrame;
 import java.awt.*;
 
@@ -14,7 +19,11 @@ public class WaifuBrew {
     }
 
     public static void createWaifu(){
-        Waifu asdf = new Waifu(45, 140);
+        Waifu asdf = new Waifu("asdf",45, 140);
         System.out.println("Height is " + asdf.getHeight() + "cm.");
+
+        Tsundere shana = new Tsundere("perry", 60, 170);
+        System.out.println("Wieght is " + shana.getWeight());
+
     }
 }
