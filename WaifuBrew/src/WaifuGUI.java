@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 public class WaifuGUI extends JFrame {
     //private variables
-    private static int WIDTH = 500;
-    private static int HEIGHT = 500;
+    private static int WIDTH = 1280;
+    private static int HEIGHT = 720;
 
     private Waifu currentWaifu;
     private String text;
