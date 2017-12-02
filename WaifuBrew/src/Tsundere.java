@@ -7,6 +7,7 @@ public class Tsundere extends Waifu{
         this.name = name;
         this.weight = weight;
         this.height = height;
+        this.mood = Mood.ANGRY;
     }
 
 }
