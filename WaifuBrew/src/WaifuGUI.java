@@ -1,33 +1,36 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class WaifuGUI extends JFrame {
     //private variables
     private static int WIDTH = 1280;
     private static int HEIGHT = 720;
 
-    private Waifu currentWaifu;
-    private String text;
-
+    private Waifu currentWaifu = null;
+    private String text = "";
+    private JFrame frame;
     //constructor
+
     public WaifuGUI() {
-        super("WaifuGUI");
 
-        //initialize fields
-        this.currentWaifu = null;
-        this.text = "";
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                runNext(me);
+            }
+        });
 
-        //initialize gfx
-        setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        createMenus();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-
+        frame = new JFrame("WaifuGUI");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        File f = new File("WaifuBrew/res/resources/icon.jpg");
+        frame.setIconImage(new ImageIcon(f.getAbsolutePath()).getImage());
     }
-    public  Waifu getCurrentWaifu() {
+
+    public Waifu getCurrentWaifu() {
         return this.currentWaifu;
     }
     public void setText(String s) {
@@ -53,37 +56,50 @@ public class WaifuGUI extends JFrame {
     }
 
     private void displayImage(String name, Mood mood) {
-        System.out.println("C:\\Users\\BetaStar\\IdeaProjects\\WaifuBrew\\WaifuBrew\\photos\\" +
-                name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
-        ImageIcon image = new ImageIcon("C:\\Users\\BetaStar\\IdeaProjects\\WaifuBrew\\WaifuBrew\\photos\\" +
-                name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
+        File f = new File("WaifuBrew/res/resources/" + name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
+        System.out.println(f.getAbsoluteFile());
+        ImageIcon image = new ImageIcon(f.getAbsolutePath());
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBounds(WIDTH/2, HEIGHT/2, WIDTH, HEIGHT);
-        add(imageLabel);
+        frame.add(imageLabel);
         imageLabel.setVisible(true);
-        setLayout(new FlowLayout());
+
+        //Display the window.
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.getContentPane().add(new mouseClass());
     }
 
     private boolean isValidClicc(MouseEvent e) {
-        return e.getX() >= 0 && e.getX() < this.WIDTH && e.getY() >= 0 && e.getY() < this.HEIGHT;
+        // System.out.println("isValidClicc");
+        return e.getX() >= 0 && e.getX() < this.WIDTH &&
+                e.getY() >= 0 && e.getY() < this.HEIGHT;
     }
 
     private void runNext(MouseEvent e) {
-        if (isValidClicc(e)) {
-            setWaifu(this.currentWaifu);
-            // change pic
-        }
+        System.out.println("runNext");
+        //if (isValidClicc(e)) {
+            if (this.currentWaifu.getMood().equals(Mood.HAPPY)) {
+                this.currentWaifu.setMood(Mood.ANGRY);
+                System.out.println("Pressed. Switching to Angry!");
+                setWaifu(this.currentWaifu);
+            }
+            else {
+                this.currentWaifu.setMood(Mood.HAPPY);
+                System.out.println("Pressed. Switching to Happy!");
+                setWaifu(this.currentWaifu);
+            }
+
+        //}
     }
     // Main application
     public static void main(String args[]) {
         new WaifuGUI();
         WaifuGUI test = new WaifuGUI();
-        Waifu asdf = new Waifu("nico",45, 140, new int[] {74, 60, 71}, Mood.HAPPY);
-        test.displayImage(asdf.name, asdf.getMood());
-
-        asdf.setMood(Mood.ANGRY);
-        test.setWaifu(asdf);
-        test.displayImage(asdf.name, asdf.getMood());
+        Waifu nicoNii = new Waifu("Nico",43, 153, new int[] {74, 57, 79}, Mood.HAPPY);
+        //nicoNii.setMood(Mood.HAPPY);
+        test.displayImage(nicoNii.name, nicoNii.getMood());
     }
 
 }
