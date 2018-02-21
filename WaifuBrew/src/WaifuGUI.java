@@ -18,6 +18,7 @@ public class WaifuGUI extends JFrame {
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
+                //System.out.println("wew");
                 runNext(me);
             }
         });
@@ -26,7 +27,7 @@ public class WaifuGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        File f = new File("WaifuBrew/res/resources/icon.jpg");
+        File f = new File("resources/icon.jpg");
         frame.setIconImage(new ImageIcon(f.getAbsolutePath()).getImage());
     }
 
@@ -62,6 +63,7 @@ public class WaifuGUI extends JFrame {
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBounds(WIDTH/2, HEIGHT/2, WIDTH, HEIGHT);
         frame.add(imageLabel);
+        //frame.setIconImage(imageLabel);
         imageLabel.setVisible(true);
 
         //Display the window.
