@@ -6,8 +6,8 @@ import java.io.File;
 
 public class WaifuGUI extends JFrame {
     //private variables
-    private static int WIDTH = 1280;
-    private static int HEIGHT = 720;
+    public static int WIDTH = 1280;
+    public static int HEIGHT = 720;
 
     private Waifu currentWaifu = null;
     private String text = "";
