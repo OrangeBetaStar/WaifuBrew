@@ -16,6 +16,8 @@ public class WaifuGUI extends JFrame {
 
     public WaifuGUI() {
 
+        //Hi there
+
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me){
                 runNext(me);
