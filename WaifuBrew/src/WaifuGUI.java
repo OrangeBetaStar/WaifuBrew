@@ -17,8 +17,7 @@ public class WaifuGUI extends JFrame {
     public WaifuGUI() {
 
         addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent me) {
-                //System.out.println("wew");
+            public void mousePressed(MouseEvent me){
                 runNext(me);
             }
         });
@@ -31,9 +30,11 @@ public class WaifuGUI extends JFrame {
         frame.setIconImage(new ImageIcon(f.getAbsolutePath()).getImage());
     }
 
+
     public Waifu getCurrentWaifu() {
         return this.currentWaifu;
     }
+
     public void setText(String s) {
         this.text = s;
     }
