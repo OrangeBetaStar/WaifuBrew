@@ -56,7 +56,7 @@ public class WaifuGUI extends JFrame {
     }
 
     private void displayImage(String name, Mood mood) {
-        File f = new File("WaifuBrew/res/resources/" + name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
+        File f = new File("resources/" + name.toLowerCase() + "-" + mood.toString().toLowerCase() + ".jpg");
         System.out.println(f.getAbsoluteFile());
         ImageIcon image = new ImageIcon(f.getAbsolutePath());
         JLabel imageLabel = new JLabel(image);
