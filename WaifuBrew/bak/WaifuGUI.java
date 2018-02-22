@@ -6,8 +6,8 @@ import java.io.File;
 
 public class WaifuGUI extends JFrame {
     //private variables
-    private static int WIDTH = 1280;
-    private static int HEIGHT = 720;
+    public static int WIDTH = 1280;
+    public static int HEIGHT = 720;
 
     private Waifu currentWaifu = null;
     private String text = "";
@@ -16,10 +16,8 @@ public class WaifuGUI extends JFrame {
 
     public WaifuGUI() {
 
-        //Hi there
-
         addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent me){
+            public void mousePressed(MouseEvent me) {
                 runNext(me);
             }
         });
@@ -28,15 +26,13 @@ public class WaifuGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        File f = new File("resources/icon.jpg");
+        File f = new File("WaifuBrew/res/resources/icon.jpg");
         frame.setIconImage(new ImageIcon(f.getAbsolutePath()).getImage());
     }
-
 
     public Waifu getCurrentWaifu() {
         return this.currentWaifu;
     }
-
     public void setText(String s) {
         this.text = s;
     }
@@ -66,7 +62,7 @@ public class WaifuGUI extends JFrame {
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBounds(WIDTH/2, HEIGHT/2, WIDTH, HEIGHT);
         frame.add(imageLabel);
-        //frame.setIconImage(imageLabel);
+        frame.setIconImage(imageLabel);
         imageLabel.setVisible(true);
 
         //Display the window.
