@@ -2,7 +2,7 @@ import java.awt.event.MouseEvent;
 
 public class Menu {
     private String currentText;
-    private WaifuGUI gui;
+    private GUI gui;
     private int skip;
     private int auto;
     private int next;
@@ -12,7 +12,7 @@ public class Menu {
 
     public Menu() {
         this.currentText = "";
-        this.gui = new WaifuGUI();
+        this.gui = new GUI();
         this.skip = gui.WIDTH/4 + gui.WIDTH/20;
         this.auto = gui.WIDTH/4 + 2*gui.WIDTH/20;
         this.next = gui.WIDTH/4 + 3*gui.WIDTH/20;
