@@ -1,54 +1,100 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI extends JFrame {
-    private JPanel mousepanel;
-    private JLabel statusbar;
+    private JPanel waifuPanel;
+    private JLabel waifuLabel;
+    private static int WIDTH = 1920;
+    private static int HEIGHT = 1080;
 
-    public GUI() {
-        super("Waifuarium by TailSoft");
+    WaifuBrew newWaifu = new WaifuBrew();
 
-        mousepanel = new JPanel();
-        mousepanel.setBackground(Color.WHITE);
-        add(mousepanel, BorderLayout.CENTER);
+    File waifuHappy;
+    File waifuAngry;
 
-        statusbar = new JLabel("Start");
-        add(statusbar, BorderLayout.SOUTH);
+    ImageIcon ii;
+
+    public GUI(Waifu waifu) {
+        // super("Waifuarium by TailSoft");
+
+        waifuPanel = new JPanel();
+        waifuPanel.setBackground(Color.WHITE);
+        add(waifuPanel, BorderLayout.CENTER);
+
+        waifuLabel = new JLabel("Start");
+        add(waifuLabel, BorderLayout.SOUTH);
 
         Handlerclass handler = new Handlerclass();
-        mousepanel.addMouseListener(handler);
-        mousepanel.addMouseMotionListener(handler);
+        waifuPanel.addMouseListener(handler);
+        waifuPanel.addMouseMotionListener(handler);
+
+        waifuHappy = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + newWaifu.getWaifu().mood.toString().toLowerCase() + ".jpg");
+        newWaifu.getWaifu().setMood(Mood.ANGRY);
+        waifuAngry = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + newWaifu.getWaifu().mood.toString().toLowerCase() + ".jpg");
+
     }
+
+
+
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
         public void mouseClicked(MouseEvent event) {
-            statusbar.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
+            waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
-        public void mousePressed(MouseEvent event) {
-            statusbar.setText("you pressed down the mouse");
-        }
-        public void mouseReleased(MouseEvent event) {
-            statusbar.setText("you released the button");
-        }
-        public void mouseEntered(MouseEvent event) {
-            statusbar.setText("you entered the area");
-            // Get image path
 
-            mousepanel.setBackground(Color.RED);
+        public void mousePressed(MouseEvent event) {
+            waifuLabel.setText("you pressed down the mouse");
+            printMouseIn();
         }
+
+        public void mouseReleased(MouseEvent event) {
+            waifuLabel.setText("you released the button");
+            printMouseOut();
+        }
+
+        public void mouseEntered(MouseEvent event) {
+            waifuLabel.setText("you entered the area");
+            waifuPanel.setBackground(Color.RED);
+        }
+
         public void mouseExited(MouseEvent event) {
-            statusbar.setText("the mouse has left the window");
-            mousepanel.setBackground(Color.WHITE);
+            waifuLabel.setText("the mouse has left the window");
+            waifuPanel.setBackground(Color.WHITE);
         }
+
         // these are mouse motion event
         public void mouseDragged(MouseEvent event) {
-            statusbar.setText("you are dragging the mouse");
-        }
-        public void mouseMoved(MouseEvent event) {
-            statusbar.setText("you moved the mouse");
+            waifuLabel.setText("you are dragging the mouse");
         }
 
+        public void mouseMoved(MouseEvent event) {
+            waifuLabel.setText("you moved the mouse");
+        }
+
+        public void printMouseIn() {
+            // path has to change
+            ii = new ImageIcon(waifuHappy.getAbsolutePath());
+
+            JLabel lable = new JLabel(ii);
+            JScrollPane jsp = new JScrollPane(lable);
+
+            waifuPanel.add(jsp);
+        }
+        public void printMouseOut() {
+            // path has to change
+            ii = new ImageIcon(waifuAngry.getAbsolutePath());
+
+            JLabel lable = new JLabel(ii);
+            JScrollPane jsp = new JScrollPane(lable);
+
+            waifuPanel.add(jsp);
+        }
     }
 }

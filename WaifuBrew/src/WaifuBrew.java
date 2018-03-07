@@ -4,46 +4,40 @@
 */
 
 import javax.swing.*;
-import java.io.*;
-import java.awt.*;
 
 public class WaifuBrew {
 
+    GUI sample;
     private static int WIDTH = 1280;
     private static int HEIGHT = 720;
-
-    GUI sample;
 
     //sample waifu
     Waifu currWaifu;
 
+    WaifuBrew() {
+        createWaifu();
+    }
+
+
     public static void main(String[] args) {
-        WaifuBrew sampleWaifu = new WaifuBrew();
 
-        sampleWaifu.visual(sampleWaifu.createWaifu());
+        WaifuBrew programStart = new WaifuBrew();
 
-        File f = new File("resources/" + sampleWaifu.getWaifu().name.toLowerCase() + "-" + sampleWaifu.createWaifu().mood.toString().toLowerCase() + ".jpg");
-        System.out.println(f.getAbsoluteFile());
-        ImageIcon image = new ImageIcon(f.getAbsolutePath());
-        JLabel imageLabel = new JLabel(image);
+        programStart.visual(programStart.createWaifu());
     }
 
     public Waifu getWaifu() {
         return currWaifu;
     }
 
+
     public void visual(Waifu waifu) {
-        sample = new GUI();
+        sample = new GUI(waifu);
+
         sample.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sample.setSize(WIDTH, HEIGHT);
         sample.setVisible(true);
 
-
-        File f = new File("WaifuBrew/res/resources/icon.jpg");
-        sample.setIconImage(new ImageIcon(f.getAbsolutePath()).getImage());
-
-        File waifuFile = new File("resources/" + waifu.name.toLowerCase() + "-" + waifu.mood.toString().toLowerCase() + ".jpg");
-        System.out.println(waifuFile.getAbsoluteFile());
     }
 
     public Waifu createWaifu(){
@@ -52,4 +46,6 @@ public class WaifuBrew {
         currWaifu = nicoNii;
         return nicoNii;
     }
+
+
 }

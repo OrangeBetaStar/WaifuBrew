@@ -2,7 +2,7 @@ import java.awt.event.MouseEvent;
 
 public class Menu {
     private String currentText;
-    private GUI gui;
+    private WaifuBrew gui;
     private int skip;
     private int auto;
     private int next;
@@ -12,25 +12,25 @@ public class Menu {
 
     public Menu() {
         this.currentText = "";
-        this.gui = new GUI();
-        this.skip = gui.WIDTH/4 + gui.WIDTH/20;
-        this.auto = gui.WIDTH/4 + 2*gui.WIDTH/20;
-        this.next = gui.WIDTH/4 + 3*gui.WIDTH/20;
-        this.prev = gui.WIDTH/4 + 4*gui.WIDTH/20;
-        this.qSave = gui.WIDTH/4 + 5*gui.WIDTH/20;
-        this.qLoad = gui.WIDTH/4 + 6*gui.WIDTH/20;
+        this.gui = new WaifuBrew();
+        this.skip = gui.getWidth()/4 + gui.getWidth()/20;
+        this.auto = gui.getWidth()/4 + 2*gui.getWidth()/20;
+        this.next = gui.getWidth()/4 + 3*gui.getWidth()/20;
+        this.prev = gui.getWidth()/4 + 4*gui.getWidth()/20;
+        this.qSave = gui.getWidth()/4 + 5*gui.getWidth()/20;
+        this.qLoad = gui.getWidth()/4 + 6*gui.getWidth()/20;
     }
 
     public void runNext(MouseEvent e) {
-        if (e.getX() >= 0 && e.getX() < gui.WIDTH &&
-                e.getY() >= 0 && e.getY() < gui.HEIGHT) {
+        if (e.getX() >= 0 && e.getX() < gui.getWidth() &&
+                e.getY() >= 0 && e.getY() < gui.getWidth()) {
             this.currentText = "Hello world";
         }
     }
 
     public void hover(MouseEvent e) {
         int positon = 0;
-        if (e.getY() > gui.WIDTH/4 && e.getY() <= this.skip) {
+        if (e.getY() > gui.getWidth()/4 && e.getY() <= this.skip) {
             positon = 1;
         } else if (e.getY() <= this.auto) {
             positon = 2;
