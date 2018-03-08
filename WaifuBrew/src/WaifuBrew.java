@@ -33,7 +33,6 @@ public class WaifuBrew {
 
     public void visual(Waifu waifu) {
         sample = new GUI(waifu);
-
         sample.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sample.setSize(WIDTH, HEIGHT);
         sample.setVisible(true);

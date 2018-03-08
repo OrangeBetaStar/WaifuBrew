@@ -16,10 +16,12 @@ public class GUI extends JFrame {
 
     WaifuBrew newWaifu = new WaifuBrew();
 
-    File waifuHappy;
-    File waifuAngry;
+    // Temporary location dumpster when images are loaded on ImageIcon[]
+    File fileGrab;
 
-    ImageIcon ii;
+    private JLabel lable;
+    private ImageIcon [] loadAll;
+    private JScrollPane jsp;
 
     public GUI(Waifu waifu) {
         // super("Waifuarium by TailSoft");
@@ -35,10 +37,14 @@ public class GUI extends JFrame {
         waifuPanel.addMouseListener(handler);
         waifuPanel.addMouseMotionListener(handler);
 
-        waifuHappy = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + newWaifu.getWaifu().mood.toString().toLowerCase() + ".jpg");
-        newWaifu.getWaifu().setMood(Mood.ANGRY);
-        waifuAngry = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + newWaifu.getWaifu().mood.toString().toLowerCase() + ".jpg");
-
+        loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
+        for(int i = 0; i<Mood.values().length; i++) {
+            System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
+            fileGrab = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
+        }
+        lable = new JLabel();
+        jsp = new JScrollPane();
     }
 
 
@@ -79,20 +85,14 @@ public class GUI extends JFrame {
         }
 
         public void printMouseIn() {
-            // path has to change
-            ii = new ImageIcon(waifuHappy.getAbsolutePath());
-
-            JLabel lable = new JLabel(ii);
-            JScrollPane jsp = new JScrollPane(lable);
+            waifuLabel.setIcon(loadAll[0]);
 
             waifuPanel.add(jsp);
         }
-        public void printMouseOut() {
-            // path has to change
-            ii = new ImageIcon(waifuAngry.getAbsolutePath());
 
-            JLabel lable = new JLabel(ii);
-            JScrollPane jsp = new JScrollPane(lable);
+        public void printMouseOut() {
+
+            waifuLabel.setIcon(loadAll[1]);
 
             waifuPanel.add(jsp);
         }
