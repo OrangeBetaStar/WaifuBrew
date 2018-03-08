@@ -43,8 +43,8 @@ public class GUI extends JFrame {
             loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
         }
         jsp = new JScrollPane();
-        //System.out.println("program.getGUIStat() " + program.getGUIStat().getX());
-        //waifuPanel.setBounds(program.getGUIStat().getX(),program.getGUIStat().getY(),program.getGUIStat().getWidth(),program.getGUIStat().getHeight());
+
+        waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
 
     }
 
