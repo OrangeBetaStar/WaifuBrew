@@ -14,17 +14,16 @@ public class GUI extends JFrame {
     private static int WIDTH = 1920;
     private static int HEIGHT = 1080;
 
-    WaifuBrew newWaifu = new WaifuBrew();
-
     // Temporary location dumpster when images are loaded on ImageIcon[]
     File fileGrab;
 
-    private JLabel lable;
     private ImageIcon [] loadAll;
     private JScrollPane jsp;
 
-    public GUI(Waifu waifu) {
-        // super("Waifuarium by TailSoft");
+    private int testInt = 0;
+
+    public GUI(WaifuBrew program) {
+        super("Waifuarium by TailSoft");
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.WHITE);
@@ -39,12 +38,14 @@ public class GUI extends JFrame {
 
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
         for(int i = 0; i<Mood.values().length; i++) {
-            System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
-            fileGrab = new File("resources/" + newWaifu.getWaifu().name.toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            // System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
+            fileGrab = new File("resources/" + program.getWaifu().name.toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
             loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
         }
-        lable = new JLabel();
         jsp = new JScrollPane();
+        //System.out.println("program.getGUIStat() " + program.getGUIStat().getX());
+        //waifuPanel.setBounds(program.getGUIStat().getX(),program.getGUIStat().getY(),program.getGUIStat().getWidth(),program.getGUIStat().getHeight());
+
     }
 
 
@@ -57,22 +58,20 @@ public class GUI extends JFrame {
 
         public void mousePressed(MouseEvent event) {
             waifuLabel.setText("you pressed down the mouse");
-            printMouseIn();
+            print();
         }
 
         public void mouseReleased(MouseEvent event) {
             waifuLabel.setText("you released the button");
-            printMouseOut();
+            print();
         }
 
         public void mouseEntered(MouseEvent event) {
             waifuLabel.setText("you entered the area");
-            waifuPanel.setBackground(Color.RED);
         }
 
         public void mouseExited(MouseEvent event) {
             waifuLabel.setText("the mouse has left the window");
-            waifuPanel.setBackground(Color.WHITE);
         }
 
         // these are mouse motion event
@@ -84,16 +83,15 @@ public class GUI extends JFrame {
             waifuLabel.setText("you moved the mouse");
         }
 
-        public void printMouseIn() {
-            waifuLabel.setIcon(loadAll[0]);
-
-            waifuPanel.add(jsp);
-        }
-
-        public void printMouseOut() {
-
-            waifuLabel.setIcon(loadAll[1]);
-
+        public void print() {
+            // Prints
+            waifuLabel.setIcon(loadAll[testInt]);
+            if(testInt==(Mood.values().length-1)) {
+                testInt = 0;
+            }
+            else {
+                testInt++;
+            }
             waifuPanel.add(jsp);
         }
     }
