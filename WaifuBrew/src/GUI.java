@@ -11,8 +11,6 @@ import java.io.IOException;
 public class GUI extends JFrame {
     private JPanel waifuPanel;
     private JLabel waifuLabel;
-    private static int WIDTH = 1920;
-    private static int HEIGHT = 1080;
 
     // Temporary location dumpster when images are loaded on ImageIcon[]
     File fileGrab;
