@@ -32,7 +32,6 @@ public class WaifuBrew {
         WaifuBrew programStart = new WaifuBrew();
         programStart.visual(programStart);
         programStart.createWaifu();
-
     }
 
     public Point[] getRes () {
@@ -58,7 +57,7 @@ public class WaifuBrew {
 
     public Waifu createWaifu(){
 
-        // Just default trash
+        // Just default best girl
         Waifu nicoNii = new Waifu("Nico",43, 153, new int[] {74, 57, 79}, Mood.HAPPY);
         currWaifu = nicoNii;
         return nicoNii;
