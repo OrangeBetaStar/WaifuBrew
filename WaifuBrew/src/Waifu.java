@@ -1,15 +1,15 @@
 public class Waifu {
-    int weight; //it's kg
-    int height; //it's cm
-    int threeSizes[] = {0,0,0};
-    String name;
-    Mood mood;
+    private int weight; //it's kg
+    private int height; //it's cm
+    private int threeSizes[] = {0,0,0};
+    private String name;
+    private Mood mood;
 
     public Waifu(){
-        weight = 0;
-        height = 0;
-        name = "";
-        mood = Mood.NORMAL;
+        this.weight = 0;
+        this.height = 0;
+        this.name = "";
+        this.mood = Mood.NORMAL;
     }
 
     public Waifu(String name, int weight, int height) {
@@ -34,11 +34,15 @@ public class Waifu {
     }
 
     public int getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public void setWeight(int weight) {

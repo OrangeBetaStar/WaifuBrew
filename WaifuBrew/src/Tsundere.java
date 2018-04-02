@@ -1,12 +1,12 @@
 public class Tsundere extends Waifu{
 
+    private Mood mood;
     public Tsundere () {
+        super();
     }
 
     public Tsundere(String name, int weight, int height) {
-        this.name = name;
-        this.weight = weight;
-        this.height = height;
+        super(name, weight, height);
         this.mood = Mood.ANGRY;
     }
 
