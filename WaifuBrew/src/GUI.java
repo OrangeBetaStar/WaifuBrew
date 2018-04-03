@@ -60,12 +60,8 @@ public class GUI extends JFrame {
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
         for(int i = 0; i<Mood.values().length; i++) {
             // System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
-<<<<<<< HEAD
-            fileGrab = new File("resources/" + program.getWaifu().name.toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            fileGrab = new File("resources/" + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
             // System.out.println(fileGrab.getAbsolutePath());
-=======
-            fileGrab = new File("src/resources/" + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
->>>>>>> d9234e570beed1c52e783b40c8a194276b05896a
             loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
         }
 
