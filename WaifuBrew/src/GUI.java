@@ -1,9 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +18,30 @@ public class GUI extends JFrame {
     private JScrollPane jsp;
 
     private int testInt = 0;
+
+    /*
+    private static void createAndShowGui() {
+        ImagePanel mainPanel = new ImagePanel();
+
+        JFrame frame = new JFrame("IntersectionImage");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(mainPanel);
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGui();
+            }
+        });
+    }
+    */
+
+    // Tester
+    private BufferedImage imageTrial;
 
     public GUI(WaifuBrew program) {
         super("Waifuarium by TailSoft");
@@ -38,8 +61,16 @@ public class GUI extends JFrame {
         for(int i = 0; i<Mood.values().length; i++) {
             // System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
             fileGrab = new File("resources/" + program.getWaifu().name.toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            // System.out.println(fileGrab.getAbsolutePath());
             loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
         }
+
+
+        ImagePanel imageSquare = new ImagePanel(fileGrab);
+        add(imageSquare);
+        pack();
+        setLocationByPlatform(true);
+
         jsp = new JScrollPane();
 
         waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
@@ -49,7 +80,12 @@ public class GUI extends JFrame {
 
 
 
-    private class Handlerclass implements MouseListener, MouseMotionListener {
+    private class Handlerclass implements MouseListener, MouseMotionListener, ActionListener{
+
+        public void actionPerformed(ActionEvent arg0) {
+
+        }
+
         public void mouseClicked(MouseEvent event) {
             waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
