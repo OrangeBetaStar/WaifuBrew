@@ -54,8 +54,13 @@ public class GUI extends JFrame {
 
 
         Handlerclass handler = new Handlerclass();
-        waifuPanel.addMouseListener(handler);
-        waifuPanel.addMouseMotionListener(handler);
+
+        // Don't need this
+        // waifuPanel.addMouseListener(handler);
+        // waifuPanel.addMouseMotionListener(handler);
+
+        waifuLabel.addMouseListener(handler);
+        waifuLabel.addMouseMotionListener(handler);
 
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
         for(int i = 0; i<Mood.values().length; i++) {
@@ -66,7 +71,9 @@ public class GUI extends JFrame {
         }
 
 
-        ImagePanel imageSquare = new ImagePanel(fileGrab);
+        ImagePanel imageSquare = new ImagePanel(new File("src/resources/bg.png"), fileGrab); // As a tester, using the old image
+        imageSquare.addMouseListener(handler);
+        imageSquare.addMouseMotionListener(handler);
         add(imageSquare);
         add(waifuLabel, BorderLayout.SOUTH);
         pack();
@@ -75,7 +82,6 @@ public class GUI extends JFrame {
         jsp = new JScrollPane();
 
         waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
-
     }
 
 
