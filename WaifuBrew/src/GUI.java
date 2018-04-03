@@ -12,33 +12,13 @@ public class GUI extends JFrame {
     private JLabel waifuLabel;
 
     // Temporary location dumpster when images are loaded on ImageIcon[]
-    File fileGrab;
+    File fileGrab[];
 
     private ImageIcon [] loadAll;
     private JScrollPane jsp;
 
     private int testInt = 0;
 
-    /*
-    private static void createAndShowGui() {
-        ImagePanel mainPanel = new ImagePanel();
-
-        JFrame frame = new JFrame("IntersectionImage");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.pack();
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGui();
-            }
-        });
-    }
-    */
 
     // Tester
     private BufferedImage imageTrial;
@@ -47,31 +27,27 @@ public class GUI extends JFrame {
         super("Waifuarium by TailSoft");
 
         waifuPanel = new JPanel();
-        waifuPanel.setBackground(Color.WHITE);
+        waifuPanel.setBackground(Color.BLACK);
         // add(waifuPanel, BorderLayout.CENTER);
 
         waifuLabel = new JLabel("Start");
 
-
         Handlerclass handler = new Handlerclass();
-
-        // Don't need this
-        // waifuPanel.addMouseListener(handler);
-        // waifuPanel.addMouseMotionListener(handler);
 
         waifuLabel.addMouseListener(handler);
         waifuLabel.addMouseMotionListener(handler);
 
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
+        fileGrab = new File[Mood.values().length];
         for(int i = 0; i<Mood.values().length; i++) {
-            // System.out.println("For loop here: " + i + " value is " + Mood.values()[i].toString());
-            fileGrab = new File("src/resources/" + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
-            // System.out.println(fileGrab.getAbsolutePath());
-            loadAll[i] = new ImageIcon(fileGrab.getAbsolutePath());
+            fileGrab[i] = new File("src/resources/" + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            loadAll[i] = new ImageIcon(fileGrab[i].getAbsolutePath());
         }
 
 
-        ImagePanel imageSquare = new ImagePanel(new File("src/resources/bg.png"), fileGrab); // As a tester, using the old image
+
+        ImagePanel imageSquare = new ImagePanel(new File("src/resources/bg.png"), fileGrab, null, null); // As a tester, using the old image
+        // ^ null since I am just testing
         imageSquare.addMouseListener(handler);
         imageSquare.addMouseMotionListener(handler);
         add(imageSquare);
@@ -87,11 +63,8 @@ public class GUI extends JFrame {
 
 
 
-    private class Handlerclass implements MouseListener, MouseMotionListener, ActionListener{
 
-        public void actionPerformed(ActionEvent arg0) {
-
-        }
+    private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
             waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
