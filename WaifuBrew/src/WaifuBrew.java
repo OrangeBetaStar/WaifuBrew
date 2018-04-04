@@ -32,6 +32,7 @@ public class WaifuBrew {
         WaifuBrew programStart = new WaifuBrew();
         programStart.visual(programStart);
         programStart.createWaifu();
+
     }
 
     public Point[] getRes () {

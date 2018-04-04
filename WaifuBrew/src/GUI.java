@@ -12,13 +12,15 @@ public class GUI extends JFrame {
     private JLabel waifuLabel;
 
     private int buttonY = 600;
+    private Handlerclass handler = new Handlerclass();
+    private StartScreen startPage;
 
     // Temporary location dumpster when images are loaded on ImageIcon[]
-    File fileGrab[];
+    private File fileGrab[];
 
     private ImageIcon [] loadAll;
     private JScrollPane jsp;
-    String sourcePath = "src/resources/";
+    private String sourcePath = "src/resources/";
     private int stage = 0;
 
     private int testInt = 0;
@@ -32,8 +34,6 @@ public class GUI extends JFrame {
 
         waifuLabel = new JLabel("Start");
 
-        Handlerclass handler = new Handlerclass();
-
         waifuLabel.addMouseListener(handler);
         waifuLabel.addMouseMotionListener(handler);
 
@@ -44,39 +44,58 @@ public class GUI extends JFrame {
             loadAll[i] = new ImageIcon(fileGrab[i].getAbsolutePath());
         }
 
-        if (stage == 0) {
-            StartScreen startPage = new StartScreen();
-            startPage.addMouseListener(handler);
-            startPage.addMouseMotionListener(handler);
-            add(startPage);
-            // pack();
-            // setLocationByPlatform(true);
-        }
-
-        else {
-            ImagePanel imageSquare = new ImagePanel(new File(sourcePath + "bg.png"), fileGrab, null, null); // As a tester, using the old image
-            // ^ null for locations since I am just testing
-            imageSquare.addMouseListener(handler);
-            imageSquare.addMouseMotionListener(handler);
-            add(imageSquare);
-            add(waifuLabel, BorderLayout.SOUTH);
-            pack();
-            setLocationByPlatform(true);
-        }
+        revalidateGraphics();
 
         jsp = new JScrollPane();
 
         waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
     }
 
+    private void revalidateGraphics() {
+        if (stage == 0) {
+            startPage = new StartScreen();
+            startPage.addMouseListener(handler);
+            startPage.addMouseMotionListener(handler);
+            add(startPage);
+            revalidate();
+            setLocationByPlatform(true);
+        }
 
+        else if(stage == 1) {
+            remove(startPage);
+            ImagePanel imageSquare = new ImagePanel(new File(sourcePath + "bg.png"), fileGrab, null, null); // As a tester, using the old image
+            // ^ null for locations since I am just testing
+            imageSquare.addMouseListener(handler);
+            imageSquare.addMouseMotionListener(handler);
+            add(imageSquare);
+            add(waifuLabel, BorderLayout.SOUTH);
+            revalidate();
+        }
+
+        else if(stage == 2) {
+            // remove(startPage);
+            // Stub
+
+            // TODO: Implement this.
+        }
+    }
 
     private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
-            if(mouseInArea(event)) {
+            if(event.getX() > 0 && event.getX() < getSize().width / 3) {
+                stage = 1;
+                System.out.println("Successfully verified start location!");
+                revalidateGraphics();
+            }
+            else if (event.getX() > getSize().width / 3 && event.getX() < (getSize().width / 3) * 2) {
+                System.out.println("Successfully verified config location!");
                 stage = 2;
-                System.out.println("Successfully verified location!");
+                revalidateGraphics();
+            }
+            else {
+                System.out.println("Successfully verified exit location!");
+                System.exit(0);
             }
             waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
@@ -108,12 +127,6 @@ public class GUI extends JFrame {
             waifuLabel.setText("you moved the mouse");
         }
 
-        public boolean mouseInArea(MouseEvent e) {
-
-            // Crude implementation of change of stages. More to come soomTM.
-
-            return e.getX() > 0 && e.getX() < getSize().width / 3; // (check if mouse is in first third of the screen.)
-        }
 
         public void print() {
             // Prints
