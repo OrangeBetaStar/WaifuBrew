@@ -11,17 +11,17 @@ public class GUI extends JFrame {
     private JPanel waifuPanel;
     private JLabel waifuLabel;
 
+    private int buttonY = 600;
+
     // Temporary location dumpster when images are loaded on ImageIcon[]
     File fileGrab[];
 
     private ImageIcon [] loadAll;
     private JScrollPane jsp;
+    String sourcePath = "src/resources/";
+    private int stage = 0;
 
     private int testInt = 0;
-
-
-    // Tester
-    private BufferedImage imageTrial;
 
     public GUI(WaifuBrew program) {
         super("Waifuarium by TailSoft");
@@ -40,20 +40,29 @@ public class GUI extends JFrame {
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
         fileGrab = new File[Mood.values().length];
         for(int i = 0; i<Mood.values().length; i++) {
-            fileGrab[i] = new File("src/resources/" + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            fileGrab[i] = new File(sourcePath + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
             loadAll[i] = new ImageIcon(fileGrab[i].getAbsolutePath());
         }
 
+        if (stage == 0) {
+            StartScreen startPage = new StartScreen();
+            startPage.addMouseListener(handler);
+            startPage.addMouseMotionListener(handler);
+            add(startPage);
+            // pack();
+            // setLocationByPlatform(true);
+        }
 
-
-        ImagePanel imageSquare = new ImagePanel(new File("src/resources/bg.png"), fileGrab, null, null); // As a tester, using the old image
-        // ^ null since I am just testing
-        imageSquare.addMouseListener(handler);
-        imageSquare.addMouseMotionListener(handler);
-        add(imageSquare);
-        add(waifuLabel, BorderLayout.SOUTH);
-        pack();
-        setLocationByPlatform(true);
+        else {
+            ImagePanel imageSquare = new ImagePanel(new File(sourcePath + "bg.png"), fileGrab, null, null); // As a tester, using the old image
+            // ^ null for locations since I am just testing
+            imageSquare.addMouseListener(handler);
+            imageSquare.addMouseMotionListener(handler);
+            add(imageSquare);
+            add(waifuLabel, BorderLayout.SOUTH);
+            pack();
+            setLocationByPlatform(true);
+        }
 
         jsp = new JScrollPane();
 
@@ -62,11 +71,13 @@ public class GUI extends JFrame {
 
 
 
-
-
     private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
+            if(mouseInArea(event)) {
+                stage = 2;
+                System.out.println("Successfully verified location!");
+            }
             waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
 
@@ -95,6 +106,13 @@ public class GUI extends JFrame {
 
         public void mouseMoved(MouseEvent event) {
             waifuLabel.setText("you moved the mouse");
+        }
+
+        public boolean mouseInArea(MouseEvent e) {
+
+            // Crude implementation of change of stages. More to come soomTM.
+
+            return e.getX() > 0 && e.getX() < getSize().width / 3; // (check if mouse is in first third of the screen.)
         }
 
         public void print() {
