@@ -60,6 +60,7 @@ public class StartScreen extends JPanel implements ActionListener {
                 System.out.println("Ratio: "+(getSize().width/(double)getPreferredSize(backgroundPicture).width));
                 */
                 if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
+                    // Change x0, y0 if picture is changed.
                     g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
                     System.out.println("Using height priority");
                 }

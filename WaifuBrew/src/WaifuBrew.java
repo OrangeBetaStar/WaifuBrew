@@ -48,6 +48,8 @@ public class WaifuBrew {
         sample.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // default size
         sample.setSize(defaultSize[1].x, defaultSize[1].y);
+        // disable resizing of the window since scaling is retarded.
+        sample.setResizable(false);
         // this calculates the window should start from (centered)
         sample.setLocation(defaultSize[2].x, defaultSize[2].y);
         //sample.setLayout(new FlowLayout());

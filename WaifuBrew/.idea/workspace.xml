@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/StartScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/GUI$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WaifuBrew/GUI$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WaifuBrew/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WaifuBrew.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,8 +19,8 @@
       <file leaf-file-name="WaifuBrew.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/WaifuBrew.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+            <state relative-caret-position="510">
+              <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
               <folding>
                 <element signature="e#0#1701#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -34,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="28" lean-forward="true" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+            <state relative-caret-position="121">
+              <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+            <state relative-caret-position="272">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#220#247#0" expanded="true" />
@@ -125,9 +122,9 @@
         <option value="$PROJECT_DIR$/src/WaifuGUI.java" />
         <option value="$PROJECT_DIR$/src/ImagePanel.java" />
         <option value="$PROJECT_DIR$/src/startScreen.java" />
-        <option value="$PROJECT_DIR$/src/GUI.java" />
         <option value="$PROJECT_DIR$/src/WaifuBrew.java" />
         <option value="$PROJECT_DIR$/src/StartScreen.java" />
+        <option value="$PROJECT_DIR$/src/GUI.java" />
       </list>
     </option>
   </component>
@@ -354,12 +351,12 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13152401" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.13152401" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.104362234" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.104362234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -621,16 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="28" lean-forward="true" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ImagePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -644,8 +631,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WaifuBrew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        <state relative-caret-position="510">
+          <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
           <folding>
             <element signature="e#0#1701#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -657,11 +644,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+        <state relative-caret-position="272">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#220#247#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

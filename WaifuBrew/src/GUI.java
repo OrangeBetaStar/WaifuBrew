@@ -11,6 +11,8 @@ public class GUI extends JFrame {
     private JPanel waifuPanel;
     private JLabel waifuLabel;
 
+    private int buttonY = 600;
+
     // Temporary location dumpster when images are loaded on ImageIcon[]
     File fileGrab[];
 
@@ -72,6 +74,10 @@ public class GUI extends JFrame {
     private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
+            if(mouseInArea(event)) {
+                stage = 2;
+                System.out.println("Successfully verified location!");
+            }
             waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
 
@@ -100,6 +106,13 @@ public class GUI extends JFrame {
 
         public void mouseMoved(MouseEvent event) {
             waifuLabel.setText("you moved the mouse");
+        }
+
+        public boolean mouseInArea(MouseEvent e) {
+
+            // Crude implementation of change of stages. More to come soomTM.
+
+            return e.getX() > 0 && e.getX() < getSize().width / 3; // (check if mouse is in first third of the screen.)
         }
 
         public void print() {
