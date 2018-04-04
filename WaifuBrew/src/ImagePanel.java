@@ -39,19 +39,27 @@ public class ImagePanel extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (intersectionImage[0] != null) {
-            g.drawImage(backgroundPicture,0,0, this);
-            for(int i = 0; i < intersectionImage.length; i++) {
-                g.drawImage(intersectionImage[i], (backgroundPicture.getWidth() / (1 + intersectionImage.length)) * i, 200, this); // Prints all nicos as test (test of lets say... four characters at once?)
+        if(getPreferredSize().width < getSize().width) {
+            if((getSize().width/(double)getPreferredSize().width) * getPreferredSize().height < getSize().height) {
+                // TODO: Change x0, y0 if picture is changed.
+                g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize().height * getPreferredSize().width), getSize().height, this);
+                // System.out.println("Using height priority");
             }
+            else {
+                g.drawImage(backgroundPicture, 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize().width * getPreferredSize().height), this);
+                // System.out.println("Using width priority");
+            }
+        }
+        for(int i = 0; i < intersectionImage.length; i++) {
+            g.drawImage(intersectionImage[i], (backgroundPicture.getWidth() / (1 + intersectionImage.length)) * i, 200, this); // Prints all nicos as test (test of lets say... four characters at once?)
         }
     }
 
     @Override
     public Dimension getPreferredSize() {
-        if (intersectionImage != null) {
-            int width = intersectionImage[0].getWidth();
-            int height = intersectionImage[0].getHeight();
+        if (backgroundPicture != null) {
+            int width = backgroundPicture.getWidth();
+            int height = backgroundPicture.getHeight();
             return new Dimension(width , height );
         }
         return super.getPreferredSize();
