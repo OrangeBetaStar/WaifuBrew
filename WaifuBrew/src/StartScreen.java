@@ -25,10 +25,6 @@ public class StartScreen extends JPanel implements ActionListener {
         System.out.println("Hi");
     }
 
-// curr is the initial position (perhaps predefined spot if not available.
-// next is final position where character stays
-// point[] will correspond to w[] (character number[])
-
     public StartScreen() {
         try {
             backgroundPicture = ImageIO.read(new File(resourcePath + "start.png"));
@@ -60,17 +56,17 @@ public class StartScreen extends JPanel implements ActionListener {
                 System.out.println("Ratio: "+(getSize().width/(double)getPreferredSize(backgroundPicture).width));
                 */
                 if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
-                    // Change x0, y0 if picture is changed.
+                    // TODO: Change x0, y0 if picture is changed.
                     g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
-                    System.out.println("Using height priority");
+                    // System.out.println("Using height priority");
                 }
                 else {
                     g.drawImage(backgroundPicture, 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
-                    System.out.println("Using width priority");
+                    // System.out.println("Using width priority");
                 }
             }
 
-            // Add rest of the elements
+            // Add rest of the menu elements
 
             g.drawImage(start_button, (getSize().width / 4) - (getPreferredSize(start_button).width / 2), buttonY - (getPreferredSize(start_button).height / 2), getPreferredSize(start_button).width, getPreferredSize(start_button).height,this);
             g.drawImage(config_button,(getSize().width / 4) * 2 - (getPreferredSize(config_button).width / 2), buttonY - (getPreferredSize(config_button).height / 2) , getPreferredSize(config_button).width, getPreferredSize(config_button).height,  this);
