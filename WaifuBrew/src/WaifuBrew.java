@@ -15,7 +15,7 @@ public class WaifuBrew {
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
     // [2] is where window should go (top-left) to be centered in the monitor
-    private Point[] defaultSize = {
+    private  Point[] defaultSize = {
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
