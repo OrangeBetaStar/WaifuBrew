@@ -31,6 +31,7 @@ public class ImagePanel extends JPanel implements ActionListener {
             }
                 backgroundPicture = ImageIO.read(bg);
         } catch (IOException e) {
+            System.out.println("File failure in ImagePanel class");
             e.printStackTrace(); // Wall of error
             System.exit(-1);
         }

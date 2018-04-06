@@ -14,6 +14,7 @@ public class GUI extends JFrame {
     private int buttonY = 600;
     private Handlerclass handler = new Handlerclass();
     private StartScreen startPage;
+    private Config configPage;
 
     // Temporary location dumpster when images are loaded on ImageIcon[]
     private File fileGrab[];
@@ -61,10 +62,16 @@ public class GUI extends JFrame {
             setLocationByPlatform(true);
         }
 
+        // Stage 1 is the play field.
+        // Perhaps a custom test panel instead of JLabel. (Later work)
         else if(stage == 1) {
-            remove(startPage);
+            if(startPage.getParent() != null) {
+                // This will clear the panel of main screen.
+                remove(startPage);
+            }
             ImagePanel imageSquare = new ImagePanel(new File(sourcePath + "bg.png"), fileGrab, null, null); // As a tester, using the old image
             // ^ null for locations since I am just testing
+            // if null, it will use default spot. (For now there has to be either no declaration or full declaration for character location.)
             imageSquare.addMouseListener(handler);
             imageSquare.addMouseMotionListener(handler);
             add(imageSquare);
@@ -73,8 +80,15 @@ public class GUI extends JFrame {
         }
 
         else if(stage == 2) {
-            // remove(startPage);
-            // Stub
+            if(startPage.getParent() != null) {
+                remove(startPage);
+            }
+
+            configPage = new Config();
+            configPage.addMouseListener(handler);
+            configPage.addMouseMotionListener(handler);
+            add(configPage);
+            revalidate();
 
             // TODO: Implement this.
         }
@@ -83,21 +97,29 @@ public class GUI extends JFrame {
     private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
-            if(event.getX() > 0 && event.getX() < getSize().width / 3) {
-                stage = 1;
-                System.out.println("Successfully verified start location!");
-                revalidateGraphics();
+            if(stage == 0) {
+                if (event.getX() > 0 && event.getX() < getSize().width / 3) {
+                    stage = 1;
+                    System.out.println("Successfully verified start location!");
+                    revalidateGraphics();
+                } else if (event.getX() > getSize().width / 3 && event.getX() < (getSize().width / 3) * 2) {
+                    System.out.println("Successfully verified config location!");
+                    stage = 2;
+                    revalidateGraphics();
+                } else {
+                    System.out.println("Successfully verified exit location!");
+                    System.exit(0);
+                }
+                waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
             }
-            else if (event.getX() > getSize().width / 3 && event.getX() < (getSize().width / 3) * 2) {
-                System.out.println("Successfully verified config location!");
-                stage = 2;
-                revalidateGraphics();
+            else if(stage == 2) {
+                // TODO: Stub for configs stage
+                if((getSize().width / 3) * 2 > event.getX() && getSize().width < event.getX() ) {
+                    stage = 0;
+                    revalidateGraphics();
+                    System.out.println("Stage 2 back button");
+                }
             }
-            else {
-                System.out.println("Successfully verified exit location!");
-                System.exit(0);
-            }
-            waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
         }
 
         public void mousePressed(MouseEvent event) {
