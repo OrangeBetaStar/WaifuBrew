@@ -84,11 +84,17 @@ public class GUI extends JFrame {
                 remove(startPage);
             }
 
+            AnimationPane e = new AnimationPane();
+            add(e);
+            revalidate();
+
+            /*
             configPage = new Config();
             configPage.addMouseListener(handler);
             configPage.addMouseMotionListener(handler);
             add(configPage);
             revalidate();
+            */
 
             // TODO: Implement this.
         }
