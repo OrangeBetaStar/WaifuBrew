@@ -17,3 +17,5 @@ Logs:
 04/04/18 - GUI update. Introduced start screen. Implementation of buttons and stages. Resolution bugs (placement & scaling) were now properly calculated. The window (JFrame) is now locked since it adds no benefit and causes elements to break. [BetaStar]
 
 04/05/18 - Placeholder buttons are working as they would. The start of Config page (only implemented BG and back button) [BetaStar]
+
+04/06/18 - Animation now in test phase. Config stage is being used as animation testing. License changed to MIT. [BetaStar]
