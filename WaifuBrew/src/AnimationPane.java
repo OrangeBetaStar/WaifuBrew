@@ -38,16 +38,18 @@ public class AnimationPane extends JPanel {
             */
 
             Timer timer = new Timer(1, e -> {
-                // xPos += direction;
-                rotationDeg++;
-                System.out.println("Rotation: " + rotationDeg);
+                xPos += direction;
+                rotationDeg += direction;
                 if (xPos + scrollingImage.getWidth() > getWidth()) {
                     xPos = getWidth() - scrollingImage.getWidth();
                     direction *= -1;
+                    rotationDeg *= -1;
                     System.out.println("REEEEEEEEEEEEEEEEEE");
                 } else if (xPos < 0) {
                     xPos = 0;
+                    rotationDeg = 0;
                     direction *= -1;
+                    rotationDeg *= -1;
                     System.out.println("AHHHHHHHHHHHHHHHHHH");
                 }
                 repaint();
@@ -75,7 +77,7 @@ public class AnimationPane extends JPanel {
         AffineTransform rotation = AffineTransform.getRotateInstance(Math.toRadians(rotationDeg), scrollingImage.getWidth() / 2, scrollingImage.getHeight() / 2);
         AffineTransformOp op = new AffineTransformOp(rotation, AffineTransformOp.TYPE_BICUBIC);
         // Apparently I can save the image through dst.
-        g.drawImage(op.filter(scrollingImage, null), 600, 300, this);
+        g.drawImage(op.filter(scrollingImage, null), xPos, getSize().height / 2 - (scrollingImage.getHeight() / 2 ), this);
 
 
 
