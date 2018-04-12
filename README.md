@@ -21,3 +21,5 @@ Logs:
 04/05/18 - Placeholder buttons are working as they would. The start of Config page (only implemented BG and back button) [BetaStar]
 
 04/06/18 - Animation now in test phase. Config stage is being used as animation testing. License changed to MIT. [BetaStar]
+
+04/09/18 - Used simpler implementation for rotation for now since more advanced implementation doesn't seem to contribute solving the problem. [BetaStar]
