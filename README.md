@@ -23,3 +23,5 @@ Logs:
 04/06/18 - Animation now in test phase. Config stage is being used as animation testing. License changed to MIT. [BetaStar]
 
 04/09/18 - Used simpler implementation for rotation for now since more advanced implementation doesn't seem to contribute solving the problem. [BetaStar]
+
+04/20/18 - Changed vanilla Java application to Maven to have JavaXT dependency for image manipulation. Added test stage [BetaStar]
