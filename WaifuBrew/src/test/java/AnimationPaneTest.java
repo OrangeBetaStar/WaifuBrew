@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class AnimationPane extends JPanel {
+public class AnimationPaneTest extends JPanel {
 
     private BufferedImage scrollingImage;
     private javaxt.io.Image sampleImage;
@@ -17,9 +17,10 @@ public class AnimationPane extends JPanel {
     private int direction = 1;
     private double rotationDeg = 0;
 
-    public AnimationPane() {
+    public AnimationPaneTest() {
         try {
             scrollingImage = ImageIO.read(new File("src/main/java/resources/icon.jpg"));
+
 
             Timer timer = new Timer(1, new ActionListener() {
                 // @Override
@@ -62,6 +63,9 @@ public class AnimationPane extends JPanel {
         super.paintComponent(g);
         int y = getHeight() - scrollingImage.getHeight();
 
+        g.drawString("java.io:", 100, getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - 50);
+        g.drawString("javaxt.io:", 100, getSize().height / 2 - (scrollingImage.getHeight() / 2 ) + 150);
+
         // g.drawImage(scrollingImage, xPos, y, this);
         AffineTransform rotation = AffineTransform.getRotateInstance(Math.toRadians(rotationDeg), scrollingImage.getWidth() / 2, scrollingImage.getHeight() / 2);
         AffineTransformOp op = new AffineTransformOp(rotation, AffineTransformOp.TYPE_BICUBIC);
@@ -69,13 +73,14 @@ public class AnimationPane extends JPanel {
         // Apparently I can save the image through dst.
         g.drawImage(op.filter(scrollingImage, null), xPos, getSize().height / 2 - (scrollingImage.getHeight() / 2 ), this);
 
+
+        // http://www.javaxt.com/javaxt-core/io/Image/
+
+
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion)
         sampleImage = new javaxt.io.Image("src/main/java/resources/icon.jpg");
-        int tempSizeY = sampleImage.getHeight();
-        int tempSizeX = sampleImage.getWidth();
         sampleImage.rotate(rotationDeg);
-        // System.out.println("sampleImage.getWidth(): "+ sampleImage.getWidth());
-        g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() - tempSizeX),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) + 200 - (sampleImage.getHeight() - tempSizeY), this);
+        g.drawImage(sampleImage.getBufferedImage(),xPos,getSize().height / 2 - (scrollingImage.getHeight() / 2 ) + 200, this);
 
     }
 

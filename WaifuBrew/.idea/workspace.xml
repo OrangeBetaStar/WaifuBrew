@@ -2,86 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WaifuBrew.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/AnimationPane$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/AnimationPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/GUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/GUI$Handlerclass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/ImagePanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Mood.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/StartScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/Waifu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/WaifuBrew.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/WaifuBrew.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/WaifuBrew.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-angry BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-angry.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-happy BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-happy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-normal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/nico-sad.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/out/production/WaifuBrew/resources/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/config_back_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-angry BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-angry.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-happy BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-happy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-normal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/nico-sad.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/options-background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/start.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/startscreen_config_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/startscreen_exit_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/startscreen_start_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WaifuBrew/resources/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AnimationPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImagePanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mood.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StartScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Waifu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WaifuBrew.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WaifuBrew.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/GUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/GUI$Handlerclass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/ImagePanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/Mood.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/Tsundere.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/Waifu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/WaifuBrew.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/WaifuBrew.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-angry BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-angry.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-happy BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-happy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-normal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/nico-sad.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/WaifuBrew/resources/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/config_back_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-angry BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-angry.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-happy BK.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-happy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-normal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/nico-sad.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/options-background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/start.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/startscreen_config_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/startscreen_exit_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/startscreen_start_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AnimationPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -170,12 +94,24 @@
       <file leaf-file-name="AnimationPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AnimationPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+            <state relative-caret-position="692">
+              <caret line="76" column="11" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#858#1704#0" expanded="true" />
                 <element signature="e#1703#1704#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimationPaneTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/AnimationPaneTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="66" column="104" selection-start-line="66" selection-start-column="104" selection-end-line="66" selection-end-column="104" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -190,20 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="misc.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+              <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -239,8 +166,9 @@
         <option value="$PROJECT_DIR$/src/Config.java" />
         <option value="$PROJECT_DIR$/src/AnimationPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/StartScreen.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AnimationPane.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/AnimationPaneTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AnimationPane.java" />
       </list>
     </option>
   </component>
@@ -325,7 +253,9 @@
             <path>
               <item name="WaifuBrew" type="b2602c69:ProjectViewProjectNode" />
               <item name="WaifuBrew" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WaifuBrew" type="b2602c69:ProjectViewProjectNode" />
@@ -345,6 +275,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -519,11 +454,12 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985386" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32776618" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="3" visible="true" weight="0.21093318" />
+      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.21093318" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32985386" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.20668058" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32985386" />
@@ -542,32 +478,12 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.32776618" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AnimationPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#858#1704#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -798,14 +714,31 @@
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/AnimationPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/AnimationPaneTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="66" column="104" selection-start-line="66" selection-start-column="104" selection-end-line="66" selection-end-column="104" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AnimationPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        <state relative-caret-position="692">
+          <caret line="76" column="11" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#858#1704#0" expanded="true" />
