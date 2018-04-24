@@ -101,6 +101,7 @@ public class AnimationPane extends JPanel {
 
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion of a same image)
         sampleImage = new javaxt.io.Image("src/main/java/resources/black.png");
+        // TODO: USE copy( ) instead of getting image every time
         sampleImage.rotate(rotationDeg);
         g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2), this);
 
@@ -112,6 +113,9 @@ public class AnimationPane extends JPanel {
         addMouseListener(handler);
 
         g.drawString(tempString, 100, 550);
+
+        // Use the bottom link for implementing string wrap around by distance used by font.
+        // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
     }
 
 }
