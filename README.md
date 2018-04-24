@@ -25,3 +25,5 @@ Logs:
 04/09/18 - Used simpler implementation for rotation for now since more advanced implementation doesn't seem to contribute solving the problem. [BetaStar]
 
 04/20/18 - Changed vanilla Java application to Maven to have JavaXT dependency for image manipulation. Added test stage [BetaStar]
+
+04/24/18 - Fixed movement issue with JavaXT, added text line for dialog, continued Gaia's JSON implementation. [BetaStar]
