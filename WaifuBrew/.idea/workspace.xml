@@ -4,24 +4,8 @@
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AnimationPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RotationCalculation" beforeDir="false" afterPath="$PROJECT_DIR$/bak/RotationCalculation" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StartScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane$Handlerclass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AnimationPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GUI$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GUI$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ImagePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/StartScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/parser/DialogueParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/DialogueParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/parser/DialogueParserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/DialogueParserTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -121,16 +105,14 @@
       <file leaf-file-name="AnimationPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AnimationPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+            <state relative-caret-position="952">
+              <caret line="74" column="82" selection-start-line="74" selection-start-column="82" selection-end-line="74" selection-end-column="82" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#816#1662#0" expanded="true" />
                 <element signature="e#1661#1662#0" expanded="true" />
                 <element signature="e#1750#2088#0" expanded="true" />
                 <element signature="e#2087#2088#0" expanded="true" />
-                <element signature="e#3543#3544#0" expanded="true" />
-                <element signature="e#3577#3578#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -821,16 +803,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AnimationPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+        <state relative-caret-position="952">
+          <caret line="74" column="82" selection-start-line="74" selection-start-column="82" selection-end-line="74" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#816#1662#0" expanded="true" />
             <element signature="e#1661#1662#0" expanded="true" />
             <element signature="e#1750#2088#0" expanded="true" />
             <element signature="e#2087#2088#0" expanded="true" />
-            <element signature="e#3543#3544#0" expanded="true" />
-            <element signature="e#3577#3578#0" expanded="true" />
           </folding>
         </state>
       </provider>

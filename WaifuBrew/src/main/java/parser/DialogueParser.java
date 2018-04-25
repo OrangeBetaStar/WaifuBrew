@@ -17,8 +17,6 @@ public class DialogueParser {
 
     private String fileName;
     private String[] dialogueList;
-
-    // index is not in private function to skip to some other previous dialogs.
     private int index;
 
     public DialogueParser(String fileName) {
