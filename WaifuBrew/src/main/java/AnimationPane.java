@@ -25,7 +25,7 @@ public class AnimationPane extends JPanel {
     private int advancer = 0;
 
     // Retrieve String from JSON
-    private String a = "";
+    private String a = "1234567890";
     private String tempString = "";
 
     public AnimationPane() {
@@ -38,7 +38,6 @@ public class AnimationPane extends JPanel {
             dialogueArray = dp.getDialogueList();
 
             Timer timer = new Timer(1, new ActionListener() {
-                // @Override
                 public void actionPerformed(ActionEvent e) {
                     xPos += direction;
                     rotationDeg += direction;
@@ -59,7 +58,6 @@ public class AnimationPane extends JPanel {
             });
 
             Timer stringTimer = new Timer(50, new ActionListener() {
-                // @Override
                 public void actionPerformed(ActionEvent e) {
                     if(tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
@@ -72,8 +70,9 @@ public class AnimationPane extends JPanel {
             timer.setCoalesce(true);
             timer.start();
 
+            // Coalesce is disabled since there is no multiple firing of triggers.
             stringTimer.setRepeats(true);
-            stringTimer.setCoalesce(true);
+            stringTimer.setCoalesce(false);
             stringTimer.start();
 
         } catch (IOException ex) {
@@ -92,10 +91,7 @@ public class AnimationPane extends JPanel {
     private class Handlerclass implements MouseListener {
 
         public void mouseClicked(MouseEvent event) {
-            if(dialogueArray[advancer] != null) {
-                tempString = "";
-                a = dialogueArray[advancer];
-            }
+
         }
 
         public void mousePressed(MouseEvent event) {
@@ -103,6 +99,11 @@ public class AnimationPane extends JPanel {
         }
 
         public void mouseReleased(MouseEvent event) {
+            // There may be a dialogue without dialogue and only character movement
+            if(dialogueArray[advancer] != null) {
+                tempString = "";
+                a = dialogueArray[advancer];
+            }
             if(advancer < dialogueArray.length - 1) {
                 advancer++;
             }
