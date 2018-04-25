@@ -1,4 +1,4 @@
-# WaifuBrew
+# YokoShippo
 
 Still building...
 
