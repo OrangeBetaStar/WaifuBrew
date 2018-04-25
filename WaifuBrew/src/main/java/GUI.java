@@ -1,11 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class GUI extends JFrame {
     private JPanel waifuPanel;
@@ -21,7 +17,7 @@ public class GUI extends JFrame {
 
     private ImageIcon [] loadAll;
     private JScrollPane jsp;
-    private String sourcePath = "src/resources/";
+    private final String RESOURCE_PATH = "src/main/java/resources/";
     private int stage = 0;
 
     private int testInt = 0;
@@ -41,7 +37,7 @@ public class GUI extends JFrame {
         loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
         fileGrab = new File[Mood.values().length];
         for(int i = 0; i<Mood.values().length; i++) {
-            fileGrab[i] = new File(sourcePath + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
+            fileGrab[i] = new File(RESOURCE_PATH + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
             loadAll[i] = new ImageIcon(fileGrab[i].getAbsolutePath());
         }
 
@@ -69,7 +65,7 @@ public class GUI extends JFrame {
                 // This will clear the panel of main screen.
                 remove(startPage);
             }
-            ImagePanel imageSquare = new ImagePanel(new File(sourcePath + "bg.png"), fileGrab, null, null); // As a tester, using the old image
+            ImagePanel imageSquare = new ImagePanel(new File(RESOURCE_PATH + "bg.png"), fileGrab, null, null); // As a tester, using the old image
             // ^ null for locations since I am just testing
             // if null, it will use default spot. (For now there has to be either no declaration or full declaration for character location.)
             imageSquare.addMouseListener(handler);

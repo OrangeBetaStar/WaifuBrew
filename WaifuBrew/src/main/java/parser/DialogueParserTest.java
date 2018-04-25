@@ -10,7 +10,7 @@ import static org.junit.Assert.fail;
 
 public class DialogueParserTest {
 
-    private static final String FILE_NAME = "src/main/java/parser/test.json";
+    private static final String FILE_NAME = "src/main/java/resources/test.json";
     File doc = new File(FILE_NAME);
     private DialogueParser dp;
 

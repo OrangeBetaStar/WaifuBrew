@@ -1,3 +1,7 @@
+import org.json.JSONException;
+import parser.DialogueParser;
+import parser.exception.DialogueDataMissingException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,14 +18,24 @@ public class AnimationPane extends JPanel {
     private int direction = 1;
     private double rotationDeg = 0;
     private Handlerclass handler = new Handlerclass();
+    private final String RESOURCE_PATH = "src/main/java/resources/";
+
+    private DialogueParser dp;
+    private String[] dialogueArray;
+    private int advancer = 0;
 
     // Retrieve String from JSON
-    private String a = "Hello World Hello World Hello World Hello World Hello World Hello World Hello World ";
+    private String a = "";
     private String tempString = "";
 
     public AnimationPane() {
+        addMouseListener(handler);
         try {
-            scrollingImage = ImageIO.read(new File("src/main/java/resources/black.png"));
+
+            scrollingImage = ImageIO.read(new File(RESOURCE_PATH + "black.png"));
+            dp = new DialogueParser(RESOURCE_PATH + "test.json");
+            dp.parse();
+            dialogueArray = dp.getDialogueList();
 
             Timer timer = new Timer(1, new ActionListener() {
                 // @Override
@@ -63,14 +77,25 @@ public class AnimationPane extends JPanel {
             stringTimer.start();
 
         } catch (IOException ex) {
+            System.out.println("Simple IOException");
+            ex.printStackTrace();
+        } catch (DialogueDataMissingException ex) {
+            System.out.println("Missing Dialog!");
+            ex.printStackTrace();
+        } catch (JSONException ex) {
+            System.out.println("There is an error with JSON");
             ex.printStackTrace();
         }
+
     }
 
     private class Handlerclass implements MouseListener {
 
         public void mouseClicked(MouseEvent event) {
-            tempString = "";
+            if(dialogueArray[advancer] != null) {
+                tempString = "";
+                a = dialogueArray[advancer];
+            }
         }
 
         public void mousePressed(MouseEvent event) {
@@ -78,7 +103,9 @@ public class AnimationPane extends JPanel {
         }
 
         public void mouseReleased(MouseEvent event) {
-
+            if(advancer < dialogueArray.length - 1) {
+                advancer++;
+            }
         }
 
         public void mouseEntered(MouseEvent event) {
@@ -101,7 +128,7 @@ public class AnimationPane extends JPanel {
 
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion of a same image)
         sampleImage = new javaxt.io.Image("src/main/java/resources/black.png");
-        // TODO: USE copy( ) instead of getting image every time
+        // TODO: USE copy() instead of getting image every time
         sampleImage.rotate(rotationDeg);
         g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2), this);
 
@@ -109,10 +136,9 @@ public class AnimationPane extends JPanel {
         g.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         g.setColor(new Color(0,0,0));
 
-        // Does this have to be added every time?
-        addMouseListener(handler);
-
-        g.drawString(tempString, 100, 550);
+        if(tempString != "") {
+            g.drawString(tempString, 100, 550);
+        }
 
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html

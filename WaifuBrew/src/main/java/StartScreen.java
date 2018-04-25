@@ -1,12 +1,11 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class StartScreen extends JPanel implements ActionListener {
@@ -16,9 +15,10 @@ public class StartScreen extends JPanel implements ActionListener {
     private BufferedImage config_button;
     private BufferedImage exit_button;
 
+
     private int buttonY = 600;
 
-    private String resourcePath = "src/main/java/resources/";
+    private final String RESOURCE_PATH = "src/main/java/resources/";
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -27,10 +27,10 @@ public class StartScreen extends JPanel implements ActionListener {
 
     public StartScreen() {
         try {
-            backgroundPicture = ImageIO.read(new File(resourcePath + "start.png"));
-            start_button = ImageIO.read(new File(resourcePath + "startscreen_start_button.png"));
-            config_button = ImageIO.read(new File(resourcePath + "startscreen_config_button.png"));
-            exit_button = ImageIO.read(new File(resourcePath + "startscreen_exit_button.png"));
+            backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "start.png"));
+            start_button = ImageIO.read(new File(RESOURCE_PATH + "startscreen_start_button.png"));
+            config_button = ImageIO.read(new File(RESOURCE_PATH + "startscreen_config_button.png"));
+            exit_button = ImageIO.read(new File(RESOURCE_PATH + "startscreen_exit_button.png"));
         } catch (IOException e) {
             System.out.println("File failure in StartScreen class");
             e.printStackTrace(); // Wall of error

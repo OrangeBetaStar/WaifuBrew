@@ -1,19 +1,18 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-// Copos De Nieve - Christopher Slaski
 
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel implements ActionListener {
     private BufferedImage backgroundPicture;
     private BufferedImage[] intersectionImage;
+    private final String RESOURCE_PATH = "src/main/java/resources/";
+
 
     public void actionPerformed(ActionEvent e) {
         repaint();

@@ -1,49 +1,43 @@
-[
-  {
-    "Name": "Yazawa Nico",
-    "Text": "Nico nico nii~",
-    "Mood": "HAPPY",
-    "Line": 1
-  },
-  {
-    "Name": "Yazawa Nico",
-    "Text": "Egao todokeru Yazawa Nico nico~",
-    "Mood": "HAPPY",
-    "Line": 2
-  },
-  {
-    "Name": "Yazawa Nico",
-    "Text": "Nico nii de oboeteru love Nico!",
-    "Mood": "HAPPY",
-    "Line": 3
-  },
-  {
-    "Name": "Yazawa Nico",
-    "Text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
-    "Mood": "HAPPY",
-    "Line": 4
-  },
-  {
-    "Name": "Nishikino Maki",
-    "Text": "Gay.",
-    "Mood": "NORMAL",
-    "Line": 5
-  },
-  {
-    "Name": "Yazawa Nico",
-    "Text": "Nani????",
-    "Mood": "ANGRY",
-    "Line": 6
-  },
-  {
-    "Name": "Yazawa Kokoro",
-    "Mood": "HAPPY",
-    "Line": 200
-  },
-  {
-    "Name": "Ichigaya Arisa",
-    "Text": "Chomama chomamama chotto matte chotto!",
-    "Mood": "TSUN",
-    "Line": 8
-  }
-]
+{
+  "route": [
+    {
+      "name": "Yazawa Nico",
+      "text": "Nico nico nii~",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Egao todokeru Yazawa Nico nico~",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Nico nii de oboeteru love Nico!",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Nishikino Maki",
+      "text": "Gay.",
+      "mood": "NORMAL"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Nani????",
+      "mood": "ANGRY"
+    },
+    {
+      "name": "Yazawa Kokoro",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Ichigaya Arisa",
+      "text": "Chomama chomamama chotto matte chotto!",
+      "mood": "SAD"
+    }
+  ]
+}

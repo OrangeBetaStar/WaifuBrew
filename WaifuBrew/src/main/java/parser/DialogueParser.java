@@ -18,6 +18,9 @@ public class DialogueParser {
     private String fileName;
     private String[] dialogueList;
 
+    // index is not in private function to skip to some other previous dialogs.
+    private int index;
+
     public DialogueParser(String fileName) {
         this.fileName = fileName;
     }
@@ -38,8 +41,11 @@ public class DialogueParser {
                 /*
                 Long l = (Long) o.get("line");
                 int index = l.intValue();
-                this.dialogueList[index] = text;
                 */
+                // System.out.println(text);
+                this.dialogueList[index] = text;
+                index++;
+
                 // System.out.println("test: "+text);
 
             }
