@@ -1,3 +1,5 @@
+package start;
+
 import org.json.JSONException;
 import parser.DialogueParser;
 import parser.exception.DialogueDataMissingException;
@@ -45,13 +47,13 @@ public class AnimationPane extends JPanel {
                         xPos = getWidth() - scrollingImage.getWidth();
                         direction *= -1;
                         rotationDeg *= -1;
-                      //  System.out.println("REEEEEEEEEEEEEEEEEE");
+                        //  System.out.println("REEEEEEEEEEEEEEEEEE");
                     } else if (xPos < 0) {
                         xPos = 0;
                         rotationDeg = 0;
                         direction *= -1;
                         rotationDeg *= -1;
-                      //  System.out.println("AHHHHHHHHHHHHHHHHHH");
+                        //  System.out.println("AHHHHHHHHHHHHHHHHHH");
                     }
                     repaint();
                 }
@@ -104,6 +106,10 @@ public class AnimationPane extends JPanel {
                 tempString = "";
                 a = dialogueArray[advancer];
             }
+            else {
+                tempString = "";
+                a = "";
+            }
             if(advancer < dialogueArray.length - 1) {
                 advancer++;
             }
@@ -126,6 +132,8 @@ public class AnimationPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+
 
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion of a same image)
         sampleImage = new javaxt.io.Image("src/main/java/resources/black.png");

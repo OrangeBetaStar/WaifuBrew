@@ -1,3 +1,5 @@
+package start;
+
 public enum Mood {
     HAPPY,
     NORMAL,

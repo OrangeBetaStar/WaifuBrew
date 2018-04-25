@@ -1,3 +1,5 @@
+package start;
+
 public class Waifu {
     private int weight; //it's kg
     private int height; //it's cm
