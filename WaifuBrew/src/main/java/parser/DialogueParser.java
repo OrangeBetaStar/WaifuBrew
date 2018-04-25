@@ -21,7 +21,9 @@ public class DialogueParser {
     private List<List<Mood>> moodList = new ArrayList<List<Mood>>(); // Dynamic 2D arraylist
     private List<List<Characters>> characterList = new ArrayList<List<Characters>>(); // Dynamic 2D arraylist
     private String tempNameString = "";
+    private String tempMoodString = "";
     private List<String> subNameString;
+    private List<String> subMoodString;
     
     /*
     List<List<Foo>> list = new ArrayList<List<Foo>>();
@@ -59,8 +61,11 @@ public class DialogueParser {
                 JSONObject o = (JSONObject) i.next();
                 if(o.get("name") != null) {
                     tempNameString = (String) o.get("name");
+                    tempMoodString = (String) o.get("mood");
                     subNameString = Arrays.asList(tempNameString.split(","));
+                    subMoodString = Arrays.asList(tempMoodString.split(","));
                     List<Characters> sceneCharList = new ArrayList<Characters>();
+                    List<Mood> sceneMoodList = new ArrayList<Mood>();
                     for (String s : subNameString) {
                         if(s.toLowerCase().contains("nico")) {
                             sceneCharList.add(Characters.Yazawa_Nico);
@@ -79,17 +84,41 @@ public class DialogueParser {
                         //    System.out.println("Added: Kibb");
                         }
                     }
+
+                    do {
+                        for (String m : subMoodString) {
+                            if (m.toLowerCase().contains("happy")) {
+                                sceneMoodList.add(Mood.HAPPY);
+                            } else if (m.toLowerCase().contains("sad")) {
+                                sceneMoodList.add(Mood.SAD);
+                            } else if (m.toLowerCase().contains("normal")) {
+                                sceneMoodList.add(Mood.NORMAL);
+                            } else if (m.toLowerCase().contains("angry")) {
+                                sceneMoodList.add(Mood.ANGRY);
+                            }
+                        }
+
+                    } while (sceneCharList.size() != sceneMoodList.size());
+
                     characterList.add(sceneCharList);
+                    moodList.add(sceneMoodList);
                 }
                 this.dialogueList[index] = (String) o.get("text");
 
                 index++;
             }
 
-            // List viewer
+            // LIST VIEWER (CHARACTERS FIRST / MOODS LATER)
+
             /*
             for(List<Characters> n : characterList){
                 for(Characters m : n) {
+                    System.out.print(m+" ");
+                }
+                System.out.println();
+            }
+            for(List<Mood> n : moodList){
+                for(Mood m : n) {
                     System.out.print(m+" ");
                 }
                 System.out.println();
@@ -100,6 +129,14 @@ public class DialogueParser {
             e.printStackTrace();
         }
 
+    }
+
+    public List<List<Mood>> getMoodList() {
+        return this.moodList;
+    }
+
+    public List<List<Characters>> getCharacterList() {
+        return this.characterList;
     }
 
     public String[] getDialogueList() {

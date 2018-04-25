@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/start/Characters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WaifuBrew.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Mood.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Mood.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/StartScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Waifu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Waifu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/resources/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane$Handlerclass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AnimationPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/WaifuBrew.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/parser/DialogueParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/DialogueParser.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -52,15 +35,16 @@
       <file leaf-file-name="DialogueParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="458">
+              <caret line="124" column="17" lean-forward="true" selection-start-line="124" selection-start-column="17" selection-end-line="124" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#539#551#0" expanded="true" />
                 <element signature="e#643#661#0" expanded="true" />
-                <element signature="e#2123#2135#0" expanded="true" />
-                <element signature="e#3644#3645#0" expanded="true" />
-                <element signature="e#3684#3685#0" expanded="true" />
+                <element signature="e#2177#2189#0" expanded="true" />
+                <element signature="e#2176#2182#0" expanded="true" />
+                <element signature="e#5282#5283#0" expanded="true" />
+                <element signature="e#5322#5323#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -563,7 +547,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1871" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985386" />
@@ -834,15 +817,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="458">
+          <caret line="124" column="17" lean-forward="true" selection-start-line="124" selection-start-column="17" selection-end-line="124" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#539#551#0" expanded="true" />
             <element signature="e#643#661#0" expanded="true" />
-            <element signature="e#2123#2135#0" expanded="true" />
-            <element signature="e#3644#3645#0" expanded="true" />
-            <element signature="e#3684#3685#0" expanded="true" />
+            <element signature="e#2177#2189#0" expanded="true" />
+            <element signature="e#2176#2182#0" expanded="true" />
+            <element signature="e#5282#5283#0" expanded="true" />
+            <element signature="e#5322#5323#0" expanded="true" />
           </folding>
         </state>
       </provider>
