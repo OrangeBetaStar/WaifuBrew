@@ -27,3 +27,5 @@ Logs:
 04/20/18 - Changed vanilla Java application to Maven to have JavaXT dependency for image manipulation. Added test stage [BetaStar]
 
 04/24/18 - Fixed movement issue with JavaXT, added text line for dialog, continued Gaia's JSON implementation. [BetaStar]
+
+04/25/18 - Finished implementing basic form of JSON parser. Now retrieves Characters, Moods, and Dialogues. Auto fixes Moods when implementation of JSON only specifies one Mood for all characters. 3 characters can have all HAPPY Mood with single Mood in JSON [BetaStar]
