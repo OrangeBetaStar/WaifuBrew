@@ -1,10 +1,7 @@
 package start;
-
-import javaxt.io.Image;
 import org.json.JSONException;
 import parser.DialogueParser;
 import parser.exception.DialogueDataMissingException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +22,9 @@ public class AnimationPane extends JPanel {
     private double rotationDeg = 0;
     private Handlerclass handler = new Handlerclass();
     private final String RESOURCE_PATH = "src/main/java/resources/";
-
+    private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
+    private Point[] res;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -36,15 +34,20 @@ public class AnimationPane extends JPanel {
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
 
-    public AnimationPane() {
+
+    public AnimationPane(Point[] res) {
         addMouseListener(handler);
+        this.res = res;
         try {
 
             scrollingImage = ImageIO.read(new File(RESOURCE_PATH + "black.png"));
+            dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
+            dialogueBox.setOpacity(70);
+            dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
+
             dp = new DialogueParser(RESOURCE_PATH + "test.json");
             dp.parse();
             e = dp.getPackagedDialogue();
-
 
             Timer timer = new Timer(1, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -150,22 +153,28 @@ public class AnimationPane extends JPanel {
         sampleImage.rotate(rotationDeg);
         g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2), this);
 
+        g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2) + 300, this);
+
         // Does this have to be declared every time?
         g.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         g.setColor(new Color(0,0,0));
 
         // Do not show character on first viewing
         if(advancer != 0) {
-            // System.out.println("PATH TO IMAGE: " + RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "_" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
+
+            // Character
             javaxt.io.Image characterImage = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "-" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
             g.drawImage(characterImage.getBufferedImage(), 400, 200, this);
-            g.drawImage(new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png").getBufferedImage(),0,400,this);
+
+            // DialogueBox
+            g.drawImage(dialogueBox.getBufferedImage(),res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2),this);
             g.drawString(e.get(advancer-1).get(0).getName().toString(), 100, 430);
         }
 
         if(tempString != "") {
             g.drawString(tempString, 150, 550);
         }
+
 
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html

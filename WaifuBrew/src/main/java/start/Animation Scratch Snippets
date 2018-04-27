@@ -1,3 +1,15 @@
+    private int xPos = 0;
+    private int direction = 1;
+    private double rotationDeg = 0;
+
+
+
+
+
+
+
+
+
 Timer timer = new Timer(1, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     xPos += direction;

@@ -47,29 +47,17 @@ public class StartScreen extends JPanel implements ActionListener {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in!
 
             // Not centered tho... lo
-
-            // int b =(int)Math.round(a);
             if(getPreferredSize(backgroundPicture).width < getSize().width) {
-                /*
-                System.out.println("BG width: "+getPreferredSize(backgroundPicture).width);
-                System.out.println("Window width: "+getSize().width);
-                System.out.println("BG height: "+getPreferredSize(backgroundPicture).height);
-                System.out.println("Window height: "+getSize().height);
-                System.out.println("Calculated height: "+(getSize().width/getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height);
-                System.out.println("Ratio: "+(getSize().width/(double)getPreferredSize(backgroundPicture).width));
-                */
                 if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
                     // TODO: Change x0, y0 if picture is changed.
                     g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
-                    // System.out.println("Using height priority");
                 }
                 else {
                     g.drawImage(backgroundPicture, 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
-                    // System.out.println("Using width priority");
                 }
             }
 
-            // Add rest of the menu elements
+            // TODO: Add rest of the menu elements
 
             g.drawImage(start_button, (getSize().width / 4) - (getPreferredSize(start_button).width / 2), buttonY - (getPreferredSize(start_button).height / 2), getPreferredSize(start_button).width, getPreferredSize(start_button).height,this);
             g.drawImage(config_button,(getSize().width / 4) * 2 - (getPreferredSize(config_button).width / 2), buttonY - (getPreferredSize(config_button).height / 2) , getPreferredSize(config_button).width, getPreferredSize(config_button).height,  this);

@@ -3,7 +3,6 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 
 public class GUI extends JFrame {
     private JPanel waifuPanel;
@@ -13,25 +12,23 @@ public class GUI extends JFrame {
     private StartScreen startPage;
     private Config configPage;
 
-    private JScrollPane jsp;
+    //private JScrollPane jsp;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private int stage = 0;
+    WaifuBrew mainProgram;
 
     public GUI(WaifuBrew program) {
         super("ワイファブルー by TailSoft");
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
-
         waifuLabel = new JLabel("ワイファブルー");
-
         waifuLabel.addMouseListener(handler);
         waifuLabel.addMouseMotionListener(handler);
 
         revalidateGraphics();
 
-        jsp = new JScrollPane();
-
+        mainProgram = program;
         waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
     }
 
@@ -52,7 +49,7 @@ public class GUI extends JFrame {
                 remove(startPage);
             }
 
-            AnimationPane e = new AnimationPane();
+            AnimationPane e = new AnimationPane(mainProgram.getRes());
             add(e);
             revalidate();
         }
@@ -92,12 +89,10 @@ public class GUI extends JFrame {
 
         public void mousePressed(MouseEvent event) {
             waifuLabel.setText("you pressed down the mouse");
-            print();
         }
 
         public void mouseReleased(MouseEvent event) {
             waifuLabel.setText("you released the button");
-            print();
         }
 
         public void mouseEntered(MouseEvent event) {
@@ -115,21 +110,6 @@ public class GUI extends JFrame {
 
         public void mouseMoved(MouseEvent event) {
             waifuLabel.setText("you moved the mouse");
-        }
-
-
-        public void print() {
-            // Prints
-            /*
-            waifuLabel.setIcon(loadAll[testInt]);
-            if(testInt==(Mood.values().length-1)) {
-                testInt = 0;
-            }
-            else {
-                testInt++;
-            }
-            */
-            waifuPanel.add(jsp);
         }
     }
 }

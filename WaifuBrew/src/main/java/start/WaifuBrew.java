@@ -1,4 +1,5 @@
-package start;/*
+package start;
+/*
  * Project by Sidetail & Gaia
 
 */
@@ -11,22 +12,34 @@ public class WaifuBrew {
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
+    private static WaifuBrew instance = null;
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
     // [2] is where window should go (top-left) to be centered in the monitor
-    private  Point[] defaultSize = {
+    private Point[] defaultSize = {
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
-        // lol
+
     }
 
     public static void main(String[] args) {
+        try {
+            WaifuBrew programStart = new WaifuBrew();
+            programStart.visual(programStart);
+        } catch (Exception e) {
+            System.out.println("Catastrophic error!");
+            e.printStackTrace();
+        }
+    }
 
-        WaifuBrew programStart = new WaifuBrew();
-        programStart.visual(programStart);
+    public static WaifuBrew getInstance() {
+        if(instance == null) {
+            instance = new WaifuBrew();
+        }
+        return instance;
     }
 
     public Point[] getRes () {
