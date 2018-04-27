@@ -30,4 +30,4 @@ Logs:
 
 04/25/18 - Finished implementing basic form of JSON parser. Now retrieves Characters, Moods, and Dialogues. Auto fixes Moods when implementation of JSON only specifies one Mood for all characters. 3 characters can have all HAPPY Mood with single Mood in JSON [BetaStar]
 
-04/26/18 - Fixed JSON bugs where it caused duplicates to show up when it reached last line of JSON. Completely reworked Waifu.java (deleted entire thing and started over) and made it into wrapper class of JSON parser to AnimationPane conversion. JSON -> Seperated into list of three seperate objects (Character, Mood, Dialogue) -> compiled and packaged with list of Waifu objects, sent off. Added elements for test purposes.
+04/26/18 - Fixed JSON bugs where it caused duplicates to show up when it reached last line of JSON. Completely reworked Waifu.java (deleted entire thing and started over) and made it into wrapper class of JSON parser to AnimationPane conversion. JSON -> Seperated into list of three seperate objects (Character, Mood, Dialogue) -> compiled and packaged with list of Waifu objects, sent off. Added elements for test purposes. [BetaStar]
