@@ -90,7 +90,7 @@ public class AnimationPane extends JPanel {
             System.out.println("Simple IOException");
             ex.printStackTrace();
         } catch (DialogueDataMissingException ex) {
-            System.out.println("Missing Dialog!");
+            System.out.println("Missing Dialog!"); //Wait what, it is okay to have missing dialog. i.e.: just character change
             ex.printStackTrace();
         } catch (JSONException ex) {
             System.out.println("There is an error with JSON");
@@ -150,20 +150,18 @@ public class AnimationPane extends JPanel {
         sampleImage.rotate(rotationDeg);
         g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2), this);
 
+        // Does this have to be declared every time?
+        g.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        g.setColor(new Color(0,0,0));
+
         // Do not show character on first viewing
         if(advancer != 0) {
-            System.out.println("PATH TO IMAGE: " + RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "_" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
+            // System.out.println("PATH TO IMAGE: " + RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "_" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
             javaxt.io.Image characterImage = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "-" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
             g.drawImage(characterImage.getBufferedImage(), 400, 200, this);
             g.drawImage(new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png").getBufferedImage(),0,400,this);
             g.drawString(e.get(advancer-1).get(0).getName().toString(), 100, 430);
         }
-
-
-
-        // Does this have to be declared every time?
-        g.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-        g.setColor(new Color(0,0,0));
 
         if(tempString != "") {
             g.drawString(tempString, 150, 550);

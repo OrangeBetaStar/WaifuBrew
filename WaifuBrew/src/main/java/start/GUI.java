@@ -9,29 +9,21 @@ public class GUI extends JFrame {
     private JPanel waifuPanel;
     private JLabel waifuLabel;
 
-    private int buttonY = 600;
     private Handlerclass handler = new Handlerclass();
     private StartScreen startPage;
     private Config configPage;
 
-    // Temporary location dumpster when images are loaded on ImageIcon[]
-    private File fileGrab[];
-
-    private ImageIcon [] loadAll;
     private JScrollPane jsp;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private int stage = 0;
 
-    private int testInt = 0;
-
     public GUI(WaifuBrew program) {
-        super("Waifuarium by TailSoft");
+        super("ワイファブルー by TailSoft");
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
-        // add(waifuPanel, BorderLayout.CENTER);
 
-        waifuLabel = new JLabel("Start");
+        waifuLabel = new JLabel("ワイファブルー");
 
         waifuLabel.addMouseListener(handler);
         waifuLabel.addMouseMotionListener(handler);
@@ -63,8 +55,6 @@ public class GUI extends JFrame {
             AnimationPane e = new AnimationPane();
             add(e);
             revalidate();
-
-            // TODO: Implement this.
         }
 
         else if(stage == 2) {
