@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import parser.exception.DialogueDataMissingException;
 import start.Characters;
 import start.Mood;
+import start.Waifu;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class DialogueParser {
     private String tempMoodString = "";
     private List<String> subNameString;
     private List<String> subMoodString;
+    private List<List<Waifu>> packagedDialogue= new ArrayList<List<Waifu>>();
     
     /*
     List<List<Foo>> list = new ArrayList<List<Foo>>();
@@ -108,38 +110,46 @@ public class DialogueParser {
                 index++;
             }
 
-            // LIST VIEWER (CHARACTERS FIRST / MOODS LATER)
-
-            /*
-            for(List<Characters> n : characterList){
-                for(Characters m : n) {
-                    System.out.print(m+" ");
-                }
-                System.out.println();
-            }
-            for(List<Mood> n : moodList){
-                for(Mood m : n) {
-                    System.out.print(m+" ");
-                }
-                System.out.println();
-            }
-            */
-
+        //    getPackagedDialogue();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public List<List<Mood>> getMoodList() {
-        return this.moodList;
-    }
-
-    public List<List<Characters>> getCharacterList() {
-        return this.characterList;
-    }
-
     public String[] getDialogueList() {
-        return this.dialogueList;
+        return dialogueList;
+    }
+
+    // Below packages the everything from JSON into single arraylist of waifus
+    public List<List<Waifu>> getPackagedDialogue() {
+        int n = 0;
+        int m = 0;
+        while (n < characterList.size()) {
+            List<Waifu> tempWaifu = new ArrayList<Waifu>();
+        //    System.out.println("n"+n);
+            while (m < characterList.get(n).size()) {
+             //   System.out.println("m"+m);
+             //   System.out.println("n: "+n+" m: "+m+" character: "+characterList.get(n).get(m)+" mood: "+moodList.get(n).get(m)+" dialogue: "+dialogueList[n]);
+                Waifu e = new Waifu(characterList.get(n).get(m), moodList.get(n).get(m), dialogueList[n]);
+                tempWaifu.add(e);
+                m++;
+            }
+            n++;
+            packagedDialogue.add(tempWaifu);
+            m=0;
+        }
+
+        // Content printer
+        /*
+        for(List<Waifu> e : packagedDialogue) {
+            for(Waifu f : e) {
+                System.out.println("Character: "+ f.getName());
+                System.out.println("Mood: "+ f.getMood());
+                System.out.println("Says: "+ f.getDialogue());
+            }
+        }
+        */
+        return packagedDialogue;
     }
 }
