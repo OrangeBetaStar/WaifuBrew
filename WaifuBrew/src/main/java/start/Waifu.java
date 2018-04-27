@@ -1,69 +1,53 @@
 package start;
 
+import java.awt.*;
+
 public class Waifu {
-    private int weight; //it's kg
-    private int height; //it's cm
-    private int threeSizes[] = {0,0,0};
-    private String name;
+    private Characters name;
     private Mood mood;
+    private String dialogue;
+    private Point initPoint;
+    private Point finalPoint;
 
-    public Waifu(){
-        this.weight = 0;
-        this.height = 0;
-        this.name = "";
-        this.mood = Mood.NORMAL;
+    public Waifu() {
+
     }
 
-    public Waifu(String name, int weight, int height) {
+    public Waifu(Characters name) {
         this.name = name;
-        this.weight = weight;
-        this.height = height;
     }
 
-    public Waifu(String name, int weight, int height, int[] threeSizes) {
+    public Waifu(Characters name, Mood mood, String dialogue) {
         this.name = name;
-        this.weight = weight;
-        this.height = height;
-        this.threeSizes = threeSizes;
-    }
-
-    public Waifu(String name, int weight, int height, int[] threeSizes, Mood mood) {
-        this.name = name;
-        this.weight = weight;
-        this.height = height;
-        this.threeSizes = threeSizes;
         this.mood = mood;
+        this.dialogue = dialogue;
     }
 
-    public int getWeight() {
-        return this.weight;
+    public Waifu(Characters name, Mood mood, String dialogue, Point initPoint, Point finalPoint) {
+        this.name = name;
+        this.mood = mood;
+        this.dialogue = dialogue;
+        this.initPoint = initPoint;
+        this.finalPoint = finalPoint;
     }
 
-    public int getHeight() {
-        return this.height;
-    }
-
-    public String getName() {
+    public Characters getName() {
         return this.name;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public void setHeight(int Height) {
-        this.height = Height;
-    }
-
-    public int[] getThreeSizes() {
-        return threeSizes;
-    }
-
-    public void setMood(Mood mood) {
-        this.mood = mood;
     }
 
     public Mood getMood() {
         return this.mood;
+    }
+
+    public String getDialogue() {
+        return this.dialogue;
+    }
+
+    public void addMood(Mood mood) {
+        this.mood = mood;
+    }
+
+    public void addDialogue (String dialogue) {
+        this.dialogue = dialogue;
     }
 }

@@ -36,13 +36,6 @@ public class GUI extends JFrame {
         waifuLabel.addMouseListener(handler);
         waifuLabel.addMouseMotionListener(handler);
 
-        loadAll = new ImageIcon[Mood.values().length]; // Needs nested loop for more characters later
-        fileGrab = new File[Mood.values().length];
-        for(int i = 0; i<Mood.values().length; i++) {
-            fileGrab[i] = new File(RESOURCE_PATH + program.getWaifu().getName().toLowerCase() + "-" + Mood.values()[i].toString().toLowerCase() + ".jpg");
-            loadAll[i] = new ImageIcon(fileGrab[i].getAbsolutePath());
-        }
-
         revalidateGraphics();
 
         jsp = new JScrollPane();
@@ -64,21 +57,6 @@ public class GUI extends JFrame {
         // Perhaps a custom test panel instead of JLabel. (Later work)
         else if(stage == 1) {
             if(startPage.getParent() != null) {
-                // This will clear the panel of main screen.
-                remove(startPage);
-            }
-            ImagePanel imageSquare = new ImagePanel(new File(RESOURCE_PATH + "bg.png"), fileGrab, null, null); // As a tester, using the old image
-            // ^ null for locations since I am just testing
-            // if null, it will use default spot. (For now there has to be either no declaration or full declaration for character location.)
-            imageSquare.addMouseListener(handler);
-            imageSquare.addMouseMotionListener(handler);
-            add(imageSquare);
-            add(waifuLabel, BorderLayout.SOUTH);
-            revalidate();
-        }
-
-        else if(stage == 2) {
-            if(startPage.getParent() != null) {
                 remove(startPage);
             }
 
@@ -86,15 +64,11 @@ public class GUI extends JFrame {
             add(e);
             revalidate();
 
-            /*
-            configPage = new Config();
-            configPage.addMouseListener(handler);
-            configPage.addMouseMotionListener(handler);
-            add(configPage);
-            revalidate();
-            */
-
             // TODO: Implement this.
+        }
+
+        else if(stage == 2) {
+            // TODO: Stub config page.
         }
     }
 
@@ -156,6 +130,7 @@ public class GUI extends JFrame {
 
         public void print() {
             // Prints
+            /*
             waifuLabel.setIcon(loadAll[testInt]);
             if(testInt==(Mood.values().length-1)) {
                 testInt = 0;
@@ -163,6 +138,7 @@ public class GUI extends JFrame {
             else {
                 testInt++;
             }
+            */
             waifuPanel.add(jsp);
         }
     }

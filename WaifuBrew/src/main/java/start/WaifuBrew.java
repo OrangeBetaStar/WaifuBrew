@@ -19,29 +19,19 @@ public class WaifuBrew {
             new Point(1280, 720),
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
-    //sample waifu
-    Waifu currWaifu;
-
     WaifuBrew() {
-        createWaifu();
+        // lol
     }
 
     public static void main(String[] args) {
 
         WaifuBrew programStart = new WaifuBrew();
         programStart.visual(programStart);
-        programStart.createWaifu();
-
     }
 
     public Point[] getRes () {
         return defaultSize;
     }
-
-    public Waifu getWaifu() {
-        return currWaifu;
-    }
-
 
     public void visual(WaifuBrew a) {
         sample = new GUI(a);
@@ -56,14 +46,4 @@ public class WaifuBrew {
         sample.setVisible(true);
 
     }
-
-    public Waifu createWaifu(){
-
-        // Just default best girl
-        Waifu nicoNii = new Waifu("Nico",43, 153, new int[] {74, 57, 79}, Mood.HAPPY);
-        currWaifu = nicoNii;
-        return nicoNii;
-    }
-
-
 }
