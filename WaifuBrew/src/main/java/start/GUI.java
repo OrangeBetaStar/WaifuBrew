@@ -17,7 +17,7 @@ public class GUI extends JFrame {
     WaifuBrew mainProgram;
 
     public GUI(WaifuBrew program) {
-        super("ワイファブルー by TailSoft");
+        super("ワイファブルー by Tailsoft");
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
