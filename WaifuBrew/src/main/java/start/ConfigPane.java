@@ -26,12 +26,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     public ConfigPane(WaifuBrew mainProgram) {
         try {
             backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "options-background.png"));
-            System.out.println("Location of the background image " + backgroundPicture.toString());
             // TODO: Add buttons (back, toggles, sound system?... etc)
 
-            /*
-            start_button = ImageIO.read(new File(resourcePath + "startscreen_start_button.png"));
-            */
             back_button = ImageIO.read(new File(RESOURCE_PATH + "config_back_button.png"));
 
         } catch (IOException e) {
@@ -49,14 +45,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             // TBH I don't really need this next if statement ???
             if(getPreferredSize(backgroundPicture).width < getSize().width) {
-                /*
-                System.out.println("BG width: "+getPreferredSize(backgroundPicture).width);
-                System.out.println("Window width: "+getSize().width);
-                System.out.println("BG height: "+getPreferredSize(backgroundPicture).height);
-                System.out.println("Window height: "+getSize().height);
-                System.out.println("Calculated height: "+(getSize().width/getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height);
-                System.out.println("Ratio: "+(getSize().width/(double)getPreferredSize(backgroundPicture).width));
-                */
                 if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
                     // TODO: Change x0, y0 if picture is changed.
                     g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
