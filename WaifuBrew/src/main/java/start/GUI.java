@@ -67,15 +67,19 @@ public class GUI extends JFrame {
 
         public void mouseClicked(MouseEvent event) {
             if(stage == 0) {
-                if (event.getX() > 0 && event.getX() < getSize().width / 3) {
+                if (event.getX() > 0 && event.getX() < getSize().width / 4) {
                     stage = 1;
                     System.out.println("Successfully verified start location!");
                     revalidateGraphics();
-                } else if (event.getX() > getSize().width / 3 && event.getX() < (getSize().width / 3) * 2) {
-                    System.out.println("Successfully verified config location!");
+                }
+                else if (event.getX() > getSize().width / 4 && event.getX() < (getSize().width / 4) * 2) {
+                    System.out.println("Successfully verified load location!");
+                }
+                else if (event.getX() > (getSize().width / 4) * 2 && event.getX() < (getSize().width / 4) * 3) {
                     stage = 2;
                     revalidateGraphics();
-                } else {
+                }
+                else {
                     System.out.println("Successfully verified exit location!");
                     System.exit(0);
                 }
@@ -107,7 +111,6 @@ public class GUI extends JFrame {
             waifuLabel.setText("the mouse has left the window");
         }
 
-        // these are mouse motion event
         public void mouseDragged(MouseEvent event) {
             waifuLabel.setText("you are dragging the mouse");
         }

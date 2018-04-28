@@ -12,13 +12,16 @@ public class StartScreen extends JPanel implements ActionListener {
     private javaxt.io.Image start_button;
     private javaxt.io.Image config_button;
     private javaxt.io.Image exit_button;
+    private javaxt.io.Image load_button;
     private Point startButtonP;
     private Point configButtonP;
     private Point exitButtonP;
+    private Point loadButtonP;
     private Handlerclass handler = new Handlerclass();
     boolean startButtonUI = false;
     boolean configButtonUI = false;
     boolean exitButtonUI = false;
+    boolean loadButtonUI = false;
 
     private int buttonY = 600;
 
@@ -36,6 +39,7 @@ public class StartScreen extends JPanel implements ActionListener {
             backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
             start_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_start_button.png");
             config_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_config_button.png");
+            load_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_load_button.png");
             exit_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_exit_button.png");
         } catch (Exception e) { // Javaxt doesn't throw IOException?
             System.out.println("File failure in StartScreen class");
@@ -62,13 +66,15 @@ public class StartScreen extends JPanel implements ActionListener {
             }
 
             // TODO: Add rest of the menu elements
-            startButtonP = new Point((getSize().width / 4) - (getPreferredSize(start_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(start_button.getBufferedImage()).height / 2));
-            configButtonP = new Point((getSize().width / 4) * 2 - (getPreferredSize(config_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(config_button.getBufferedImage()).height / 2));
-            exitButtonP = new Point((getSize().width / 4) * 3 - (getPreferredSize(exit_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(exit_button.getBufferedImage()).height / 2));
+            startButtonP = new Point((getSize().width / 5) - (getPreferredSize(start_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(start_button.getBufferedImage()).height / 2));
+            loadButtonP = new Point((getSize().width / 5) * 2 - (getPreferredSize(load_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(load_button.getBufferedImage()).height / 2));
+            configButtonP = new Point((getSize().width / 5) * 3 - (getPreferredSize(config_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(config_button.getBufferedImage()).height / 2));
+            exitButtonP = new Point((getSize().width / 5) * 4 - (getPreferredSize(exit_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(exit_button.getBufferedImage()).height / 2));
 
             javaxt.io.Image tempStartButton = start_button.copy();
             javaxt.io.Image tempConfigButton = config_button.copy();
             javaxt.io.Image tempExitButton = exit_button.copy();
+            javaxt.io.Image tempLoadButton = load_button.copy();
             if(startButtonUI) {
                 tempStartButton.setOpacity(100);
             }
@@ -81,6 +87,12 @@ public class StartScreen extends JPanel implements ActionListener {
             else {
                 tempConfigButton.setOpacity(20);
             }
+            if(loadButtonUI) {
+                tempLoadButton.setOpacity(20);
+            }
+            else {
+                tempLoadButton.setOpacity(100);
+            }
             if(exitButtonUI) {
                 tempExitButton.setOpacity(100);
             }
@@ -90,6 +102,7 @@ public class StartScreen extends JPanel implements ActionListener {
             g.drawImage(tempStartButton.getBufferedImage(), startButtonP.x, startButtonP.y, getPreferredSize(start_button.getBufferedImage()).width, getPreferredSize(start_button.getBufferedImage()).height,this);
             g.drawImage(tempConfigButton.getBufferedImage(),configButtonP.x, configButtonP.y, getPreferredSize(config_button.getBufferedImage()).width, getPreferredSize(config_button.getBufferedImage()).height,  this);
             g.drawImage(tempExitButton.getBufferedImage(), exitButtonP.x, exitButtonP.y, getPreferredSize(exit_button.getBufferedImage()).width, getPreferredSize(exit_button.getBufferedImage()).height,  this);
+            g.drawImage(tempLoadButton.getBufferedImage(), loadButtonP.x, loadButtonP.y, getPreferredSize(load_button.getBufferedImage()).width, getPreferredSize(load_button.getBufferedImage()).height, this);
             repaint();
         }
     }
@@ -111,29 +124,38 @@ public class StartScreen extends JPanel implements ActionListener {
         public void mouseExited(MouseEvent event) {
         }
 
-        // these are mouse motion event
         public void mouseDragged(MouseEvent event) {
         }
 
         public void mouseMoved(MouseEvent event) {
-            if(event.getX() > startButtonP.x && event.getX() < (startButtonP.x + start_button.getWidth()) && event.getY() > startButtonP.y && event.getY() < (startButtonP.y + start_button.getHeight())) {
+            if(isInArea(event, start_button, startButtonP)) {
                 startButtonUI = true;
             }
             else {
                 startButtonUI = false;
             }
-            if(event.getX() > configButtonP.x && event.getX() < (configButtonP.x + config_button.getWidth()) && event.getY() > configButtonP.y && event.getY() < (configButtonP.y + config_button.getHeight())) {
+            if(isInArea(event, config_button, configButtonP)) {
                 configButtonUI = true;
             }
             else {
                 configButtonUI = false;
             }
-            if(event.getX() > exitButtonP.x && event.getX() < (exitButtonP.x + exit_button.getWidth()) && event.getY() > exitButtonP.y && event.getY() < (exitButtonP.y + exit_button.getHeight())) {
+            if(isInArea(event, load_button, loadButtonP)) {
+                loadButtonUI = true;
+            }
+            else {
+                loadButtonUI = false;
+            }
+            if(isInArea(event, exit_button, exitButtonP)) {
                 exitButtonUI = true;
             }
             else {
                 exitButtonUI = false;
             }
+        }
+
+        private boolean isInArea(MouseEvent event, javaxt.io.Image button, Point area) {
+            return event.getX() > area.x && event.getX() < (area.x + button.getWidth()) && event.getY() > area.y && event.getY() < (area.y + button.getHeight());
         }
     }
 
