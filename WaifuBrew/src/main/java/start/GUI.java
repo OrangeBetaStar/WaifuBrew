@@ -10,7 +10,6 @@ public class GUI extends JFrame {
 
     private Handlerclass handler = new Handlerclass();
     private StartScreen startPage;
-    private Config configPage;
 
     //private JScrollPane jsp;
     private final String RESOURCE_PATH = "src/main/java/resources/";
@@ -48,7 +47,6 @@ public class GUI extends JFrame {
             if(startPage.getParent() != null) {
                 remove(startPage);
             }
-
             AnimationPane e = new AnimationPane(mainProgram.getRes());
             add(e);
             revalidate();
@@ -56,6 +54,12 @@ public class GUI extends JFrame {
 
         else if(stage == 2) {
             // TODO: Stub config page.
+            if(startPage.getParent() != null) {
+                remove(startPage);
+            }
+            ConfigPane e = new ConfigPane(mainProgram);
+            add(e);
+            revalidate();
         }
     }
 

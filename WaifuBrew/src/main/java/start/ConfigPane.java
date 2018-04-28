@@ -1,40 +1,38 @@
 package start;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 @SuppressWarnings("serial")
-public class Config extends JPanel implements ActionListener {
+public class ConfigPane extends JPanel implements ActionListener {
 
     private BufferedImage backgroundPicture;
     private BufferedImage back_button;
 
     private int buttonY = 600;
 
-    private String resourcePath = "src/resources/";
+    private String RESOURCE_PATH = "src/main/java/resources/";
 
     public void actionPerformed(ActionEvent e) {
         repaint();
-        System.out.println("Hi");
     }
 
-    public Config() {
+    public ConfigPane(WaifuBrew mainProgram) {
         try {
-            backgroundPicture = ImageIO.read(new File(resourcePath + "options-background.png"));
+            backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "options-background.png"));
             System.out.println("Location of the background image " + backgroundPicture.toString());
             // TODO: Add buttons (back, toggles, sound system?... etc)
 
             /*
             start_button = ImageIO.read(new File(resourcePath + "startscreen_start_button.png"));
             */
-            back_button = ImageIO.read(new File(resourcePath + "config_back_button.png"));
+            back_button = ImageIO.read(new File(RESOURCE_PATH + "config_back_button.png"));
 
         } catch (IOException e) {
             System.out.println("File failure in Config class");
