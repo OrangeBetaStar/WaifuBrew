@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/StartScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/GUI$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/GUI$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -25,8 +24,8 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+            <state relative-caret-position="351">
+              <caret line="65" column="77" lean-forward="true" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="77" />
               <folding>
                 <element signature="e#3396#3397#0" expanded="true" />
                 <element signature="e#3468#3469#0" expanded="true" />
@@ -85,20 +84,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/StartScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="146" column="28" selection-start-line="146" selection-start-column="28" selection-end-line="146" selection-end-column="28" />
+            <state relative-caret-position="-1159">
+              <caret line="54" column="65" lean-forward="true" selection-start-line="54" selection-start-column="65" selection-end-line="54" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnimationPane.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AnimationPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/AnimationPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1944">
-              <caret line="173" selection-start-line="173" selection-end-line="173" />
+            <state relative-caret-position="433">
+              <caret line="200" column="34" selection-start-line="200" selection-start-column="34" selection-end-line="200" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2540#2923#0" expanded="true" />
+                <element signature="e#2922#2923#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WaifuBrew.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="470">
+              <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -163,14 +179,14 @@
         <option value="$PROJECT_DIR$/src/main/java/AnimationPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/Characters.java" />
         <option value="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/WaifuBrewSingleton.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets" />
         <option value="$PROJECT_DIR$/src/main/java/start/Config.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" />
-        <option value="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/GUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/StartScreen.java" />
+        <option value="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" />
+        <option value="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" />
       </list>
     </option>
   </component>
@@ -579,6 +595,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2584">
           <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2540#2923#0" expanded="true" />
+            <element signature="e#2922#2923#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -704,6 +725,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="74" column="25" lean-forward="true" selection-end-line="155" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4935#4936#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -723,18 +748,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_66/src.zip!/javax/imageio/ImageIO.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1142#1143#0" expanded="true" />
-            <element signature="e#1176#1177#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Mood.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -789,13 +802,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/ConfigPane.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/AnimationPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="173" selection-start-line="173" selection-end-line="173" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -803,10 +809,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+        <state relative-caret-position="351">
+          <caret line="65" column="77" lean-forward="true" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="77" />
           <folding>
             <element signature="e#3396#3397#0" expanded="true" />
             <element signature="e#3468#3469#0" expanded="true" />
@@ -826,8 +842,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/StartScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="146" column="28" selection-start-line="146" selection-start-column="28" selection-end-line="146" selection-end-column="28" />
+        <state relative-caret-position="-1159">
+          <caret line="54" column="65" lean-forward="true" selection-start-line="54" selection-start-column="65" selection-end-line="54" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/AnimationPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="200" column="34" selection-start-line="200" selection-start-column="34" selection-end-line="200" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2540#2923#0" expanded="true" />
+            <element signature="e#2922#2923#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

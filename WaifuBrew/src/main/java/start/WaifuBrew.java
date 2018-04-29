@@ -29,7 +29,9 @@ public class WaifuBrew {
         try {
             WaifuBrew programStart = new WaifuBrew();
             programStart.visual(programStart);
-        } catch (Exception e) {
+        }
+        // catches any exception
+        catch (Exception e) {
             System.out.println("Catastrophic error!");
             e.printStackTrace();
         }

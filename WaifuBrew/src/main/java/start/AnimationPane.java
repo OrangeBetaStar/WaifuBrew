@@ -5,8 +5,7 @@ import parser.exception.DialogueDataMissingException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -26,6 +25,14 @@ public class AnimationPane extends JPanel {
     private DialogueParser dp;
     private Point[] res;
 
+    //Load elements
+    private javaxt.io.Image spinningThing;
+
+    private javaxt.io.Image saveButton;
+    private javaxt.io.Image loadButton;
+    private javaxt.io.Image configButton;
+
+
     // Advancer keeps track of which line it reads
     private int advancer = 0;
 
@@ -37,11 +44,18 @@ public class AnimationPane extends JPanel {
 
     public AnimationPane(Point[] res) {
         addMouseListener(handler);
+        addMouseMotionListener(handler);
         this.res = res;
         try {
 
             scrollingImage = ImageIO.read(new File(RESOURCE_PATH + "black.png"));
             dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
+
+            // Fix the image names later
+            saveButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+            loadButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+            configButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+            spinningThing = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             dialogueBox.setOpacity(70);
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
 
@@ -102,7 +116,7 @@ public class AnimationPane extends JPanel {
 
     }
 
-    private class Handlerclass implements MouseListener {
+    private class Handlerclass implements  MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
 
@@ -134,6 +148,14 @@ public class AnimationPane extends JPanel {
         public void mouseExited(MouseEvent event) {
 
         }
+
+        public void mouseMoved(MouseEvent event) {
+
+        }
+
+        public void mouseDragged(MouseEvent event) {
+
+        }
     }
 
     @Override
@@ -148,8 +170,9 @@ public class AnimationPane extends JPanel {
 
 
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion of a same image)
-        javaxt.io.Image sampleImage = new javaxt.io.Image("src/main/java/resources/black.png");
-                // TODO: USE copy() instead of getting image every time
+        javaxt.io.Image sampleImage = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+
+        // TODO: USE copy() instead of getting image every time
         sampleImage.rotate(rotationDeg);
         g.drawImage(sampleImage.getBufferedImage(),xPos - (sampleImage.getWidth() / 2),getSize().height / 2 - (scrollingImage.getHeight() / 2 ) - (sampleImage.getHeight() / 2), this);
 
@@ -169,6 +192,16 @@ public class AnimationPane extends JPanel {
             // DialogueBox
             g.drawImage(dialogueBox.getBufferedImage(),res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2),this);
             g.drawString(e.get(advancer-1).get(0).getName().toString(), 100, 430);
+
+            // Other buttons (save, load, config)
+            javaxt.io.Image tempSpinningThing = spinningThing.copy();
+            tempSpinningThing.rotate(rotationDeg);
+            // System.out.println(rotationDeg);
+
+            // Fix the bottom part
+            tempSpinningThing.setOpacity((rotationDeg%360) / 360);
+            // Fix the location since square doesn't spin cleanly.
+            g.drawImage(tempSpinningThing.getBufferedImage(), 1000 - tempSpinningThing.getWidth() / 2, 600 - tempSpinningThing.getHeight() / 2, this);
         }
 
         if(tempString != "") {

@@ -24,6 +24,7 @@ public class StartScreen extends JPanel implements ActionListener {
     boolean loadButtonUI = false;
 
     private int buttonY = 600;
+    private int brightness = 20;
 
     private final String RESOURCE_PATH = "src/main/java/resources/";
 
@@ -35,17 +36,11 @@ public class StartScreen extends JPanel implements ActionListener {
     public StartScreen() {
         addMouseListener(handler);
         addMouseMotionListener(handler);
-        try {
-            backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
-            start_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_start_button.png");
-            config_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_config_button.png");
-            load_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_load_button.png");
-            exit_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_exit_button.png");
-        } catch (Exception e) { // Javaxt doesn't throw IOException?
-            System.out.println("File failure in StartScreen class");
-            e.printStackTrace(); // Wall of error
-            System.exit(-1);
-        }
+        backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
+        start_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_start_button.png");
+        config_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_config_button.png");
+        load_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_load_button.png");
+        exit_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_exit_button.png");
     }
 
     @Override
@@ -71,6 +66,7 @@ public class StartScreen extends JPanel implements ActionListener {
             configButtonP = new Point((getSize().width / 5) * 3 - (getPreferredSize(config_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(config_button.getBufferedImage()).height / 2));
             exitButtonP = new Point((getSize().width / 5) * 4 - (getPreferredSize(exit_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(exit_button.getBufferedImage()).height / 2));
 
+            // Copy the original cuz the javaxt edits from original (quality loss)
             javaxt.io.Image tempStartButton = start_button.copy();
             javaxt.io.Image tempConfigButton = config_button.copy();
             javaxt.io.Image tempExitButton = exit_button.copy();
@@ -79,25 +75,25 @@ public class StartScreen extends JPanel implements ActionListener {
                 tempStartButton.setOpacity(100);
             }
             else {
-                tempStartButton.setOpacity(20);
+                tempStartButton.setOpacity(brightness);
             }
             if(configButtonUI) {
                 tempConfigButton.setOpacity(100);
             }
             else {
-                tempConfigButton.setOpacity(20);
+                tempConfigButton.setOpacity(brightness);
             }
             if(loadButtonUI) {
-                tempLoadButton.setOpacity(20);
+                tempLoadButton.setOpacity(100);
             }
             else {
-                tempLoadButton.setOpacity(100);
+                tempLoadButton.setOpacity(brightness);
             }
             if(exitButtonUI) {
                 tempExitButton.setOpacity(100);
             }
             else {
-                tempExitButton.setOpacity(20);
+                tempExitButton.setOpacity(brightness);
             }
             g.drawImage(tempStartButton.getBufferedImage(), startButtonP.x, startButtonP.y, getPreferredSize(start_button.getBufferedImage()).width, getPreferredSize(start_button.getBufferedImage()).height,this);
             g.drawImage(tempConfigButton.getBufferedImage(),configButtonP.x, configButtonP.y, getPreferredSize(config_button.getBufferedImage()).width, getPreferredSize(config_button.getBufferedImage()).height,  this);
