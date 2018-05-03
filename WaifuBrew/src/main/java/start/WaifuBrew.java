@@ -13,6 +13,7 @@ public class WaifuBrew {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private static WaifuBrew instance = null;
+    private final String RESOURCE_PATH = "src/main/java/resources/";
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
     // [2] is where window should go (top-left) to be centered in the monitor
@@ -42,6 +43,10 @@ public class WaifuBrew {
             System.out.println("Catastrophic error!");
             e.printStackTrace();
         }
+    }
+
+    public String getResoucePath () {
+        return RESOURCE_PATH;
     }
 
     public Point[] getRes () {

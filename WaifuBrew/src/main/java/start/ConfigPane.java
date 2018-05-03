@@ -17,7 +17,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int backButtonX = 1100;
     private int backButtonY = 600;
 
-    private String RESOURCE_PATH = "src/main/java/resources/";
+    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private Handlerclass handler = new Handlerclass();
 
     private boolean backButtonUI = false;
@@ -40,7 +40,6 @@ public class ConfigPane extends JPanel implements ActionListener {
             e.printStackTrace(); // Wall of error
             System.exit(-1);
         }
-        System.out.println(WaifuBrew.getInstance().getRes()[1].getX());
     }
 
     @Override

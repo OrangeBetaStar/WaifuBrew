@@ -26,11 +26,10 @@ public class StartScreen extends JPanel implements ActionListener {
     private int buttonY = 600;
     private int brightness = 20;
 
-    private final String RESOURCE_PATH = "src/main/java/resources/";
+    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     public void actionPerformed(ActionEvent e) {
         repaint();
-        System.out.println("Hi");
     }
 
     public StartScreen() {

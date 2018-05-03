@@ -20,7 +20,7 @@ public class AnimationPane extends JPanel {
     private int direction = 1;
     private double rotationDeg = 0;
     private Handlerclass handler = new Handlerclass();
-    private final String RESOURCE_PATH = "src/main/java/resources/";
+    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;

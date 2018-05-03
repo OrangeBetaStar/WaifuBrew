@@ -14,7 +14,7 @@ public class GUI extends JFrame {
     private ConfigPane configPane;
 
     //private JScrollPane jsp;
-    private final String RESOURCE_PATH = "src/main/java/resources/";
+    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private int stage = 0;
     private int lastStage = 10;
 
@@ -36,14 +36,10 @@ public class GUI extends JFrame {
         revalidateGraphics();
 
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
-
     }
-
-
 
     public void revalidateGraphics() {
 
-        System.out.println("Parent "+startPage.getParent());
         // If stage changed
         if(lastStage != stage) {
 
@@ -56,6 +52,7 @@ public class GUI extends JFrame {
                     remove(configPane);
                 }
                 add(startPage);
+                startPage.repaint();
             }
 
             // Stage 1 is the play field.
@@ -67,6 +64,7 @@ public class GUI extends JFrame {
                     remove(configPane);
                 }
                 add(animationPane);
+                animationPane.repaint();
             }
 
             // Stage 2 is the config field
@@ -78,7 +76,7 @@ public class GUI extends JFrame {
                     remove(startPage);
                 }
                 add(configPane);
-
+                configPane.repaint();
             }
             revalidate();
         }
@@ -92,6 +90,7 @@ public class GUI extends JFrame {
 
     public void setStage(int stage) {
         this.stage = stage;
+        revalidateGraphics();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener{
