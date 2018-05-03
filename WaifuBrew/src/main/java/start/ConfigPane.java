@@ -3,8 +3,7 @@ package start;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +12,15 @@ import java.io.IOException;
 public class ConfigPane extends JPanel implements ActionListener {
 
     private BufferedImage backgroundPicture;
-    private BufferedImage back_button;
+    private javaxt.io.Image back_button;
 
-    private int buttonY = 600;
+    private int backButtonX = 1100;
+    private int backButtonY = 600;
 
     private String RESOURCE_PATH = "src/main/java/resources/";
+    private Handlerclass handler = new Handlerclass();
+
+    private boolean backButtonUI = false;
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -28,7 +31,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "options-background.png"));
             // TODO: Add buttons (back, toggles, sound system?... etc)
 
-            back_button = ImageIO.read(new File(RESOURCE_PATH + "config_back_button.png"));
+            back_button = new javaxt.io.Image(RESOURCE_PATH + "config_back_button.png");
+            addMouseListener(handler);
+            addMouseMotionListener(handler);
 
         } catch (IOException e) {
             System.out.println("File failure in Config class");
@@ -73,8 +78,48 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawImage(config_button,(getSize().width / 4) * 2 - (getPreferredSize(config_button).width / 2), buttonY - (getPreferredSize(config_button).height / 2) , getPreferredSize(config_button).width, getPreferredSize(config_button).height,  this);
             g.drawImage(exit_button,(getSize().width / 4) * 3 - (getPreferredSize(exit_button).width / 2), buttonY - (getPreferredSize(exit_button).height / 2), getPreferredSize(exit_button).width, getPreferredSize(exit_button).height,  this);
             */
+            if(backButtonUI) {
+                back_button.setOpacity(100);
+            }
+            else {
+                back_button.setOpacity(20);
+            }
+            g.drawImage(back_button.getBufferedImage(), backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2), backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2), getPreferredSize(back_button.getBufferedImage()).width, getPreferredSize(back_button.getBufferedImage()).height, this);
+        }
+    }
 
-            g.drawImage(back_button, 1100 - (getPreferredSize(back_button).width / 2), buttonY - (getPreferredSize(back_button).height / 2), getPreferredSize(back_button).width, getPreferredSize(back_button).height, this);
+    private class Handlerclass implements MouseListener, MouseMotionListener {
+        public void mousePressed (MouseEvent event) {
+
+        }
+        public void mouseMoved (MouseEvent event) {
+            if(event.getX() >= backButtonX && event.getY() >= backButtonY && event.getX() <= (backButtonX + back_button.getWidth()) && event.getY() <= (backButtonY + back_button.getHeight())) {
+                backButtonUI = true;
+                /*
+                System.out.println("1: "+ (event.getX() >= backButtonX));
+                System.out.println("2: "+ (event.getY() >= backButtonY));
+                System.out.println("3: "+ (event.getX() <= (backButtonX + back_button.getWidth())));
+                System.out.println("4: "+ (event.getY() <= (backButtonY + back_button.getHeight())));
+                */
+            }
+            else {
+                backButtonUI = false;
+            }
+        }
+        public void mouseDragged (MouseEvent event) {
+
+        }
+        public void mouseClicked (MouseEvent event) {
+
+        }
+        public void mouseEntered (MouseEvent event) {
+
+        }
+        public void mouseReleased (MouseEvent event) {
+
+        }
+        public void mouseExited (MouseEvent event) {
+
         }
     }
 
