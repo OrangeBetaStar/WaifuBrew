@@ -34,4 +34,6 @@ Logs:
 
 04/27/18 - Restarted progress of Settings panel (ConfigPane). Fixed and enhanced dialoguebar. The placement is now relative. Lastly, start page buttons now react to mouse for better GUI experience. [BetaStar]
 
-04/28/18 - Added "load" button to main screen. Added more elements in resource pool for future use (like "Save" image).
+04/28/18 - Added "load" button to main screen. Added more elements in resource pool for future use (like "Save" image). [BetaStar]
+
+05/02/18 - Properly set up Singleton to reduce the amount of dependency between classes. (No more passing around class objects of main!) Able to retrive variables from classes. Implemented back button of ConfigPane and responds to mouse clicks, however GUI get stuck. I can move to Stage 2 -> Stage 0 -> Stage 1 (I can go from Setting page to Main to Play field). Cleared useless codes / redundant lines [BetaStar]
