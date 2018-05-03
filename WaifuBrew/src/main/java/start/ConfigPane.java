@@ -22,7 +22,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private boolean backButtonUI = false;
 
-    public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
@@ -78,14 +78,19 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawImage(config_button,(getSize().width / 4) * 2 - (getPreferredSize(config_button).width / 2), buttonY - (getPreferredSize(config_button).height / 2) , getPreferredSize(config_button).width, getPreferredSize(config_button).height,  this);
             g.drawImage(exit_button,(getSize().width / 4) * 3 - (getPreferredSize(exit_button).width / 2), buttonY - (getPreferredSize(exit_button).height / 2), getPreferredSize(exit_button).width, getPreferredSize(exit_button).height,  this);
             */
-            if(backButtonUI) {
-                back_button.setOpacity(100);
-            }
-            else {
-                back_button.setOpacity(20);
-            }
-            g.drawImage(back_button.getBufferedImage(), backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2), backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2), getPreferredSize(back_button.getBufferedImage()).width, getPreferredSize(back_button.getBufferedImage()).height, this);
+
         }
+        javaxt.io.Image tempBackButton = back_button.copy();
+        if(backButtonUI) {
+            tempBackButton.setOpacity(100);
+        }
+        else {
+            tempBackButton.setOpacity(20);
+        }
+        g.drawImage(tempBackButton.getBufferedImage(), (backButtonX - (getPreferredSize(tempBackButton.getBufferedImage()).width / 2)), (backButtonY - (getPreferredSize(tempBackButton.getBufferedImage()).height / 2)), getPreferredSize(tempBackButton.getBufferedImage()).width, getPreferredSize(tempBackButton.getBufferedImage()).height, this);
+
+        // Save resource (in mouseEntered) - Didn't work
+        repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
@@ -93,14 +98,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         }
         public void mouseMoved (MouseEvent event) {
-            if(event.getX() >= backButtonX && event.getY() >= backButtonY && event.getX() <= (backButtonX + back_button.getWidth()) && event.getY() <= (backButtonY + back_button.getHeight())) {
+            if(event.getX() >= (backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) && event.getY() >= (backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) && event.getX() <= ((backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) + back_button.getWidth()) && event.getY() <= ((backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) + back_button.getHeight())) {
                 backButtonUI = true;
-                /*
-                System.out.println("1: "+ (event.getX() >= backButtonX));
-                System.out.println("2: "+ (event.getY() >= backButtonY));
-                System.out.println("3: "+ (event.getX() <= (backButtonX + back_button.getWidth())));
-                System.out.println("4: "+ (event.getY() <= (backButtonY + back_button.getHeight())));
-                */
             }
             else {
                 backButtonUI = false;
