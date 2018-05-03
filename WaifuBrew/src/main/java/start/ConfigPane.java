@@ -26,7 +26,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         repaint();
     }
 
-    public ConfigPane(WaifuBrew mainProgram) {
+    public ConfigPane() {
         try {
             backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "options-background.png"));
             // TODO: Add buttons (back, toggles, sound system?... etc)
@@ -40,6 +40,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             e.printStackTrace(); // Wall of error
             System.exit(-1);
         }
+        System.out.println(WaifuBrew.getInstance().getRes()[1].getX());
     }
 
     @Override
@@ -48,36 +49,27 @@ public class ConfigPane extends JPanel implements ActionListener {
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
 
+
             // TBH I don't really need this next if statement ???
-            if(getPreferredSize(backgroundPicture).width < getSize().width) {
-                if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
-                    // TODO: Change x0, y0 if picture is changed.
-                    g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
-                    //System.out.println("Using height priority (This is Config)");
+            if(getPreferredSize(backgroundPicture).width < WaifuBrew.getInstance().getRes()[1].getX()) {
+                if((WaifuBrew.getInstance().getRes()[1].getX()/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < WaifuBrew.getInstance().getRes()[1].getY()) {
+                    g.drawImage(backgroundPicture,0,0,(int)Math.round(WaifuBrew.getInstance().getRes()[1].getY() / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), (int)Math.round(WaifuBrew.getInstance().getRes()[1].getY()), this);
                 }
                 else {
-                    g.drawImage(backgroundPicture, 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
-                    //System.out.println("Using width priority (This is Config)");
+                    g.drawImage(backgroundPicture, 0, 0, (int)Math.round(WaifuBrew.getInstance().getRes()[1].getX()),(int)Math.round(WaifuBrew.getInstance().getRes()[1].getX() / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
                 }
             }
             else {
                 // TODO: Just copied from above. Will refine later
-                if((getSize().width/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < getSize().height) {
-                    // TODO: Change x0, y0 if picture is changed.
-                    g.drawImage(backgroundPicture,0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), getSize().height, this);
+                if((WaifuBrew.getInstance().getRes()[1].getX()/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < WaifuBrew.getInstance().getRes()[1].getY()) {
+                    g.drawImage(backgroundPicture,0,0,(int)Math.round(WaifuBrew.getInstance().getRes()[1].getY() / (double)getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), (int)Math.round(WaifuBrew.getInstance().getRes()[1].getY()), this);
                 }
                 else {
-                    g.drawImage(backgroundPicture, 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
+                    g.drawImage(backgroundPicture, 0, 0, (int)Math.round(WaifuBrew.getInstance().getRes()[1].getX()),(int)Math.round(WaifuBrew.getInstance().getRes()[1].getX() / (double)getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
                 }
             }
 
             // TODO: Add rest of the menu elements
-
-            /*
-            g.drawImage(start_button, (getSize().width / 4) - (getPreferredSize(start_button).width / 2), buttonY - (getPreferredSize(start_button).height / 2), getPreferredSize(start_button).width, getPreferredSize(start_button).height,this);
-            g.drawImage(config_button,(getSize().width / 4) * 2 - (getPreferredSize(config_button).width / 2), buttonY - (getPreferredSize(config_button).height / 2) , getPreferredSize(config_button).width, getPreferredSize(config_button).height,  this);
-            g.drawImage(exit_button,(getSize().width / 4) * 3 - (getPreferredSize(exit_button).width / 2), buttonY - (getPreferredSize(exit_button).height / 2), getPreferredSize(exit_button).width, getPreferredSize(exit_button).height,  this);
-            */
 
         }
         javaxt.io.Image tempBackButton = back_button.copy();
@@ -109,6 +101,12 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         }
         public void mouseClicked (MouseEvent event) {
+
+            if(event.getX() >= (backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) && event.getY() >= (backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) && event.getX() <= ((backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) + back_button.getWidth()) && event.getY() <= ((backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) + back_button.getHeight())) {
+                System.out.println("Current stage: "+WaifuBrew.getInstance().getGUIInstance().getStage());
+                WaifuBrew.getInstance().getGUIInstance().setStage(0);
+                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+            }
 
         }
         public void mouseEntered (MouseEvent event) {

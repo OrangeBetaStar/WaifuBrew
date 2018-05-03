@@ -10,57 +10,88 @@ public class GUI extends JFrame {
 
     private Handlerclass handler = new Handlerclass();
     private StartScreen startPage;
+    private AnimationPane animationPane;
+    private ConfigPane configPane;
 
     //private JScrollPane jsp;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private int stage = 0;
-    WaifuBrew mainProgram;
+    private int lastStage = 10;
 
-    public GUI(WaifuBrew program) {
+    public GUI() {
         super("ワイファブルー by Tailsoft");
+
+        addMouseListener(handler);
+        addMouseMotionListener(handler);
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
         waifuLabel = new JLabel("ワイファブルー");
-        waifuLabel.addMouseListener(handler);
-        waifuLabel.addMouseMotionListener(handler);
+        startPage = new StartScreen();
+        startPage.addMouseListener(handler);
+        startPage.addMouseMotionListener(handler);
+        animationPane = new AnimationPane();
+        configPane = new ConfigPane();
 
         revalidateGraphics();
 
-        mainProgram = program;
-        waifuPanel.setBounds(program.getRes()[1].x, program.getRes()[1].y, program.getRes()[2].x, program.getRes()[2].y);
+        waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
+
     }
 
-    private void revalidateGraphics() {
-        if (stage == 0) {
-            startPage = new StartScreen();
-            startPage.addMouseListener(handler);
-            startPage.addMouseMotionListener(handler);
-            add(startPage);
+
+
+    public void revalidateGraphics() {
+
+        System.out.println("Parent "+startPage.getParent());
+        // If stage changed
+        if(lastStage != stage) {
+
+            // Stage 0 is the main screen
+            if (stage == 0) {
+                if(animationPane.getParent() != null) {
+                    remove(animationPane);
+                }
+                if(configPane.getParent() != null) {
+                    remove(configPane);
+                }
+                add(startPage);
+            }
+
+            // Stage 1 is the play field.
+            else if (stage == 1) {
+                if(startPage.getParent() != null) {
+                    remove(startPage);
+                }
+                if(configPane.getParent() != null) {
+                    remove(configPane);
+                }
+                add(animationPane);
+            }
+
+            // Stage 2 is the config field
+            else if (stage == 2) {
+                if(animationPane.getParent() != null) {
+                    remove(animationPane);
+                }
+                if(startPage.getParent() != null) {
+                    remove(startPage);
+                }
+                add(configPane);
+
+            }
             revalidate();
-            setLocationByPlatform(true);
         }
 
-        // Stage 1 is the play field.
-        // Perhaps a custom test panel instead of JLabel. (Later work)
-        else if(stage == 1) {
-            if(startPage.getParent() != null) {
-                remove(startPage);
-            }
-            AnimationPane e = new AnimationPane(mainProgram.getRes());
-            add(e);
-            revalidate();
-        }
+        lastStage = stage;
+    }
 
-        else if(stage == 2) {
-            // TODO: Stub config page.
-            if(startPage.getParent() != null) {
-                remove(startPage);
-            }
-            ConfigPane e = new ConfigPane(mainProgram);
-            add(e);
-            revalidate();
-        }
+    public int getStage(){
+        return this.stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener{

@@ -42,10 +42,10 @@ public class AnimationPane extends JPanel {
     private java.util.List<java.util.List<Waifu>> e;
 
 
-    public AnimationPane(Point[] res) {
+    public AnimationPane() {
         addMouseListener(handler);
         addMouseMotionListener(handler);
-        this.res = res;
+        this.res = WaifuBrew.getInstance().getRes();
         try {
 
             scrollingImage = ImageIO.read(new File(RESOURCE_PATH + "black.png"));

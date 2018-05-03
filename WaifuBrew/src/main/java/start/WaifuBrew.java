@@ -25,10 +25,17 @@ public class WaifuBrew {
 
     }
 
+    private static WaifuBrew singleton  = new WaifuBrew();
+
+    public static WaifuBrew getInstance() {
+        return singleton;
+    }
+
     public static void main(String[] args) {
         try {
             WaifuBrew programStart = new WaifuBrew();
-            programStart.visual(programStart);
+            programStart.start();
+            singleton = programStart;
         }
         // catches any exception
         catch (Exception e) {
@@ -37,19 +44,16 @@ public class WaifuBrew {
         }
     }
 
-    public static WaifuBrew getInstance() {
-        if(instance == null) {
-            instance = new WaifuBrew();
-        }
-        return instance;
-    }
-
     public Point[] getRes () {
         return defaultSize;
     }
 
-    public void visual(WaifuBrew a) {
-        sample = new GUI(a);
+    public GUI getGUIInstance(){
+        return sample;
+    }
+
+    public void start() {
+        sample = new GUI();
         sample.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // default size
         sample.setSize(defaultSize[1].x, defaultSize[1].y);
