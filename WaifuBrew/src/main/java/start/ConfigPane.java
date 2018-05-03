@@ -48,7 +48,6 @@ public class ConfigPane extends JPanel implements ActionListener {
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
 
-
             // TBH I don't really need this next if statement ???
             if(getPreferredSize(backgroundPicture).width < WaifuBrew.getInstance().getRes()[1].getX()) {
                 if((WaifuBrew.getInstance().getRes()[1].getX()/(double)getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < WaifuBrew.getInstance().getRes()[1].getY()) {
@@ -102,7 +101,6 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mouseClicked (MouseEvent event) {
 
             if(event.getX() >= (backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) && event.getY() >= (backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) && event.getX() <= ((backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) + back_button.getWidth()) && event.getY() <= ((backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) + back_button.getHeight())) {
-                System.out.println("Current stage: "+WaifuBrew.getInstance().getGUIInstance().getStage());
                 WaifuBrew.getInstance().getGUIInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }

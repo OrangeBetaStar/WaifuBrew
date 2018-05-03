@@ -32,10 +32,8 @@ public class GUI extends JFrame {
         startPage.addMouseMotionListener(handler);
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
-
-        revalidateGraphics();
-
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
+        revalidateGraphics();
     }
 
     public void revalidateGraphics() {
@@ -52,6 +50,7 @@ public class GUI extends JFrame {
                     remove(configPane);
                 }
                 add(startPage);
+                // If there is no repaint(), it doesn't set chain reaction for loop.
                 startPage.repaint();
             }
 
@@ -112,15 +111,6 @@ public class GUI extends JFrame {
                 else {
                     System.out.println("Successfully verified exit location!");
                     System.exit(0);
-                }
-                waifuLabel.setText(String.format("Clicked at %d, %d", event.getX(), event.getY()));
-            }
-            else if(stage == 2) {
-                // TODO: Stub for configs stage
-                if((getSize().width / 3) * 2 > event.getX() && getSize().width < event.getX() ) {
-                    stage = 0;
-                    revalidateGraphics();
-                    System.out.println("Stage 2 back button");
                 }
             }
         }
