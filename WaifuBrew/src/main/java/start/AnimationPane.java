@@ -56,6 +56,7 @@ public class AnimationPane extends JPanel {
             loadButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             configButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             spinningThing = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+
             dialogueBox.setOpacity(70);
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
 
