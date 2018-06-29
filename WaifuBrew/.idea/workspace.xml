@@ -2,15 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CODE_OF_CONDUCT.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CODE_OF_CONDUCT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WaifuBrew.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/bak/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/bak/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/RotationCalculation" beforeDir="false" afterPath="$PROJECT_DIR$/bak/RotationCalculation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/Tsundere.java" beforeDir="false" afterPath="$PROJECT_DIR$/bak/Tsundere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/WaifuGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/bak/WaifuGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bak/mouseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/bak/mouseClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/out/production/WaifuBrew/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/out/production/WaifuBrew/WaifuBrew.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/DialogueParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/exception/DialogueDataMissingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/exception/DialogueDataMissingException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/Characters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Characters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/AnimationPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/AnimationPane$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/AnimationPane$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/AnimationPane$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/AnimationPane$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/AnimationPane$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/AnimationPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/AnimationPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/Mood.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Mood.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/StartScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/Waifu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Waifu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AnimationPaneTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AnimationPaneTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$Handlerclass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -30,8 +59,8 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-536">
-              <caret line="48" column="52" lean-forward="true" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+            <state relative-caret-position="782">
+              <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,11 +86,25 @@
       <file leaf-file-name="ConfigPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/ConfigPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="42" column="38" lean-forward="true" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+            <state relative-caret-position="357">
+              <caret line="67" column="43" lean-forward="true" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#257#284#0" expanded="true" />
+                <element signature="e#877#878#0" expanded="true" />
+                <element signature="e#902#903#0" expanded="true" />
+                <element signature="e#1764#2993#0" expanded="true" />
+                <element signature="e#2992#2993#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DialogueParserTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-185">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -71,15 +114,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
               <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Animation Scratch Snippets" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -96,7 +130,7 @@
       <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/StartScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
+            <state relative-caret-position="918">
               <caret line="59" selection-start-line="59" selection-end-line="59" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -117,7 +151,7 @@
       <file leaf-file-name="WaifuBrew.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
+            <state relative-caret-position="867">
               <caret line="60" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -129,8 +163,8 @@
       <file leaf-file-name="AnimationPane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/AnimationPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="62" column="65" lean-forward="true" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
+            <state relative-caret-position="867">
+              <caret line="62" column="65" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -301,6 +335,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WaifuBrew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WaifuBrew" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="start" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -324,9 +366,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -573,29 +615,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1394" height="916" extended-state="6" />
+    <frame x="-8" y="-8" width="1865" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985386" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3233458" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32254696" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.500277" side_tool="true" weight="0.20250522" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.21044993" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32985386" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20349564" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.499723" visible="true" weight="0.20250522" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32985386" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21407838" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2166205" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.19311064" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -619,6 +661,11 @@
           <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#257#284#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#1764#2993#0" expanded="true" />
+            <element signature="e#2992#2993#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -747,10 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="74" column="25" lean-forward="true" selection-end-line="155" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4935#4936#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,13 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Animation Scratch Snippets">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -794,7 +830,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
+        <state relative-caret-position="867">
           <caret line="60" selection-start-line="60" selection-end-line="60" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -811,7 +847,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/StartScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
+        <state relative-caret-position="918">
           <caret line="59" selection-start-line="59" selection-end-line="59" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -841,8 +877,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-536">
-          <caret line="48" column="52" lean-forward="true" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+        <state relative-caret-position="782">
+          <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -851,20 +887,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/AnimationPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="62" column="65" lean-forward="true" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
+        <state relative-caret-position="867">
+          <caret line="62" column="65" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/parser/DialogueParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-185">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/ConfigPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="42" column="38" lean-forward="true" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+        <state relative-caret-position="357">
+          <caret line="67" column="43" lean-forward="true" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#257#284#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#1764#2993#0" expanded="true" />
+            <element signature="e#2992#2993#0" expanded="true" />
           </folding>
         </state>
       </provider>
