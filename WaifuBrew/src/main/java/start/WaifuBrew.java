@@ -1,8 +1,8 @@
 package start;
 /*
  * Project by Sidetail & Gaia
-
-*/
+ *
+ */
 
 import javax.swing.*;
 import java.awt.*;

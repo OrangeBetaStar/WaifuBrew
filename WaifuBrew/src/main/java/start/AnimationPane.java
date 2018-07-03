@@ -171,7 +171,7 @@ public class AnimationPane extends JPanel {
         super.paintComponent(g);
 
         if(initStage) {
-            System.out.println("Setting dialogueTrans to " + WaifuBrew.getInstance().getDialogueTransparency() + "%");
+            // System.out.println("Setting dialogueTrans to " + WaifuBrew.getInstance().getDialogueTransparency() + "%");
             dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
         }
 

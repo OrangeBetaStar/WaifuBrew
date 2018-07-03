@@ -152,8 +152,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         g.drawImage(dialogueSpeedSlider.getBufferedImage(), dialogueX, dialogueSpeedY, (int)(sliderTrack.getWidth() * (dialogueSpeed/100.0)) + (int)(dialogueSpeedKnob.getWidth() * 0.5), sliderTrack.getHeight(), this);
         g.drawImage(dialogueSpeedKnob.getBufferedImage(), dialogueSpeedKnobX, dialogueSpeedKnobY, this);
 
-        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 40);
-        g.drawString("Diologue Text Speed", dialogueX, dialogueTransparencyY + 80);
+        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
+        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
 
         repaint();
     }
