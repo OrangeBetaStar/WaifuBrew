@@ -17,15 +17,21 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image sliderTrack;
     private javaxt.io.Image dialogueTransparencySlider;
     private javaxt.io.Image dialogueTransparencyKnob;
+    private javaxt.io.Image dialogueSpeedSlider;
+    private javaxt.io.Image dialogueSpeedKnob;
 
     // PLACEMENT
-    private int dialogueTransparencyX = 100;
+    private int dialogueX = 100;
     private int dialogueTransparencyY = 220;
+    private int dialogueSpeedY = dialogueTransparencyY + 80;
     private int dialogueTransparencyKnobX;
     private int dialogueTransparencyKnobY;
+    private int dialogueSpeedKnobX;
+    private int dialogueSpeedKnobY;
     private int backButtonX = 1100;
     private int backButtonY = 600;
     private boolean dialogueTransparencyMove = false;
+    private boolean dialogueSpeedMove = false;
 
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private Handlerclass handler = new Handlerclass();
@@ -34,6 +40,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private boolean backButtonUI = false;
 
     public int dialogueTransparency = 70;
+    public int dialogueSpeed = 50;
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -49,6 +56,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             sliderTrack = new javaxt.io.Image(RESOURCE_PATH + "white.png");
             dialogueTransparencyKnob = new javaxt.io.Image(RESOURCE_PATH + "white.png");
             dialogueTransparencySlider = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+            dialogueSpeedKnob = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+            dialogueSpeedSlider = new javaxt.io.Image(RESOURCE_PATH + "white.png");
 
             addMouseListener(handler);
             addMouseMotionListener(handler);
@@ -86,13 +95,13 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
 
         if(initStage) {
-            // Will run only once to save resource
-
-            // SHIT IMPLEMENTATION AS TEMP
+            // TODO: FIX THIS. SHIT IMPLEMENTATION AS TEMP (CHANGING EACH PIXEL WTF)
             for(int a=0; a <= dialogueTransparencyKnob.getWidth(); a++) {
                 for(int b=0; b <= dialogueTransparencySlider.getHeight(); b++) {
                     dialogueTransparencySlider.setColor(a, b, Color.CYAN);
                     dialogueTransparencyKnob.setColor(a, b, Color.ORANGE);
+                    dialogueSpeedSlider.setColor(a, b, Color.CYAN);
+                    dialogueSpeedKnob.setColor(a, b, Color.ORANGE);
                 }
             }
 
@@ -101,13 +110,17 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             // dialogueTransparencySlider.setBackgroundColor(90, 90, 90);
             dialogueTransparencyKnob.resize(sliderTrack.getHeight(), sliderTrack.getHeight(), false);
-            dialogueTransparencyKnobX = dialogueTransparencyX + (int)(sliderTrack.getWidth() * (dialogueTransparency/100.0));
+            dialogueTransparencyKnobX = dialogueX + (int)(sliderTrack.getWidth() * (dialogueTransparency/100.0));
             dialogueTransparencyKnobY = dialogueTransparencyY;
+
+            dialogueSpeedKnob.resize(sliderTrack.getHeight(), sliderTrack.getHeight(), false);
+            dialogueSpeedKnobX = dialogueX + (int)(sliderTrack.getWidth() * (dialogueSpeed/100.0));
+            dialogueSpeedKnobY = dialogueTransparencyY + 80;
 
             initStage = false;
         }
 
-
+        // DISABLES CONFIGPANE BG WHEN USING SLIDER
         if(!dialogueTransparencyMove) {
             // BACK BUTTON
             javaxt.io.Image tempBackButton = back_button.copy();
@@ -129,24 +142,31 @@ public class ConfigPane extends JPanel implements ActionListener {
 
 
         // DRAW ELEMENTS
-        // TODO: Calcuate the following (x, y) to relative to resolution
-        g.drawString("Diologue Bar Transparency", 100, 180);
+        // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
         // +20 on width so knob fits
-        g.drawImage(sliderTrack.getBufferedImage(), dialogueTransparencyX, dialogueTransparencyY, sliderTrack.getWidth() + 20, sliderTrack.getHeight(), this);
-        g.drawImage(dialogueTransparencySlider.getBufferedImage(), dialogueTransparencyX, dialogueTransparencyY, (int)(sliderTrack.getWidth() * (dialogueTransparency/100.0)) + (int)(dialogueTransparencyKnob.getWidth() * 0.5), sliderTrack.getHeight(), this);
+        g.drawImage(sliderTrack.getBufferedImage(), dialogueX, dialogueTransparencyY, sliderTrack.getWidth() + 20, sliderTrack.getHeight(), this);
+        g.drawImage(dialogueTransparencySlider.getBufferedImage(), dialogueX, dialogueTransparencyY, (int)(sliderTrack.getWidth() * (dialogueTransparency/100.0)) + (int)(dialogueTransparencyKnob.getWidth() * 0.5), sliderTrack.getHeight(), this);
         g.drawImage(dialogueTransparencyKnob.getBufferedImage(), dialogueTransparencyKnobX, dialogueTransparencyKnobY, this);
 
+        g.drawImage(sliderTrack.getBufferedImage(), dialogueX, dialogueSpeedY, sliderTrack.getWidth() + 20, sliderTrack.getHeight(), this);
+        g.drawImage(dialogueSpeedSlider.getBufferedImage(), dialogueX, dialogueSpeedY, (int)(sliderTrack.getWidth() * (dialogueSpeed/100.0)) + (int)(dialogueSpeedKnob.getWidth() * 0.5), sliderTrack.getHeight(), this);
+        g.drawImage(dialogueSpeedKnob.getBufferedImage(), dialogueSpeedKnobX, dialogueSpeedKnobY, this);
 
+        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 40);
+        g.drawString("Diologue Text Speed", dialogueX, dialogueTransparencyY + 80);
 
         repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
 
-         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
+        // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
             if(event.getX() >= dialogueTransparencyKnobX && event.getX() <= dialogueTransparencyKnobX + dialogueTransparencyKnob.getWidth() && event.getY() >= dialogueTransparencyKnobY && event.getY() <= dialogueTransparencyKnobY + dialogueTransparencyKnob.getHeight()) {
                 dialogueTransparencyMove = true;
+            }
+            if(event.getX() >= dialogueSpeedKnobX && event.getX() <= dialogueSpeedKnobX + dialogueSpeedKnob.getWidth() && event.getY() >= dialogueSpeedKnobY && event.getY() <= dialogueSpeedKnobY + dialogueSpeedKnob.getHeight()) {
+                dialogueSpeedMove = true;
             }
         }
         public void mouseMoved (MouseEvent event) {
@@ -159,9 +179,16 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         public void mouseDragged (MouseEvent event) {
             if(dialogueTransparencyMove) {
-                if(event.getX() >= dialogueTransparencyX + (int)(dialogueTransparencyKnob.getWidth() * 0.5) && event.getX() <= dialogueTransparencyX + dialogueTransparencySlider.getWidth() + (int)(dialogueTransparencyKnob.getWidth() * 0.5)) {
+                if(event.getX() >= dialogueX + (int)(dialogueTransparencyKnob.getWidth() * 0.5) && event.getX() <= dialogueX + dialogueTransparencySlider.getWidth() + (int)(dialogueTransparencyKnob.getWidth() * 0.5)) {
                     dialogueTransparencyKnobX = (int) (event.getX() - (dialogueTransparencyKnob.getWidth() * 0.5));
-                    dialogueTransparency = (int)(((dialogueTransparencyKnobX - dialogueTransparencyX) / (double)sliderTrack.getWidth()) * 100);
+                    dialogueTransparency = (int)(((dialogueTransparencyKnobX - dialogueX) / (double)sliderTrack.getWidth()) * 100);
+                }
+            }
+
+            if(dialogueSpeedMove) {
+                if(event.getX() >= dialogueX + (int)(dialogueSpeedKnob.getWidth() * 0.5) && event.getX() <= dialogueX + dialogueSpeedSlider.getWidth() + (int)(dialogueSpeedKnob.getWidth() * 0.5)) {
+                    dialogueSpeedKnobX = (int) (event.getX() - (dialogueSpeedKnob.getWidth() * 0.5));
+                    dialogueSpeed = (int)(((dialogueSpeedKnobX - dialogueX) / (double)sliderTrack.getWidth()) * 100);
                 }
             }
         }
@@ -181,12 +208,18 @@ public class ConfigPane extends JPanel implements ActionListener {
             if(dialogueTransparencyMove) {
                 dialogueTransparencyMove = false;
                 WaifuBrew.getInstance().setDialogueTransparency(dialogueTransparency);
-                System.out.println("SET: "+dialogueTransparency);
+                // System.out.println("SET: "+dialogueTransparency);
             }
 
+            if(dialogueSpeedMove) {
+                dialogueSpeedMove = false;
+                // WaifuBrew.getInstance().setdialogueSpeed(dialogueSpeed);
+                // System.out.println("SET: "+dialogueSpeed);
+            }
         }
         public void mouseExited (MouseEvent event) {
-
+            // Fooling around
+            // setFocusableWindowState(false);
         }
     }
 

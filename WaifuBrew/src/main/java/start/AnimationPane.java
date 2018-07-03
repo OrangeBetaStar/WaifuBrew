@@ -220,7 +220,7 @@ public class AnimationPane extends JPanel {
         if(tempString != "") {
             g.drawString(tempString, 150, 550);
         }
-        
+
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
 

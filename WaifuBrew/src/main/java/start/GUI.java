@@ -98,18 +98,18 @@ public class GUI extends JFrame {
             if(stage == 0) {
                 if (event.getX() > 0 && event.getX() < getSize().width / 4) {
                     stage = 1;
-                    System.out.println("Successfully verified start location!");
+                    // System.out.println("Successfully verified start location!");
                     revalidateGraphics();
                 }
                 else if (event.getX() > getSize().width / 4 && event.getX() < (getSize().width / 4) * 2) {
-                    System.out.println("Successfully verified load location!");
+                    // System.out.println("Successfully verified load location!");
                 }
                 else if (event.getX() > (getSize().width / 4) * 2 && event.getX() < (getSize().width / 4) * 3) {
                     stage = 2;
                     revalidateGraphics();
                 }
                 else {
-                    System.out.println("Successfully verified exit location!");
+                    // System.out.println("Successfully verified exit location!");
                     System.exit(0);
                 }
             }
