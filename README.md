@@ -37,3 +37,5 @@ Logs:
 04/28/18 - Added "load" button to main screen. Added more elements in resource pool for future use (like "Save" image). [BetaStar]
 
 05/02/18 - Properly set up Singleton to reduce the amount of dependency between classes. (No more passing around class objects of main!) Able to retrive variables from classes. Implemented back button of ConfigPane and responds to mouse clicks, however GUI get stuck. I can move to Stage 2 -> Stage 0 -> Stage 1 (I can go from Setting page to Main to Play field). Cleared useless codes / redundant lines [BetaStar]
+
+07/02/18 - Implemented dialogue transparency in settings. Have tried LAF and Nimbus, and both of them are ugly and not very customizable. Implemented (messy) slider in ConfigPane which has few layers. Most rear one shows how much slider can go, second will fill up to set value, and knob which reacts to mouse actions. Mouse does not need to stay on knob to change value. The ConfigPane's BG will be temporary disabled and dialogueBox will show up to demonstrate the opacity. AnimationPane will reflect opacity set value from ConfigPane. [BetaStar]
