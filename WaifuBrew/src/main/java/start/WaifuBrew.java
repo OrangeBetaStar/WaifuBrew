@@ -7,16 +7,18 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 
-public class WaifuBrew {
+public class WaifuBrew extends WaifuException{
 
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
-    private static WaifuBrew instance = null;
     private final String RESOURCE_PATH = "src/main/java/resources/";
 
-    // TODO: CREATE ARRAYS OF SETTINGS
-    private int dialogueTransparency = 100; //Temporary solution
+    // [n] array number / = n value
+    // [0] is dialogueTransparency = 70
+    // [1] is dialogueSpeed = 50
+    private static int[] configStorage = new int[10]; //Increase if needed.
+
 
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
@@ -27,7 +29,8 @@ public class WaifuBrew {
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
-
+        setDialogueTransparency(70);
+        setDialogueSpeed(50);
     }
 
     private static WaifuBrew singleton  = new WaifuBrew();
@@ -36,25 +39,34 @@ public class WaifuBrew {
         return singleton;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws WaifuException {
         try {
             WaifuBrew programStart = new WaifuBrew();
             programStart.start();
             singleton = programStart;
+
         }
         // catches any exception
         catch (Exception e) {
             System.out.println("Catastrophic error!");
-            e.printStackTrace();
+            throw new WaifuException(e);
         }
     }
 
     public int getDialogueTransparency () {
-        return dialogueTransparency;
+        return configStorage[0];
     }
 
     public void setDialogueTransparency (int dialogueTransparency) {
-        this.dialogueTransparency = dialogueTransparency;
+        this.configStorage[0] = dialogueTransparency;
+    }
+
+    public int getDialogueSpeed () {
+        return configStorage[1];
+    }
+
+    public void setDialogueSpeed (int dialogueSpeed) {
+        this.configStorage[1] = dialogueSpeed;
     }
 
     public String getResoucePath () {

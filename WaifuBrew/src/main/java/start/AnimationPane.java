@@ -34,6 +34,7 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image loadButton;
     private javaxt.io.Image configButton;
 
+    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -58,7 +59,6 @@ public class AnimationPane extends JPanel {
             loadButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             configButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             spinningThing = new javaxt.io.Image(RESOURCE_PATH + "black.png");
-
 
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9),true);
 
@@ -86,7 +86,8 @@ public class AnimationPane extends JPanel {
                 }
             });
 
-            Timer stringTimer = new Timer(50, new ActionListener() {
+            System.out.println("Currently speed is: "+textSpeedMS);
+            Timer stringTimer = new Timer(textSpeedMS, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(!a.isEmpty()) {
                         if (tempString.length() != a.length()) {
