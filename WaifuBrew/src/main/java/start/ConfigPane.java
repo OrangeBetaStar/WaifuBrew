@@ -33,9 +33,9 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private boolean backButtonUI = false;
 
-    private int dialogueTransparency = 70;
+    public int dialogueTransparency = 70;
 
-     public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
@@ -120,8 +120,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         else {
             // DialogueBox
-
             javaxt.io.Image dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
+            dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
             dialogueBox.setOpacity(dialogueTransparency);
             g.drawImage(dialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
 
@@ -178,7 +178,12 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         }
         public void mouseReleased (MouseEvent event) {
-            dialogueTransparencyMove = false;
+            if(dialogueTransparencyMove) {
+                dialogueTransparencyMove = false;
+                WaifuBrew.getInstance().setDialogueTransparency(dialogueTransparency);
+                System.out.println("SET: "+dialogueTransparency);
+            }
+
         }
         public void mouseExited (MouseEvent event) {
 

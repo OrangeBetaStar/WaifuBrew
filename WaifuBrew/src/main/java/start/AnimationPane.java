@@ -16,6 +16,7 @@ public class AnimationPane extends JPanel {
 
     private BufferedImage scrollingImage;
 
+    private boolean initStage = true;
     private int xPos = 0;
     private int direction = 1;
     private double rotationDeg = 0;
@@ -24,6 +25,7 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;
+    private int dialogueTransparency = 100;
 
     //Load elements
     private javaxt.io.Image spinningThing;
@@ -57,8 +59,8 @@ public class AnimationPane extends JPanel {
             configButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
             spinningThing = new javaxt.io.Image(RESOURCE_PATH + "black.png");
 
-            dialogueBox.setOpacity(70);
-            dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
+
+            dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9),true);
 
             dp = new DialogueParser(RESOURCE_PATH + "test.json");
             dp.parse();
@@ -168,7 +170,10 @@ public class AnimationPane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
+        if(initStage) {
+            System.out.println("Setting dialogueTrans to " + WaifuBrew.getInstance().getDialogueTransparency() + "%");
+            dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
+        }
 
         // Needs new image every rotation since reusing will make image blurry and hot garbage. (reconversion after reconversion of a same image)
         javaxt.io.Image sampleImage = new javaxt.io.Image(RESOURCE_PATH + "black.png");
@@ -204,14 +209,22 @@ public class AnimationPane extends JPanel {
             // Fix the location since square doesn't spin cleanly.
             g.drawImage(tempSpinningThing.getBufferedImage(), 1000 - tempSpinningThing.getWidth() / 2, 600 - tempSpinningThing.getHeight() / 2, this);
         }
+        else {
+            if(initStage) {
+                dialogueBox.setOpacity(dialogueTransparency);
+                // System.out.println("dialoguebox transparency set to: " + dialogueTransparency);
+
+            }
+        }
 
         if(tempString != "") {
             g.drawString(tempString, 150, 550);
         }
-
-
+        
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
+
+        initStage = false;
     }
 
 }

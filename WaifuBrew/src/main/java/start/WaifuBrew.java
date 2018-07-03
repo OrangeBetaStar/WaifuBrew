@@ -14,6 +14,10 @@ public class WaifuBrew {
     private GUI sample;
     private static WaifuBrew instance = null;
     private final String RESOURCE_PATH = "src/main/java/resources/";
+
+    // TODO: CREATE ARRAYS OF SETTINGS
+    private int dialogueTransparency = 100; //Temporary solution
+
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
     // [2] is where window should go (top-left) to be centered in the monitor
@@ -43,6 +47,14 @@ public class WaifuBrew {
             System.out.println("Catastrophic error!");
             e.printStackTrace();
         }
+    }
+
+    public int getDialogueTransparency () {
+        return dialogueTransparency;
+    }
+
+    public void setDialogueTransparency (int dialogueTransparency) {
+        this.dialogueTransparency = dialogueTransparency;
     }
 
     public String getResoucePath () {
