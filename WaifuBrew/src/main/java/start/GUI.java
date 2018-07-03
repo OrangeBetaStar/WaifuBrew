@@ -54,7 +54,7 @@ public class GUI extends JFrame {
                 startPage.repaint();
             }
 
-            // Stage 1 is the play field.
+            // Stage 1 is the play field
             else if (stage == 1) {
                 if(startPage.getParent() != null) {
                     remove(startPage);
@@ -76,6 +76,19 @@ public class GUI extends JFrame {
                 }
                 add(configPane);
                 configPane.repaint();
+            }
+
+            // Stage 3 is the load field
+            else if (stage == 3) {
+                if(animationPane.getParent() != null) {
+                    remove(animationPane);
+                }
+                if(startPage.getParent() != null) {
+                    remove(startPage);
+                }
+                // TODO: Uncomment when this is implemented
+                // add(loadPane);
+                // loadPane.repaint();
             }
             revalidate();
         }
@@ -103,6 +116,8 @@ public class GUI extends JFrame {
                 }
                 else if (event.getX() > getSize().width / 4 && event.getX() < (getSize().width / 4) * 2) {
                     // System.out.println("Successfully verified load location!");
+                    stage = 3;
+                    revalidateGraphics();
                 }
                 else if (event.getX() > (getSize().width / 4) * 2 && event.getX() < (getSize().width / 4) * 3) {
                     stage = 2;
