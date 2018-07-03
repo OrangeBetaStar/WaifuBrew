@@ -150,7 +150,13 @@ public class StartScreen extends JPanel implements ActionListener {
         }
 
         private boolean isInArea(MouseEvent event, javaxt.io.Image button, Point area) {
-            return event.getX() > area.x && event.getX() < (area.x + button.getWidth()) && event.getY() > area.y && event.getY() < (area.y + button.getHeight());
+            try {
+                return event.getX() > area.x && event.getX() < (area.x + button.getWidth()) && event.getY() > area.y && event.getY() < (area.y + button.getHeight());
+            }
+            catch (Exception e){
+                System.out.println("Exception in StartScreen: isInArea");
+            }
+            return false;
         }
     }
 
