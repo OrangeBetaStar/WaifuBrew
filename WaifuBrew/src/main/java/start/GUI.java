@@ -12,8 +12,8 @@ public class GUI extends JFrame {
     private StartScreen startPage;
     private AnimationPane animationPane;
     private ConfigPane configPane;
+    // private LoadPane configPage;
 
-    //private JScrollPane jsp;
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private int stage = 0;
     private int lastStage = 10;
