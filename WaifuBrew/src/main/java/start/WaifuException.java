@@ -3,8 +3,7 @@ package start;
 public class WaifuException extends Exception {
 
     public WaifuException() {
-        System.out.println("Exception: rip waifu");
-        super.printStackTrace();
+        // d
     }
 
     public WaifuException(Exception e) {

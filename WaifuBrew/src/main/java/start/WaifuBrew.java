@@ -30,7 +30,7 @@ public class WaifuBrew extends WaifuException{
 
     WaifuBrew() {
         setDialogueTransparency(70);
-        setDialogueSpeed(50);
+        setDialogueSpeed(5);
     }
 
     private static WaifuBrew singleton  = new WaifuBrew();

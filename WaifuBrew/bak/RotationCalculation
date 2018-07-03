@@ -150,3 +150,88 @@
         transformedImage = opRotated.filter(image, transformedImage);
         return transformedImage;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Timer timer = new Timer(1, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    xPos += direction;
+                    rotationDeg += direction;
+                    if (xPos + scrollingImage.getWidth() > getWidth()) {
+                        xPos = getWidth() - scrollingImage.getWidth();
+                        direction *= -1;
+                        rotationDeg *= -1;
+                        //  System.out.println("REEEEEEEEEEEEEEEEEE");
+                    } else if (xPos < 0) {
+                        xPos = 0;
+                        rotationDeg = 0;
+                        direction *= -1;
+                        rotationDeg *= -1;
+                        //  System.out.println("AHHHHHHHHHHHHHHHHHH");
+                    }
+                    repaint();
+                }
+            });
+
+            timer.setRepeats(true);
+            timer.setCoalesce(true);
+            timer.start();
+
+            // Other buttons (save, load, config)
+            javaxt.io.Image tempSpinningThing = spinningThing.copy();
+            tempSpinningThing.rotate(rotationDeg);
+            // System.out.println(rotationDeg);
+
+            // Fix the bottom part
+            tempSpinningThing.setOpacity((rotationDeg%360) / 360);
+            // Fix the location since square doesn't spin cleanly.
+            g.drawImage(tempSpinningThing.getBufferedImage(), 1000 - tempSpinningThing.getWidth() / 2, 600 - tempSpinningThing.getHeight() / 2, this);
