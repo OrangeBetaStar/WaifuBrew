@@ -121,6 +121,7 @@ public class GUI extends JFrame {
                 }
                 else if (event.getX() > (getSize().width / 4) * 2 && event.getX() < (getSize().width / 4) * 3) {
                     stage = 2;
+                    Toolkit.getDefaultToolkit().beep();
                     revalidateGraphics();
                 }
                 else {

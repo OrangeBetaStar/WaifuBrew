@@ -24,6 +24,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int backButtonX = 1100;
     private int backButtonY = 600;
     private boolean backButtonUI = false;
+    private Timer stringTimer;
 
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
@@ -31,8 +32,10 @@ public class ConfigPane extends JPanel implements ActionListener {
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private Handlerclass handler = new Handlerclass();
 
-    public int dialogueTransparency = 70;
-    public int dialogueSpeed = 50;
+    public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
+    public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed() * 10;
+    private String a = "Your waifu isn't real."; // Test String.
+    private String tempString = "";
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -57,6 +60,27 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(slider_transparency.retrieveMouseHandler());
             addMouseListener(slider_speed.retrieveMouseHandler());
             addMouseMotionListener(slider_speed.retrieveMouseHandler());
+
+            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed() * 10), new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (!a.isEmpty()) {
+                        if (tempString.length() != a.length()) {
+                            tempString = tempString + a.charAt(tempString.length());
+                        }
+                        else {
+                            tempString = a.substring(0,1);
+                            stringTimer.stop();
+                            stringTimer.setDelay(slider_speed.getLevel());
+                            stringTimer.start();
+                        }
+                    }
+                }
+            });
+
+            // Coalesce is disabled since there is no multiple firing of triggers.
+            stringTimer.setRepeats(true);
+            stringTimer.setCoalesce(false);
+
 
         } catch (IOException e) {
             System.out.println("File failure in Config class");
@@ -98,13 +122,21 @@ public class ConfigPane extends JPanel implements ActionListener {
             } else {
                 tempBackButton.setOpacity(20);
             }
+
             g.drawImage(tempBackButton.getBufferedImage(), (backButtonX - (getPreferredSize(tempBackButton.getBufferedImage()).width / 2)), (backButtonY - (getPreferredSize(tempBackButton.getBufferedImage()).height / 2)), getPreferredSize(tempBackButton.getBufferedImage()).width, getPreferredSize(tempBackButton.getBufferedImage()).height, this);
+            if(stringTimer.isRunning()) {
+                stringTimer.stop();
+            }
         }
         else {
             // DialogueBox
             tempDialogueBox = dialogueBox.copy();
             tempDialogueBox.setOpacity(slider_transparency.getLevel());
             g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
+            stringTimer.start();
+            if(tempString != "") {
+                g.drawString(tempString, 150, 550);
+            }
         }
 
         // TODO: Perhaps implement title for CustomSlider

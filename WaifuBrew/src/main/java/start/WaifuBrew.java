@@ -31,6 +31,7 @@ public class WaifuBrew extends WaifuException{
     WaifuBrew() {
         setDialogueTransparency(70);
         setDialogueSpeed(5);
+        configStorage[9] = 1; // Reserve 10 for stage access.
     }
 
     private static WaifuBrew singleton  = new WaifuBrew();
@@ -80,6 +81,7 @@ public class WaifuBrew extends WaifuException{
     public GUI getGUIInstance(){
         return sample;
     }
+
 
     public void start() {
         sample = new GUI();

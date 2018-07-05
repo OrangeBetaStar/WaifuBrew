@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CustomSlider extends JPanel implements ActionListener {
-    private javaxt.io.Image slider_background;  // sliderTrack
+    private javaxt.io.Image slider_background; // sliderTrack
     private javaxt.io.Image slider_leveler; // dialogueTransparencySlider
     private javaxt.io.Image slider_knob; // dialogueTransparencyKnob
     private int dialogueKnobX; // dialogueTransparencyKnobX
@@ -16,6 +16,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     private int y; // dialogueTransparencyY
     private boolean initStage = true;
 
+    // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
 
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
@@ -27,6 +28,8 @@ public class CustomSlider extends JPanel implements ActionListener {
         slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
         slider_leveler = new javaxt.io.Image(RESOURCE_PATH + "white.png");
         slider_knob = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+
+
 
         this.level = level;
     }
@@ -52,8 +55,6 @@ public class CustomSlider extends JPanel implements ActionListener {
 
             // SLIDER TRACK
             slider_background.resize(200, 20, false);
-
-            // slider_leveler.setBackgroundColor(90, 90, 90);
             slider_knob.resize(slider_background.getHeight(), slider_background.getHeight(), false);
             dialogueKnobX = x + (int)(slider_background.getWidth() * (level/100.0));
             dialogueKnobY = y;
@@ -62,7 +63,6 @@ public class CustomSlider extends JPanel implements ActionListener {
         }
 
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
-        // +20 on width so knob fits
         g.drawImage(slider_background.getBufferedImage(), x, dialogueKnobY, slider_background.getWidth() + slider_knob.getWidth(), slider_background.getHeight(), that);
         g.drawImage(slider_leveler.getBufferedImage(), x, dialogueKnobY, (int)(slider_background.getWidth() * (level/100.0)) + (int)(slider_knob.getWidth() * 0.5), slider_background.getHeight(), that);
         g.drawImage(slider_knob.getBufferedImage(), dialogueKnobX, dialogueKnobY, that);
@@ -92,6 +92,10 @@ public class CustomSlider extends JPanel implements ActionListener {
                 if(event.getX() >= x + (int)(slider_knob.getWidth() * 0.5) && event.getX() <= x + slider_leveler.getWidth() + (int)(slider_knob.getWidth() * 0.5)) {
                     dialogueKnobX = (int) (event.getX() - (slider_knob.getWidth() * 0.5));
                     level = (int)(((dialogueKnobX - x) / (double)slider_background.getWidth()) * 100);
+                    if(level == 0) {
+                        level = 1;
+                    }
+                    // System.out.println("Level: "+level);
                 }
             }
         }
@@ -104,7 +108,6 @@ public class CustomSlider extends JPanel implements ActionListener {
         public void mouseReleased (MouseEvent event) {
             if(sliderActive) {
                 sliderActive = false;
-                WaifuBrew.getInstance().setDialogueTransparency(level);
             }
         }
         public void mouseExited (MouseEvent event) {
