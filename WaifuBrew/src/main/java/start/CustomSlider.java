@@ -28,9 +28,16 @@ public class CustomSlider extends JPanel implements ActionListener {
         slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
         slider_leveler = slider_background.copy();
         slider_knob = slider_background.copy();
+        this.level = level;
+    }
 
-
-
+    // TODO: Haven't full implemented custom knob slider yet
+    public CustomSlider(int x, int y, int level, String fileName) {
+        this.x = x;
+        this.y = y;
+        slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+        slider_leveler = slider_background.copy();
+        slider_knob = new javaxt.io.Image(RESOURCE_PATH + fileName);
         this.level = level;
     }
 
