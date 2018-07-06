@@ -26,8 +26,8 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
         slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
-        slider_leveler = new javaxt.io.Image(RESOURCE_PATH + "white.png");
-        slider_knob = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+        slider_leveler = slider_background.copy();
+        slider_knob = slider_background.copy();
 
 
 
@@ -45,13 +45,11 @@ public class CustomSlider extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         if(initStage) {
-            // TODO: FIX THIS. SHIT IMPLEMENTATION AS TEMP (CHANGING EACH PIXEL WTF)
-            for(int a=0; a <= slider_knob.getWidth(); a++) {
-                for(int b=0; b <= slider_leveler.getHeight(); b++) {
-                    slider_leveler.setColor(a, b, Color.CYAN);
-                    slider_knob.setColor(a, b, Color.ORANGE);
-                }
-            }
+
+            // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
+            slider_background.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+            slider_leveler.setBackgroundColor(Color.CYAN.getRed(), Color.CYAN.getGreen(), Color.CYAN.getBlue());
+            slider_knob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
 
             // SLIDER TRACK
             slider_background.resize(200, 20, false);

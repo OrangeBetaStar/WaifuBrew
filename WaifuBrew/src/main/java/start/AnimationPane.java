@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import static com.sun.java.accessibility.util.SwingEventMonitor.addChangeListener;
+
 public class AnimationPane extends JPanel {
 
     private boolean initStage = true;
@@ -19,14 +21,10 @@ public class AnimationPane extends JPanel {
     private DialogueParser dp;
     private Point[] res;
 
-    //Load elements
-
-    private javaxt.io.Image saveButton;
-    private javaxt.io.Image loadButton;
-    private javaxt.io.Image configButton;
-
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
+
+    CustomButton saveButton;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -40,15 +38,16 @@ public class AnimationPane extends JPanel {
     public AnimationPane() {
         addMouseListener(handler);
         addMouseMotionListener(handler);
+
+
         this.res = WaifuBrew.getInstance().getRes();
         try {
             dialogueBox = new javaxt.io.Image(RESOURCE_PATH + "dialogbar.png");
 
-            // Fix the image names later
-
-            saveButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
-            loadButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
-            configButton = new javaxt.io.Image(RESOURCE_PATH + "black.png");
+            // GARBAGE IMPLEMENTATION
+            saveButton = new CustomButton(500, 500, "startscreen_save_button.png");
+            addMouseListener(saveButton.retrieveMouseHandler());
+            addMouseMotionListener(saveButton.retrieveMouseHandler());
 
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9),true);
 
@@ -168,6 +167,8 @@ public class AnimationPane extends JPanel {
         if(tempString != "") {
             g.drawString(tempString, 150, 550);
         }
+
+        saveButton.paintComponent(g);
 
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
