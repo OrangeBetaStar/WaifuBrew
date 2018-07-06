@@ -25,6 +25,7 @@ public class AnimationPane extends JPanel {
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
 
     CustomButton saveButton;
+    CustomButton configButton;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -48,6 +49,10 @@ public class AnimationPane extends JPanel {
             saveButton = new CustomButton(500, 500, "startscreen_save_button.png");
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
+
+            configButton = new CustomButton(700, 500, "startscreen_config_button.png");
+            addMouseListener(configButton.retrieveMouseHandler());
+            addMouseMotionListener(configButton.retrieveMouseHandler());
 
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9),true);
 
@@ -169,6 +174,7 @@ public class AnimationPane extends JPanel {
         }
 
         saveButton.paintComponent(g);
+        configButton.paintComponent(g);
 
         // Use the bottom link for implementing string wrap around by distance used by font.
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
