@@ -20,6 +20,7 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;
+    private javaxt.io.Image characterImage[] = new javaxt.io.Image[5];
 
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
@@ -146,8 +147,13 @@ public class AnimationPane extends JPanel {
         if(advancer != 0) {
 
             // Character
-            javaxt.io.Image characterImage = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "-" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
-            g.drawImage(characterImage.getBufferedImage(), 600, 250, this);
+            for(int a = 0; a < e.get(advancer-1).size(); a++) {
+                characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
+            }
+            for(int b = 1; b <= e.get(advancer-1).size(); b++) {
+                System.out.println((res[1].x / e.get(advancer-1).size() + 1) * b);
+                g.drawImage(characterImage[b - 1].getBufferedImage(), ((res[1].x / (e.get(advancer-1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (res[1].y / 4) + (characterImage[b - 1].getHeight() / 2), this);
+            }
 
             // DialogueBox
             g.drawImage(dialogueBox.getBufferedImage(),res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2),this);
