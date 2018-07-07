@@ -35,7 +35,6 @@ public class AnimationPane extends JPanel {
     private String a = "...";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
-    private Point screenSize = WaifuBrew.getInstance().getRes()[1];
 
 
     public AnimationPane() {
@@ -148,17 +147,12 @@ public class AnimationPane extends JPanel {
         if(advancer != 0) {
 
             // Character
-            System.out.println("Size of the each scene character " + e.get(advancer-1).size());
             for(int a = 0; a < e.get(advancer-1).size(); a++) {
                 characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
             }
-            for(int b = 0; b < characterImage.length - 1; b++) {
-                try {
-                    g.drawImage(characterImage[b].getBufferedImage(), screenSize.x / (2 + b), screenSize.y / 3, this);
-                }
-                catch (java.lang.NullPointerException e){
-                    break;
-                }
+            for(int b = 1; b <= e.get(advancer-1).size(); b++) {
+                System.out.println((res[1].x / e.get(advancer-1).size() + 1) * b);
+                g.drawImage(characterImage[b - 1].getBufferedImage(), ((res[1].x / (e.get(advancer-1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (res[1].y / 4) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
             // DialogueBox
