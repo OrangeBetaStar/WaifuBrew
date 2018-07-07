@@ -31,7 +31,7 @@ public class WaifuBrew extends WaifuException{
     WaifuBrew() {
         setDialogueTransparency(70);
         setDialogueSpeed(5);
-        configStorage[9] = 1; // Reserve 10 for stage access.
+        configStorage[9] = 0; // Reserve 10 for stage access.
     }
 
     private static WaifuBrew singleton  = new WaifuBrew();
@@ -68,6 +68,14 @@ public class WaifuBrew extends WaifuException{
 
     public void setDialogueSpeed (int dialogueSpeed) {
         this.configStorage[1] = dialogueSpeed;
+    }
+
+    public int getStage() {
+        return configStorage[9];
+    }
+
+    public void setStage(int stage) {
+        configStorage[9] = stage;
     }
 
     public String getResoucePath () {
