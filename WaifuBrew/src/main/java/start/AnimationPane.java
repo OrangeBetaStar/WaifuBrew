@@ -20,6 +20,7 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;
+    private javaxt.io.Image characterImage[] = new javaxt.io.Image[5];
 
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
@@ -34,6 +35,7 @@ public class AnimationPane extends JPanel {
     private String a = "...";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
+    private Point screenSize = WaifuBrew.getInstance().getRes()[1];
 
 
     public AnimationPane() {
@@ -146,8 +148,18 @@ public class AnimationPane extends JPanel {
         if(advancer != 0) {
 
             // Character
-            javaxt.io.Image characterImage = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer-1).get(0).getName().toString().toLowerCase() + "-" + e.get(advancer-1).get(0).getMood().toString().toLowerCase() + ".png");
-            g.drawImage(characterImage.getBufferedImage(), 600, 250, this);
+            System.out.println("Size of the each scene character " + e.get(advancer-1).size());
+            for(int a = 0; a < e.get(advancer-1).size(); a++) {
+                characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
+            }
+            for(int b = 0; b < characterImage.length - 1; b++) {
+                try {
+                    g.drawImage(characterImage[b].getBufferedImage(), screenSize.x / (2 + b), screenSize.y / 3, this);
+                }
+                catch (java.lang.NullPointerException e){
+                    break;
+                }
+            }
 
             // DialogueBox
             g.drawImage(dialogueBox.getBufferedImage(),res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2),this);

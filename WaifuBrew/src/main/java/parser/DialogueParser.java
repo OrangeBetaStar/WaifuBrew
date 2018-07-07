@@ -23,25 +23,10 @@ public class DialogueParser {
     private List<List<Characters>> characterList = new ArrayList<List<Characters>>(); // Dynamic 2D arraylist
     private String tempNameString = "";
     private String tempMoodString = "";
+    private String tempMoveString = "";
     private List<String> subNameString;
     private List<String> subMoodString;
     private List<List<Waifu>> packagedDialogue= new ArrayList<List<Waifu>>();
-    
-    /*
-    List<List<Foo>> list = new ArrayList<List<Foo>>();
-
-    List<Foo> row1 = new ArrayList<Foo>();
-    row1.add(new Foo());
-    row1.add(new Foo());
-    row1.add(new Foo());
-    list.add(row1);
-
-    List<Foo> row2 = new ArrayList<Foo>();
-    row2.add(new Foo());
-    row2.add(new Foo());
-
-    list.add(row2);
-     */
 
     private int index;
 
@@ -110,7 +95,6 @@ public class DialogueParser {
                 index++;
             }
 
-        //    getPackagedDialogue();
         } catch (Exception e) {
             e.printStackTrace();
         }
