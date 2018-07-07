@@ -9,14 +9,15 @@ public class GUI extends JFrame {
     private JLabel waifuLabel;
 
     private Handlerclass handler = new Handlerclass();
+
+    // TODO: Why create them when I do not need it right now.
     private StartScreen startPage;
     private AnimationPane animationPane;
     private ConfigPane configPane;
-    // private LoadPane configPage;
 
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
-    private int stage = 0;
-    private int lastStage = 10;
+    private int stage = WaifuBrew.getInstance().getStage();
+    private int lastStage = 10; // Remembers last opened stage
 
     public GUI() {
         super("ワイファブルー by Tailsoft");
@@ -37,6 +38,8 @@ public class GUI extends JFrame {
     }
 
     public void revalidateGraphics() {
+
+        stage = WaifuBrew.getInstance().getStage();
 
         // If stage changed
         if(lastStage != stage) {
@@ -96,39 +99,17 @@ public class GUI extends JFrame {
         lastStage = stage;
     }
 
-    public int getStage(){
-        return this.stage;
-    }
-
     public void setStage(int stage) {
         this.stage = stage;
+        // Just using duplicated stage variables for Global and Private to cut down on calling?
+        WaifuBrew.getInstance().setStage(stage);
         revalidateGraphics();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener{
 
         public void mouseClicked(MouseEvent event) {
-            if(stage == 0) {
-                if (event.getX() > 0 && event.getX() < getSize().width / 4) {
-                    stage = 1;
-                    // System.out.println("Successfully verified start location!");
-                    revalidateGraphics();
-                }
-                else if (event.getX() > getSize().width / 4 && event.getX() < (getSize().width / 4) * 2) {
-                    // System.out.println("Successfully verified load location!");
-                    stage = 3;
-                    revalidateGraphics();
-                }
-                else if (event.getX() > (getSize().width / 4) * 2 && event.getX() < (getSize().width / 4) * 3) {
-                    stage = 2;
-                    Toolkit.getDefaultToolkit().beep();
-                    revalidateGraphics();
-                }
-                else {
-                    // System.out.println("Successfully verified exit location!");
-                    System.exit(0);
-                }
-            }
+            revalidateGraphics();
         }
 
         public void mousePressed(MouseEvent event) {

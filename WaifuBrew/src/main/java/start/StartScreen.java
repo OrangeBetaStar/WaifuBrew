@@ -9,24 +9,21 @@ import java.awt.image.BufferedImage;
 public class StartScreen extends JPanel implements ActionListener {
 
     private javaxt.io.Image backgroundPicture;
-    private javaxt.io.Image start_button;
-    private javaxt.io.Image config_button;
-    private javaxt.io.Image exit_button;
-    private javaxt.io.Image load_button;
-    private Point startButtonP;
-    private Point configButtonP;
-    private Point exitButtonP;
-    private Point loadButtonP;
+
+    // LOAD THE BUTTONS
+    private CustomButton start_buton;
+    private CustomButton config_buton;
+    private CustomButton load_buton;
+    private CustomButton exit_buton;
+
     private Handlerclass handler = new Handlerclass();
-    boolean startButtonUI = false;
-    boolean configButtonUI = false;
-    boolean exitButtonUI = false;
-    boolean loadButtonUI = false;
 
     private int buttonY = 600;
-    private int brightness = 20;
 
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
+    private final Point windowSize = WaifuBrew.getInstance().getRes()[1];
+
+    private int spacing = 5;
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -36,75 +33,64 @@ public class StartScreen extends JPanel implements ActionListener {
         addMouseListener(handler);
         addMouseMotionListener(handler);
         backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
-        start_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_start_button.png");
-        config_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_config_button.png");
-        load_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_load_button.png");
-        exit_button = new javaxt.io.Image(RESOURCE_PATH + "startscreen_exit_button.png");
+        // Calculates the scaling needed to fit the screen. Any ratio will work.
+        if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
+            if(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
+                backgroundPicture.resize(((int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
+            }
+            else {
+                backgroundPicture.resize(((int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
+            }
+        }
+
+        start_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing), buttonY, "startscreen_start_button.png",true);
+        load_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 2, buttonY, "startscreen_load_button.png", true);
+        config_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 3, buttonY, "startscreen_config_button.png",true);
+        exit_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 4, buttonY, "startscreen_exit_button.png",true);
+
+        addMouseListener(start_buton.retrieveMouseHandler());
+        addMouseMotionListener(start_buton.retrieveMouseHandler());
+        addMouseListener(load_buton.retrieveMouseHandler());
+        addMouseMotionListener(load_buton.retrieveMouseHandler());
+        addMouseListener(config_buton.retrieveMouseHandler());
+        addMouseMotionListener(config_buton.retrieveMouseHandler());
+        addMouseListener(exit_buton.retrieveMouseHandler());
+        addMouseMotionListener(exit_buton.retrieveMouseHandler());
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (backgroundPicture != null) {
-            // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in!
+        super.paintComponent(g); g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
 
-            // Not centered tho... lo
-            if(getPreferredSize(backgroundPicture.getBufferedImage()).width < getSize().width) {
-                if((getSize().width/(double)getPreferredSize(backgroundPicture.getBufferedImage()).width) * getPreferredSize(backgroundPicture.getBufferedImage()).height < getSize().height) {
-                    // TODO: Change x0, y0 if picture is changed.
-                    g.drawImage(backgroundPicture.getBufferedImage(),0,0,(int)Math.round(getSize().height / (double)getPreferredSize(backgroundPicture.getBufferedImage()).height * getPreferredSize(backgroundPicture.getBufferedImage()).width), getSize().height, this);
-                }
-                else {
-                    g.drawImage(backgroundPicture.getBufferedImage(), 0, 0, getSize().width,(int)Math.round(getSize().width / (double)getPreferredSize(backgroundPicture.getBufferedImage()).width * getPreferredSize(backgroundPicture.getBufferedImage()).height), this);
-                }
-            }
-
-            // TODO: Add rest of the menu elements
-            startButtonP = new Point((getSize().width / 5) - (getPreferredSize(start_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(start_button.getBufferedImage()).height / 2));
-            loadButtonP = new Point((getSize().width / 5) * 2 - (getPreferredSize(load_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(load_button.getBufferedImage()).height / 2));
-            configButtonP = new Point((getSize().width / 5) * 3 - (getPreferredSize(config_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(config_button.getBufferedImage()).height / 2));
-            exitButtonP = new Point((getSize().width / 5) * 4 - (getPreferredSize(exit_button.getBufferedImage()).width / 2), buttonY - (getPreferredSize(exit_button.getBufferedImage()).height / 2));
-
-            // Copy the original cuz the javaxt edits from original (quality loss)
-            javaxt.io.Image tempStartButton = start_button.copy();
-            javaxt.io.Image tempConfigButton = config_button.copy();
-            javaxt.io.Image tempExitButton = exit_button.copy();
-            javaxt.io.Image tempLoadButton = load_button.copy();
-            if(startButtonUI) {
-                tempStartButton.setOpacity(100);
-            }
-            else {
-                tempStartButton.setOpacity(brightness);
-            }
-            if(configButtonUI) {
-                tempConfigButton.setOpacity(100);
-            }
-            else {
-                tempConfigButton.setOpacity(brightness);
-            }
-            if(loadButtonUI) {
-                tempLoadButton.setOpacity(100);
-            }
-            else {
-                tempLoadButton.setOpacity(brightness);
-            }
-            if(exitButtonUI) {
-                tempExitButton.setOpacity(100);
-            }
-            else {
-                tempExitButton.setOpacity(brightness);
-            }
-            g.drawImage(tempStartButton.getBufferedImage(), startButtonP.x, startButtonP.y, getPreferredSize(start_button.getBufferedImage()).width, getPreferredSize(start_button.getBufferedImage()).height,this);
-            g.drawImage(tempConfigButton.getBufferedImage(),configButtonP.x, configButtonP.y, getPreferredSize(config_button.getBufferedImage()).width, getPreferredSize(config_button.getBufferedImage()).height,  this);
-            g.drawImage(tempExitButton.getBufferedImage(), exitButtonP.x, exitButtonP.y, getPreferredSize(exit_button.getBufferedImage()).width, getPreferredSize(exit_button.getBufferedImage()).height,  this);
-            g.drawImage(tempLoadButton.getBufferedImage(), loadButtonP.x, loadButtonP.y, getPreferredSize(load_button.getBufferedImage()).width, getPreferredSize(load_button.getBufferedImage()).height, this);
-            repaint();
-        }
+        start_buton.paintComponent(g);
+        load_buton.paintComponent(g);
+        config_buton.paintComponent(g);
+        exit_buton.paintComponent(g);
+        repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
 
         public void mouseClicked(MouseEvent event) {
+
+            // 1 - AnimationPane
+            // 2 - ConfigPane
+            // 3 - Load
+            // 4 - Exit lol
+
+            if(WaifuBrew.getInstance().getStage() == 0) {
+                if((event.getY() < buttonY + ((double)start_buton.getHeight() / 2)) && (event.getY() > buttonY - ((double)start_buton.getHeight() / 2))) {
+                    if ((event.getX() < ((double)windowSize.x / spacing) + ((double)start_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) - ((double)start_buton.getWidth() / 2))) {
+                        WaifuBrew.getInstance().setStage(1);
+                    } else if ((event.getX() < ((double)windowSize.x / spacing) * 2 + ((double)load_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 2 - ((double)load_buton.getWidth() / 2))) {
+                        WaifuBrew.getInstance().setStage(3);
+                    } else if ((event.getX() < ((double)windowSize.x / spacing) * 3 + ((double)config_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 3 - ((double)config_buton.getWidth() / 2))) {
+                        WaifuBrew.getInstance().setStage(2);
+                    } else if ((event.getX() < ((double)windowSize.x / spacing) * 4 + ((double)exit_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 4 - ((double)exit_buton.getWidth() / 2))) {
+                        System.exit(0);
+                    }
+                }
+            }
         }
 
         public void mousePressed(MouseEvent event) {
@@ -123,40 +109,7 @@ public class StartScreen extends JPanel implements ActionListener {
         }
 
         public void mouseMoved(MouseEvent event) {
-            if(isInArea(event, start_button, startButtonP)) {
-                startButtonUI = true;
-            }
-            else {
-                startButtonUI = false;
-            }
-            if(isInArea(event, config_button, configButtonP)) {
-                configButtonUI = true;
-            }
-            else {
-                configButtonUI = false;
-            }
-            if(isInArea(event, load_button, loadButtonP)) {
-                loadButtonUI = true;
-            }
-            else {
-                loadButtonUI = false;
-            }
-            if(isInArea(event, exit_button, exitButtonP)) {
-                exitButtonUI = true;
-            }
-            else {
-                exitButtonUI = false;
-            }
-        }
 
-        private boolean isInArea(MouseEvent event, javaxt.io.Image button, Point area) {
-            try {
-                return event.getX() > area.x && event.getX() < (area.x + button.getWidth()) && event.getY() > area.y && event.getY() < (area.y + button.getHeight());
-            }
-            catch (Exception e){
-                System.out.println("Exception in StartScreen: isInArea");
-            }
-            return false;
         }
     }
 
