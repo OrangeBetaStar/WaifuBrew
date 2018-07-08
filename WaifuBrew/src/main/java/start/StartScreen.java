@@ -25,11 +25,15 @@ public class StartScreen extends JPanel implements ActionListener {
 
     private int spacing = 5;
 
+    private boolean stop = false;
+
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
     public StartScreen() {
+        init();
+
         addMouseListener(handler);
         addMouseMotionListener(handler);
         backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
@@ -58,15 +62,34 @@ public class StartScreen extends JPanel implements ActionListener {
         addMouseMotionListener(exit_buton.retrieveMouseHandler());
     }
 
+    public void init(){
+        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!stop) {
+                    repaint();
+                } else {
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
+        t.setRepeats(true);
+        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.start();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
+        super.paintComponent(g);
+
+        g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
 
         start_buton.paintComponent(g);
         load_buton.paintComponent(g);
         config_buton.paintComponent(g);
         exit_buton.paintComponent(g);
-        repaint();
+
+
+        // repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {

@@ -74,7 +74,7 @@ public class CustomButton extends JPanel implements ActionListener {
 
     public boolean isPressed() {
         return wasPressed;
-    }
+    } // Doesn't work reliably to use it. Yet.
 
     @Override
     public void paintComponent(Graphics g) {

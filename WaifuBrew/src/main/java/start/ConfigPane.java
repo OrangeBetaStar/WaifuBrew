@@ -1,18 +1,15 @@
 package start;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
 
     // LOAD IMAGE
-    private BufferedImage backgroundPicture;
+    private javaxt.io.Image backgroundPicture;
     private javaxt.io.Image back_button;
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
@@ -25,6 +22,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int backButtonY = 600;
     private boolean backButtonUI = false;
     private Timer stringTimer;
+    private boolean stop = false;
 
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
@@ -37,16 +35,30 @@ public class ConfigPane extends JPanel implements ActionListener {
     private String a = "Your waifu isn't real."; // Test String.
     private String tempString = "";
 
+    private Point windowSize = WaifuBrew.getInstance().getRes()[1];
+
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
     public ConfigPane() {
         try {
+            init();
+
             // Load needed images
-            backgroundPicture = ImageIO.read(new File(RESOURCE_PATH + "options-background.png"));
+            backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "options-background.png");
             back_button = new javaxt.io.Image(RESOURCE_PATH + "config_back_button.png");
             dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
+
+            // Pre-scale
+            if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
+                if(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
+                    backgroundPicture.resize(((int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
+                }
+                else {
+                    backgroundPicture.resize(((int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
+                }
+            }
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
 
             // Testing CUSTOM SLIDER
@@ -61,6 +73,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseListener(slider_speed.retrieveMouseHandler());
             addMouseMotionListener(slider_speed.retrieveMouseHandler());
 
+            // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed() * 10), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (!a.isEmpty()) {
@@ -82,7 +95,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             stringTimer.setCoalesce(false);
 
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("File failure in Config class");
             e.printStackTrace(); // Wall of error
             System.exit(-1);
@@ -95,21 +108,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
             if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
-                // TBH I don't really need this next if statement ???
-                if (getPreferredSize(backgroundPicture).width < WaifuBrew.getInstance().getRes()[1].getX()) {
-                    if ((WaifuBrew.getInstance().getRes()[1].getX() / (double) getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < WaifuBrew.getInstance().getRes()[1].getY()) {
-                        g.drawImage(backgroundPicture, 0, 0, (int) Math.round(WaifuBrew.getInstance().getRes()[1].getY() / (double) getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), (int) Math.round(WaifuBrew.getInstance().getRes()[1].getY()), this);
-                    } else {
-                        g.drawImage(backgroundPicture, 0, 0, (int) Math.round(WaifuBrew.getInstance().getRes()[1].getX()), (int) Math.round(WaifuBrew.getInstance().getRes()[1].getX() / (double) getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
-                    }
-                } else {
-                    // TODO: Just copied from above. Will refine later
-                    if ((WaifuBrew.getInstance().getRes()[1].getX() / (double) getPreferredSize(backgroundPicture).width) * getPreferredSize(backgroundPicture).height < WaifuBrew.getInstance().getRes()[1].getY()) {
-                        g.drawImage(backgroundPicture, 0, 0, (int) Math.round(WaifuBrew.getInstance().getRes()[1].getY() / (double) getPreferredSize(backgroundPicture).height * getPreferredSize(backgroundPicture).width), (int) Math.round(WaifuBrew.getInstance().getRes()[1].getY()), this);
-                    } else {
-                        g.drawImage(backgroundPicture, 0, 0, (int) Math.round(WaifuBrew.getInstance().getRes()[1].getX()), (int) Math.round(WaifuBrew.getInstance().getRes()[1].getX() / (double) getPreferredSize(backgroundPicture).width * getPreferredSize(backgroundPicture).height), this);
-                    }
-                }
+                g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
         }
 
@@ -145,8 +144,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         slider_transparency.paintComponent(g);
         slider_speed.paintComponent(g);
-
-        repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
@@ -189,5 +186,20 @@ public class ConfigPane extends JPanel implements ActionListener {
             return new Dimension(width, height);
         }
         return super.getPreferredSize();
+    }
+
+    public void init(){
+        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!stop) {
+                    repaint();
+                } else {
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
+        t.setRepeats(true);
+        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.start();
     }
 }

@@ -31,7 +31,8 @@ public class WaifuBrew extends WaifuException{
     WaifuBrew() {
         setDialogueTransparency(70);
         setDialogueSpeed(5);
-        configStorage[9] = 0; // Reserve 10 for stage access.
+        setFrameRate(2);
+        setStage(0);
     }
 
     private static WaifuBrew singleton  = new WaifuBrew();
@@ -54,6 +55,17 @@ public class WaifuBrew extends WaifuException{
         }
     }
 
+    // 0 - Dialog Transparency
+    // 1 - Text Speed
+    // 2 - Frame Rate
+    // 3 -
+    // 4 -
+    // 5 -
+    // 6 -
+    // 7 -
+    // 8 -
+    // 9 - Stage
+
     public int getDialogueTransparency () {
         return configStorage[0];
     }
@@ -68,6 +80,14 @@ public class WaifuBrew extends WaifuException{
 
     public void setDialogueSpeed (int dialogueSpeed) {
         this.configStorage[1] = dialogueSpeed;
+    }
+
+    public int getFrameRate() {
+        return configStorage[2];
+    }
+
+    public void setFrameRate(int frameRate) {
+        this.configStorage[2] = frameRate;
     }
 
     public int getStage() {

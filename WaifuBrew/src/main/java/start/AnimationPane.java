@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-import static com.sun.java.accessibility.util.SwingEventMonitor.addChangeListener;
-
 public class AnimationPane extends JPanel {
 
     private boolean initStage = true;
@@ -21,6 +19,8 @@ public class AnimationPane extends JPanel {
     private DialogueParser dp;
     private Point[] res;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[5];
+
+    private boolean stop = false;
 
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
@@ -38,9 +38,10 @@ public class AnimationPane extends JPanel {
 
 
     public AnimationPane() {
+        init();
+
         addMouseListener(handler);
         addMouseMotionListener(handler);
-
 
         this.res = WaifuBrew.getInstance().getRes();
         try {
@@ -61,7 +62,6 @@ public class AnimationPane extends JPanel {
             dp.parse();
             e = dp.getPackagedDialogue();
 
-            // System.out.println("Currently speed is: "+textSpeedMS);
             Timer stringTimer = new Timer(textSpeedMS, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(!a.isEmpty()) {
@@ -69,7 +69,6 @@ public class AnimationPane extends JPanel {
                             tempString = tempString + a.charAt(tempString.length());
                         }
                     }
-                    repaint();
                 }
             });
 
@@ -139,7 +138,6 @@ public class AnimationPane extends JPanel {
         super.paintComponent(g);
 
         if(initStage) {
-            // System.out.println("Setting dialogueTrans to " + WaifuBrew.getInstance().getDialogueTransparency() + "%");
             dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
         }
 
@@ -151,7 +149,6 @@ public class AnimationPane extends JPanel {
                 characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
             }
             for(int b = 1; b <= e.get(advancer-1).size(); b++) {
-                System.out.println((res[1].x / e.get(advancer-1).size() + 1) * b);
                 g.drawImage(characterImage[b - 1].getBufferedImage(), ((res[1].x / (e.get(advancer-1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (res[1].y / 4) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
@@ -170,8 +167,6 @@ public class AnimationPane extends JPanel {
         else {
             if(initStage) {
                 dialogueBox.setOpacity(dialogueTransparency);
-                // System.out.println("dialoguebox transparency set to: " + dialogueTransparency);
-
             }
         }
 
@@ -186,6 +181,21 @@ public class AnimationPane extends JPanel {
         // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
 
         initStage = false;
+    }
+
+    public void init(){
+        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!stop) {
+                    repaint();
+                } else {
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
+        t.setRepeats(true);
+        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.start();
     }
 
 }
