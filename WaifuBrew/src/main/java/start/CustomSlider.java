@@ -100,7 +100,6 @@ public class CustomSlider extends JPanel implements ActionListener {
                     if(level == 0) {
                         level = 1;
                     }
-                    // System.out.println("Level: "+level);
                 }
             }
         }
