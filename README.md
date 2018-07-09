@@ -46,4 +46,6 @@ Logs:
 
 07/06/18 - The StartScreen now relies on CustomButton and removed whole lot of garbage codes. CustomButton now takes extra parameter for centered image for x, y. GUI.java has also been cleared out along with StartScreen. Now GUI.java only manages stage changes between panes. (Updates are in 07/07/18 since I uploaded too late) Also fixed one line in ConfigPane that set local stage instead of global stage. [BetaStar]
 
-07/07/18 - AnimationPane got its update on character placement - especially multi character scenarios. Will now calculate where character will go through window calculation. Huge performance saver with implementation of framerate control. Currently running 2FPS as a debug. Will revert back to 30FPS when needed.
+07/07/18 - AnimationPane got its update on character placement - especially multi character scenarios. Will now calculate where character will go through window calculation. Huge performance saver with implementation of framerate control. Currently running 2FPS as a debug. Will revert back to 30FPS when needed. [BetaStar]
+
+07/08/18 - Implementation of ImageSlicer. Loading times of ConfigPane was annoying so I am implemented ImageSlider to grab needed image once (with all the buttons on it) and slice them up so that I can access on any Pane. [BetaStar]
