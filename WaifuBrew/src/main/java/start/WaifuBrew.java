@@ -13,6 +13,7 @@ public class WaifuBrew extends WaifuException{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
+    private javaxt.io.Image systemButtons;
 
     // [n] array number / = n value
     // [0] is dialogueTransparency = 70
@@ -29,6 +30,7 @@ public class WaifuBrew extends WaifuException{
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
+        systemButtons = new javaxt.io.Image(RESOURCE_PATH + "StartScreen_ElementSheet.png");
         setDialogueTransparency(70);
         setDialogueSpeed(5);
         setFrameRate(2);
