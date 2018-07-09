@@ -6,6 +6,7 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class WaifuBrew extends WaifuException{
 
@@ -13,6 +14,7 @@ public class WaifuBrew extends WaifuException{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
+    private BufferedImage[] systemImages;
 
     // [n] array number / = n value
     // [0] is dialogueTransparency = 70
@@ -46,7 +48,8 @@ public class WaifuBrew extends WaifuException{
             WaifuBrew programStart = new WaifuBrew();
             programStart.start();
             singleton = programStart;
-
+            ImageSlicer systemButtons = new ImageSlicer(250,200, singleton.RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
+            programStart.setSystemImage(systemButtons.getSprites());
         }
         // catches any exception
         catch (Exception e) {
@@ -108,6 +111,14 @@ public class WaifuBrew extends WaifuException{
 
     public GUI getGUIInstance(){
         return sample;
+    }
+
+    public BufferedImage[] getSystemImage() {
+        return systemImages;
+    }
+
+    public void setSystemImage(BufferedImage[] systemImage) {
+        this.systemImages = systemImage;
     }
 
 
