@@ -48,7 +48,7 @@ public class WaifuBrew extends WaifuException{
             WaifuBrew programStart = new WaifuBrew();
             programStart.start();
             singleton = programStart;
-            ImageSlicer systemButtons = new ImageSlicer(250,200, singleton.RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
+            ImageSlicer systemButtons = new ImageSlicer(500,200, singleton.RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
             programStart.setSystemImage(systemButtons.getSprites());
         }
         // catches any exception

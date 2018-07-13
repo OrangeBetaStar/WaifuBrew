@@ -88,17 +88,6 @@ public class StartScreen extends JPanel implements ActionListener {
         config_buton.paintComponent(g);
         exit_buton.paintComponent(g);
 
-        for(int z = 0; z <= WaifuBrew.getInstance().getSystemImage().length - 1; z++) {
-            if(!(z%2 == 1)) {
-                g.drawImage(WaifuBrew.getInstance().getSystemImage()[z],500, 50*z, 100,100, this);
-            }
-            else {
-                g.drawImage(WaifuBrew.getInstance().getSystemImage()[z],700, 50*z, 100,100, this);
-            }
-        }
-
-
-        // repaint();
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
