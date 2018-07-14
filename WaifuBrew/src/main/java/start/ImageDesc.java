@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 // TODO: Create exception for no description or image
 
+// This class will be a wrapper class of String (for description) and BufferedImage (image) as having list of BufferedImage would be too messy and inefficient.
+
 public class ImageDesc {
 
     private String imageDescription;

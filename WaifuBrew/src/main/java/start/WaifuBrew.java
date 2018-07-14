@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class WaifuBrew extends WaifuException{
 
@@ -16,8 +15,8 @@ public class WaifuBrew extends WaifuException{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
-    private BufferedImage[] systemImages;
-    ArrayList<LinkedList<ImageDesc>> fileList = new ArrayList<LinkedList<ImageDesc>>();
+    private BufferedImage[] systemImages = new BufferedImage[10];
+    ArrayList<ArrayList<ImageDesc>> fileList;
 
     private static WaifuBrew singleton;
 
@@ -39,11 +38,10 @@ public class WaifuBrew extends WaifuException{
 
         setDialogueTransparency(70);
         setDialogueSpeed(5);
-        setFrameRate(2);
+        setFrameRate(30);
         setStage(0);
         setSystemGUIScale(100);
-        LinkedList<String> a = new FindFile().listFile(RESOURCE_PATH, ".png");
-        ArrayList<LinkedList<ImageDesc>> fileList = new ImageLoader().imgCompiler(a);
+        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
         for(ImageDesc buttons : fileList.get(0)) {
             systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
         }
@@ -130,8 +128,11 @@ public class WaifuBrew extends WaifuException{
         return systemImages;
     }
 
-    public LinkedList<ImageDesc> getVectorImages() {
-        return fileList.get(1);
+    public ArrayList<ImageDesc> getImageSet(int index) {
+        return fileList.get(index);
+    }
+    public ArrayList<ImageDesc> getImageSet(ImageSelector imageSelector) {
+        return fileList.get(imageSelector.getValue());
     }
 
     /*
@@ -140,6 +141,16 @@ public class WaifuBrew extends WaifuException{
         this.systemImages = systemImage;
     }
     */
+
+    public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
+
+        for(ImageDesc pictures : fileList.get(whichPile.getValue())) {
+            if(pictures.getImageDescription().contains(whichOne)) {
+                return pictures.getImageItself();
+            }
+        }
+        return null;
+    }
 
     public void start() {
         sample = new GUI();

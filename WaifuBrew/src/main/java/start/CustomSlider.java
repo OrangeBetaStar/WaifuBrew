@@ -29,13 +29,7 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
 
-        // TODO: FIX THIS SHIT
-        for(ImageDesc a : WaifuBrew.getInstance().getVectorImages()) {
-            if(a.getImageDescription().contains("whitebox")) {
-                white = new javaxt.io.Image(a.getImageItself());
-            }
-        }
-        slider_background = white.copy();
+        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         slider_leveler = slider_background.copy();
         slider_knob = slider_background.copy();
         this.level = level;
@@ -46,14 +40,9 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
 
-        for(ImageDesc a : WaifuBrew.getInstance().getVectorImages()) {
-            if(a.getImageDescription().contains("whitebox")) {
-                white = new javaxt.io.Image(a.getImageItself());
-            }
-        }
-        slider_background = white.copy();
+        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         slider_leveler = slider_background.copy();
-        slider_knob = new javaxt.io.Image(RESOURCE_PATH + fileName);
+        slider_knob = slider_background.copy();
         this.level = level;
     }
 

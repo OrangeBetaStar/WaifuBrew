@@ -24,6 +24,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     private Timer stringTimer;
     private boolean stop = false;
 
+    CustomButton backButon;
+
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
 
@@ -45,9 +47,9 @@ public class ConfigPane extends JPanel implements ActionListener {
         try {
             init();
 
-            // Load needed images
-            backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "options-background.png");
-            back_button = new javaxt.io.Image(RESOURCE_PATH + "config_back_button.png");
+            backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
+
+            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button.png", true);
             dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
 
             // Pre-scale
@@ -72,6 +74,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(slider_transparency.retrieveMouseHandler());
             addMouseListener(slider_speed.retrieveMouseHandler());
             addMouseMotionListener(slider_speed.retrieveMouseHandler());
+            addMouseListener(backButon.retrieveMouseHandler());
+            addMouseMotionListener(backButon.retrieveMouseHandler());
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed() * 10), new ActionListener() {
@@ -114,15 +118,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
         if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
-            // BACK BUTTON
-            javaxt.io.Image tempBackButton = back_button.copy();
-            if (backButtonUI) {
-                tempBackButton.setOpacity(100);
-            } else {
-                tempBackButton.setOpacity(20);
-            }
 
-            g.drawImage(tempBackButton.getBufferedImage(), (backButtonX - (getPreferredSize(tempBackButton.getBufferedImage()).width / 2)), (backButtonY - (getPreferredSize(tempBackButton.getBufferedImage()).height / 2)), getPreferredSize(tempBackButton.getBufferedImage()).width, getPreferredSize(tempBackButton.getBufferedImage()).height, this);
             if(stringTimer.isRunning()) {
                 stringTimer.stop();
             }
@@ -142,6 +138,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
         g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
 
+        backButon.paintComponent(g);
         slider_transparency.paintComponent(g);
         slider_speed.paintComponent(g);
     }
@@ -153,19 +150,12 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         }
         public void mouseMoved (MouseEvent event) {
-            if(event.getX() >= (backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) && event.getY() >= (backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) && event.getX() <= ((backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) + back_button.getWidth()) && event.getY() <= ((backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) + back_button.getHeight())) {
-                backButtonUI = true;
-            }
-            else {
-                backButtonUI = false;
-            }
         }
         public void mouseDragged (MouseEvent event) {
-
         }
         public void mouseClicked (MouseEvent event) {
 
-            if(event.getX() >= (backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) && event.getY() >= (backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) && event.getX() <= ((backButtonX - (getPreferredSize(back_button.getBufferedImage()).width / 2)) + back_button.getWidth()) && event.getY() <= ((backButtonY - (getPreferredSize(back_button.getBufferedImage()).height / 2)) + back_button.getHeight())) {
+            if(event.getX() >= backButtonX && event.getY() >= backButtonY && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
@@ -177,15 +167,6 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mouseReleased (MouseEvent event) {}
         public void mouseExited (MouseEvent event) {
         }
-    }
-
-    public Dimension getPreferredSize(BufferedImage a) {
-        if (a != null) {
-            int width = a.getWidth();
-            int height = a.getHeight();
-            return new Dimension(width, height);
-        }
-        return super.getPreferredSize();
     }
 
     public void init(){

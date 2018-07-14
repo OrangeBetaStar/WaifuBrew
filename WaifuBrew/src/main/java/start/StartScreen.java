@@ -36,7 +36,8 @@ public class StartScreen extends JPanel implements ActionListener {
 
         addMouseListener(handler);
         addMouseMotionListener(handler);
-        backgroundPicture = new javaxt.io.Image(RESOURCE_PATH + "start.png");
+        backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
+
         // Calculates the scaling needed to fit the screen. Any ratio will work.
         if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
             if(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
