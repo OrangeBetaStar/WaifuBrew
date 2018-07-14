@@ -2,7 +2,7 @@ package start;
 
 // For Parsing and use in AnimationPane.
 public enum CharMove {
-    STANDBY,
+    STANDBY, // Do not move
     BOW, // Down and up
     FALLLEFT, // Rotate left (and perhaps shift left)
     DOWN, // Slide down
