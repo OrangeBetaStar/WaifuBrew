@@ -9,7 +9,7 @@ public class CustomValueButton extends CustomButton {
     private boolean centered = false;
 
     public CustomValueButton(int x, int y, String fileName, String[] valueStrings) {
-        super(x, y, fileName);
+        super(x, y, fileName, false);
         this.valueStrings = valueStrings;
     }
 

@@ -19,26 +19,39 @@ public class CustomButton extends JPanel implements ActionListener {
     private boolean wasPressed = false;
     private boolean mouseOver = false;
     private boolean centered = false;
+    private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
 
     // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
 
     private Handlerclass miniHandler = new Handlerclass();
 
-    public CustomButton (int x, int y, String fileName) {
-        this.x = x;
-        this.y = y;
-        // originalButton will be shown when mouse isn't above the button.
-        originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
-        mouseoverButton = originalButton.copy();
-        originalButton.setOpacity(20);
-    }
-
     public CustomButton (int x, int y, String fileName, boolean centered) {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+        if(fileName.contains("start_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
+        }
+        else if(fileName.contains("save_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
+        }
+        else if(fileName.contains("load_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
+        }
+        else if(fileName.contains("back_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
+        }
+        else if(fileName.contains("config_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
+        }
+        else if(fileName.contains("exit_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
+        }
+        else {
+            originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+        }
+        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), 75, true);
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.centered = centered;
@@ -75,6 +88,12 @@ public class CustomButton extends JPanel implements ActionListener {
     public boolean isPressed() {
         return wasPressed;
     } // Doesn't work reliably to use it. Yet.
+
+    // Calculating RGB to YIQ Values for possible invert the colour of buttons. (Sometimes I can't see white on white)
+    public static Color getContrastColor(Color color) {
+        double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
+        return y >= 128 ? Color.black : Color.white;
+    }
 
     @Override
     public void paintComponent(Graphics g) {

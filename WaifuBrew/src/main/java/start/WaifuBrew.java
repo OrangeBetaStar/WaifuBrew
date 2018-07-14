@@ -15,6 +15,7 @@ public class WaifuBrew extends WaifuException{
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private BufferedImage[] systemImages;
+    private static WaifuBrew singleton;
 
     // [n] array number / = n value
     // [0] is dialogueTransparency = 70
@@ -35,9 +36,12 @@ public class WaifuBrew extends WaifuException{
         setDialogueSpeed(5);
         setFrameRate(2);
         setStage(0);
+        setSystemGUIScale(100);
+        new FindFile().listFile(RESOURCE_PATH, ".png");
+        ImageSlicer systemButtons = new ImageSlicer(500,200, RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
+        systemImages = systemButtons.getSprites();
+        // TODO: LOAD SYSTEM BG IMAGES
     }
-
-    private static WaifuBrew singleton  = new WaifuBrew();
 
     public static WaifuBrew getInstance() {
         return singleton;
@@ -45,11 +49,8 @@ public class WaifuBrew extends WaifuException{
 
     public static void main(String[] args) throws WaifuException {
         try {
-            WaifuBrew programStart = new WaifuBrew();
-            programStart.start();
-            singleton = programStart;
-            ImageSlicer systemButtons = new ImageSlicer(500,200, singleton.RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
-            programStart.setSystemImage(systemButtons.getSprites());
+            singleton = new WaifuBrew();
+            singleton.start();
         }
         // catches any exception
         catch (Exception e) {
@@ -61,7 +62,7 @@ public class WaifuBrew extends WaifuException{
     // 0 - Dialog Transparency
     // 1 - Text Speed
     // 2 - Frame Rate
-    // 3 -
+    // 3 - GUI Scaling
     // 4 -
     // 5 -
     // 6 -
@@ -93,6 +94,10 @@ public class WaifuBrew extends WaifuException{
         this.configStorage[2] = frameRate;
     }
 
+    public int getSystemGUIScale() { return configStorage[3]; }
+
+    public void setSystemGUIScale(int GUIScale) { this.configStorage[3] = GUIScale; }
+
     public int getStage() {
         return configStorage[9];
     }
@@ -117,10 +122,12 @@ public class WaifuBrew extends WaifuException{
         return systemImages;
     }
 
+    /*
     public void setSystemImage(BufferedImage[] systemImage) {
+
         this.systemImages = systemImage;
     }
-
+    */
 
     public void start() {
         sample = new GUI();
@@ -133,6 +140,5 @@ public class WaifuBrew extends WaifuException{
         sample.setLocation(defaultSize[2].x, defaultSize[2].y);
         //sample.setLayout(new FlowLayout());
         sample.setVisible(true);
-
     }
 }

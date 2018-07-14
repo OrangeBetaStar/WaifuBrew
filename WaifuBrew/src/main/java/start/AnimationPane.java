@@ -48,11 +48,11 @@ public class AnimationPane extends JPanel {
             dialogueBox = new javaxt.io.Image(RESOURCE_PATH + "dialogbar.png");
 
             // GARBAGE IMPLEMENTATION
-            saveButton = new CustomButton(500, 500, "startscreen_save_button.png");
+            saveButton = new CustomButton(500, 500, "startscreen_save_button.png", false);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(700, 500, "startscreen_config_button.png");
+            configButton = new CustomButton(700, 500, "startscreen_config_button.png", false);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
