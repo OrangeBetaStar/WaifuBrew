@@ -7,6 +7,8 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class WaifuBrew extends WaifuException{
 
@@ -15,6 +17,8 @@ public class WaifuBrew extends WaifuException{
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private BufferedImage[] systemImages;
+    ArrayList<LinkedList<ImageDesc>> fileList = new ArrayList<LinkedList<ImageDesc>>();
+
     private static WaifuBrew singleton;
 
     // [n] array number / = n value
@@ -32,14 +36,18 @@ public class WaifuBrew extends WaifuException{
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
+
         setDialogueTransparency(70);
         setDialogueSpeed(5);
         setFrameRate(2);
         setStage(0);
         setSystemGUIScale(100);
-        new FindFile().listFile(RESOURCE_PATH, ".png");
-        ImageSlicer systemButtons = new ImageSlicer(500,200, RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
-        systemImages = systemButtons.getSprites();
+        LinkedList<String> a = new FindFile().listFile(RESOURCE_PATH, ".png");
+        ArrayList<LinkedList<ImageDesc>> fileList = new ImageLoader().imgCompiler(a);
+        for(ImageDesc buttons : fileList.get(0)) {
+            systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
+        }
+
         // TODO: LOAD SYSTEM BG IMAGES
     }
 
@@ -120,6 +128,10 @@ public class WaifuBrew extends WaifuException{
 
     public BufferedImage[] getSystemImage() {
         return systemImages;
+    }
+
+    public LinkedList<ImageDesc> getVectorImages() {
+        return fileList.get(1);
     }
 
     /*
