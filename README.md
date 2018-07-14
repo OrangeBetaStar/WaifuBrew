@@ -49,3 +49,7 @@ Logs:
 07/07/18 - AnimationPane got its update on character placement - especially multi character scenarios. Will now calculate where character will go through window calculation. Huge performance saver with implementation of framerate control. Currently running 2FPS as a debug. Will revert back to 30FPS when needed. [BetaStar]
 
 07/08/18 - Implementation of ImageSlicer. Loading times of ConfigPane was annoying so I am implemented ImageSlider to grab needed image once (with all the buttons on it) and slice them up so that I can access on any Pane. [BetaStar]
+
+07/13/18 - Cleaned out testers for ImageSlicer. Added FindFile.java to retrieve files from local directory instead of listing out and hard code file names for read out. CharMove has been added but still in progress. Performance fixes and flexibility for rest of the program. GUI Scaling has been added and fixed. No more double declaration with WaifuBrew.java (The bug fix). [BetaStar]
+
+0714/18 - Applying image loader to other classes to rely on. Fixed dialog bars not applying the settings and removed hard coded buttons in setting class (replaced with CustomButton). [BetaStar]
