@@ -33,6 +33,8 @@ public class GUI extends JFrame {
         startPage.addMouseMotionListener(handler);
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
+        // Set icon? Why not?
+        // TODO: setIconImage();
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
         revalidateGraphics();
     }
