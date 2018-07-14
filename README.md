@@ -52,4 +52,4 @@ Logs:
 
 07/13/18 - Cleaned out testers for ImageSlicer. Added FindFile.java to retrieve files from local directory instead of listing out and hard code file names for read out. CharMove has been added but still in progress. Performance fixes and flexibility for rest of the program. GUI Scaling has been added and fixed. No more double declaration with WaifuBrew.java (The bug fix). [BetaStar]
 
-0714/18 - Applying image loader to other classes to rely on. Fixed dialog bars not applying the settings and removed hard coded buttons in setting class (replaced with CustomButton). [BetaStar]
+07/14/18 - Applying image loader to other classes to rely on. Fixed dialog bars not applying the settings and removed hard coded buttons in setting class (replaced with CustomButton). Release of v0.05 [BetaStar]
