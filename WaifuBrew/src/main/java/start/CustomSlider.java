@@ -16,6 +16,9 @@ public class CustomSlider extends JPanel implements ActionListener {
     private int y; // dialogueTransparencyY
     private boolean initStage = true;
 
+
+    private javaxt.io.Image white;
+
     // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
 
@@ -25,7 +28,8 @@ public class CustomSlider extends JPanel implements ActionListener {
     public CustomSlider(int x, int y, int level) {
         this.x = x;
         this.y = y;
-        slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+
+        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         slider_leveler = slider_background.copy();
         slider_knob = slider_background.copy();
         this.level = level;
@@ -35,9 +39,10 @@ public class CustomSlider extends JPanel implements ActionListener {
     public CustomSlider(int x, int y, int level, String fileName) {
         this.x = x;
         this.y = y;
-        slider_background = new javaxt.io.Image(RESOURCE_PATH + "white.png");
+
+        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         slider_leveler = slider_background.copy();
-        slider_knob = new javaxt.io.Image(RESOURCE_PATH + fileName);
+        slider_knob = slider_background.copy();
         this.level = level;
     }
 

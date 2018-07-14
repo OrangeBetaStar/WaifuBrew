@@ -2,10 +2,13 @@ package start;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.LinkedList;
 
 public class FindFile {
 
-    public void listFile(String folder, String extension) {
+    LinkedList<String> fileList = new LinkedList<String>();
+
+    public LinkedList<String> listFile(String folder, String extension) {
 
         GenericExtFilter filter = new GenericExtFilter(extension);
 
@@ -13,21 +16,23 @@ public class FindFile {
 
         if(dir.isDirectory()==false){
             System.out.println("Directory does not exists : " + folder);
-            return;
+            return null;
         }
 
-        // list out all the file name and filter by the extension
         String[] list = dir.list(filter);
 
         if (list.length == 0) {
             System.out.println("Files not found with extension : " + extension);
-            return;
+            return null;
         }
 
         for (String file : list) {
-            String temp = new StringBuffer(folder).append(File.separator).append(file).toString();
-            System.out.println("Found file : " + temp);
+            fileList.add(file);
+            // String temp = new StringBuffer(folder).append(file).toString();
+            System.out.println("Found file : " + (new StringBuffer(folder).append(file).toString()));
         }
+
+        return fileList;
     }
 
     public class GenericExtFilter implements FilenameFilter {

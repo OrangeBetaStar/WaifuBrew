@@ -7,6 +7,7 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class WaifuBrew extends WaifuException{
 
@@ -14,7 +15,9 @@ public class WaifuBrew extends WaifuException{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
-    private BufferedImage[] systemImages;
+    private BufferedImage[] systemImages = new BufferedImage[10];
+    ArrayList<ArrayList<ImageDesc>> fileList;
+
     private static WaifuBrew singleton;
 
     // [n] array number / = n value
@@ -32,14 +35,17 @@ public class WaifuBrew extends WaifuException{
             new Point((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
+
         setDialogueTransparency(70);
         setDialogueSpeed(5);
-        setFrameRate(2);
+        setFrameRate(60);
         setStage(0);
         setSystemGUIScale(100);
-        new FindFile().listFile(RESOURCE_PATH, ".png");
-        ImageSlicer systemButtons = new ImageSlicer(500,200, RESOURCE_PATH + "StartScreen_ElementSheet.png", true);
-        systemImages = systemButtons.getSprites();
+        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
+        for(ImageDesc buttons : fileList.get(0)) {
+            systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
+        }
+
         // TODO: LOAD SYSTEM BG IMAGES
     }
 
@@ -122,12 +128,29 @@ public class WaifuBrew extends WaifuException{
         return systemImages;
     }
 
+    public ArrayList<ImageDesc> getImageSet(int index) {
+        return fileList.get(index);
+    }
+    public ArrayList<ImageDesc> getImageSet(ImageSelector imageSelector) {
+        return fileList.get(imageSelector.getValue());
+    }
+
     /*
     public void setSystemImage(BufferedImage[] systemImage) {
 
         this.systemImages = systemImage;
     }
     */
+
+    public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
+
+        for(ImageDesc pictures : fileList.get(whichPile.getValue())) {
+            if(pictures.getImageDescription().contains(whichOne)) {
+                return pictures.getImageItself();
+            }
+        }
+        return null;
+    }
 
     public void start() {
         sample = new GUI();
