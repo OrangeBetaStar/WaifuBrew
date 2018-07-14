@@ -38,7 +38,7 @@ public class WaifuBrew extends WaifuException{
 
         setDialogueTransparency(70);
         setDialogueSpeed(5);
-        setFrameRate(30);
+        setFrameRate(60);
         setStage(0);
         setSystemGUIScale(100);
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));

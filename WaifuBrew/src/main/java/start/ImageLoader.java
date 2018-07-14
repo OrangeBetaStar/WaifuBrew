@@ -28,7 +28,7 @@ public class ImageLoader {
                     }
                 }
                 // Any images that are used in effects (used with scaleVec like things)
-                else if(loadImage.contains("whitebox")) {
+                else {//if(loadImage.contains("whitebox")) {
                     vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
                 }
             }

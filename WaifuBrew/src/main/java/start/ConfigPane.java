@@ -10,7 +10,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     // LOAD IMAGE
     private javaxt.io.Image backgroundPicture;
-    private javaxt.io.Image back_button;
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
 
@@ -20,7 +19,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int dialogueSpeedY = dialogueTransparencyY + 80;
     private int backButtonX = 1100;
     private int backButtonY = 600;
-    private boolean backButtonUI = false;
     private Timer stringTimer;
     private boolean stop = false;
 
@@ -50,7 +48,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
 
             backButon = new CustomButton(backButtonX, backButtonY, "config_back_button.png", true);
-            dialogueBox = new javaxt.io.Image(RESOURCE_PATH+"dialogbar.png");
+            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -155,7 +153,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         public void mouseClicked (MouseEvent event) {
 
-            if(event.getX() >= backButtonX && event.getY() >= backButtonY && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
+            if(event.getX() >= backButtonX - backButon.getWidth()/2 && event.getY() >= backButtonY - backButon.getHeight()/2 && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }

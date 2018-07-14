@@ -45,7 +45,7 @@ public class AnimationPane extends JPanel {
 
         this.res = WaifuBrew.getInstance().getRes();
         try {
-            dialogueBox = new javaxt.io.Image(RESOURCE_PATH + "dialogbar.png");
+            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
             saveButton = new CustomButton(500, 500, "startscreen_save_button.png", false);
