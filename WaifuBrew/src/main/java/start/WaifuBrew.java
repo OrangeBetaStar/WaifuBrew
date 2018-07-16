@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class WaifuBrew extends WaifuException{
+public class WaifuBrew{
 
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

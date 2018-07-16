@@ -27,7 +27,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
 
-    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private Handlerclass handler = new Handlerclass();
 
     public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();

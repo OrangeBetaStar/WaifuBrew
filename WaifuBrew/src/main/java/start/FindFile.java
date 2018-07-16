@@ -2,6 +2,7 @@ package start;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class FindFile {
@@ -32,6 +33,7 @@ public class FindFile {
             System.out.println("Found file : " + (new StringBuffer(folder).append(file).toString()));
         }
 
+        Collections.sort(fileList);
         return fileList;
     }
 

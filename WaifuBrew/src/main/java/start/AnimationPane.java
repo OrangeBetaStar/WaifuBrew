@@ -19,6 +19,8 @@ public class AnimationPane extends JPanel {
     private DialogueParser dp;
     private Point[] res;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[5];
+    private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
+    private boolean clickActivate = true;
 
     private boolean stop = false;
 
@@ -102,6 +104,10 @@ public class AnimationPane extends JPanel {
 
         public void mouseReleased(MouseEvent event) {
             // There may be a dialogue without dialogue and only character movement
+
+            // Have this inside if statement where it is not run on buttons.
+            clickActivate = true;
+
             if(e.get(advancer).get(0).getDialogue() != null) {
                 tempString = "";
                 a = e.get(advancer).get(0).getDialogue();
@@ -141,12 +147,24 @@ public class AnimationPane extends JPanel {
             dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
         }
 
+        /*
+        private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
+        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), 75, true);
+        */
+
         // Do not show character on first viewing
         if(advancer != 0) {
 
             // Character
-            for(int a = 0; a < e.get(advancer-1).size(); a++) {
-                characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
+            if(clickActivate) {
+                for (int a = 0; a < e.get(advancer - 1).size(); a++) {
+                    //backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
+                    // System.out.println(e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase());
+                    characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
+                    characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
+                    //characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
+                }
+                clickActivate = false;
             }
             for(int b = 1; b <= e.get(advancer-1).size(); b++) {
                 g.drawImage(characterImage[b - 1].getBufferedImage(), ((res[1].x / (e.get(advancer-1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (res[1].y / 4) + (characterImage[b - 1].getHeight() / 2), this);
@@ -161,7 +179,7 @@ public class AnimationPane extends JPanel {
 
                 initStory = false;
             }
-            g.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+            g.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(3000/GUIScale)));
             g.setColor(new Color(0,0,0));
         }
         else {
