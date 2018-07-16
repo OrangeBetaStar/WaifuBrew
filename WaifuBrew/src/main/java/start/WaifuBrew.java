@@ -1,6 +1,6 @@
 package start;
 /*
- * Project by Sidetail & Gaia
+ * Project by Sidetail & Gaia & Nic
  *
  */
 
