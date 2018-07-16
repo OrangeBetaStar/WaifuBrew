@@ -73,7 +73,7 @@ public class ImageLoader {
         }
 
         for(ImageDesc asdf : character_imagesArr) {
-            System.out.println("Image Descriptions: "+asdf.getImageDescription());
+            System.out.println("Image Processed: "+asdf.getImageDescription());
         }
 
         ArrayList<ArrayList<ImageDesc>> imagePackage = new ArrayList<ArrayList<ImageDesc>>();
