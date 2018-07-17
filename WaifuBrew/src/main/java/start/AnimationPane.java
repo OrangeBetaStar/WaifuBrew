@@ -22,6 +22,8 @@ public class AnimationPane extends JPanel {
     private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
+    private Dimension characterSize = WaifuBrew.getInstance().getImageSizes(0);
+
     private boolean stop = false;
 
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
