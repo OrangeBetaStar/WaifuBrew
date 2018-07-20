@@ -60,7 +60,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
-            auto_dialog = new CustomOnOffButton(dialogueX, dialogueSpeedY + 200, false, true);
+            auto_dialog = new CustomOnOffButton( dialogueX + 100, dialogueSpeedY + 200, false, true);
 
             // Testing CUSTOM SLIDER
             slider_transparency = new CustomSlider(dialogueX, dialogueTransparencyY, dialogueTransparency);
@@ -77,6 +77,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(backButon.retrieveMouseHandler());
 
             addMouseListener(auto_dialog.retrieveMouseHandler());
+            addMouseMotionListener(auto_dialog.retrieveMouseHandler());
 
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
