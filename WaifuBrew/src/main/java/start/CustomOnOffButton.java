@@ -16,7 +16,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     private javaxt.io.Image backgroundImage;
     private javaxt.io.Image knob;
 
-    private int slidingPathWidth = 100;
+    private int slidingPathWidth = 80;
     private int slidingPathHeight = 30;
 
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
@@ -35,7 +35,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         this.value = value;
         this.centered = centered;
         // Change the image later. This is just a sample
-        backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         backgroundImage.resize(slidingPathWidth, slidingPathHeight);
         // Shit implementation (Will replace later)
         /*
@@ -53,7 +53,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         if(value) {
-            g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2) + knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
+            g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         }
         else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
