@@ -22,8 +22,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private Timer stringTimer;
     private boolean stop = false;
 
-    CustomButton backButon;
-
+    private CustomButton backButon;
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
     private CustomOnOffButton auto_dialog;
@@ -47,7 +46,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
 
-            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button.png", true);
+            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true);
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // Pre-scale

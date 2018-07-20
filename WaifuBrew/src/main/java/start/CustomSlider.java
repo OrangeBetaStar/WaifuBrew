@@ -28,7 +28,7 @@ public class CustomSlider extends JPanel implements ActionListener {
 
         slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         slider_leveler = slider_background.copy();
-        slider_knob = slider_background.copy();
+        slider_knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         this.level = level;
     }
 
@@ -60,7 +60,7 @@ public class CustomSlider extends JPanel implements ActionListener {
             // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
             slider_background.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
             slider_leveler.setBackgroundColor(Color.CYAN.getRed(), Color.CYAN.getGreen(), Color.CYAN.getBlue());
-            slider_knob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
+            // slider_knob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
 
             // SLIDER TRACK
             slider_background.resize(200, 20, false);

@@ -26,7 +26,10 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         this.y = y;
         this.value = value;
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob.jpg")); // TODO: Change to circle and png later
+        backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+        backgroundImage.resize(slidingPathWidth, slidingPathHeight);
+        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob.jpg"));
+        knob.resize(slidingPathHeight, slidingPathHeight);
     }
 
     public CustomOnOffButton(int x, int y, boolean value, boolean centered) {
@@ -38,16 +41,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
         backgroundImage.resize(slidingPathWidth, slidingPathHeight);
-        // Shit implementation (Will replace later)
-        /*
-        for(int widthX = 0; widthX < backgroundImage.getWidth(); widthX++) {
-            for(int heightY = 0; heightY < backgroundImage.getHeight(); heightY++) {
-                backgroundImage.setColor(x, y, Color.ORANGE);
-            }
-        }
-        */
-
-        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob")); // TODO: Change to circle and png later
+        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         knob.resize(slidingPathHeight, slidingPathHeight);
     }
 
@@ -72,6 +66,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     public boolean getValue() {
         return value;
     }
+
     private class Handlerclass implements MouseListener, MouseMotionListener {
         public void mouseClicked(MouseEvent e) {
             if(centered) {
@@ -85,9 +80,15 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
                 }
             }
             else {
-                // TODO: Non centred position
+                if((e.getX() > x) && (e.getX() <= x + slidingPathWidth) && (e.getY() > y) && (e.getY() <= y + slidingPathHeight)) { // TODO: Check if this is working.
+                    if(value) {
+                        value = false;
+                    }
+                    else {
+                        value = true;
+                    }
+                }
             }
-
             /*
             System.out.println("x " + (x - (slidingPathWidth / 2)) + " and " + (x + (slidingPathWidth / 2)) + " t/f for x: " + (e.getX() > (x - (slidingPathWidth / 2))) + " and " + (e.getX() < (x + (slidingPathWidth / 2))));
             System.out.println("y " + (y - (slidingPathHeight / 2)) + " and " + (y + (slidingPathHeight / 2)) + " t/f for y: " + (e.getY() > (y - (slidingPathHeight / 2))) + " and " + (e.getY() < (y + (slidingPathHeight / 2))));
@@ -95,32 +96,25 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
             System.out.println("y cursor " + e.getY());
             System.out.println("--------------------");
             */
-
-
         }
 
         public void mousePressed(MouseEvent e) {
 
         }
-
         public void mouseReleased(MouseEvent e) {
 
         }
-
         public void mouseMoved(MouseEvent e) {
 
         }
-
         public void mouseEntered(MouseEvent e) {
 
         }
-
         public void mouseDragged(MouseEvent e) {
 
         }
         public void mouseExited(MouseEvent e) {
 
         }
-
     }
 }
