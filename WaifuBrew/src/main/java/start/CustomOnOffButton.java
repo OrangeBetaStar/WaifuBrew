@@ -17,7 +17,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     private javaxt.io.Image knob;
 
     private int slidingPathWidth = 100;
-    private int slidingPathHeight = 24;
+    private int slidingPathHeight = 30;
 
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
 
@@ -47,16 +47,16 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         */
 
         knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob")); // TODO: Change to circle and png later
-        knob.resize(slidingPathHeight + 10, slidingPathHeight + 10);
+        knob.resize(slidingPathHeight, slidingPathHeight);
     }
 
     public void paintComponent(Graphics g) {
-        g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y + (backgroundImage.getHeight() / 2), that);
+        g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         if(value) {
-            g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2) + knob.getWidth(), y - (backgroundImage.getHeight() / 2) + (knob.getHeight() / 2), that);
+            g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2) + knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
         else {
-            g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2) + (knob.getHeight() / 2), that);
+            g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
     }
 
@@ -74,8 +74,7 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     private class Handlerclass implements MouseListener, MouseMotionListener {
         public void mouseClicked(MouseEvent e) {
             if(centered) {
-                if((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() < (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() < (y + (slidingPathHeight / 2)))) {
-                    System.out.println("Yesss");
+                if((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
                     if(value) {
                         value = false;
                     }
@@ -88,13 +87,13 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
                 // TODO: Non centred position
             }
 
-
+            /*
             System.out.println("x " + (x - (slidingPathWidth / 2)) + " and " + (x + (slidingPathWidth / 2)) + " t/f for x: " + (e.getX() > (x - (slidingPathWidth / 2))) + " and " + (e.getX() < (x + (slidingPathWidth / 2))));
             System.out.println("y " + (y - (slidingPathHeight / 2)) + " and " + (y + (slidingPathHeight / 2)) + " t/f for y: " + (e.getY() > (y - (slidingPathHeight / 2))) + " and " + (e.getY() < (y + (slidingPathHeight / 2))));
             System.out.println("x cursor " + e.getX());
             System.out.println("y cursor " + e.getY());
             System.out.println("--------------------");
-
+            */
 
 
         }

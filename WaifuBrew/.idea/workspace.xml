@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/load_first_slider_knob.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/CustomOnOffButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/CustomOnOffButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane$Handlerclass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/start/ConfigPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ConfigPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/start/CustomOnOffButton$Handlerclass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/CustomOnOffButton$Handlerclass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/start/CustomOnOffButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/CustomOnOffButton.class" afterDir="false" />
     </list>
@@ -82,8 +76,8 @@
       <file leaf-file-name="CustomSlider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomSlider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="122" />
+            <state relative-caret-position="772">
+              <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,8 +88,8 @@
       <file leaf-file-name="CustomOnOffButton.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomOnOffButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+            <state relative-caret-position="268">
+              <caret line="76" column="121" lean-forward="true" selection-start-line="76" selection-start-column="121" selection-end-line="76" selection-end-column="121" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2676#2677#0" expanded="true" />
@@ -606,11 +600,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.500277" side_tool="true" weight="0.20250522" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.21044993" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32908705" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.499723" visible="true" weight="0.28537735" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.499723" visible="true" weight="0.28537735" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32908705" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19444445" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19444445" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -855,8 +849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomSlider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="122" />
+        <state relative-caret-position="772">
+          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -865,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomOnOffButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+        <state relative-caret-position="268">
+          <caret line="76" column="121" lean-forward="true" selection-start-line="76" selection-start-column="121" selection-end-line="76" selection-end-column="121" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2676#2677#0" expanded="true" />
