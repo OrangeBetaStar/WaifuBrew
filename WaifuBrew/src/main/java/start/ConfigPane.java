@@ -26,6 +26,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
+    private CustomOnOffButton auto_dialog;
 
     private Handlerclass handler = new Handlerclass();
 
@@ -59,6 +60,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
+            auto_dialog = new CustomOnOffButton(dialogueX, dialogueSpeedY + 200, false, true);
 
             // Testing CUSTOM SLIDER
             slider_transparency = new CustomSlider(dialogueX, dialogueTransparencyY, dialogueTransparency);
@@ -73,6 +75,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(slider_speed.retrieveMouseHandler());
             addMouseListener(backButon.retrieveMouseHandler());
             addMouseMotionListener(backButon.retrieveMouseHandler());
+
+            addMouseListener(auto_dialog.retrieveMouseHandler());
+
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed() * 10), new ActionListener() {
@@ -138,6 +143,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         backButon.paintComponent(g);
         slider_transparency.paintComponent(g);
         slider_speed.paintComponent(g);
+        auto_dialog.paintComponent(g);
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
