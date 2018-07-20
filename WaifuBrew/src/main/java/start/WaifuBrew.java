@@ -42,9 +42,11 @@ public class WaifuBrew{
         setStage(0);
         setSystemGUIScale(100);
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
+
         for(ImageDesc buttons : fileList.get(0)) {
             systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
         }
+
 
         // TODO: LOAD SYSTEM BG IMAGES
     }

@@ -1,5 +1,6 @@
 package start;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class ImageLoader {
     }
 
     public ArrayList<ArrayList<ImageDesc>> imgCompiler (LinkedList<String> fileList) {
+
         for(String loadImage : fileList) {
             loadImage = loadImage.toLowerCase();
             // This will look inside resource folder and automatically load the images according to file names.
@@ -35,8 +37,17 @@ public class ImageLoader {
                     }
                 }
                 // Any images that are used in effects (used with scaleVec like things)
-                else {//if(loadImage.contains("whitebox")) {
-                    vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
+                else { //if(loadImage.contains("whitebox")) {
+                    if (loadImage.contains("toggle_housing")) {
+                        ImageSlicer toggleHousing = new ImageSlicer(200, 400, RESOURCE_PATH + loadImage, true);
+                        BufferedImage[] sliderHousing = toggleHousing.getSprites();
+                        for (int a = 0; a < sliderHousing.length; a++) {
+                            vectorImages.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
+                        }
+                    }
+                    else {
+                        vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
+                    }
                 }
             } else if (loadImage.contains("bg")) {
                 //System.out.println("What's the loadImage's name? " + loadImage);

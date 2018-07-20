@@ -16,6 +16,12 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
     private javaxt.io.Image backgroundImage;
     private javaxt.io.Image knob;
 
+    /*
+    private javaxt.io.Image left = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-0"));
+    private javaxt.io.Image body = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-2"));
+    private javaxt.io.Image right = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-1"));
+    */
+
     private int slidingPathWidth = 80;
     private int slidingPathHeight = 30;
 
@@ -42,17 +48,30 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
         backgroundImage.resize(slidingPathWidth, slidingPathHeight);
         knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
-        knob.resize(slidingPathHeight, slidingPathHeight);
+        knob.resize(slidingPathHeight, slidingPathHeight); // I meant to do that, intellij.
+
+        /*
+        left.resize((int)(left.getWidth() * ((double)slidingPathHeight/left.getHeight())), slidingPathHeight, true);
+        body.resize((int)(left.getWidth() * ((double)slidingPathHeight/left.getHeight())), slidingPathHeight, true);
+        right.resize((int)(left.getWidth() * ((double)slidingPathHeight/left.getHeight())), slidingPathHeight, true);
+        */
+
     }
 
     public void paintComponent(Graphics g) {
         g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
+
         if(value) {
             g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         }
         else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
+        /*
+        g.drawImage(left.getBufferedImage(), x - (backgroundImage.getWidth() / 2) - (left.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
+        // TODO : add middle portion if this looks good...
+        g.drawImage(right.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - (right.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
+        */
     }
 
     public Handlerclass retrieveMouseHandler() {
