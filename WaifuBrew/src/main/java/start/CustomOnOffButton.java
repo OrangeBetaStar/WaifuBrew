@@ -35,7 +35,8 @@ public class CustomOnOffButton extends JPanel implements ActionListener {
         this.value = value;
         this.centered = centered;
         // Change the image later. This is just a sample
-        backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
+        backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
         backgroundImage.resize(slidingPathWidth, slidingPathHeight);
         // Shit implementation (Will replace later)
         /*
