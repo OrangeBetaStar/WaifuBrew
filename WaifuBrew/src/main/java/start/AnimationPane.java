@@ -23,6 +23,7 @@ public class AnimationPane extends JPanel {
     private boolean clickActivate = true;
 
     private boolean stop = false;
+    private Dimension characterSize = WaifuBrew.getInstance().getImageSizes(0);
 
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
