@@ -24,7 +24,7 @@ public class WaifuBrew{
     // [0] is dialogueTransparency = 70
     // [1] is dialogueSpeed = 50
     private static int[] configStorage = new int[10]; //Increase if needed.
-
+    private Dimension[] imageSizes = new Dimension[10]; //Increase if needed.
 
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
@@ -41,6 +41,7 @@ public class WaifuBrew{
         setFrameRate(60);
         setStage(0);
         setSystemGUIScale(100);
+        setImageSizes(0, new Dimension(200, 250));
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
 
         for(ImageDesc buttons : fileList.get(0)) {
@@ -112,6 +113,14 @@ public class WaifuBrew{
 
     public void setStage(int stage) {
         configStorage[9] = stage;
+    }
+
+    public Dimension getImageSizes(int index) {
+        return imageSizes[index];
+    }
+
+    public void setImageSizes(int index, Dimension imageSizes) {
+        this.imageSizes[index] = imageSizes;
     }
 
     public String getResoucePath () {
