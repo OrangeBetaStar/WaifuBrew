@@ -56,4 +56,4 @@ Logs:
 
 07/16/18 - Most classes including AnimationPane (character images) are using auto-loaded (sliced) images. Cleared out all unnecessary images in the resource folder. Added unhandled exception class to deal with wrong image retrieval. Numbers has been added to enums to simplify and add more functionality. [BetaStar]
 
-07/19/18 - Started implementing Custom on/off switch for ConfigPane. A sample button now rests in ConfigPane to be implemented as intended. [BetaStar]
+07/19/18 - Started implementing Custom on/off switch for ConfigPane. A sample button now rests in ConfigPane to be implemented as intended. Added toggle knob for both CustomSlider and CustomOnOffSwitch [BetaStar]
