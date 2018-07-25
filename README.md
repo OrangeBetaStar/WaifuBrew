@@ -55,3 +55,5 @@ Logs:
 07/14/18 - Applying image loader to other classes to rely on. Fixed dialog bars not applying the settings and removed hard coded buttons in setting class (replaced with CustomButton). Release of v0.05 [BetaStar]
 
 07/16/18 - Most classes including AnimationPane (character images) are using auto-loaded (sliced) images. Cleared out all unnecessary images in the resource folder. Added unhandled exception class to deal with wrong image retrieval. Numbers has been added to enums to simplify and add more functionality. [BetaStar]
+
+07/19/18 - Started implementing Custom on/off switch for ConfigPane. A sample button now rests in ConfigPane to be implemented as intended. [BetaStar]
