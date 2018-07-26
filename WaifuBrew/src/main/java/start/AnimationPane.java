@@ -58,12 +58,6 @@ public class AnimationPane extends JPanel {
 
         this.res = WaifuBrew.getInstance().getRes();
         try {
-
-            // TODO: Fix this so that it loads in main, rather than here.
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH+"y3.ttf"));
-            ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
-
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
@@ -104,6 +98,11 @@ public class AnimationPane extends JPanel {
             stringTimer.setCoalesce(false);
             stringTimer.start();
 
+            // TODO: Fix this so that it loads in main, rather than here.
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH+"Halogen.ttf"));
+            ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+            telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
+
         } catch (IOException ex) {
             System.out.println("Simple IOException");
             ex.printStackTrace();
@@ -116,7 +115,7 @@ public class AnimationPane extends JPanel {
         } catch (FontFormatException ex) {
             ex.printStackTrace();
             System.err.println("Font " + " not loaded.  Using serif font.");
-            font = new Font("serif", Font.PLAIN, 24);
+            telegraficoFont = new Font("serif", Font.PLAIN, 24);
         }
     }
 
