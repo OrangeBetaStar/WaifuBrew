@@ -25,7 +25,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private CustomButton backButon;
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
-    private CustomOnOffButton auto_dialog;
+    private CustomSwitch auto_dialog;
 
     private Handlerclass handler = new Handlerclass();
 
@@ -59,7 +59,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
-            auto_dialog = new CustomOnOffButton( dialogueX + 100, dialogueSpeedY + 200, false, true);
+            auto_dialog = new CustomSwitch(dialogueX + 200, dialogueSpeedY + 60 - 10, false, true);
 
             // Testing CUSTOM SLIDER
             slider_transparency = new CustomSlider(dialogueX, dialogueTransparencyY, dialogueTransparency);
@@ -139,6 +139,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: Perhaps implement title for CustomSlider
         g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
         g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
+        g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
 
         backButon.paintComponent(g);
         slider_transparency.paintComponent(g);

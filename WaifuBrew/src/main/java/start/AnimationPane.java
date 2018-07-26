@@ -27,14 +27,18 @@ public class AnimationPane extends JPanel {
     private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
 
-    CustomButton saveButton;
-    CustomButton configButton;
+    private int buttonPlacementY = 640;
+
+    private CustomButton saveButton;
+    private CustomButton loadButton;
+    private CustomButton configButton;
+    private CustomButton startButton;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
 
     // Retrieve String from JSON
-    private String a = "...";
+    private String a = "Click anywhere to initiate dialog!";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
 
@@ -50,11 +54,19 @@ public class AnimationPane extends JPanel {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
-            saveButton = new CustomButton(500, 500, "startscreen_save_button.png", false);
+            startButton = new CustomButton(640, buttonPlacementY, "startscreen_start_button.png", false, 60, true);
+            addMouseListener(startButton.retrieveMouseHandler());
+            addMouseMotionListener(startButton.retrieveMouseHandler());
+
+            loadButton = new CustomButton(760, buttonPlacementY, "startscreen_load_button.png", false, 60, true);
+            addMouseListener(loadButton.retrieveMouseHandler());
+            addMouseMotionListener(loadButton.retrieveMouseHandler());
+
+            saveButton = new CustomButton(870, buttonPlacementY, "startscreen_save_button.png", false, 60, true);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(700, 500, "startscreen_config_button.png", false);
+            configButton = new CustomButton(1000, buttonPlacementY, "startscreen_config_button.png", false, 60, true);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
@@ -164,6 +176,7 @@ public class AnimationPane extends JPanel {
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
                     //characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
                 }
+                // TODO: Implement auto advancer here according to setting
                 clickActivate = false;
             }
             for(int b = 1; b <= e.get(advancer-1).size(); b++) {
@@ -192,6 +205,8 @@ public class AnimationPane extends JPanel {
             g.drawString(tempString, 150, 550);
         }
 
+        startButton.paintComponent(g);
+        loadButton.paintComponent(g);
         saveButton.paintComponent(g);
         configButton.paintComponent(g);
 

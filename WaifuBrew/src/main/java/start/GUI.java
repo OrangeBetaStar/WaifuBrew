@@ -27,7 +27,7 @@ public class GUI extends JFrame {
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
-        waifuLabel = new JLabel("ワイファブルー");
+        //waifuLabel = new JLabel("ワイファブルー");
         startPage = new StartScreen();
         startPage.addMouseListener(handler);
         startPage.addMouseMotionListener(handler);
@@ -115,27 +115,27 @@ public class GUI extends JFrame {
         }
 
         public void mousePressed(MouseEvent event) {
-            waifuLabel.setText("you pressed down the mouse");
+            // waifuLabel.setText("you pressed down the mouse");
         }
 
         public void mouseReleased(MouseEvent event) {
-            waifuLabel.setText("you released the button");
+            // waifuLabel.setText("you released the button");
         }
 
         public void mouseEntered(MouseEvent event) {
-            waifuLabel.setText("you entered the area");
+            // waifuLabel.setText("you entered the area");
         }
 
         public void mouseExited(MouseEvent event) {
-            waifuLabel.setText("the mouse has left the window");
+            // waifuLabel.setText("the mouse has left the window");
         }
 
         public void mouseDragged(MouseEvent event) {
-            waifuLabel.setText("you are dragging the mouse");
+            // waifuLabel.setText("you are dragging the mouse");
         }
 
         public void mouseMoved(MouseEvent event) {
-            waifuLabel.setText("you moved the mouse");
+            // waifuLabel.setText("you moved the mouse");
         }
     }
 }

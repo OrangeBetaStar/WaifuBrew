@@ -3,6 +3,7 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
 // TODO: Probably better to use this as async instead of putting this in graphics and check if it has been pressed?
 
@@ -50,8 +51,44 @@ public class CustomButton extends JPanel implements ActionListener {
         }
         else {
             originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+            System.out.println("Please fix code: I/O access detected.");
         }
         originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), 75, true);
+        mouseoverButton = originalButton.copy();
+        originalButton.setOpacity(20);
+        this.centered = centered;
+    }
+
+    public CustomButton (int x, int y, String fileName, boolean centered, double sizeY, boolean invert) {
+        this.x = x;
+        this.y = y;
+        // originalButton will be shown when mouse isn't above the button.
+        if(fileName.contains("start_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
+        }
+        else if(fileName.contains("save_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
+        }
+        else if(fileName.contains("load_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
+        }
+        else if(fileName.contains("back_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
+        }
+        else if(fileName.contains("config_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
+        }
+        else if(fileName.contains("exit_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
+        }
+        else {
+            originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+            System.out.println("Please fix code: I/O access detected.");
+        }
+        if(invert) {
+            originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
+        }
+        originalButton.resize((int)(originalButton.getWidth() * (sizeY/originalButton.getHeight())), (int)sizeY, false);
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.centered = centered;
@@ -111,6 +148,37 @@ public class CustomButton extends JPanel implements ActionListener {
                 g.drawImage(mouseoverButton.getBufferedImage(), x, y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
             }
         }
+    }
+    private BufferedImage imageInverter(BufferedImage inputFile) {
+
+        for(int ConvY = 0; ConvY < inputFile.getHeight(); ConvY++){
+            for(int ConvX = 0; ConvX < inputFile.getWidth(); ConvX++){
+                int p = inputFile.getRGB(ConvX, ConvY);
+                int a = (p>>24)&0xff;
+                int r = (p>>16)&0xff;
+                int g = (p>>8)&0xff;
+                int b = p&0xff;
+                r = 255 - r;
+                g = 255 - g;
+                b = 255 - b;
+                p = (a<<24) | (r<<16) | (g<<8) | b;
+                inputFile.setRGB(ConvX, ConvY, p);
+            }
+        }
+        /*
+
+        for (int ConvX = 0; ConvX < inputFile.getWidth(); ConvX++) {
+            for (int ConvY = 0; ConvY < inputFile.getHeight(); ConvY++) {
+                int rgba = inputFile.getRGB(ConvX, ConvY);
+                Color col = new Color(rgba, true);
+                col = new Color(255 - col.getRed(),
+                        255 - col.getGreen(),
+                        255 - col.getBlue());
+                inputFile.setRGB(ConvX, ConvY, col.getRGB());
+            }
+        }
+        */
+        return inputFile;
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
