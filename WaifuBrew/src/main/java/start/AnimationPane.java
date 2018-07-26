@@ -40,7 +40,7 @@ public class AnimationPane extends JPanel {
     // Delete after experiment
     private static InputStream myStream;
     private static Font ttfBase;
-    private static Font telegraficoFont;
+    private static Font activeFont;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -90,8 +90,13 @@ public class AnimationPane extends JPanel {
                             tempString = tempString + a.charAt(tempString.length());
                         }
                         else { // TODO: Check if this works
+                            System.out.println("The string is full");
+                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
                             if(WaifuBrew.getInstance().getAutoAdvancer()) {
                                 clickActivate = true;
+                                // TODO: NEEDS AWAIT
+                                // TODO: FIX TRANSPARENCY
+                                triggerNext();
                             }
                         }
                     }
@@ -104,14 +109,13 @@ public class AnimationPane extends JPanel {
             stringTimer.start();
 
             try {
-                // TODO: Fix this so that it loads in main, rather than here.
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
                 ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-                telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
+                activeFont = ttfBase.deriveFont(Font.PLAIN, 24);
             } catch (FontFormatException ex) {
                 ex.printStackTrace();
                 System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                telegraficoFont = new Font("serif", Font.PLAIN, 24);
+                activeFont = new Font("serif", Font.PLAIN, 24);
             }
 
 
@@ -124,6 +128,20 @@ public class AnimationPane extends JPanel {
         } catch (JSONException ex) {
             System.out.println("There is an error with JSON");
             ex.printStackTrace();
+        }
+    }
+
+    public void triggerNext() {
+        if(e.get(advancer).get(0).getDialogue() != null) {
+            tempString = "";
+            a = e.get(advancer).get(0).getDialogue();
+        }
+        else {
+            tempString = "";
+            a = "";
+        }
+        if(advancer < e.size()-1) {
+            advancer++;
         }
     }
 
@@ -142,18 +160,7 @@ public class AnimationPane extends JPanel {
 
             // Have this inside if statement where it is not run on buttons.
             clickActivate = true;
-
-            if(e.get(advancer).get(0).getDialogue() != null) {
-                tempString = "";
-                a = e.get(advancer).get(0).getDialogue();
-            }
-            else {
-                tempString = "";
-                a = "";
-            }
-            if(advancer < e.size()-1) {
-                advancer++;
-            }
+            triggerNext();
         }
 
         public void mouseEntered(MouseEvent event) {
@@ -216,7 +223,7 @@ public class AnimationPane extends JPanel {
                 initStory = false;
             }
             // g.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(3000/GUIScale)));
-            g.setFont(telegraficoFont);
+            g.setFont(activeFont);
             g.setColor(new Color(0,0,0));
         }
         else {
