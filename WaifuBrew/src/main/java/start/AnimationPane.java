@@ -38,9 +38,9 @@ public class AnimationPane extends JPanel {
     private CustomButton startButton;
 
     // Delete after experiment
-    private static InputStream myStream = null;
-    private static Font ttfBase = null;
-    private static Font telegraficoFont = null;
+    private static InputStream myStream;
+    private static Font ttfBase;
+    private static Font telegraficoFont;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -89,6 +89,11 @@ public class AnimationPane extends JPanel {
                         if (tempString.length() != a.length()) {
                             tempString = tempString + a.charAt(tempString.length());
                         }
+                        else { // TODO: Check if this works
+                            if(WaifuBrew.getInstance().getAutoAdvancer()) {
+                                clickActivate = true;
+                            }
+                        }
                     }
                 }
             });
@@ -98,10 +103,17 @@ public class AnimationPane extends JPanel {
             stringTimer.setCoalesce(false);
             stringTimer.start();
 
-            // TODO: Fix this so that it loads in main, rather than here.
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH+"Halogen.ttf"));
-            ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
+            try {
+                // TODO: Fix this so that it loads in main, rather than here.
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+                ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+                telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
+            } catch (FontFormatException ex) {
+                ex.printStackTrace();
+                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+                telegraficoFont = new Font("serif", Font.PLAIN, 24);
+            }
+
 
         } catch (IOException ex) {
             System.out.println("Simple IOException");
@@ -112,10 +124,6 @@ public class AnimationPane extends JPanel {
         } catch (JSONException ex) {
             System.out.println("There is an error with JSON");
             ex.printStackTrace();
-        } catch (FontFormatException ex) {
-            ex.printStackTrace();
-            System.err.println("Font " + " not loaded.  Using serif font.");
-            telegraficoFont = new Font("serif", Font.PLAIN, 24);
         }
     }
 
@@ -184,6 +192,7 @@ public class AnimationPane extends JPanel {
 
             // Character
             if(clickActivate) {
+                // TODO: This needs to be reimplemented (Too much storing in RAM)
                 for (int a = 0; a < e.get(advancer - 1).size(); a++) {
                     //backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
                     // System.out.println(e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase());
@@ -191,7 +200,6 @@ public class AnimationPane extends JPanel {
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
                     //characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
                 }
-                // TODO: Implement auto advancer here according to setting
                 clickActivate = false;
             }
             for(int b = 1; b <= e.get(advancer-1).size(); b++) {
