@@ -153,6 +153,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mousePressed (MouseEvent event) {
             System.out.println("The status of the button: " + auto_dialog.getValue());
             WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+            System.out.println("The actual status of autoDialog " + WaifuBrew.getInstance().getAutoAdvancer());
         }
         public void mouseMoved (MouseEvent event) {
         }

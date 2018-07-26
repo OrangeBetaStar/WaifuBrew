@@ -1,13 +1,16 @@
 package start;
+
 import org.json.JSONException;
 import parser.DialogueParser;
 import parser.exception.DialogueDataMissingException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class AnimationPane extends JPanel {
 
@@ -34,6 +37,11 @@ public class AnimationPane extends JPanel {
     private CustomButton configButton;
     private CustomButton startButton;
 
+    // Delete after experiment
+    private static InputStream myStream = null;
+    private static Font ttfBase = null;
+    private static Font telegraficoFont = null;
+
     // Advancer keeps track of which line it reads
     private int advancer = 0;
 
@@ -41,7 +49,6 @@ public class AnimationPane extends JPanel {
     private String a = "Click anywhere to initiate dialog!";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
-
 
     public AnimationPane() {
         init();
@@ -51,6 +58,12 @@ public class AnimationPane extends JPanel {
 
         this.res = WaifuBrew.getInstance().getRes();
         try {
+
+            // TODO: Fix this so that it loads in main, rather than here.
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH+"y3.ttf"));
+            ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+            telegraficoFont = ttfBase.deriveFont(Font.PLAIN, 24);
+
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
@@ -100,8 +113,11 @@ public class AnimationPane extends JPanel {
         } catch (JSONException ex) {
             System.out.println("There is an error with JSON");
             ex.printStackTrace();
+        } catch (FontFormatException ex) {
+            ex.printStackTrace();
+            System.err.println("Font " + " not loaded.  Using serif font.");
+            font = new Font("serif", Font.PLAIN, 24);
         }
-
     }
 
     private class Handlerclass implements  MouseListener, MouseMotionListener{
@@ -192,7 +208,8 @@ public class AnimationPane extends JPanel {
 
                 initStory = false;
             }
-            g.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(3000/GUIScale)));
+            // g.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(3000/GUIScale)));
+            g.setFont(telegraficoFont);
             g.setColor(new Color(0,0,0));
         }
         else {
