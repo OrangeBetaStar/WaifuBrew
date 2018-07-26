@@ -21,6 +21,7 @@ public class CustomButton extends JPanel implements ActionListener {
     private boolean mouseOver = false;
     private boolean centered = false;
     private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
+    private int defaultButtonHeight = 75;
 
     // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
@@ -53,7 +54,7 @@ public class CustomButton extends JPanel implements ActionListener {
             originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
             System.out.println("Please fix code: I/O access detected.");
         }
-        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), 75, true);
+        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), defaultButtonHeight, true);
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.centered = centered;
@@ -88,7 +89,12 @@ public class CustomButton extends JPanel implements ActionListener {
         if(invert) {
             originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
         }
-        originalButton.resize((int)(originalButton.getWidth() * (sizeY/originalButton.getHeight())), (int)sizeY, false);
+        if(sizeY == 0) {
+            originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), defaultButtonHeight, true);
+        }
+        else {
+            originalButton.resize((int)(originalButton.getWidth() * (sizeY/originalButton.getHeight())), (int)sizeY, false);
+        }
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.centered = centered;

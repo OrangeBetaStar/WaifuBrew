@@ -46,7 +46,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
 
-            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true);
+            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // Pre-scale
