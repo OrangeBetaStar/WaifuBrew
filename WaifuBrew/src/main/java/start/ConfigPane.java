@@ -151,7 +151,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-
+            System.out.println("The status of the button: " + auto_dialog.getValue());
+            WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
         }
         public void mouseMoved (MouseEvent event) {
         }

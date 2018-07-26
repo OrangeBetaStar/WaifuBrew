@@ -40,6 +40,7 @@ public class WaifuBrew{
         setDialogueSpeed(5);
         setFrameRate(60);
         setStage(0);
+        setAutoAdvancer(false);
         setSystemGUIScale(100);
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
 
@@ -71,7 +72,7 @@ public class WaifuBrew{
     // 1 - Text Speed
     // 2 - Frame Rate
     // 3 - GUI Scaling
-    // 4 -
+    // 4 - Auto Dialogue Advancer
     // 5 -
     // 6 -
     // 7 -
@@ -105,6 +106,22 @@ public class WaifuBrew{
     public int getSystemGUIScale() { return configStorage[3]; }
 
     public void setSystemGUIScale(int GUIScale) { this.configStorage[3] = GUIScale; }
+
+    public boolean getAutoAdvancer() {
+        if(configStorage[4] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setAutoAdvancer(boolean autoAdvancer) {
+        if(autoAdvancer) {
+            configStorage[4] = 1;
+        }
+        else {
+            configStorage[4] = 0;
+        }
+    }
 
     public int getStage() {
         return configStorage[9];
