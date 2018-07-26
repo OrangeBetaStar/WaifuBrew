@@ -21,7 +21,7 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;
-    private javaxt.io.Image characterImage[] = new javaxt.io.Image[5];
+    private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Size of pictures per advance? Wait wtf? TODO: NEEDS QUICK FIX
     private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
