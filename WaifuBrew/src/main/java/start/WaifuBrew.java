@@ -60,6 +60,7 @@ public class WaifuBrew{
         try {
             singleton = new WaifuBrew();
             singleton.start();
+
         }
         // catches any exception
         catch (Exception e) {

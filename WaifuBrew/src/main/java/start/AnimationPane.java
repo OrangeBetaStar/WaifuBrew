@@ -46,7 +46,7 @@ public class AnimationPane extends JPanel {
     private int advancer = 0;
 
     // Retrieve String from JSON
-    private String a = "Click anywhere to initiate dialog!";
+    private String a = "Click anywhere to initiate dialog...!";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
 
@@ -92,11 +92,15 @@ public class AnimationPane extends JPanel {
                         else { // TODO: Check if this works
                             System.out.println("The string is full");
                             System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
+                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
                             if(WaifuBrew.getInstance().getAutoAdvancer()) {
                                 clickActivate = true;
                                 // TODO: NEEDS AWAIT
                                 // TODO: FIX TRANSPARENCY
-                                triggerNext();
+                                if(WaifuBrew.getInstance().getStage() == 1) {
+                                    triggerNext();
+                                }
+
                             }
                         }
                     }
@@ -107,6 +111,8 @@ public class AnimationPane extends JPanel {
             stringTimer.setRepeats(true);
             stringTimer.setCoalesce(false);
             stringTimer.start();
+
+
 
             try {
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
@@ -145,7 +151,11 @@ public class AnimationPane extends JPanel {
         }
     }
 
-    private class Handlerclass implements  MouseListener, MouseMotionListener{
+    private class Handlerclass implements  MouseListener, MouseMotionListener, ItemListener{
+
+        public void itemStateChanged(ItemEvent event) {
+            
+        }
 
         public void mouseClicked(MouseEvent event) {
 
@@ -214,6 +224,7 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
+
             g.drawImage(dialogueBox.getBufferedImage(),res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2),this);
             g.drawString(e.get(advancer-1).get(0).getName().toString(), 100, 430);
 
