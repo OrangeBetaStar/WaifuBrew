@@ -154,7 +154,7 @@ public class AnimationPane extends JPanel {
     private class Handlerclass implements  MouseListener, MouseMotionListener, ItemListener{
 
         public void itemStateChanged(ItemEvent event) {
-            
+
         }
 
         public void mouseClicked(MouseEvent event) {
@@ -209,7 +209,7 @@ public class AnimationPane extends JPanel {
 
             // Character
             if(clickActivate) {
-                // TODO: This needs to be reimplemented (Too much storing in RAM)
+                // This will get all the chars that are needed for each dialog.
                 for (int a = 0; a < e.get(advancer - 1).size(); a++) {
                     //backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
                     // System.out.println(e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase());

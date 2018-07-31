@@ -6,11 +6,10 @@ public class Waifu {
     private Characters name;
     private Mood mood;
     private String dialogue;
-    private Point initPoint;
-    private Point finalPoint;
+    private Point[] position = new Point[2];
 
     public Waifu() {
-
+        // Shouldn't use this.
     }
 
     public Waifu(Characters name) {
@@ -27,8 +26,8 @@ public class Waifu {
         this.name = name;
         this.mood = mood;
         this.dialogue = dialogue;
-        this.initPoint = initPoint;
-        this.finalPoint = finalPoint;
+        this.position[0] = initPoint;
+        this.position[1] = finalPoint;
     }
 
     public Characters getName() {
@@ -41,6 +40,10 @@ public class Waifu {
 
     public String getDialogue() {
         return this.dialogue;
+    }
+
+    public Point[] getPosition() {
+        return this.position;
     }
 
     public void addMood(Mood mood) {

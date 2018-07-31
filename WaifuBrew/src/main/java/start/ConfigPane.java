@@ -160,18 +160,21 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mouseDragged (MouseEvent event) {
         }
         public void mouseClicked (MouseEvent event) {
-
             if(event.getX() >= backButtonX - backButon.getWidth()/2 && event.getY() >= backButtonY - backButon.getHeight()/2 && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
-
         }
         public void mouseEntered (MouseEvent event) {
 
         }
-        public void mouseReleased (MouseEvent event) {}
+        public void mouseReleased (MouseEvent event) {
+            // TODO: Find better way to implement this.
+            WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
+            WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
+        }
         public void mouseExited (MouseEvent event) {
+
         }
     }
 

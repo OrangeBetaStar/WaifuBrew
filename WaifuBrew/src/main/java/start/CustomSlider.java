@@ -14,6 +14,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     private boolean sliderActive = false; //dialogueTransparencyMove
     private int x; // dialogueX
     private int y; // dialogueTransparencyY
+
     private boolean initStage = true;
 
     // this that this that left right left right up down up down
