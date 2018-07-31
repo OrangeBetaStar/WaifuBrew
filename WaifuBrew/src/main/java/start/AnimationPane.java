@@ -90,7 +90,6 @@ public class AnimationPane extends JPanel {
                             tempString = tempString + a.charAt(tempString.length());
                         }
                         else { // TODO: Check if this works
-                            System.out.println("The string is full");
                             System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
                             System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
                             if(WaifuBrew.getInstance().getAutoAdvancer()) {

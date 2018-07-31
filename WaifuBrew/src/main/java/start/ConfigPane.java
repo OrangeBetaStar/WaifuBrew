@@ -151,9 +151,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-            System.out.println("The status of the button: " + auto_dialog.getValue());
-            WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
-            System.out.println("The actual status of autoDialog " + WaifuBrew.getInstance().getAutoAdvancer());
         }
         public void mouseMoved (MouseEvent event) {
         }
@@ -172,6 +169,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             // TODO: Find better way to implement this.
             WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
             WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
+            System.out.println("Set auto dia to: " + auto_dialog.getValue());
+            WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
         }
         public void mouseExited (MouseEvent event) {
 
@@ -179,6 +178,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
     public void init(){
+        // TODO: I wonder if I use this lambda
         Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!stop) {

@@ -67,6 +67,7 @@ public class CustomSwitch extends JPanel implements ActionListener {
         else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
+        g.drawString("The value: " + value, x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2));
         /*
         g.drawImage(left.getBufferedImage(), x - (backgroundImage.getWidth() / 2) - (left.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         // TODO : add middle portion if this looks good...
@@ -96,6 +97,7 @@ public class CustomSwitch extends JPanel implements ActionListener {
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
         public void mouseClicked(MouseEvent e) {
+            System.out.println("In class value :" + value);
             if(centered) {
                 if((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
                     if(value) {
