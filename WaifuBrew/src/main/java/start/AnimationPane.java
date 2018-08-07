@@ -112,7 +112,6 @@ public class AnimationPane extends JPanel {
             stringTimer.start();
 
 
-
             try {
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
                 ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
