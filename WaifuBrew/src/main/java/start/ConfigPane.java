@@ -3,7 +3,10 @@ package start;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
@@ -17,22 +20,29 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int dialogueX = 100;
     private int dialogueTransparencyY = 220;
     private int dialogueSpeedY = dialogueTransparencyY + 80;
+    private int dialogueFontSizeY = dialogueTransparencyY + 160 + 40;
     private int backButtonX = 1100;
     private int backButtonY = 600;
     private Timer stringTimer;
     private boolean stop = false;
+    private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     private CustomButton backButon;
     private CustomSlider slider_transparency;
     private CustomSlider slider_speed;
     private CustomSwitch auto_dialog;
+    private CustomSlider slider_fontSize;
 
     private Handlerclass handler = new Handlerclass();
 
     public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
     public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed() * 10;
-    private String a = "Your waifu isn't real."; // Test String.
+    private String a = "The dialogue would look like this!"; //"Your waifu isn't real."; // Test String.
     private String tempString = "";
+    private Font activeFont;
+    private Font configPaneFont;
+    private BufferedInputStream myStream;
+    private int fontSize = 24;
 
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
@@ -45,9 +55,10 @@ public class ConfigPane extends JPanel implements ActionListener {
             init();
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
-
             backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
+
+            // myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -64,6 +75,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Testing CUSTOM SLIDER
             slider_transparency = new CustomSlider(dialogueX, dialogueTransparencyY, dialogueTransparency);
             slider_speed = new CustomSlider(dialogueX,dialogueSpeedY,dialogueSpeed);
+            slider_fontSize = new CustomSlider(dialogueX, dialogueFontSizeY, fontSize);
+
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);
@@ -77,6 +90,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             addMouseListener(auto_dialog.retrieveMouseHandler());
             addMouseMotionListener(auto_dialog.retrieveMouseHandler());
+            addMouseListener(slider_fontSize.retrieveMouseHandler());
+            addMouseMotionListener(slider_fontSize.retrieveMouseHandler());
 
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
@@ -111,15 +126,37 @@ public class ConfigPane extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if(slider_fontSize.isSliderActive()) {
+            // Configure font preview
+            try {
+                // TODO: This not a good implementation
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+                fontSize = slider_fontSize.getLevel();
+                Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+                activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            } catch (FontFormatException ex) {
+                ex.printStackTrace();
+                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+                activeFont = new Font("serif", Font.PLAIN, fontSize);
+            } catch (FileNotFoundException ex) {
+                System.out.println("FileNotFoundException in ConfigPane.init()");
+                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+                activeFont = new Font("serif", Font.PLAIN, fontSize);
+            } catch (IOException ex) {
+                System.out.println("IOException in ConfigPane.init()");
+                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+                activeFont = new Font("serif", Font.PLAIN, fontSize);
+            }
+        }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
-            if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
+            if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
                 g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
         }
 
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
-        if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
+        if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
 
             if(stringTimer.isRunning()) {
                 stringTimer.stop();
@@ -132,50 +169,65 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
             stringTimer.start();
             if(tempString != "") {
+                g.setFont(activeFont);
+                g.setColor(new Color(0,0,0));
                 g.drawString(tempString, 150, 550);
             }
         }
 
         // TODO: Perhaps implement title for CustomSlider
+        // TODO: implement configPaneFont
+        g.setFont(configPaneFont);
+        g.setColor(new Color(0,0,0));
         g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
         g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
         g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
+        g.drawString("Dialog Text Size", dialogueX, dialogueFontSizeY - 20);
 
         backButon.paintComponent(g);
         slider_transparency.paintComponent(g);
         slider_speed.paintComponent(g);
         auto_dialog.paintComponent(g);
+        slider_fontSize.paintComponent(g);
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
 
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-            System.out.println("The status of the button: " + auto_dialog.getValue());
-            WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
-            System.out.println("The actual status of autoDialog " + WaifuBrew.getInstance().getAutoAdvancer());
         }
         public void mouseMoved (MouseEvent event) {
         }
         public void mouseDragged (MouseEvent event) {
         }
         public void mouseClicked (MouseEvent event) {
-
             if(event.getX() >= backButtonX - backButon.getWidth()/2 && event.getY() >= backButtonY - backButon.getHeight()/2 && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
-
+            System.out.println("Mouseclicked from ConfigPane"); // to check if handler is active outside of settings
         }
         public void mouseEntered (MouseEvent event) {
 
         }
-        public void mouseReleased (MouseEvent event) {}
+        public void mouseReleased (MouseEvent event) {
+            // TODO: Find better way to implement this.
+
+            if(WaifuBrew.getInstance().getStage() == 2) { // If it is still configPane... perhaps save setting when back button?
+                WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
+                WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
+                System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
+                WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+                WaifuBrew.getInstance().setFontSize(slider_fontSize.getLevel());
+            }
+        }
         public void mouseExited (MouseEvent event) {
+
         }
     }
 
     public void init(){
+        // TODO: I wonder if I use this lambda
         Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!stop) {
@@ -188,5 +240,28 @@ public class ConfigPane extends JPanel implements ActionListener {
         t.setRepeats(true);
         t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
         t.start();
+
+        // Configure font preview
+        try {
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+            Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+            activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
+        } catch (FontFormatException ex) {
+            ex.printStackTrace();
+            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+            activeFont = new Font("serif", Font.PLAIN, fontSize);
+            configPaneFont = new Font("serif", Font.PLAIN, 24);
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException in ConfigPane.init()");
+            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+            activeFont = new Font("serif", Font.PLAIN, fontSize);
+            configPaneFont = new Font("serif", Font.PLAIN, 24);
+        } catch (IOException ex) {
+            System.out.println("IOException in ConfigPane.init()");
+            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+            activeFont = new Font("serif", Font.PLAIN, fontSize);
+            configPaneFont = new Font("serif", Font.PLAIN, 24);
+        }
     }
 }

@@ -99,6 +99,7 @@ public class GUI extends JFrame {
         }
 
         lastStage = stage;
+        System.out.println("ADVANCER: " + WaifuBrew.getInstance().getAutoAdvancer());
     }
 
     public void setStage(int stage) {
