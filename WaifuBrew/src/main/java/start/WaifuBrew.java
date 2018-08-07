@@ -74,7 +74,7 @@ public class WaifuBrew{
     // 2 - Frame Rate
     // 3 - GUI Scaling
     // 4 - Auto Dialogue Advancer
-    // 5 -
+    // 5 - Dialog Font Size
     // 6 -
     // 7 -
     // 8 -
@@ -122,6 +122,14 @@ public class WaifuBrew{
         else {
             configStorage[4] = 0;
         }
+    }
+
+    public int getFontSize() {
+        return configStorage[5];
+    }
+
+    public void setFontSize(int fontSize) {
+        configStorage[5] = fontSize;
     }
 
     public int getStage() {

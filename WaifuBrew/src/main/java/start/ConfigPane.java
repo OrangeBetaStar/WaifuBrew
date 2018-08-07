@@ -20,7 +20,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private int dialogueX = 100;
     private int dialogueTransparencyY = 220;
     private int dialogueSpeedY = dialogueTransparencyY + 80;
-    private int dialogueFontSizeY = dialogueTransparencyY + 160;
+    private int dialogueFontSizeY = dialogueTransparencyY + 160 + 40;
     private int backButtonX = 1100;
     private int backButtonY = 600;
     private Timer stringTimer;
@@ -37,7 +37,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
     public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed() * 10;
-    private String a = "Your waifu isn't real."; // Test String.
+    private String a = "The dialogue would look like this!"; //"Your waifu isn't real."; // Test String.
     private String tempString = "";
     private Font activeFont;
     private Font configPaneFont;
@@ -55,9 +55,10 @@ public class ConfigPane extends JPanel implements ActionListener {
             init();
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
-
             backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
+
+            // myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -128,8 +129,9 @@ public class ConfigPane extends JPanel implements ActionListener {
         if(slider_fontSize.isSliderActive()) {
             // Configure font preview
             try {
-                fontSize = slider_fontSize.getLevel();
+                // TODO: This not a good implementation
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+                fontSize = slider_fontSize.getLevel();
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             } catch (FontFormatException ex) {
@@ -148,13 +150,13 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
-            if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
+            if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
                 g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
         }
 
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
-        if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive()) {
+        if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
 
             if(stringTimer.isRunning()) {
                 stringTimer.stop();
@@ -175,11 +177,12 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // TODO: Perhaps implement title for CustomSlider
         // TODO: implement configPaneFont
-        g.setFont(activeFont);
+        g.setFont(configPaneFont);
         g.setColor(new Color(0,0,0));
         g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
         g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
         g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
+        g.drawString("Dialog Text Size", dialogueX, dialogueFontSizeY - 20);
 
         backButon.paintComponent(g);
         slider_transparency.paintComponent(g);
@@ -202,16 +205,21 @@ public class ConfigPane extends JPanel implements ActionListener {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
+            System.out.println("Mouseclicked from ConfigPane"); // to check if handler is active outside of settings
         }
         public void mouseEntered (MouseEvent event) {
 
         }
         public void mouseReleased (MouseEvent event) {
             // TODO: Find better way to implement this.
-            WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
-            WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
-            System.out.println("Set auto dia to: " + auto_dialog.getValue());
-            WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+
+            if(WaifuBrew.getInstance().getStage() == 2) { // If it is still configPane... perhaps save setting when back button?
+                WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
+                WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
+                System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
+                WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+                WaifuBrew.getInstance().setFontSize(slider_fontSize.getLevel());
+            }
         }
         public void mouseExited (MouseEvent event) {
 
