@@ -37,7 +37,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
     public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed() * 10;
-    private String a = "The dialogue would look like this!"; //"Your waifu isn't real."; // Test String.
+    private String a = "The dialogue would look like this!"; // "Your waifu isn't real."; // Test String.
     private String tempString = "";
     private Font activeFont;
     private Font configPaneFont;
@@ -131,7 +131,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             try {
                 // TODO: This not a good implementation
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
-                fontSize = slider_fontSize.getLevel();
+                fontSize = (slider_fontSize.getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             } catch (FontFormatException ex) {
@@ -218,7 +218,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
                 System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
                 WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
-                WaifuBrew.getInstance().setFontSize(slider_fontSize.getLevel());
+                WaifuBrew.getInstance().setFontSize((slider_fontSize.getLevel() / 2) + 10);
             }
         }
         public void mouseExited (MouseEvent event) {
