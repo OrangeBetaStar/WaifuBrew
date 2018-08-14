@@ -8,8 +8,6 @@ public class GUI extends JFrame {
     private JPanel waifuPanel;
     private JLabel waifuLabel;
 
-    private Handlerclass handler = new Handlerclass();
-
     // TODO: Why create them when I do not need it right now.
     private StartScreen startPage;
     private AnimationPane animationPane;
@@ -19,24 +17,21 @@ public class GUI extends JFrame {
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
 
+    private boolean stop = false;
+
     public GUI() {
         super("ワイファブルー by Tailsoft");
-
-        addMouseListener(handler);
-        addMouseMotionListener(handler);
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
         //waifuLabel = new JLabel("ワイファブルー");
         startPage = new StartScreen();
-        startPage.addMouseListener(handler);
-        startPage.addMouseMotionListener(handler);
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
         // Set icon? Why not?
         // TODO: setIconImage();
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
-        revalidateGraphics();
+        init();
     }
 
     public void revalidateGraphics() {
@@ -95,11 +90,9 @@ public class GUI extends JFrame {
                 // add(loadPane);
                 // loadPane.repaint();
             }
-            revalidate();
         }
 
         lastStage = stage;
-        System.out.println("ADVANCER: " + WaifuBrew.getInstance().getAutoAdvancer());
     }
 
     public void setStage(int stage) {
@@ -109,34 +102,20 @@ public class GUI extends JFrame {
         revalidateGraphics();
     }
 
-    private class Handlerclass implements MouseListener, MouseMotionListener{
-
-        public void mouseClicked(MouseEvent event) {
-            revalidateGraphics();
-        }
-
-        public void mousePressed(MouseEvent event) {
-            // waifuLabel.setText("you pressed down the mouse");
-        }
-
-        public void mouseReleased(MouseEvent event) {
-            // waifuLabel.setText("you released the button");
-        }
-
-        public void mouseEntered(MouseEvent event) {
-            // waifuLabel.setText("you entered the area");
-        }
-
-        public void mouseExited(MouseEvent event) {
-            // waifuLabel.setText("the mouse has left the window");
-        }
-
-        public void mouseDragged(MouseEvent event) {
-            // waifuLabel.setText("you are dragging the mouse");
-        }
-
-        public void mouseMoved(MouseEvent event) {
-            // waifuLabel.setText("you moved the mouse");
-        }
+    public void init(){
+        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!stop) {
+                    revalidateGraphics();
+                    revalidate();
+                } else {
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
+        t.setRepeats(true);
+        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.start();
     }
+
 }
