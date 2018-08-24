@@ -1,7 +1,6 @@
 package start;
 /*
- * Project by Sidetail & Gaia
- *
+ * Project by BetaStar
  */
 
 import javax.swing.*;
@@ -56,20 +55,14 @@ public class WaifuBrew {
             ttls.join();
         } catch (InterruptedException e) {
             System.out.println("Thread Error");
+            e.printStackTrace();
         }
 
         System.out.println("Threads should be done by now!  ");
 
+        // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
         systemImages = tfl.getSystemImages();
-
-        /*
-        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
-        for(ImageDesc buttons : fileList.get(0)) {
-            systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
-        }
-        */
-
     }
 
     public static WaifuBrew getInstance() {
@@ -181,13 +174,6 @@ public class WaifuBrew {
     public ArrayList<ImageDesc> getImageSet(ImageSelector imageSelector) {
         return fileList.get(imageSelector.getValue());
     }
-
-    /*
-    public void setSystemImage(BufferedImage[] systemImage) {
-
-        this.systemImages = systemImage;
-    }
-    */
 
     public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
 

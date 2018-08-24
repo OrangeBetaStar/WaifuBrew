@@ -15,7 +15,7 @@ public class ThreadLoadingScreen implements Runnable {
         ImageIcon loadingImage = new ImageIcon((RESOURCE_PATH+"loading.gif"));
         JWindow window = new JWindow();
             window.getContentPane().add(
-                    new JLabel("Loading... uwu", loadingImage, JLabel.HORIZONTAL));
+                    new JLabel("Loading... :D", loadingImage, JLabel.CENTER));
 
         window.setBounds((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2), 1280, 720);
         window.setVisible(true);
