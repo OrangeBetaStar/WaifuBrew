@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class WaifuBrew{
+public class WaifuBrew {
 
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,14 +42,34 @@ public class WaifuBrew{
         setStage(0);
         setAutoAdvancer(false);
         setSystemGUIScale(100);
-        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
 
+        ThreadFileLoad tfl = new ThreadFileLoad();
+        ThreadLoadingScreen tls = new ThreadLoadingScreen();
+        Thread ttfl = new Thread(tfl, "ThreadFileLoad");
+        Thread ttls = new Thread(tls, "ThreadLoadScreen");
+
+        ttfl.start();
+        ttls.start();
+
+        try {
+            ttfl.join();
+            ttls.join();
+        } catch (InterruptedException e) {
+            System.out.println("Thread Error");
+        }
+
+        System.out.println("Threads should be done by now!  ");
+
+        fileList = tfl.getFileList();
+        systemImages = tfl.getSystemImages();
+
+        /*
+        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
         for(ImageDesc buttons : fileList.get(0)) {
             systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
         }
+        */
 
-
-        // TODO: LOAD SYSTEM BG IMAGES
     }
 
     public static WaifuBrew getInstance() {
@@ -60,7 +80,6 @@ public class WaifuBrew{
         try {
             singleton = new WaifuBrew();
             singleton.start();
-
         }
         // catches any exception
         catch (Exception e) {
