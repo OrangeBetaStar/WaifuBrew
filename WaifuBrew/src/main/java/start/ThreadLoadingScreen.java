@@ -2,29 +2,26 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class ThreadLoadingScreen implements Runnable {
 
+    private final String RESOURCE_PATH = "src/main/java/resources/";
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + " - Loadscreen Thread running");
 
+        ImageIcon loadingImage = new ImageIcon((RESOURCE_PATH+"loading.gif"));
         JWindow window = new JWindow();
-        try {
             window.getContentPane().add(
-                    new JLabel("", new ImageIcon(new URL("http://docs.oracle.com/javase/tutorial/uiswing/examples/misc/SplashDemoProject/src/misc/images/splash.gif")), SwingConstants.CENTER));
-        } catch (MalformedURLException e) {
-            System.out.println("Malformed URL Exception");
-        }
+                    new JLabel("Loading... uwu", loadingImage, JLabel.HORIZONTAL));
 
         window.setBounds((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2), 1280, 720);
         window.setVisible(true);
         try {
-            Thread.sleep(5000);
+            // What if HDD is so slow that it's over this sleep time?
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

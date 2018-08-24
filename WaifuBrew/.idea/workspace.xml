@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/start/ThreadFileLoad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/loading.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/start/ThreadLoadingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/ThreadLoadingScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/start/WaifuBrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/start/WaifuBrew.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -56,22 +57,22 @@
     <session id="1603961537">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="13" />
+          <entry key="java" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="13" />
+          <entry key="JAVA" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2272" />
+          <entry key="java" value="2512" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2272" />
+          <entry key="JAVA" value="2512" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -110,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
+            <state relative-caret-position="-2658">
+              <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1904#1905#0" expanded="true" />
@@ -154,12 +155,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/ThreadFileLoad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+            <state relative-caret-position="527">
+              <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="32" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#322#323#0" expanded="true" />
                 <element signature="e#349#350#0" expanded="true" />
+                <element signature="e#919#920#0" expanded="true" />
                 <element signature="e#953#954#0" expanded="true" />
               </folding>
             </state>
@@ -169,8 +171,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="391">
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -179,10 +181,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/javaxt-core.jar!/javaxt/io/Image.class">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/javax/swing/ImageIcon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="235">
+              <caret line="216" selection-start-line="216" selection-end-line="216" />
+              <folding>
+                <element signature="e#6758#6759#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -308,8 +313,8 @@
         <option value="$PROJECT_DIR$/src/main/java/start/ConfigPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/AnimationPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/ThreadFileLoad.java" />
-        <option value="$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/WaifuBrew.java" />
+        <option value="$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java" />
       </list>
     </option>
   </component>
@@ -404,6 +409,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WaifuBrew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WaifuBrew" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="start" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -433,7 +446,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535072108542" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535073764009" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -446,11 +459,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\abe81\Documents\GitHub\WaifuBrew\WaifuBrew\src\main\java\resources" />
       <recent name="C:\Users\abe81\Documents\GitHub\WaifuBrew\WaifuBrew\bak" />
       <recent name="$PROJECT_DIR$/bak" />
       <recent name="C:\Users\Nam Wook Kim\Documents\GitHub\WaifuBrew\WaifuBrew\bak" />
       <recent name="$PROJECT_DIR$/src/main/java/resources" />
-      <recent name="C:\Users\Nam Wook Kim\Documents\GitHub\WaifuBrew\WaifuBrew\src\main\java\start" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -703,7 +716,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_66/src.zip!/java/awt/Component.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomValueChanger.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/lang/Math.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/lang/String.java" />
@@ -924,21 +936,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/ThreadFileLoad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+        <state relative-caret-position="527">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="32" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#322#323#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
+            <element signature="e#919#920#0" expanded="true" />
             <element signature="e#953#954#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/javax/swing/ImageIcon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="216" selection-start-line="216" selection-end-line="216" />
+          <folding>
+            <element signature="e#6758#6759#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/ThreadLoadingScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="391">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -947,8 +970,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/WaifuBrew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
+        <state relative-caret-position="-2658">
+          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1904#1905#0" expanded="true" />

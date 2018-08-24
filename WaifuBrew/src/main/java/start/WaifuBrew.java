@@ -15,8 +15,8 @@ public class WaifuBrew {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     private final String RESOURCE_PATH = "src/main/java/resources/";
-    private BufferedImage[] systemImages = new BufferedImage[10];
-    ArrayList<ArrayList<ImageDesc>> fileList;
+    private BufferedImage[] systemImages;
+    private ArrayList<ArrayList<ImageDesc>> fileList;
 
     private static WaifuBrew singleton;
 
