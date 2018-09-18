@@ -27,7 +27,7 @@ public class AnimationPane extends JPanel {
 
     private boolean stop = false;
 
-    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
+    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed();
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
 
     private int buttonPlacementY = 640;
