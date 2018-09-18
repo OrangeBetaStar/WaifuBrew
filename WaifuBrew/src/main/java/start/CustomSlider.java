@@ -56,6 +56,7 @@ public class CustomSlider extends JPanel implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         if(initStage) {
 
             // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
@@ -84,7 +85,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
