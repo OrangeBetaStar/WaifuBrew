@@ -102,8 +102,10 @@ public class CustomSlider extends JPanel implements ActionListener {
                 if(event.getX() >= x + (int)(slider_knob.getWidth() * 0.5) && event.getX() <= x + slider_leveler.getWidth() + (int)(slider_knob.getWidth() * 0.5)) {
                     dialogueKnobX = (int) (event.getX() - (slider_knob.getWidth() * 0.5));
                     level = (int)(((dialogueKnobX - x) / (double)slider_background.getWidth()) * 100);
-                    if(level == 0) {
-                        level = 1;
+
+                    if(level <= 1 ) {
+                        // <= 1 because 1 == true and program thinks it wants to be opaque
+                        level = 0;
                     }
                 }
             }

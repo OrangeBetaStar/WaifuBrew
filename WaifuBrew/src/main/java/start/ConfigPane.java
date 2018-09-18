@@ -168,7 +168,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             tempDialogueBox.setOpacity(slider_transparency.getLevel());
             g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
             stringTimer.start();
-            if(tempString != "") {
+            if(!tempString.equals("")) {
                 g.setFont(activeFont);
                 g.setColor(new Color(0,0,0));
                 g.drawString(tempString, 150, 550);
@@ -179,8 +179,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: implement configPaneFont
         g.setFont(configPaneFont);
         g.setColor(new Color(0,0,0));
-        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
-        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
+        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY);
+        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY);
         g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
         g.drawString("Dialog Text Size", dialogueX, dialogueFontSizeY - 20);
 
