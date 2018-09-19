@@ -122,10 +122,7 @@ public class WaifuBrew {
     public void setSystemGUIScale(int GUIScale) { this.configStorage[3] = GUIScale; }
 
     public boolean getAutoAdvancer() {
-        if(configStorage[4] == 1) {
-            return true;
-        }
-        return false;
+        return (configStorage[4] == 1);
     }
 
     public void setAutoAdvancer(boolean autoAdvancer) {

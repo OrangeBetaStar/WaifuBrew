@@ -27,7 +27,7 @@ public class AnimationPane extends JPanel {
 
     private boolean stop = false;
 
-    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed() * 10;
+    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed();
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
 
     private int buttonPlacementY = 640;
@@ -90,8 +90,8 @@ public class AnimationPane extends JPanel {
                             tempString = tempString + a.charAt(tempString.length());
                         }
                         else { // TODO: Check if this works
-                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
-                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
+//                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
+//                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
                             if(WaifuBrew.getInstance().getAutoAdvancer()) {
                                 clickActivate = true;
                                 // TODO: NEEDS AWAIT

@@ -36,7 +36,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private Handlerclass handler = new Handlerclass();
 
     public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
-    public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed() * 10;
+    public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed();
     private String a = "The dialogue would look like this!"; // "Your waifu isn't real."; // Test String.
     private String tempString = "";
     private Font activeFont;
@@ -95,7 +95,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
-            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed() * 10), new ActionListener() {
+            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (!a.isEmpty()) {
                         if (tempString.length() != a.length()) {
@@ -104,7 +104,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         else {
                             tempString = a.substring(0,1);
                             stringTimer.stop();
-                            stringTimer.setDelay(slider_speed.getLevel());
+                            stringTimer.setDelay(100 - slider_speed.getLevel()); // Text speed is inverted. 
                             stringTimer.start();
                         }
                     }
@@ -168,7 +168,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             tempDialogueBox.setOpacity(slider_transparency.getLevel());
             g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
             stringTimer.start();
-            if(tempString != "") {
+            if(!tempString.equals("")) {
                 g.setFont(activeFont);
                 g.setColor(new Color(0,0,0));
                 g.drawString(tempString, 150, 550);
@@ -179,8 +179,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: implement configPaneFont
         g.setFont(configPaneFont);
         g.setColor(new Color(0,0,0));
-        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY - 20);
-        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY - 20);
+        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY);
+        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY);
         g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
         g.drawString("Dialog Text Size", dialogueX, dialogueFontSizeY - 20);
 
@@ -215,7 +215,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             if(WaifuBrew.getInstance().getStage() == 2) { // If it is still configPane... perhaps save setting when back button?
                 WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
-                WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel()/10);
+                WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel());
                 System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
                 WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
                 WaifuBrew.getInstance().setFontSize((slider_fontSize.getLevel() / 2) + 10);
