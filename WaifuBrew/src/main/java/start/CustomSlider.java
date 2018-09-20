@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CustomSlider extends JPanel implements ActionListener {
-    private javaxt.io.Image slider_background; // sliderTrack
-    private javaxt.io.Image slider_leveler; // dialogueTransparencySlider
-    private javaxt.io.Image slider_knob; // dialogueTransparencyKnob
+    private javaxt.io.Image sliderBackground; // sliderTrack
+    private javaxt.io.Image sliderLeveler; // dialogueTransparencySlider
+    private javaxt.io.Image sliderKnob; // dialogueTransparencyKnob
     private int dialogueKnobX; // dialogueTransparencyKnobX
     private int dialogueKnobY; // dialogueTransparencyKnobY
     private int level; // dialogueTransparency
@@ -27,9 +27,9 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
 
-        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        slider_leveler = slider_background.copy();
-        slider_knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
+        sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        sliderLeveler = sliderBackground.copy();
+        sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         this.level = level;
     }
 
@@ -38,11 +38,11 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
 
-        slider_background = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        slider_leveler = slider_background.copy();
+        sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        sliderLeveler = sliderBackground.copy();
         // Find a better way to implement fileName as it uses IO
-        slider_knob = new javaxt.io.Image(RESOURCE_PATH + fileName);
-        // slider_knob = slider_background.copy();
+        sliderKnob = new javaxt.io.Image(RESOURCE_PATH + fileName);
+        // sliderKnob = sliderBackground.copy();
         this.level = level;
     }
 
@@ -60,23 +60,23 @@ public class CustomSlider extends JPanel implements ActionListener {
         if(initStage) {
 
             // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
-            slider_background.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
-            slider_leveler.setBackgroundColor(Color.CYAN.getRed(), Color.CYAN.getGreen(), Color.CYAN.getBlue());
-            // slider_knob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
+            sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+            sliderLeveler.setBackgroundColor(Color.CYAN.getRed(), Color.CYAN.getGreen(), Color.CYAN.getBlue());
+            // sliderKnob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
 
             // SLIDER TRACK
-            slider_background.resize(200, 20, false);
-            slider_knob.resize(slider_background.getHeight(), slider_background.getHeight(), false);
-            dialogueKnobX = x + (int)(slider_background.getWidth() * (level/100.0));
+            sliderBackground.resize(200, 20, false);
+            sliderKnob.resize(sliderBackground.getHeight(), sliderBackground.getHeight(), false);
+            dialogueKnobX = x + (int)(sliderBackground.getWidth() * (level/100.0));
             dialogueKnobY = y;
 
             initStage = false;
         }
 
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
-        g.drawImage(slider_background.getBufferedImage(), x, dialogueKnobY, slider_background.getWidth() + slider_knob.getWidth(), slider_background.getHeight(), that);
-        g.drawImage(slider_leveler.getBufferedImage(), x, dialogueKnobY, (int)(slider_background.getWidth() * (level/100.0)) + (int)(slider_knob.getWidth() * 0.5), slider_background.getHeight(), that);
-        g.drawImage(slider_knob.getBufferedImage(), dialogueKnobX, dialogueKnobY, that);
+        g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth() + sliderKnob.getWidth(), sliderBackground.getHeight(), that);
+        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int)(sliderBackground.getWidth() * (level/100.0)) + (int)(sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
+        g.drawImage(sliderKnob.getBufferedImage(), dialogueKnobX, dialogueKnobY, that);
 
     }
 
@@ -91,7 +91,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     private class Handlerclass implements MouseListener, MouseMotionListener {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-            if(event.getX() >= dialogueKnobX && event.getX() <= dialogueKnobX + slider_knob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + slider_knob.getHeight()) {
+            if(event.getX() >= dialogueKnobX && event.getX() <= dialogueKnobX + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
                 sliderActive = true;
             }
         }
@@ -100,9 +100,9 @@ public class CustomSlider extends JPanel implements ActionListener {
         }
         public void mouseDragged (MouseEvent event) {
             if(sliderActive) {
-                if(event.getX() >= x + (int)(slider_knob.getWidth() * 0.5) && event.getX() <= x + slider_leveler.getWidth() + (int)(slider_knob.getWidth() * 0.5)) {
-                    dialogueKnobX = (int) (event.getX() - (slider_knob.getWidth() * 0.5));
-                    level = (int)(((dialogueKnobX - x) / (double)slider_background.getWidth()) * 100);
+                if(event.getX() >= x + (int)(sliderKnob.getWidth() * 0.5) && event.getX() <= x + sliderLeveler.getWidth() + (int)(sliderKnob.getWidth() * 0.5)) {
+                    dialogueKnobX = (int) (event.getX() - (sliderKnob.getWidth() * 0.5));
+                    level = (int)(((dialogueKnobX - x) / (double)sliderBackground.getWidth()) * 100);
 
                     if(level <= 1 ) {
                         // <= 1 because 1 == true and program thinks it wants to be opaque
