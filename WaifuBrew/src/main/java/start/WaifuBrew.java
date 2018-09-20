@@ -98,7 +98,7 @@ public class WaifuBrew {
     }
 
     public void setDialogueTransparency (int dialogueTransparency) {
-        this.configStorage[0] = dialogueTransparency;
+        this.configStorage[0] = 70;
     }
 
     public int getDialogueSpeed () {

@@ -88,6 +88,14 @@ public class CustomSlider extends JPanel implements ActionListener {
         return this.level;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     private class Handlerclass implements MouseListener, MouseMotionListener {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {

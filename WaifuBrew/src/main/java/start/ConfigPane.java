@@ -16,28 +16,25 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
 
-    // PLACEMENT TODO: (Probably change to relative later)
-    private int dialogueX = 100;
-    private int dialogueTransparencyY = 220;
-    private int dialogueSpeedY = dialogueTransparencyY + 80;
-    private int dialogueFontSizeY = dialogueTransparencyY + 160 + 40;
+    // Apart Y: 80; Start X: 100; Start Y: 220;
+    // TODO: THIS WILL BE CHANGED TOO
     private int backButtonX = 1100;
     private int backButtonY = 600;
     private Timer stringTimer;
     private boolean stop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
-    private CustomButton backButon;
-    private CustomSlider slider_transparency;
-    private CustomSlider slider_speed;
+    // [0] - slider_transparency
+    // [1] - slider_speed
+    // [2] - slider-fontSize
+    private CustomSlider[] settingSliders = new CustomSlider[3];
+    private CustomButton backButton;
+    private CustomButton saveButton;
     private CustomSwitch auto_dialog;
-    private CustomSlider slider_fontSize;
 
     private Handlerclass handler = new Handlerclass();
 
-    public int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
-    public int dialogueSpeed = WaifuBrew.getInstance().getDialogueSpeed();
-    private String a = "The dialogue would look like this!"; // "Your waifu isn't real."; // Test String.
+    private String a = "The dialogue would look like this!";
     private String tempString = "";
     private Font activeFont;
     private Font configPaneFont;
@@ -55,10 +52,11 @@ public class ConfigPane extends JPanel implements ActionListener {
             init();
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
-            backButon = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
+            backButton = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
+            saveButton = new CustomButton(backButtonX, backButtonY - 100, "config_save_button", true, 0, true);
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-            // myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -70,29 +68,27 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
             dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
-            auto_dialog = new CustomSwitch(dialogueX + 200, dialogueSpeedY + 60 - 10, false, true);
 
-            // Testing CUSTOM SLIDER
-            slider_transparency = new CustomSlider(dialogueX, dialogueTransparencyY, dialogueTransparency);
-            slider_speed = new CustomSlider(dialogueX,dialogueSpeedY,dialogueSpeed);
-            slider_fontSize = new CustomSlider(dialogueX, dialogueFontSizeY, fontSize);
+            settingSliders[0] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency());
+            settingSliders[1] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed());
+            settingSliders[2] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, WaifuBrew.getInstance().getFontSize());
+            auto_dialog = new CustomSwitch(settingSliders[0].getX() + 200, settingSliders[0].getY() + 60 - 10, false, true);
 
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);
             addMouseMotionListener(handler);
-            addMouseListener(slider_transparency.retrieveMouseHandler());
-            addMouseMotionListener(slider_transparency.retrieveMouseHandler());
-            addMouseListener(slider_speed.retrieveMouseHandler());
-            addMouseMotionListener(slider_speed.retrieveMouseHandler());
-            addMouseListener(backButon.retrieveMouseHandler());
-            addMouseMotionListener(backButon.retrieveMouseHandler());
-
+            addMouseListener(saveButton.retrieveMouseHandler());
+            addMouseMotionListener(saveButton.retrieveMouseHandler());
+            addMouseListener(backButton.retrieveMouseHandler());
+            addMouseMotionListener(backButton.retrieveMouseHandler());
             addMouseListener(auto_dialog.retrieveMouseHandler());
             addMouseMotionListener(auto_dialog.retrieveMouseHandler());
-            addMouseListener(slider_fontSize.retrieveMouseHandler());
-            addMouseMotionListener(slider_fontSize.retrieveMouseHandler());
 
+            for(int applier = 0; applier < settingSliders.length; applier++) {
+                addMouseListener(settingSliders[applier].retrieveMouseHandler());
+                addMouseMotionListener(settingSliders[applier].retrieveMouseHandler());
+            }
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
@@ -104,7 +100,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         else {
                             tempString = a.substring(0,1);
                             stringTimer.stop();
-                            stringTimer.setDelay(100 - slider_speed.getLevel()); // Text speed is inverted. 
+                            stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
                             stringTimer.start();
                         }
                     }
@@ -126,12 +122,12 @@ public class ConfigPane extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(slider_fontSize.isSliderActive()) {
+        if(settingSliders[2].isSliderActive()) {
             // Configure font preview
             try {
                 // TODO: This not a good implementation
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
-                fontSize = (slider_fontSize.getLevel() / 2) + 10; // This equation seems most appropriate
+                fontSize = (settingSliders[2].getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             } catch (FontFormatException ex) {
@@ -150,13 +146,13 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
-            if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
+            if(!settingSliders[0].isSliderActive() && !settingSliders[1].isSliderActive() && !settingSliders[2].isSliderActive()) {
                 g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
         }
 
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
-        if(!slider_transparency.isSliderActive() && !slider_speed.isSliderActive() && !slider_fontSize.isSliderActive()) {
+        if(!settingSliders[0].isSliderActive() && !settingSliders[1].isSliderActive() && !settingSliders[2].isSliderActive()) {
 
             if(stringTimer.isRunning()) {
                 stringTimer.stop();
@@ -165,7 +161,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         else {
             // DialogueBox
             tempDialogueBox = dialogueBox.copy();
-            tempDialogueBox.setOpacity(slider_transparency.getLevel());
+            tempDialogueBox.setOpacity(settingSliders[0].getLevel());
             g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
             stringTimer.start();
             if(!tempString.equals("")) {
@@ -175,20 +171,24 @@ public class ConfigPane extends JPanel implements ActionListener {
             }
         }
 
-        // TODO: Perhaps implement title for CustomSlider
         // TODO: implement configPaneFont
         g.setFont(configPaneFont);
         g.setColor(new Color(0,0,0));
-        g.drawString("Diologue Bar Transparency", dialogueX, dialogueTransparencyY);
-        g.drawString("Diologue Text Speed", dialogueX, dialogueSpeedY);
-        g.drawString("Auto dialog advance", dialogueX, dialogueSpeedY + 60);
-        g.drawString("Dialog Text Size", dialogueX, dialogueFontSizeY - 20);
+        g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - 40);
+        g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - 40);
+        g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - 40);
+        g.drawString("Auto dialog advance", settingSliders[1].getX(), settingSliders[1].getY() + 60);
 
-        backButon.paintComponent(g);
-        slider_transparency.paintComponent(g);
-        slider_speed.paintComponent(g);
+        backButton.paintComponent(g);
+        saveButton.paintComponent(g);
         auto_dialog.paintComponent(g);
-        slider_fontSize.paintComponent(g);
+
+        for(int applier = 0; applier < settingSliders.length; applier++) {
+            settingSliders[applier].paintComponent(g);
+            settingSliders[applier].paintComponent(g);
+            settingSliders[applier].paintComponent(g);
+        }
+
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
@@ -201,25 +201,26 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mouseDragged (MouseEvent event) {
         }
         public void mouseClicked (MouseEvent event) {
-            if(event.getX() >= backButtonX - backButon.getWidth()/2 && event.getY() >= backButtonY - backButon.getHeight()/2 && event.getX() <= backButtonX + backButon.getWidth()/2 && event.getY() <= backButtonY + backButon.getHeight()/2) {
+            if(event.getX() >= backButton.getX() - backButton.getWidth()/2 && event.getY() >= backButton.getY() - backButton.getHeight()/2 && event.getX() <= backButton.getX() + backButton.getWidth()/2 && event.getY() <= backButton.getY() + backButton.getHeight()/2) {
                 WaifuBrew.getInstance().setStage(0);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
-            System.out.println("Mouseclicked from ConfigPane"); // to check if handler is active outside of settings
+            if(event.getX() >= saveButton.getX() - saveButton.getWidth()/2 && event.getY() >= saveButton.getY() - saveButton.getHeight()/2 && event.getX() <= saveButton.getX() + saveButton.getWidth()/2 && event.getY() <= saveButton.getY() + saveButton.getHeight()/2) {
+                WaifuBrew.getInstance().setDialogueTransparency(settingSliders[0].getLevel());
+                WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
+                WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
+
+                System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
+                WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+            }
+
         }
         public void mouseEntered (MouseEvent event) {
 
         }
         public void mouseReleased (MouseEvent event) {
-            // TODO: Find better way to implement this.
 
-            if(WaifuBrew.getInstance().getStage() == 2) { // If it is still configPane... perhaps save setting when back button?
-                WaifuBrew.getInstance().setDialogueTransparency(slider_transparency.getLevel());
-                WaifuBrew.getInstance().setDialogueSpeed(slider_speed.getLevel());
-                System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
-                WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
-                WaifuBrew.getInstance().setFontSize((slider_fontSize.getLevel() / 2) + 10);
-            }
         }
         public void mouseExited (MouseEvent event) {
 
