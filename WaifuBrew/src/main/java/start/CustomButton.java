@@ -87,6 +87,7 @@ public class CustomButton extends JPanel implements ActionListener {
             System.out.println("Please fix code: I/O access detected.");
         }
         if(invert) {
+            System.out.println("inverted. " + fileName);
             originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
         }
         if(sizeY == 0) {
@@ -126,6 +127,14 @@ public class CustomButton extends JPanel implements ActionListener {
     @Override
     public int getHeight() {
         return originalButton.getHeight();
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
 
     public boolean isPressed() {
