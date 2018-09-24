@@ -15,8 +15,7 @@ public class GUI extends JFrame {
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
-
-    private boolean stop = false;
+    private boolean framelimiterDisable = false;
 
     public GUI() {
         super("ワイファブルー by Tailsoft");
@@ -26,9 +25,6 @@ public class GUI extends JFrame {
         startPage = new StartScreen();
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
-
-        // Set icon? Why not?
-        // TODO: setIconImage();
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
         init();
     }
@@ -87,7 +83,7 @@ public class GUI extends JFrame {
         // Setting framerate
         Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(!stop) {
+                if(!framelimiterDisable) {
                     revalidateGraphics();
                     revalidate();
                 } else {
