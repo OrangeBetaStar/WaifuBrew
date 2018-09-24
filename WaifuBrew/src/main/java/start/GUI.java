@@ -71,59 +71,6 @@ public class GUI extends JFrame {
                 add(startPage);
                 startPage.repaint();
             }
-
-
-            /*
-            // Stage 0 is the main screen
-            if (stage == 0) {
-                if(animationPane.getParent() != null) {
-                    remove(animationPane);
-                }
-                if(configPane.getParent() != null) {
-                    remove(configPane);
-                }
-                add(startPage);
-                // If there is no repaint(), it doesn't set chain reaction for loop.
-                startPage.repaint();
-            }
-
-            // Stage 1 is the play field
-            else if (stage == 1) {
-                if(startPage.getParent() != null) {
-                    remove(startPage);
-                }
-                if(configPane.getParent() != null) {
-                    remove(configPane);
-                }
-                add(animationPane);
-                animationPane.repaint();
-            }
-
-            // Stage 2 is the config field
-            else if (stage == 2) {
-                if(animationPane.getParent() != null) {
-                    remove(animationPane);
-                }
-                if(startPage.getParent() != null) {
-                    remove(startPage);
-                }
-                add(configPane);
-                configPane.repaint();
-            }
-
-            // Stage 3 is the load field
-            else if (stage == 3) {
-                if(animationPane.getParent() != null) {
-                    remove(animationPane);
-                }
-                if(startPage.getParent() != null) {
-                    remove(startPage);
-                }
-                // TODO: Uncomment when this is implemented
-                // add(loadPane);
-                // loadPane.repaint();
-            }
-            */
         }
 
         lastStage = stage;
@@ -137,6 +84,7 @@ public class GUI extends JFrame {
     }
 
     public void init(){
+        // Setting framerate
         Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!stop) {
@@ -150,6 +98,9 @@ public class GUI extends JFrame {
         t.setRepeats(true);
         t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
         t.start();
+
+        // Set application icon
+        setIconImage(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "icon"));
     }
 
 }
