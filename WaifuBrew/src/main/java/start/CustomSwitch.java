@@ -87,6 +87,14 @@ public class CustomSwitch extends JPanel implements ActionListener {
         return value;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     public int getSlidingPathWidth() {
         return slidingPathWidth;
     }

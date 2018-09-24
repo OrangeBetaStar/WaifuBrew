@@ -21,16 +21,12 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
     private Point[] res;
-    private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Size of pictures per advance? Wait wtf? TODO: NEEDS QUICK FIX
+    private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
-    private boolean stop = false;
-
-    private int textSpeedMS = WaifuBrew.getInstance().getDialogueSpeed();
+    private boolean frameRateDisable = false;
     private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
-
-    private int buttonPlacementY = 640;
 
     private CustomButton saveButton;
     private CustomButton loadButton;
@@ -41,6 +37,9 @@ public class AnimationPane extends JPanel {
     private static InputStream myStream;
     private static Font ttfBase;
     private static Font activeFont;
+
+    // This thing below is temporary solution. Will be dealt with later.
+    int roughButtonSizeY = 160;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0;
@@ -61,19 +60,19 @@ public class AnimationPane extends JPanel {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
-            startButton = new CustomButton(640, buttonPlacementY, "startscreen_start_button.png", false, 60, true);
+            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_start_button.png", false, 60, true);
             addMouseListener(startButton.retrieveMouseHandler());
             addMouseMotionListener(startButton.retrieveMouseHandler());
 
-            loadButton = new CustomButton(760, buttonPlacementY, "startscreen_load_button.png", false, 60, true);
+            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_load_button.png", false, 60, true);
             addMouseListener(loadButton.retrieveMouseHandler());
             addMouseMotionListener(loadButton.retrieveMouseHandler());
 
-            saveButton = new CustomButton(870, buttonPlacementY, "startscreen_save_button.png", false, 60, true);
+            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_save_button.png", false, 60, true);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(1000, buttonPlacementY, "startscreen_config_button.png", false, 60, true);
+            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_config_button.png", false, 60, true);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
@@ -83,7 +82,7 @@ public class AnimationPane extends JPanel {
             dp.parse();
             e = dp.getPackagedDialogue();
 
-            Timer stringTimer = new Timer(textSpeedMS, new ActionListener() {
+            Timer stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(!a.isEmpty()) {
                         if (tempString.length() != a.length()) {
@@ -113,7 +112,7 @@ public class AnimationPane extends JPanel {
 
 
             try {
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
                 ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, 24);
             } catch (FontFormatException ex) {
@@ -259,7 +258,7 @@ public class AnimationPane extends JPanel {
     public void init(){
         Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(!stop) {
+                if(!frameRateDisable) {
                     repaint();
                 } else {
                     ((Timer)e.getSource()).stop();

@@ -30,7 +30,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private CustomSlider[] settingSliders = new CustomSlider[3];
     private CustomButton backButton;
     private CustomButton saveButton;
-    private CustomSwitch auto_dialog;
+    private CustomSwitch autoDialog;
 
     private Handlerclass handler = new Handlerclass();
 
@@ -41,6 +41,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private BufferedInputStream myStream;
     private int fontSize = 24;
 
+    // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
     public void actionPerformed(ActionEvent e) {
@@ -52,11 +53,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             init();
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
+            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
             backButton = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
             saveButton = new CustomButton(backButtonX, backButtonY - 100, "config_save_button", true, 0, true);
-            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-
-
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -72,7 +71,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             settingSliders[0] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency());
             settingSliders[1] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed());
             settingSliders[2] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, WaifuBrew.getInstance().getFontSize());
-            auto_dialog = new CustomSwitch(settingSliders[0].getX() + 200, settingSliders[0].getY() + 60 - 10, false, true);
+            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
 
 
             // Handlers listening to mouse like DOGS
@@ -82,8 +81,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(saveButton.retrieveMouseHandler());
             addMouseListener(backButton.retrieveMouseHandler());
             addMouseMotionListener(backButton.retrieveMouseHandler());
-            addMouseListener(auto_dialog.retrieveMouseHandler());
-            addMouseMotionListener(auto_dialog.retrieveMouseHandler());
+            addMouseListener(autoDialog.retrieveMouseHandler());
+            addMouseMotionListener(autoDialog.retrieveMouseHandler());
 
             for(int applier = 0; applier < settingSliders.length; applier++) {
                 addMouseListener(settingSliders[applier].retrieveMouseHandler());
@@ -126,7 +125,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Configure font preview
             try {
                 // TODO: This not a good implementation
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
                 fontSize = (settingSliders[2].getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
@@ -174,14 +173,14 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: implement configPaneFont
         g.setFont(configPaneFont);
         g.setColor(new Color(0,0,0));
-        g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - 40);
-        g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - 40);
-        g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - 40);
-        g.drawString("Auto dialog advance", settingSliders[1].getX(), settingSliders[1].getY() + 60);
+        g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - ((windowSize.x / 10) / 3));
+        g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - ((windowSize.x / 10) / 3));
+        g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - ((windowSize.x / 10) / 3));
+        g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
         backButton.paintComponent(g);
         saveButton.paintComponent(g);
-        auto_dialog.paintComponent(g);
+        autoDialog.paintComponent(g);
 
         for(int applier = 0; applier < settingSliders.length; applier++) {
             settingSliders[applier].paintComponent(g);
@@ -210,8 +209,8 @@ public class ConfigPane extends JPanel implements ActionListener {
                 WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
                 WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
 
-                System.out.println("ConfigPane.Handler: Set auto dia to: " + auto_dialog.getValue());
-                WaifuBrew.getInstance().setAutoAdvancer(auto_dialog.getValue());
+                System.out.println("ConfigPane.Handler: Set auto dia to: " + autoDialog.getValue());
+                WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
 
@@ -244,7 +243,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // Configure font preview
         try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "Halogen.ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
             activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
