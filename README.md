@@ -57,3 +57,30 @@ Logs:
 07/16/18 - Most classes including AnimationPane (character images) are using auto-loaded (sliced) images. Cleared out all unnecessary images in the resource folder. Added unhandled exception class to deal with wrong image retrieval. Numbers has been added to enums to simplify and add more functionality. [BetaStar]
 
 07/19/18 - Started implementing Custom on/off switch for ConfigPane. A sample button now rests in ConfigPane to be implemented as intended. Added toggle knob for both CustomSlider and CustomOnOffSwitch [BetaStar]
+
+07/20/18 - CustomOnOffButton is cleared for garbage codes and other Custom classes are implemented with more customizable elements. ImageLoader is implemented with UI elements cutting. [BetaStar]
+
+07/25/18 - Implementation of AnimationPane. Save, Load, Config, Back buttons are implemented. Fixed where initial dialog were too ambiguous. ConfigPane relys on CustomSwitch (renamed CustomOnOffButton). Addition to bug fixes, implemented custom fontsCustomButton has been set up so that image is loaded directly from loaded state instead of fetching each every elements from disk to reduce stutter and loading times. Also implemented on-the-fly imageInverter for buttons to be dark in lighter background. The start of implementation of setting text auto advancing. [BetaStar]
+
+07/26/18 - Continued auto dialogue system along with custom font. [BetaStar]
+
+07/27/18 - Trial of BooleanChangeTest.java / ListnToBoolean.java / BooleanListener.java to be constantly listening to a switch (when triggered, it is alterted to trigger something else). [BetaStar]
+
+07/31/18 - AnimationPane has more connection with settings variables. Now loads appropriate user set values to apply in AnimationPane (such as dialogue transparency & speed). Combine of init / final point of character placement to single variable for Waifu.java. Start of bug fix of dialogue auto advancer. (Ignorance of first trigger in ConfigPane, opposite value, starting auto advancing when still in ConfigPane). [BetaStar]
+
+08/07/18 - ConfigPane now receives much needed font preview. Failure load of custom font will lead to default font. Another font for controlling font size. [BetaStar]
+
+08/12/18 - Limit of font size. [BetaStar]
+
+08/13/18 - Added frame limiter to GUI.java.
+
+08/23/18 - Added threaded loading / display loading screen. Now it loads the needed elements as it shows loading screen. Now it doesn't freeze in the first second of finished opening! [BetaStar]
+
+09/17/18 - Changed repo commit gitignore [Gaia]
+
+09/18/18 - Fixed inversed case of dialogue speed slider. Fixed dialogue transparency of value turning 1 at 0. [Gaia]
+
+09/20/18 - Consistent naming scheme throughout the CustomSlider class. Now with relative positioning of the elements instead of relying on each other for placement in ConfigPane. [BetaStar] Removal of bak folder since elements are no longer needed [Gaia]
+
+
+
