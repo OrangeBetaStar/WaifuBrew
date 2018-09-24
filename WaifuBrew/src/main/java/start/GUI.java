@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 public class GUI extends JFrame {
     private JPanel waifuPanel;
-    private JLabel waifuLabel;
 
     // TODO: Why create them when I do not need it right now.
     private StartScreen startPage;
@@ -24,10 +23,10 @@ public class GUI extends JFrame {
 
         waifuPanel = new JPanel();
         waifuPanel.setBackground(Color.BLACK);
-        //waifuLabel = new JLabel("ワイファブルー");
         startPage = new StartScreen();
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
+
         // Set icon? Why not?
         // TODO: setIconImage();
         waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
@@ -41,6 +40,40 @@ public class GUI extends JFrame {
         // If stage changed
         if(lastStage != stage) {
 
+            // Remove old pane
+            if(lastStage == 1) {
+                remove(animationPane);
+            }
+            if(lastStage == 2) {
+                remove(configPane);
+            }
+            if(lastStage == 3) {
+                // remeove load pane
+            }
+            if(lastStage == 0 || lastStage == 10) {
+                remove(startPage);
+            }
+
+            // Add new pane as active
+            if(stage == 1) {
+                add(animationPane);
+                animationPane.repaint();
+            }
+            if(stage == 2) {
+                add(configPane);
+                configPane.repaint();
+            }
+            if (stage == 3) {
+                // add load pane
+                // load pane repaint
+            }
+            if(stage == 0 || stage == 10) {
+                add(startPage);
+                startPage.repaint();
+            }
+
+
+            /*
             // Stage 0 is the main screen
             if (stage == 0) {
                 if(animationPane.getParent() != null) {
@@ -90,6 +123,7 @@ public class GUI extends JFrame {
                 // add(loadPane);
                 // loadPane.repaint();
             }
+            */
         }
 
         lastStage = stage;

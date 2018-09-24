@@ -26,7 +26,6 @@ public class AnimationPane extends JPanel {
     private boolean clickActivate = true;
 
     private boolean frameRateDisable = false;
-    private int dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
 
     private CustomButton saveButton;
     private CustomButton loadButton;
@@ -192,15 +191,6 @@ public class AnimationPane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(initStage) {
-            dialogueTransparency = WaifuBrew.getInstance().getDialogueTransparency();
-        }
-
-        /*
-        private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
-        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), 75, true);
-        */
-
         // Do not show character on first viewing
         if(advancer != 0) {
 
@@ -236,7 +226,7 @@ public class AnimationPane extends JPanel {
         }
         else {
             if(initStage) {
-                dialogueBox.setOpacity(dialogueTransparency);
+                dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
             }
         }
 
