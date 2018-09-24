@@ -13,10 +13,7 @@ public class ImageLoader {
     private ArrayList<ImageDesc> vectorImages = new ArrayList<ImageDesc>();
     private ArrayList<ImageDesc> bg_images = new ArrayList<ImageDesc>();
     private ImageDesc[] character_imagesArr= new ImageDesc[Characters.length * Mood.length];
-    // private ArrayList<ImageDesc> arrayList = new ArrayList<ImageDesc>(Arrays.asList(array));
     private int charCounter = 0;
-    // private int charLoop = 0;
-    // private int moodLoop = 0;
 
 
     public ImageLoader(String RESOURCE_PATH) {

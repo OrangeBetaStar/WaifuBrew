@@ -14,6 +14,8 @@ public class CustomSlider extends JPanel implements ActionListener {
     private boolean sliderActive = false; //dialogueTransparencyMove
     private int x; // dialogueX
     private int y; // dialogueTransparencyY
+    private int length = 200;
+    private int height = 20;
 
     private boolean initStage = true;
 
@@ -65,7 +67,7 @@ public class CustomSlider extends JPanel implements ActionListener {
             // sliderKnob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
 
             // SLIDER TRACK
-            sliderBackground.resize(200, 20, false);
+            sliderBackground.resize(length, height, false);
             sliderKnob.resize(sliderBackground.getHeight(), sliderBackground.getHeight(), false);
             dialogueKnobX = x + (int)(sliderBackground.getWidth() * (level/100.0));
             dialogueKnobY = y;

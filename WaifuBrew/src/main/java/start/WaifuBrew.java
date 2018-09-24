@@ -22,7 +22,8 @@ public class WaifuBrew {
     // [n] array number / = n value
     // [0] is dialogueTransparency = 70
     // [1] is dialogueSpeed = 50
-    private static int[] configStorage = new int[10]; //Increase if needed.
+    private static int[] configStorage = new int[20]; //Increase if needed.
+    private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
 
 
@@ -42,6 +43,7 @@ public class WaifuBrew {
         setStage(0);
         setAutoAdvancer(false);
         setSystemGUIScale(100);
+        setFontName("Halogen");
 
         ThreadFileLoad tfl = new ThreadFileLoad();
         ThreadLoadingScreen tls = new ThreadLoadingScreen();
@@ -82,6 +84,18 @@ public class WaifuBrew {
         }
     }
 
+    // ConfigUI:
+    // 0 - Font
+
+    public String getFontName() {
+        return configUI[0];
+    }
+
+    public void setFontName(String fontName) {
+        configUI[0] = fontName;
+    }
+
+    // ConfigStorage:
     // 0 - Dialog Transparency
     // 1 - Text Speed
     // 2 - Frame Rate
@@ -98,7 +112,7 @@ public class WaifuBrew {
     }
 
     public void setDialogueTransparency (int dialogueTransparency) {
-        this.configStorage[0] = 70;
+        configStorage[0] = dialogueTransparency;
     }
 
     public int getDialogueSpeed () {
@@ -106,7 +120,7 @@ public class WaifuBrew {
     }
 
     public void setDialogueSpeed (int dialogueSpeed) {
-        this.configStorage[1] = dialogueSpeed;
+        configStorage[1] = dialogueSpeed;
     }
 
     public int getFrameRate() {
@@ -114,12 +128,12 @@ public class WaifuBrew {
     }
 
     public void setFrameRate(int frameRate) {
-        this.configStorage[2] = frameRate;
+        configStorage[2] = frameRate;
     }
 
     public int getSystemGUIScale() { return configStorage[3]; }
 
-    public void setSystemGUIScale(int GUIScale) { this.configStorage[3] = GUIScale; }
+    public void setSystemGUIScale(int GUIScale) { configStorage[3] = GUIScale; }
 
     public boolean getAutoAdvancer() {
         return (configStorage[4] == 1);
