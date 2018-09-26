@@ -147,11 +147,7 @@ public class AnimationPane extends JPanel {
         }
     }
 
-    private class Handlerclass implements  MouseListener, MouseMotionListener, ItemListener{
-
-        public void itemStateChanged(ItemEvent event) {
-
-        }
+    private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
 
@@ -164,7 +160,7 @@ public class AnimationPane extends JPanel {
         public void mouseReleased(MouseEvent event) {
             // There may be a dialogue without dialogue and only character movement
 
-            // Have this inside if statement where it is not run on buttons.
+            // TODO: Have this inside if statement where it is not run on buttons.
             clickActivate = true;
             triggerNext();
         }

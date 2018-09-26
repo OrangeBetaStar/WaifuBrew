@@ -109,8 +109,6 @@ public class CustomButton extends JPanel implements ActionListener {
         mouseoverButton = new javaxt.io.Image(RESOURCE_PATH + fileName_2);
     }
 
-    // TODO: ACCEPT A PARAMETER THAT HAS BUFFERED IMAGE / IMAGE (So that I can pass image that was cut from image sheet)
-
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
@@ -135,6 +133,36 @@ public class CustomButton extends JPanel implements ActionListener {
 
     public int getY() {
         return this.y;
+    }
+
+    public int getAbsoluteX() {
+        if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+            return x;
+        }
+
+        if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+            return (x - (originalButton.getWidth() / 2));
+        }
+
+        if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+            return (x - (originalButton.getWidth()));
+        }
+        return x;
+    }
+
+    public int getAbsoluteY() {
+        if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+            return x;
+        }
+
+        if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+            return (y - (originalButton.getHeight() / 2));
+        }
+
+        if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+            return (y - (originalButton.getHeight()));
+        }
+        return y;
     }
 
     public boolean isPressed() {
@@ -264,7 +292,7 @@ public class CustomButton extends JPanel implements ActionListener {
         return inputFile;
     }
 
-    private class Handlerclass implements MouseListener, MouseMotionListener {
+    private class Handlerclass extends MasterHandlerClass {
 
         public void mousePressed (MouseEvent event) {
 
@@ -361,9 +389,7 @@ public class CustomButton extends JPanel implements ActionListener {
                 }
             }
         }
-        public void mouseDragged (MouseEvent event) {
 
-        }
         public void mouseClicked (MouseEvent event) {
             if(origin.getValue() == 0) {
                 if (event.getX() > x &&
@@ -438,16 +464,11 @@ public class CustomButton extends JPanel implements ActionListener {
                 }
             }
         }
-        public void mouseEntered (MouseEvent event) {
 
-        }
         public void mouseReleased (MouseEvent event) {
             // TODO: If state wasn't changed, do not change the boolean to false
             if(mouseOver)
                 mouseOver = false;
-        }
-        public void mouseExited (MouseEvent event) {
-
         }
     }
 }
