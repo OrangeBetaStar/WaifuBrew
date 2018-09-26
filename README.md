@@ -81,3 +81,5 @@ Logs:
 09/18/18 - Fixed inversed case of dialogue speed slider. Fixed dialogue transparency of value turning 1 at 0. [Gaia]
 
 09/20/18 - Consistent naming scheme throughout the CustomSlider class. Now with relative positioning of the elements instead of relying on each other for placement in ConfigPane. [BetaStar] Removal of bak folder since elements are no longer needed [Gaia]
+
+09/26/18 - CustomButton now takes 9 positions of origin (uses Origin ENUM). (in x-axis first, y-axis next naming scheme) As an example: LEFT_TOP, RIGHT_TOP, MIDDLE_CENTRE, RIGHT_BOTTOM. (Yes, centre is in Canadian spelling.) ConfigPane won't allow to go back without saving the settings, instead, noticebox comes up with buttons whether if you want to save or not. If save button is clicked, it will save and go back to main screen. Otherwise, it will not save the settings and just close the box. When one of the slider is active in ConfigPane, everything is disabled except preview and a slider. Not even back and save button is visible during sliding. MasterHandlerClass.java so that code is slightly cleaner for every Pane class. (Don't have to explicitly override every single mouse actions)
