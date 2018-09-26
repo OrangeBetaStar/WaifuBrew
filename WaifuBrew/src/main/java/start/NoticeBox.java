@@ -25,9 +25,6 @@ public class NoticeBox extends JPanel {
     // Active Boolean
     private boolean isActive = false;
 
-    // Boolean to keep track if it has two buttons
-    private boolean dualButton = false;
-
     // Dialogue text string (warning message)
     private String dialogueBoxText = "";
 
@@ -53,7 +50,6 @@ public class NoticeBox extends JPanel {
     public NoticeBox(String text, String leftButton, String rightButton, boolean leftInvert, boolean rightInvert) {
         button = new CustomButton[2];
         dialogueBoxText = text;
-        dualButton = true;
         backgroundPane = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2), leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
         button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2), rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
