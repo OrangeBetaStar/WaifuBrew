@@ -70,7 +70,7 @@ Logs:
 
 08/07/18 - ConfigPane now receives much needed font preview. Failure load of custom font will lead to default font. Another font for controlling font size. [BetaStar]
 
-08/12/18 - Limit of font size. [BetaStar]
+08/12/18 - Limit of font size range. [BetaStar]
 
 08/13/18 - Added frame limiter to GUI.java. [BetaStar]
 
@@ -82,4 +82,4 @@ Logs:
 
 09/20/18 - Consistent naming scheme throughout the CustomSlider class. Now with relative positioning of the elements instead of relying on each other for placement in ConfigPane. [BetaStar] Removal of bak folder since elements are no longer needed [Gaia]
 
-09/26/18 - CustomButton now takes 9 positions of origin (uses Origin ENUM). (in x-axis first, y-axis next naming scheme) As an example: LEFT_TOP, RIGHT_TOP, MIDDLE_CENTRE, RIGHT_BOTTOM. (Yes, centre is in Canadian spelling.) ConfigPane won't allow to go back without saving the settings, instead, noticebox comes up with buttons whether if you want to save or not. If save button is clicked, it will save and go back to main screen. Otherwise, it will not save the settings and just close the box. When one of the slider is active in ConfigPane, everything is disabled except preview and a slider. Not even back and save button is visible during sliding. MasterHandlerClass.java so that code is slightly cleaner for every Pane class. (Don't have to explicitly override every single mouse actions)
+09/26/18 - CustomButton now takes 9 positions of origin (uses Origin ENUM). ConfigPane won't allow to go back without saving the settings, instead, noticebox comes up with buttons whether if you want to save or not. If save button is clicked, it will save and go back to main screen. Otherwise, it will not save the settings and just close the box. When one of the slider is active in ConfigPane, everything is disabled except preview and a slider. MasterHandlerClass.java so that code is slightly cleaner for every Pane class. [BetaStar]
