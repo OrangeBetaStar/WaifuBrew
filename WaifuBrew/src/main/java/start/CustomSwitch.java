@@ -67,7 +67,7 @@ public class CustomSwitch extends JPanel implements ActionListener {
         else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
-        g.drawString("The value: " + value, x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2));
+        // g.drawString("The value: " + value, x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2));
         /*
         g.drawImage(left.getBufferedImage(), x - (backgroundImage.getWidth() / 2) - (left.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         // TODO : add middle portion if this looks good...
@@ -103,9 +103,8 @@ public class CustomSwitch extends JPanel implements ActionListener {
         return slidingPathHeight;
     }
 
-    private class Handlerclass implements MouseListener, MouseMotionListener {
+    private class Handlerclass extends MasterHandlerClass {
         public void mouseClicked(MouseEvent e) {
-            System.out.println("In class value :" + value);
             if(centered) {
                 if((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
                     if(value) {
@@ -126,13 +125,6 @@ public class CustomSwitch extends JPanel implements ActionListener {
                     }
                 }
             }
-            /*
-            System.out.println("x " + (x - (slidingPathWidth / 2)) + " and " + (x + (slidingPathWidth / 2)) + " t/f for x: " + (e.getX() > (x - (slidingPathWidth / 2))) + " and " + (e.getX() < (x + (slidingPathWidth / 2))));
-            System.out.println("y " + (y - (slidingPathHeight / 2)) + " and " + (y + (slidingPathHeight / 2)) + " t/f for y: " + (e.getY() > (y - (slidingPathHeight / 2))) + " and " + (e.getY() < (y + (slidingPathHeight / 2))));
-            System.out.println("x cursor " + e.getX());
-            System.out.println("y cursor " + e.getY());
-            System.out.println("--------------------");
-            */
         }
 
         public void mousePressed(MouseEvent e) {
@@ -144,13 +136,7 @@ public class CustomSwitch extends JPanel implements ActionListener {
         public void mouseMoved(MouseEvent e) {
 
         }
-        public void mouseEntered(MouseEvent e) {
-
-        }
         public void mouseDragged(MouseEvent e) {
-
-        }
-        public void mouseExited(MouseEvent e) {
 
         }
     }

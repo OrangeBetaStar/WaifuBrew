@@ -38,7 +38,8 @@ public class WaifuBrew {
     WaifuBrew() {
 
         setDialogueTransparency(70);
-        setDialogueSpeed(5);
+        setDialogueSpeed(60);
+        setFontSize(30);
         setFrameRate(60);
         setStage(0);
         setAutoAdvancer(false);

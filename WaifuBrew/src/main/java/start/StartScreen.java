@@ -49,10 +49,10 @@ public class StartScreen extends JPanel implements ActionListener {
         }
 
         // These actually now gets images from sliced up system_image sheet.
-        start_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing), buttonY, "startscreen_start_button.png",true);
-        load_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 2, buttonY, "startscreen_load_button.png", true);
-        config_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 3, buttonY, "startscreen_config_button.png",true);
-        exit_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 4, buttonY, "startscreen_exit_button.png",true);
+        start_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing), buttonY, "startscreen_start_button.png", Origin.MIDDLE_CENTRE);
+        load_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 2, buttonY, "startscreen_load_button.png", Origin.MIDDLE_CENTRE);
+        config_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 3, buttonY, "startscreen_config_button.png", Origin.MIDDLE_CENTRE);
+        exit_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 4, buttonY, "startscreen_exit_button.png", Origin.MIDDLE_CENTRE);
 
         addMouseListener(start_buton.retrieveMouseHandler());
         addMouseMotionListener(start_buton.retrieveMouseHandler());
