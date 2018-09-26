@@ -54,8 +54,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            backButton = new CustomButton(backButtonX, backButtonY, "config_back_button", true, 0, true);
-            saveButton = new CustomButton(backButtonX, backButtonY - 100, "config_save_button", true, 0, true);
+            backButton = new CustomButton(backButtonX, backButtonY, "config_back_button", Origin.MIDDLE_CENTRE, 0, true);
+            saveButton = new CustomButton(backButtonX, backButtonY - 100, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -70,7 +70,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             settingSliders[0] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency());
             settingSliders[1] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed());
-            settingSliders[2] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, WaifuBrew.getInstance().getFontSize());
+            // ((settingSliders[2].getLevel() / 2) + 10)
+            settingSliders[2] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2);
             autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
 
 
@@ -124,7 +125,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         if(settingSliders[2].isSliderActive()) {
             // Configure font preview
             try {
-                // TODO: This not a good implementation
+                // For real time preview later when font change is implemented
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
                 fontSize = (settingSliders[2].getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
@@ -153,8 +154,23 @@ public class ConfigPane extends JPanel implements ActionListener {
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
         if(!settingSliders[0].isSliderActive() && !settingSliders[1].isSliderActive() && !settingSliders[2].isSliderActive()) {
 
-            if(stringTimer.isRunning()) {
+            if (stringTimer.isRunning()) {
                 stringTimer.stop();
+            }
+
+            g.setFont(configPaneFont);
+            g.setColor(new Color(0, 0, 0));
+            g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
+
+            backButton.paintComponent(g);
+            saveButton.paintComponent(g);
+            autoDialog.paintComponent(g);
+
+            for (int applier = 0; applier < settingSliders.length; applier++) {
+                settingSliders[applier].paintComponent(g);
             }
         }
         else {
@@ -168,63 +184,88 @@ public class ConfigPane extends JPanel implements ActionListener {
                 g.setColor(new Color(0,0,0));
                 g.drawString(tempString, 150, 550);
             }
+            for (int applier = 0; applier < settingSliders.length; applier++) {
+                if(settingSliders[applier].isSliderActive()) {
+                    settingSliders[applier].paintComponent(g);
+                }
+            }
         }
-
-        // TODO: implement configPaneFont
-        g.setFont(configPaneFont);
-        g.setColor(new Color(0,0,0));
-        g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - ((windowSize.x / 10) / 3));
-        g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - ((windowSize.x / 10) / 3));
-        g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - ((windowSize.x / 10) / 3));
-        g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
-
-        backButton.paintComponent(g);
-        saveButton.paintComponent(g);
-        autoDialog.paintComponent(g);
-
-        for(int applier = 0; applier < settingSliders.length; applier++) {
-            settingSliders[applier].paintComponent(g);
-            settingSliders[applier].paintComponent(g);
-            settingSliders[applier].paintComponent(g);
-        }
-
     }
+
+    private boolean checkLockInSetting() {
+        if(settingSliders[0].getLevel() != WaifuBrew.getInstance().getDialogueTransparency()) {
+            /*
+            System.out.println("Transparency Level " + settingSliders[0].getLevel());
+            System.out.println("Transparency Settings " + WaifuBrew.getInstance().getDialogueTransparency());
+            */
+            return false;
+        }
+        if(settingSliders[1].getLevel() != WaifuBrew.getInstance().getDialogueSpeed()) {
+            /*
+            System.out.println("Speed Level " + settingSliders[1].getLevel());
+            System.out.println("Speed Settings " + WaifuBrew.getInstance().getDialogueSpeed());
+            */
+            return false;
+        }
+        if(((settingSliders[2].getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()) {
+            /*
+            System.out.println("FontSize Level " + (settingSliders[2].getLevel() / 2) + 10);
+            System.out.println("FontSize Settings " + WaifuBrew.getInstance().getFontSize());
+            */
+            return false;
+        }
+        return true;
+    }
+
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
 
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
-        public void mousePressed (MouseEvent event) {
+        public void mousePressed(MouseEvent event) {
         }
-        public void mouseMoved (MouseEvent event) {
+
+        public void mouseMoved(MouseEvent event) {
         }
-        public void mouseDragged (MouseEvent event) {
+
+        public void mouseDragged(MouseEvent event) {
         }
-        public void mouseClicked (MouseEvent event) {
-            if(event.getX() >= backButton.getX() - backButton.getWidth()/2 && event.getY() >= backButton.getY() - backButton.getHeight()/2 && event.getX() <= backButton.getX() + backButton.getWidth()/2 && event.getY() <= backButton.getY() + backButton.getHeight()/2) {
-                WaifuBrew.getInstance().setStage(0);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+
+        public void mouseClicked(MouseEvent event) {
+            if (event.getX() >= backButton.getX() - backButton.getWidth() / 2 && event.getY() >= backButton.getY() - backButton.getHeight() / 2 && event.getX() <= backButton.getX() + backButton.getWidth() / 2 && event.getY() <= backButton.getY() + backButton.getHeight() / 2) {
+                if(checkLockInSetting()) {
+                    WaifuBrew.getInstance().setStage(0);
+                    WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                }
+                else {
+                    // Save setting first!
+                }
             }
-            if(event.getX() >= saveButton.getX() - saveButton.getWidth()/2 && event.getY() >= saveButton.getY() - saveButton.getHeight()/2 && event.getX() <= saveButton.getX() + saveButton.getWidth()/2 && event.getY() <= saveButton.getY() + saveButton.getHeight()/2) {
+            if (event.getX() >= saveButton.getX() - saveButton.getWidth() / 2 && event.getY() >= saveButton.getY() - saveButton.getHeight() / 2 && event.getX() <= saveButton.getX() + saveButton.getWidth() / 2 && event.getY() <= saveButton.getY() + saveButton.getHeight() / 2) {
                 WaifuBrew.getInstance().setDialogueTransparency(settingSliders[0].getLevel());
                 WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
                 WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
 
-                System.out.println("ConfigPane.Handler: Set auto dia to: " + autoDialog.getValue());
+                // System.out.println("ConfigPane.Handler: Set auto dia to: " + autoDialog.getValue());
                 WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
 
         }
-        public void mouseEntered (MouseEvent event) {
+
+        public void mouseEntered(MouseEvent event) {
 
         }
-        public void mouseReleased (MouseEvent event) {
+
+        public void mouseReleased(MouseEvent event) {
 
         }
-        public void mouseExited (MouseEvent event) {
+
+        public void mouseExited(MouseEvent event) {
 
         }
+
     }
+
 
     public void init(){
         // TODO: I wonder if I use this lambda

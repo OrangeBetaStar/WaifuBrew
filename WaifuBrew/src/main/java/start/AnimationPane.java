@@ -59,19 +59,19 @@ public class AnimationPane extends JPanel {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
-            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_start_button.png", false, 60, true);
+            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_start_button.png", Origin.LEFT_TOP, 60, true);
             addMouseListener(startButton.retrieveMouseHandler());
             addMouseMotionListener(startButton.retrieveMouseHandler());
 
-            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_load_button.png", false, 60, true);
+            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_load_button.png", Origin.LEFT_TOP, 60, true);
             addMouseListener(loadButton.retrieveMouseHandler());
             addMouseMotionListener(loadButton.retrieveMouseHandler());
 
-            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_save_button.png", false, 60, true);
+            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_save_button.png", Origin.LEFT_TOP, 60, true);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_config_button.png", false, 60, true);
+            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_config_button.png", Origin.LEFT_TOP, 60, true);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
@@ -81,6 +81,7 @@ public class AnimationPane extends JPanel {
             dp.parse();
             e = dp.getPackagedDialogue();
 
+            // Add stage check to disable auto dialogue to start without being in the correct stage
             Timer stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if(!a.isEmpty()) {
@@ -97,7 +98,6 @@ public class AnimationPane extends JPanel {
                                 if(WaifuBrew.getInstance().getStage() == 1) {
                                     triggerNext();
                                 }
-
                             }
                         }
                     }
