@@ -1,12 +1,18 @@
 package start;
 
+import com.sun.deploy.config.Config;
+import javafx.scene.Parent;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class ImageLoader {
+// It's extending JPanel due to usage of font width calculation.
+public class ImageLoader extends JPanel {
 
     private String RESOURCE_PATH;
     private ArrayList<ImageDesc> load_first_images = new ArrayList<ImageDesc>();
@@ -14,6 +20,17 @@ public class ImageLoader {
     private ArrayList<ImageDesc> bg_images = new ArrayList<ImageDesc>();
     private ImageDesc[] character_imagesArr= new ImageDesc[Characters.length * Mood.length];
     private int charCounter = 0;
+
+    // Creating a menu button fonts
+    // Need a font, string, size, width
+    private BufferedInputStream myStream;
+    private Font menuFont;
+    private String textString;
+    private int fontSize = 64; // probably use it for height
+    private int width = 0;
+    private int padding = 5;
+    private int count = 0;
+
 
 
     public ImageLoader(String RESOURCE_PATH) {
@@ -27,10 +44,49 @@ public class ImageLoader {
             // This will look inside resource folder and automatically load the images according to file names.
             if (loadImage.contains("load_first")) {
                 if (loadImage.contains("startscreen_elementsheet")) { // this tag in filename will trigger auto split image and load
-                    ImageSlicer systemButtons = new ImageSlicer(500, 200, RESOURCE_PATH + loadImage, true);
-                    BufferedImage[] systemImages = systemButtons.getSprites();
-                    for (int a = 0; a < systemImages.length; a++) {
-                        load_first_images.add(new ImageDesc(Integer.toString(a), systemImages[a]));
+                    try {
+
+                        javaxt.io.Image menuCreationArea = new javaxt.io.Image(RESOURCE_PATH + "load_first_whitebox.png");
+
+                        myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "FashionF" + ".ttf"));
+                        menuFont = Font.createFont(Font.TRUETYPE_FONT, myStream);
+                        menuFont = menuFont.deriveFont(Font.PLAIN, fontSize);
+
+                        // menuFont = new Font("serif", Font.PLAIN, fontSize);
+                        // new Font("serif", Font.PLAIN, fontSize);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(RESOURCE_PATH + "load_first_buttonText.txt"), "UTF-8"));
+                        while((textString = reader.readLine()) != null) {
+                            width = getFontMetrics(menuFont).stringWidth(textString);
+                            javaxt.io.Image tempCreation = menuCreationArea.copy();
+                            tempCreation.resize(width + (padding * 2), fontSize + (padding * 2));
+                            // There is a weird symbol just before Start symbol maker.
+                            tempCreation.addText(textString.replaceAll("\\s+",""), (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont,255, 255, 255);
+                            load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
+                            count++;
+                        }
+
+                    } catch (FileNotFoundException e) {
+
+                        // If textfile could not be found, it will use the pre-made image to slice.
+                        ImageSlicer systemButtons = new ImageSlicer(500, 200, RESOURCE_PATH + loadImage, true);
+                        BufferedImage[] systemImages = systemButtons.getSprites();
+                        for (int a = 0; a < systemImages.length; a++) {
+                            load_first_images.add(new ImageDesc(Integer.toString(a), systemImages[a]));
+                        }
+                    } catch (IOException e) {
+                        // If there is error reading with textfile, it will use the pre-made image to slice.
+                        ImageSlicer systemButtons = new ImageSlicer(500, 200, RESOURCE_PATH + loadImage, true);
+                        BufferedImage[] systemImages = systemButtons.getSprites();
+                        for (int a = 0; a < systemImages.length; a++) {
+                            load_first_images.add(new ImageDesc(Integer.toString(a), systemImages[a]));
+                        }
+                    } catch (FontFormatException e) {
+                        // If there is error with format of font, it will use the pre-made image to slice.
+                        ImageSlicer systemButtons = new ImageSlicer(500, 200, RESOURCE_PATH + loadImage, true);
+                        BufferedImage[] systemImages = systemButtons.getSprites();
+                        for (int a = 0; a < systemImages.length; a++) {
+                            load_first_images.add(new ImageDesc(Integer.toString(a), systemImages[a]));
+                        }
                     }
                 }
                 // Any images that are used in effects (used with scaleVec like things)
@@ -59,23 +115,6 @@ public class ImageLoader {
                     // System.out.println("loadImage: " + loadImage.substring(5, loadImage.indexOf(".png"))+"-"+getMood(inde).toString().toLowerCase());
                     character_imagesArr[Mood.length * charCounter + inde] = new ImageDesc(loadImage.substring(5, loadImage.indexOf(".png"))+"-"+getMood(inde).toString().toLowerCase(), charImageArray[inde]);
                 }
-
-                /*
-                System.out.println(loadImage.substring(loadImage.indexOf("_") + 1, (loadImage.indexOf("-"))));
-
-                for (charLoop = 0; charLoop < Characters.length; charLoop++) {
-                    if(loadImage.substring(loadImage.indexOf("_") + 1, (loadImage.indexOf("-"))).toLowerCase().compareTo(getChar(charLoop).toString().toLowerCase()) == 0) {
-                        System.out.println("The char was: "+getChar(charLoop));
-                    }
-                }
-                for (moodLoop = 0; moodLoop < Mood.length; moodLoop++) {
-                    // getMood(moodLoop).toString().toLowerCase()
-                    if(loadImage.substring(loadImage.indexOf("-") + 1, (loadImage.indexOf(".png"))).compareTo(getMood(moodLoop).toString().toLowerCase()) == 0) {
-                        System.out.println("The mood was: "+getMood(moodLoop));
-                    }
-                }
-                // character_images.add(new ImageDesc(loadImage.substring(loadImage.indexOf("_") + 1, loadImage.indexOf(".png")), new javaxt.io.Image(RESOURCE_PATH + loadImage)));
-                */
                 charCounter++;
             }
         }
@@ -107,6 +146,7 @@ public class ImageLoader {
         }
         return null;
     }
+
     public Mood getMood(int index) {
         for(Mood a : Mood.values()) {
             if(a.getValue() == index) {

@@ -13,7 +13,7 @@ public class WaifuBrew {
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
-    private final String RESOURCE_PATH = "src/main/java/resources/";
+    public final String RESOURCE_PATH = "src/main/java/resources/";
     private BufferedImage[] systemImages;
     private ArrayList<ArrayList<ImageDesc>> fileList;
 
@@ -77,6 +77,7 @@ public class WaifuBrew {
         try {
             singleton = new WaifuBrew();
             singleton.start();
+
         }
         // catches any exception
         catch (Exception e) {
