@@ -189,6 +189,7 @@ public class WaifuBrew {
         return fileList.get(imageSelector.getValue());
     }
 
+    // No image will result in blank image.
     public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
 
         for(ImageDesc pictures : fileList.get(whichPile.getValue())) {
@@ -196,7 +197,7 @@ public class WaifuBrew {
                 return pictures.getImageItself();
             }
         }
-        return null;
+        return getImageByName(ImageSelector.VECTOR, "blackbox");
     }
 
     public void start() {
