@@ -4,3 +4,4 @@ Load
 Back
 Config
 Exit
+Reset

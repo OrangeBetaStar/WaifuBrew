@@ -50,6 +50,9 @@ public class CustomButton extends JPanel implements ActionListener {
         else if(fileName.contains("exit_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
         }
+        else if(fileName.contains("reset_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
+        }
         else {
             originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
             System.out.println("Please fix code: I/O access detected.");
@@ -81,6 +84,9 @@ public class CustomButton extends JPanel implements ActionListener {
         }
         else if(fileName.contains("exit_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
+        }
+        else if(fileName.contains("reset_button")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
         }
         else {
             originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);

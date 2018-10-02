@@ -90,6 +90,10 @@ public class CustomSlider extends JPanel implements ActionListener {
         return this.level;
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public int getX() {
         return this.x;
     }
