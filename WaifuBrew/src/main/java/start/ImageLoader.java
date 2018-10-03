@@ -31,7 +31,7 @@ public class ImageLoader extends JPanel {
     private int padding = 5;
     private int count = 0;
 
-
+    public static final String UTF8_BOM = "\uFEFF";
 
     public ImageLoader(String RESOURCE_PATH) {
         this.RESOURCE_PATH = RESOURCE_PATH;
@@ -60,7 +60,11 @@ public class ImageLoader extends JPanel {
                             javaxt.io.Image tempCreation = menuCreationArea.copy();
                             tempCreation.resize(width + (padding * 2), fontSize + (padding * 2));
                             // There is a weird symbol just before Start symbol maker.
-                            tempCreation.addText(textString.replaceAll("\\s+",""), (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont,255, 255, 255);
+                            if (textString.startsWith(UTF8_BOM)) {
+                                textString = textString.substring(1);
+                            }
+                            textString = textString.replaceAll("\\n", "").replaceAll("\\r", "").replaceAll("\\s+","");
+                            tempCreation.addText(textString, (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont,255, 255, 255);
                             load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
                             count++;
                         }

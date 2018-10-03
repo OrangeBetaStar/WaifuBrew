@@ -12,7 +12,6 @@ public class GUI extends JFrame {
     private AnimationPane animationPane;
     private ConfigPane configPane;
 
-    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
     private boolean framelimiterDisable = false;

@@ -1,6 +1,6 @@
 package start;
 /*
- * Project by BetaStar
+ * Project by BetaStar and Gaia
  */
 
 import javax.swing.*;
@@ -192,12 +192,16 @@ public class WaifuBrew {
     // No image will result in blank image.
     public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
 
+        // Getting ImageSelector.VECTOR - blackbox is a fail-safe
         for(ImageDesc pictures : fileList.get(whichPile.getValue())) {
             if(pictures.getImageDescription().contains(whichOne)) {
                 return pictures.getImageItself();
             }
         }
-        return getImageByName(ImageSelector.VECTOR, "blackbox");
+        javaxt.io.Image createDefaultImage = new javaxt.io.Image(getImageByName(ImageSelector.VECTOR, "blackbox"));
+        createDefaultImage.resize(getFontSize() * 2, getFontSize());
+        createDefaultImage.addText(whichOne, 0, createDefaultImage.getHeight()/2, null, getFontSize(), 128, 128, 128);
+        return createDefaultImage.getBufferedImage();
     }
 
     public void start() {

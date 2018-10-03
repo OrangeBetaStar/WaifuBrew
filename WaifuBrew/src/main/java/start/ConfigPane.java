@@ -103,29 +103,26 @@ public class ConfigPane extends JPanel implements ActionListener {
                 addMouseMotionListener(settingButton[applier].retrieveMouseHandler());
             }
 
-
-
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (!a.isEmpty()) {
-                        if (tempString.length() != a.length()) {
-                            tempString = tempString + a.charAt(tempString.length());
-                        }
-                        else {
-                            tempString = a.substring(0,1);
-                            stringTimer.stop();
-                            stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
-                            stringTimer.start();
-                        }
+                if (!a.isEmpty()) {
+                    if (tempString.length() != a.length()) {
+                        tempString = tempString + a.charAt(tempString.length());
                     }
+                    else {
+                        tempString = a.substring(0,1);
+                        stringTimer.stop();
+                        stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
+                        stringTimer.start();
+                    }
+                }
                 }
             });
 
             // Coalesce is disabled since there is no multiple firing of triggers.
             stringTimer.setRepeats(true);
             stringTimer.setCoalesce(false);
-
 
         } catch (Exception e) {
             System.out.println("File failure in Config class");
@@ -181,9 +178,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
             if(!saveDialogue.isActive()) {
-                settingButton[0].paintComponent(g);
-                settingButton[1].paintComponent(g);
-                settingButton[2].paintComponent(g);
+                for(int paintButton = 0; paintButton < settingButton.length; paintButton++) {
+                    settingButton[paintButton].paintComponent(g);
+                }
             }
             autoDialog.paintComponent(g);
 
@@ -214,24 +211,12 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private boolean checkLockInSetting() {
         if(settingSliders[0].getLevel() != WaifuBrew.getInstance().getDialogueTransparency()) {
-            /*
-            System.out.println("Transparency Level " + settingSliders[0].getLevel());
-            System.out.println("Transparency Settings " + WaifuBrew.getInstance().getDialogueTransparency());
-            */
             return false;
         }
         if(settingSliders[1].getLevel() != WaifuBrew.getInstance().getDialogueSpeed()) {
-            /*
-            System.out.println("Speed Level " + settingSliders[1].getLevel());
-            System.out.println("Speed Settings " + WaifuBrew.getInstance().getDialogueSpeed());
-            */
             return false;
         }
         if(((settingSliders[2].getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()) {
-            /*
-            System.out.println("FontSize Level " + (settingSliders[2].getLevel() / 2) + 10);
-            System.out.println("FontSize Settings " + WaifuBrew.getInstance().getFontSize());
-            */
             return false;
         }
         return true;

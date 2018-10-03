@@ -5,10 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-// TODO: Probably better to use this as async instead of putting this in graphics and check if it has been pressed?
-
-// TODO: ^ Need change listener since button's wasPressed needs to be defaulted back to false after stage change.
-
 // This class will handle the buttons that require transparency changes and launch actions
 public class CustomButton extends JPanel implements ActionListener {
 
@@ -54,8 +50,9 @@ public class CustomButton extends JPanel implements ActionListener {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
         }
         else {
-            originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
-            System.out.println("Please fix code: I/O access detected.");
+            // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+            // System.out.println("Please fix code: I/O access detected.");
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
         }
         originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), defaultButtonHeight, true);
         mouseoverButton = originalButton.copy();
@@ -89,8 +86,9 @@ public class CustomButton extends JPanel implements ActionListener {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
         }
         else {
-            originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
-            System.out.println("Please fix code: I/O access detected.");
+            // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
+            // System.out.println("Please fix code: I/O access detected.");
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
         }
         if(invert) {
             System.out.println("inverted. " + fileName);
