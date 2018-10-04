@@ -58,9 +58,7 @@ public class ImageLoader extends JPanel {
             // This will look inside resource folder and automatically load the images according to file names.
             if (loadImage.contains("load_first")) {
                 if (loadImage.contains("startscreen_elementsheet")) { // this tag in filename will trigger auto split image and load
-
                     javaxt.io.Image menuCreationArea = new javaxt.io.Image(RESOURCE_PATH + "load_first_whitebox.png");
-
                     try {
                         myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + "FashionF" + ".ttf"));
                         menuFont = Font.createFont(Font.TRUETYPE_FONT, myStream);
@@ -77,22 +75,11 @@ public class ImageLoader extends JPanel {
                         width = getFontMetrics(menuFont).stringWidth(textString);
                         javaxt.io.Image tempCreation = menuCreationArea.copy();
                         tempCreation.resize(width + (padding * 2), fontSize + (padding * 2));
-                        // There is a weird symbol just before Start symbol maker.
-                        textString = textString.replaceAll("\\n", "").replaceAll("\\r", "").replaceAll("\\s+", "");
                         tempCreation.addText(textString, (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont, 255, 255, 255);
                         load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
                         count++;
                     }
-
-                    /* (This is deprecated as latest implementation works just as well.
-                        ImageSlicer systemButtons = new ImageSlicer(500, 200, RESOURCE_PATH + loadImage, true);
-                        BufferedImage[] systemImages = systemButtons.getSprites();
-                        for (int a = 0; a < systemImages.length; a++) {
-                            load_first_images.add(new ImageDesc(Integer.toString(a), systemImages[a]));
-                        }
-                     */
                 }
-                // Any images that are used in effects (used with scaleVec like things)
                 else {
                     if (loadImage.contains("toggle_housing")) {
                         ImageSlicer toggleHousing = new ImageSlicer(200, 400, RESOURCE_PATH + loadImage, true);

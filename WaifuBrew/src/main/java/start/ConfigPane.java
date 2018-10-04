@@ -210,6 +210,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         if(saveDialogue.isActive())
         saveDialogue.paintComponent(g);
+
     }
 
     private boolean checkLockInSetting() {
@@ -286,6 +287,10 @@ public class ConfigPane extends JPanel implements ActionListener {
 
                             // Disable NoticeBox
                             saveDialogue.setActive(false);
+                            settingSliders[0].setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                            settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                            settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                            repaint();
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }

@@ -106,7 +106,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-            if(event.getX() >= dialogueKnobX && event.getX() <= dialogueKnobX + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
+            if(event.getX() >= (int)(x + ((level/100.0) * length)) && event.getX() <= (int)(x + ((level/100.0) * length)) + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
                 sliderActive = true;
             }
         }
