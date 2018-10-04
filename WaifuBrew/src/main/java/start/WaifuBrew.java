@@ -39,7 +39,7 @@ public class WaifuBrew {
 
     WaifuBrew() {
 
-        this.initConfig();
+        initConfig();
 
         ThreadFileLoad tfl = new ThreadFileLoad();
         ThreadLoadingScreen tls = new ThreadLoadingScreen();
@@ -97,7 +97,7 @@ public class WaifuBrew {
         configStorage.put("dialogueSpeed", 60);
         configStorage.put("fontSize", 30);
         configStorage.put("frameRate", 60);
-        configStorage.put("GUIScaling", 0);
+        configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
         this.setFontName("Halogen");
@@ -128,11 +128,11 @@ public class WaifuBrew {
     }
 
     public int getSystemGUIScale() {
-        return configStorage.get("GUIScale");
+        return configStorage.get("GUIScaling");
     }
 
     public void setSystemGUIScale(int GUIScale) {
-        configStorage.put("GUIScale", GUIScale);
+        configStorage.put("GUIScaling", GUIScale);
     }
 
     public boolean getAutoAdvancer() {
