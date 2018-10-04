@@ -20,7 +20,7 @@ Logs:
 
 04/05/18 - Placeholder buttons are working as they would. The start of Config page (only implemented BG and back button) [BetaStar]
 
-04/06/18 - Animation now in test phase. Config stage is being used as animation testing. License changed to MIT. [BetaStar]
+04/06/18 - Animation now in test phase. Config stage is being used as animation testing. [BetaStar]
 
 04/09/18 - Used simpler implementation for rotation for now since more advanced implementation doesn't seem to contribute solving the problem. [BetaStar]
 
@@ -84,6 +84,6 @@ Logs:
 
 09/26/18 - CustomButton now takes 9 positions of origin (uses Origin ENUM). ConfigPane won't allow to go back without saving the settings, instead, noticebox comes up with buttons whether if you want to save or not. If save button is clicked, it will save and go back to main screen. Otherwise, it will not save the settings and just close the box. When one of the slider is active in ConfigPane, everything is disabled except preview and a slider. MasterHandlerClass.java so that code is slightly cleaner for every Pane class. [BetaStar]
 
-10/01/18 - Fixed font to the same one that was used on original system button font. It no longer relies on cut pre-made image for system images. When you run, it makes fresh new one everytime! (idea of Gaia) When there is no picture while using getImageByName(), it returns black image instead of null so that program can still run for debugging purpose without crashing. Added reset button. Now users are not forced to save the current settings. Relative positioning of ConfigPane button placement. Added set value.
+10/01/18 - Fixed font to the same one that was used on original system button font. It no longer relies on cut pre-made image for system images. When you run, it makes fresh new one everytime! (idea of Gaia) When there is no picture while using getImageByName(), it returns black image instead of null so that program can still run for debugging purpose without crashing. Added reset button. Now users are not forced to save the current settings. Relative positioning of ConfigPane button placement. Added set value. [BetaStar]
 
-10/03/18 - Improved failed retrieval defaultImage. Fixed default case when font can not be found. Defaults to serif. No more cutting images for system button images.
+10/03/18 - Improved failed retrieval defaultImage. Fixed default case when font can not be found. Defaults to serif. No more cutting images for system button images. [BetaStar]
