@@ -2,12 +2,15 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
@@ -24,11 +27,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     private Timer stringTimer;
     private boolean stop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
-
-    // [0] - slider_transparency
-    // [1] - slider_speed
-    // [2] - slider-fontSize
-    private CustomSlider[] settingSliders = new CustomSlider[3];
+    
+    private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
     private CustomButton[] settingButton = new CustomButton[3];
     private CustomSwitch autoDialog;
     private NoticeBox saveDialogue;
@@ -64,20 +64,18 @@ public class ConfigPane extends JPanel implements ActionListener {
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
 
             // Pre-scale
-            if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
-                if(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
-                    backgroundPicture.resize(((int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int)(((double)windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
-                }
-                else {
-                    backgroundPicture.resize(((int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int)(((double)windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
+            if (backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
+                if (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
+                    backgroundPicture.resize(((int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
+                } else {
+                    backgroundPicture.resize(((int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
                 }
             }
-            dialogueBox.resize((int)(dialogueBox.getWidth() * 0.9), (int)(dialogueBox.getHeight() * 0.9));
+            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
 
-            settingSliders[0] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency());
-            settingSliders[1] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed());
-            // ((settingSliders[2].getLevel() / 2) + 10)
-            settingSliders[2] = new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2);
+            this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency()));
+            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed()));
+            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2));
             autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
 
             // Handlers listening to mouse like DOGS
@@ -89,19 +87,20 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(saveDialogue.retrieveMouseHandler());
 
             // MouseListners for NoticeBox in ConfigPage
-            for(int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
+            for (int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
                 addMouseListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
                 addMouseMotionListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
             }
 
             // Each of the slider's mouselisteners
-            for(int applier = 0; applier < settingSliders.length; applier++) {
-                addMouseListener(settingSliders[applier].retrieveMouseHandler());
-                addMouseMotionListener(settingSliders[applier].retrieveMouseHandler());
+            for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
+                CustomSlider slider = entry.getValue();
+                addMouseListener(slider.retrieveMouseHandler());
+                addMouseMotionListener(slider.retrieveMouseHandler());
             }
 
             // Each of the button's mouselisteners
-            for(int applier = 0; applier < settingButton.length; applier++) {
+            for (int applier = 0; applier < settingButton.length; applier++) {
                 addMouseListener(settingButton[applier].retrieveMouseHandler());
                 addMouseMotionListener(settingButton[applier].retrieveMouseHandler());
             }
@@ -109,17 +108,16 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                if (!a.isEmpty()) {
-                    if (tempString.length() != a.length()) {
-                        tempString = tempString + a.charAt(tempString.length());
+                    if (!a.isEmpty()) {
+                        if (tempString.length() != a.length()) {
+                            tempString = tempString + a.charAt(tempString.length());
+                        } else {
+                            tempString = a.substring(0, 1);
+                            stringTimer.stop();
+                            stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
+                            stringTimer.start();
+                        }
                     }
-                    else {
-                        tempString = a.substring(0,1);
-                        stringTimer.stop();
-                        stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
-                        stringTimer.start();
-                    }
-                }
                 }
             });
 
@@ -137,12 +135,12 @@ public class ConfigPane extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(settingSliders[2].isSliderActive()) {
+        if (this.settingSlidersMap.get("textSize").isSliderActive()) {
             // Configure font preview
             try {
                 // For real time preview later when font change is implemented
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
-                fontSize = (settingSliders[2].getLevel() / 2) + 10; // This equation seems most appropriate
+                fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             } catch (FontFormatException ex) {
@@ -161,13 +159,21 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
-            if(!settingSliders[0].isSliderActive() && !settingSliders[1].isSliderActive() && !settingSliders[2].isSliderActive()) {
+            if (
+                    !this.settingSlidersMap.get("barTransparency").isSliderActive() &&
+                    !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
+                    !this.settingSlidersMap.get("textSize").isSliderActive()
+            ) {
                 g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
         }
 
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
-        if(!settingSliders[0].isSliderActive() && !settingSliders[1].isSliderActive() && !settingSliders[2].isSliderActive()) {
+        if (
+                !this.settingSlidersMap.get("barTransparency").isSliderActive() &&
+                !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
+                !this.settingSlidersMap.get("textSize").isSliderActive()
+        ) {
 
             if (stringTimer.isRunning()) {
                 stringTimer.stop();
@@ -175,55 +181,50 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             g.setFont(configPaneFont);
             g.setColor(new Color(0, 0, 0));
-            g.drawString("Diologue Bar Transparency", settingSliders[0].getX(), settingSliders[0].getY() - ((windowSize.x / 10) / 3));
-            g.drawString("Diologue Text Speed", settingSliders[1].getX(), settingSliders[1].getY() - ((windowSize.x / 10) / 3));
-            g.drawString("Dialog Text Size", settingSliders[2].getX(), settingSliders[2].getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Diologue Bar Transparency", this.settingSlidersMap.get("barTransparency").getX(), this.settingSlidersMap.get("barTransparency").getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Diologue Text Speed", this.settingSlidersMap.get("textSpeed").getX(), this.settingSlidersMap.get("textSpeed").getY() - ((windowSize.x / 10) / 3));
+            g.drawString("Dialog Text Size", this.settingSlidersMap.get("textSize").getX(), this.settingSlidersMap.get("textSize").getY() - ((windowSize.x / 10) / 3));
             g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
-            if(!saveDialogue.isActive()) {
-                for(int paintButton = 0; paintButton < settingButton.length; paintButton++) {
+            if (!saveDialogue.isActive()) {
+                for (int paintButton = 0; paintButton < settingButton.length; paintButton++) {
                     settingButton[paintButton].paintComponent(g);
                 }
             }
             autoDialog.paintComponent(g);
 
-            for (int applier = 0; applier < settingSliders.length; applier++) {
-                settingSliders[applier].paintComponent(g);
+            for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
+                entry.getValue().paintComponent(g);
             }
-        }
-        else {
+        } else {
             // DialogueBox
             tempDialogueBox = dialogueBox.copy();
-            tempDialogueBox.setOpacity(settingSliders[0].getLevel());
-            g.drawImage(tempDialogueBox.getBufferedImage(),WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2),this);
+            tempDialogueBox.setOpacity(this.settingSlidersMap.get("barTransparency").getLevel());
+            g.drawImage(tempDialogueBox.getBufferedImage(), WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2), this);
             stringTimer.start();
-            if(!tempString.equals("")) {
+            if (!tempString.equals("")) {
                 g.setFont(activeFont);
-                g.setColor(new Color(0,0,0));
+                g.setColor(new Color(0, 0, 0));
                 g.drawString(tempString, 150, 550);
             }
-            for (int applier = 0; applier < settingSliders.length; applier++) {
-                if(settingSliders[applier].isSliderActive()) {
-                    settingSliders[applier].paintComponent(g);
+            for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
+                CustomSlider slider = entry.getValue();
+                if (slider.isSliderActive()) {
+                    slider.paintComponent(g);
                 }
             }
         }
-        if(saveDialogue.isActive())
-        saveDialogue.paintComponent(g);
+        if (saveDialogue.isActive())
+            saveDialogue.paintComponent(g);
 
     }
 
     private boolean checkLockInSetting() {
-        if(settingSliders[0].getLevel() != WaifuBrew.getInstance().getDialogueTransparency()) {
-            return false;
-        }
-        if(settingSliders[1].getLevel() != WaifuBrew.getInstance().getDialogueSpeed()) {
-            return false;
-        }
-        if(((settingSliders[2].getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()) {
-            return false;
-        }
-        return true;
+        return (
+                this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
+                this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
+                ((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()
+        );
     }
 
 
@@ -231,7 +232,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         public void mouseClicked(MouseEvent event) {
             // Disable original back and save button for noticeBox buttons.
-            if(!saveDialogue.isActive()) {
+            if (!saveDialogue.isActive()) {
                 if (event.getX() >= settingButton[0].getX() - settingButton[0].getWidth() / 2 && event.getY() >= settingButton[0].getY() - settingButton[0].getHeight() / 2 && event.getX() <= settingButton[0].getX() + settingButton[0].getWidth() / 2 && event.getY() <= settingButton[0].getY() + settingButton[0].getHeight() / 2) {
                     if (checkLockInSetting()) {
                         WaifuBrew.getInstance().setStage(0);
@@ -242,9 +243,9 @@ public class ConfigPane extends JPanel implements ActionListener {
                     }
                 }
                 if (event.getX() >= settingButton[1].getX() - settingButton[1].getWidth() / 2 && event.getY() >= settingButton[1].getY() - settingButton[1].getHeight() / 2 && event.getX() <= settingButton[1].getX() + settingButton[1].getWidth() / 2 && event.getY() <= settingButton[1].getY() + settingButton[1].getHeight() / 2) {
-                    WaifuBrew.getInstance().setDialogueTransparency(settingSliders[0].getLevel());
-                    WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
-                    WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
+                    WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                    WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                    WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSpeed").getLevel() / 2) + 10);
 
                     // System.out.println("ConfigPane.Handler: Set auto dia to: " + autoDialog.getValue());
                     WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
@@ -252,27 +253,26 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
                 if (event.getX() >= settingButton[2].getX() - settingButton[2].getWidth() / 2 && event.getY() >= settingButton[2].getY() - settingButton[2].getHeight() / 2 && event.getX() <= settingButton[2].getX() + settingButton[2].getWidth() / 2 && event.getY() <= settingButton[2].getY() + settingButton[2].getHeight() / 2) {
 
-                    settingSliders[0].setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                    settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                    settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                    settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                    settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                    settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
 
 
                 }
-            }
-            else {
-                for(int noticeBoxButtonIndix = 0; noticeBoxButtonIndix < saveDialogue.getButton().length; noticeBoxButtonIndix++) {
+            } else {
+                for (int noticeBoxButtonIndix = 0; noticeBoxButtonIndix < saveDialogue.getButton().length; noticeBoxButtonIndix++) {
                     if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() &&
                             event.getX() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndix].getWidth() &&
                             event.getY() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() &&
                             event.getY() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndix].getHeight()) {
 
-                        if(noticeBoxButtonIndix == 0) {
+                        if (noticeBoxButtonIndix == 0) {
                             // Save is clicked
 
                             // Save all the settings.
-                            WaifuBrew.getInstance().setDialogueTransparency(settingSliders[0].getLevel());
-                            WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
-                            WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
+                            WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                            WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                            WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSpeed").getLevel() / 2) + 10);
                             WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
                             // Disable NoticeBox
@@ -281,15 +281,14 @@ public class ConfigPane extends JPanel implements ActionListener {
                             // Go back to Main screen.
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                        }
-                        else if(noticeBoxButtonIndix == 1) {
+                        } else if (noticeBoxButtonIndix == 1) {
                             // Back is clicked
 
                             // Disable NoticeBox
                             saveDialogue.setActive(false);
-                            settingSliders[0].setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                            settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                            settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                            settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                            settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                            settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
                             repaint();
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -301,19 +300,19 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
 
-    public void init(){
+    public void init() {
         // TODO: I wonder if I use this lambda
-        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+        Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(!stop) {
+                if (!stop) {
                     repaint();
                 } else {
-                    ((Timer)e.getSource()).stop();
+                    ((Timer) e.getSource()).stop();
                 }
             }
         });
         t.setRepeats(true);
-        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
 
         // Configure font preview
