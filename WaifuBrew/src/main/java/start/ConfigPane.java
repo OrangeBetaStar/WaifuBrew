@@ -30,7 +30,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
     private HashMap<String, CustomButton> settingButtonsMap = new HashMap<>(3);
-//    private CustomButton[] settingButton = new CustomButton[3];
     private CustomSwitch autoDialog;
     private NoticeBox saveDialogue;
 

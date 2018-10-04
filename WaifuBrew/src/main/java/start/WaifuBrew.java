@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WaifuBrew {
 
@@ -22,7 +23,8 @@ public class WaifuBrew {
     // [n] array number / = n value
     // [0] is dialogueTransparency = 70
     // [1] is dialogueSpeed = 50
-    private static int[] configStorage = new int[20]; //Increase if needed.
+//    private static int[] configStorage = new int[20]; //Increase if needed.
+    private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
 
@@ -37,14 +39,7 @@ public class WaifuBrew {
 
     WaifuBrew() {
 
-        setDialogueTransparency(70);
-        setDialogueSpeed(60);
-        setFontSize(30);
-        setFrameRate(60);
-        setStage(0);
-        setAutoAdvancer(false);
-        setSystemGUIScale(100);
-        setFontName("Halogen");
+        this.initConfig();
 
         ThreadFileLoad tfl = new ThreadFileLoad();
         ThreadLoadingScreen tls = new ThreadLoadingScreen();
@@ -97,73 +92,71 @@ public class WaifuBrew {
         configUI[0] = fontName;
     }
 
-    // ConfigStorage:
-    // 0 - Dialog Transparency
-    // 1 - Text Speed
-    // 2 - Frame Rate
-    // 3 - GUI Scaling
-    // 4 - Auto Dialogue Advancer
-    // 5 - Dialog Font Size
-    // 6 -
-    // 7 -
-    // 8 -
-    // 9 - Stage
+    private void initConfig() {
+        configStorage.put("dialogueTransparency", 70);
+        configStorage.put("dialogueSpeed", 60);
+        configStorage.put("fontSize", 30);
+        configStorage.put("frameRate", 60);
+        configStorage.put("GUIScaling", 0);
+        configStorage.put("autoAdvancer", 0);
+        configStorage.put("stage", 0);
+        this.setFontName("Halogen");
+    }
 
     public int getDialogueTransparency () {
-        return configStorage[0];
+        return configStorage.get("dialogueTransparency");
     }
 
     public void setDialogueTransparency (int dialogueTransparency) {
-        configStorage[0] = dialogueTransparency;
+        configStorage.put("dialogueTransparency", dialogueTransparency);
     }
 
     public int getDialogueSpeed () {
-        return configStorage[1];
+        return configStorage.get("dialogueSpeed");
     }
 
     public void setDialogueSpeed (int dialogueSpeed) {
-        configStorage[1] = dialogueSpeed;
+        configStorage.put("dialogueSpeed", dialogueSpeed);
     }
 
     public int getFrameRate() {
-        return configStorage[2];
+        return configStorage.get("frameRate");
     }
 
     public void setFrameRate(int frameRate) {
-        configStorage[2] = frameRate;
+        configStorage.put("frameRate", frameRate);
     }
 
-    public int getSystemGUIScale() { return configStorage[3]; }
+    public int getSystemGUIScale() {
+        return configStorage.get("GUIScale");
+    }
 
-    public void setSystemGUIScale(int GUIScale) { configStorage[3] = GUIScale; }
+    public void setSystemGUIScale(int GUIScale) {
+        configStorage.put("GUIScale", GUIScale);
+    }
 
     public boolean getAutoAdvancer() {
-        return (configStorage[4] == 1);
+        return (configStorage.get("autoAdvancer") == 1);
     }
 
     public void setAutoAdvancer(boolean autoAdvancer) {
-        if(autoAdvancer) {
-            configStorage[4] = 1;
-        }
-        else {
-            configStorage[4] = 0;
-        }
+        configStorage.put("autoAdvancer", autoAdvancer ? 1 : 0);
     }
 
     public int getFontSize() {
-        return configStorage[5];
+        return configStorage.get("fontSize");
     }
 
     public void setFontSize(int fontSize) {
-        configStorage[5] = fontSize;
+        configStorage.put("fontSize", fontSize);
     }
 
     public int getStage() {
-        return configStorage[9];
+        return configStorage.get("stage");
     }
 
     public void setStage(int stage) {
-        configStorage[9] = stage;
+        configStorage.put("stage", stage);
     }
 
     public String getResoucePath () {
