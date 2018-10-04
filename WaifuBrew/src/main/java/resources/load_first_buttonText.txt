@@ -1,7 +1,0 @@
-﻿Start
-Save
-Load
-Back
-Config
-Exit
-Reset
