@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 @SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
@@ -41,6 +42,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     private BufferedInputStream myStream;
     private int fontSize = 24;
 
+    int upperBound = 90;
+
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
@@ -58,7 +61,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             settingButton[1] = new CustomButton(backButtonX, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
             settingButton[2] = new CustomButton(backButtonX, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true);
 
-            saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_back_button", false, false);
+            saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -283,6 +286,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
                             // Disable NoticeBox
                             saveDialogue.setActive(false);
+                            WaifuBrew.getInstance().setStage(0);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }
                     }
                 }

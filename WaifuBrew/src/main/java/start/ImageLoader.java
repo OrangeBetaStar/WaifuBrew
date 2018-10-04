@@ -37,7 +37,8 @@ public class ImageLoader extends JPanel {
             "Back" ,
             "Config" ,
             "Exit" ,
-            "Reset"};
+            "Reset" ,
+            "Don't Save"};
 
     /*
     public static final String UTF8_BOM = "\uFEFF";
