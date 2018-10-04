@@ -15,13 +15,6 @@ public class CustomSwitch extends JPanel implements ActionListener {
     private boolean centered;
     private javaxt.io.Image backgroundImage;
     private javaxt.io.Image knob;
-
-    /*
-    private javaxt.io.Image left = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-0"));
-    private javaxt.io.Image body = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-2"));
-    private javaxt.io.Image right = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-1"));
-    */
-
     private int slidingPathWidth = 40;
     private int slidingPathHeight = 20;
 

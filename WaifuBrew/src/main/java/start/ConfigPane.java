@@ -15,11 +15,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image backgroundPicture;
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
-
-    // Apart Y: 80; Start X: 100; Start Y: 220;
-    // TODO: THIS WILL BE CHANGED TOO
-    private int backButtonX = 1100;
-    private int backButtonY = 600;
     private Timer stringTimer;
     private boolean stop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
@@ -28,8 +23,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     // [1] - slider_speed
     // [2] - slider-fontSize
     private CustomSlider[] settingSliders = new CustomSlider[3];
-    private CustomButton backButton;
-    private CustomButton saveButton;
+    private CustomButton[] settingButton = new CustomButton[3];
     private CustomSwitch autoDialog;
     private NoticeBox saveDialogue;
 
@@ -41,6 +35,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     private Font configPaneFont;
     private BufferedInputStream myStream;
     private int fontSize = 24;
+
+    int upperBound = 90;
 
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
@@ -55,10 +51,11 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            backButton = new CustomButton(backButtonX, backButtonY, "config_back_button", Origin.MIDDLE_CENTRE, 0, true);
-            saveButton = new CustomButton(backButtonX, backButtonY - 100, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
+            settingButton[0] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true);
+            settingButton[1] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
+            settingButton[2] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true);
 
-            saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_back_button", false, false);
+            saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
 
             // Pre-scale
             if(backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
@@ -80,19 +77,15 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);
             addMouseMotionListener(handler);
-            addMouseListener(saveButton.retrieveMouseHandler());
-            addMouseMotionListener(saveButton.retrieveMouseHandler());
-            addMouseListener(backButton.retrieveMouseHandler());
-            addMouseMotionListener(backButton.retrieveMouseHandler());
             addMouseListener(autoDialog.retrieveMouseHandler());
             addMouseMotionListener(autoDialog.retrieveMouseHandler());
             addMouseListener(saveDialogue.retrieveMouseHandler());
             addMouseMotionListener(saveDialogue.retrieveMouseHandler());
 
             // MouseListners for NoticeBox in ConfigPage
-            for(int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
-                addMouseListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
-                addMouseMotionListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
+            for(int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                addMouseListener(saveDialogue.getButton()[noticeBoxButtonIndex].retrieveMouseHandler());
+                addMouseMotionListener(saveDialogue.getButton()[noticeBoxButtonIndex].retrieveMouseHandler());
             }
 
             // Each of the slider's mouselisteners
@@ -101,7 +94,11 @@ public class ConfigPane extends JPanel implements ActionListener {
                 addMouseMotionListener(settingSliders[applier].retrieveMouseHandler());
             }
 
-
+            // Each of the button's mouselisteners
+            for(int applier = 0; applier < settingButton.length; applier++) {
+                addMouseListener(settingButton[applier].retrieveMouseHandler());
+                addMouseMotionListener(settingButton[applier].retrieveMouseHandler());
+            }
 
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
@@ -123,7 +120,6 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Coalesce is disabled since there is no multiple firing of triggers.
             stringTimer.setRepeats(true);
             stringTimer.setCoalesce(false);
-
 
         } catch (Exception e) {
             System.out.println("File failure in Config class");
@@ -179,8 +175,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
             if(!saveDialogue.isActive()) {
-                backButton.paintComponent(g);
-                saveButton.paintComponent(g);
+                for(int paintButton = 0; paintButton < settingButton.length; paintButton++) {
+                    settingButton[paintButton].paintComponent(g);
+                }
             }
             autoDialog.paintComponent(g);
 
@@ -206,29 +203,18 @@ public class ConfigPane extends JPanel implements ActionListener {
             }
         }
         if(saveDialogue.isActive())
-        saveDialogue.paintComponent(g);
+            saveDialogue.paintComponent(g);
+
     }
 
     private boolean checkLockInSetting() {
         if(settingSliders[0].getLevel() != WaifuBrew.getInstance().getDialogueTransparency()) {
-            /*
-            System.out.println("Transparency Level " + settingSliders[0].getLevel());
-            System.out.println("Transparency Settings " + WaifuBrew.getInstance().getDialogueTransparency());
-            */
             return false;
         }
         if(settingSliders[1].getLevel() != WaifuBrew.getInstance().getDialogueSpeed()) {
-            /*
-            System.out.println("Speed Level " + settingSliders[1].getLevel());
-            System.out.println("Speed Settings " + WaifuBrew.getInstance().getDialogueSpeed());
-            */
             return false;
         }
         if(((settingSliders[2].getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()) {
-            /*
-            System.out.println("FontSize Level " + (settingSliders[2].getLevel() / 2) + 10);
-            System.out.println("FontSize Settings " + WaifuBrew.getInstance().getFontSize());
-            */
             return false;
         }
         return true;
@@ -240,7 +226,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         public void mouseClicked(MouseEvent event) {
             // Disable original back and save button for noticeBox buttons.
             if(!saveDialogue.isActive()) {
-                if (event.getX() >= backButton.getX() - backButton.getWidth() / 2 && event.getY() >= backButton.getY() - backButton.getHeight() / 2 && event.getX() <= backButton.getX() + backButton.getWidth() / 2 && event.getY() <= backButton.getY() + backButton.getHeight() / 2) {
+                if (event.getX() >= settingButton[0].getX() - settingButton[0].getWidth() / 2 && event.getY() >= settingButton[0].getY() - settingButton[0].getHeight() / 2 && event.getX() <= settingButton[0].getX() + settingButton[0].getWidth() / 2 && event.getY() <= settingButton[0].getY() + settingButton[0].getHeight() / 2) {
                     if (checkLockInSetting()) {
                         WaifuBrew.getInstance().setStage(0);
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -249,7 +235,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         saveDialogue.setActive(true);
                     }
                 }
-                if (event.getX() >= saveButton.getX() - saveButton.getWidth() / 2 && event.getY() >= saveButton.getY() - saveButton.getHeight() / 2 && event.getX() <= saveButton.getX() + saveButton.getWidth() / 2 && event.getY() <= saveButton.getY() + saveButton.getHeight() / 2) {
+                if (event.getX() >= settingButton[1].getX() - settingButton[1].getWidth() / 2 && event.getY() >= settingButton[1].getY() - settingButton[1].getHeight() / 2 && event.getX() <= settingButton[1].getX() + settingButton[1].getWidth() / 2 && event.getY() <= settingButton[1].getY() + settingButton[1].getHeight() / 2) {
                     WaifuBrew.getInstance().setDialogueTransparency(settingSliders[0].getLevel());
                     WaifuBrew.getInstance().setDialogueSpeed(settingSliders[1].getLevel());
                     WaifuBrew.getInstance().setFontSize((settingSliders[2].getLevel() / 2) + 10);
@@ -258,15 +244,23 @@ public class ConfigPane extends JPanel implements ActionListener {
                     WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
                     WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 }
+                if (event.getX() >= settingButton[2].getX() - settingButton[2].getWidth() / 2 && event.getY() >= settingButton[2].getY() - settingButton[2].getHeight() / 2 && event.getX() <= settingButton[2].getX() + settingButton[2].getWidth() / 2 && event.getY() <= settingButton[2].getY() + settingButton[2].getHeight() / 2) {
+
+                    settingSliders[0].setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                    settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                    settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+
+
+                }
             }
             else {
-                for(int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
-                    if (event.getX() > saveDialogue.getButton()[noticBoxButtonIndix].getAbsoluteX() &&
-                        event.getX() < saveDialogue.getButton()[noticBoxButtonIndix].getAbsoluteX() + saveDialogue.getButton()[noticBoxButtonIndix].getWidth() &&
-                        event.getY() > saveDialogue.getButton()[noticBoxButtonIndix].getAbsoluteY() &&
-                        event.getY() < saveDialogue.getButton()[noticBoxButtonIndix].getAbsoluteY() + saveDialogue.getButton()[noticBoxButtonIndix].getHeight()) {
+                for(int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() &&
+                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndex].getWidth() &&
+                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() &&
+                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndex].getHeight()) {
 
-                        if(noticBoxButtonIndix == 0) {
+                        if(noticeBoxButtonIndex == 0) {
                             // Save is clicked
 
                             // Save all the settings.
@@ -282,11 +276,17 @@ public class ConfigPane extends JPanel implements ActionListener {
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }
-                        else if(noticBoxButtonIndix == 1) {
+                        else if(noticeBoxButtonIndex == 1) {
                             // Back is clicked
 
                             // Disable NoticeBox
                             saveDialogue.setActive(false);
+                            settingSliders[0].setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                            settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                            settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                            repaint();
+                            WaifuBrew.getInstance().setStage(0);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }
                     }
                 }

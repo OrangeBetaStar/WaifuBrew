@@ -12,7 +12,6 @@ public class GUI extends JFrame {
     private AnimationPane animationPane;
     private ConfigPane configPane;
 
-    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
     private boolean framelimiterDisable = false;
@@ -29,6 +28,8 @@ public class GUI extends JFrame {
         init();
     }
 
+
+
     public void revalidateGraphics() {
 
         stage = WaifuBrew.getInstance().getStage();
@@ -44,7 +45,7 @@ public class GUI extends JFrame {
                 remove(configPane);
             }
             if(lastStage == 3) {
-                // remeove load pane
+                // remove load pane
             }
             if(lastStage == 0 || lastStage == 10) {
                 remove(startPage);

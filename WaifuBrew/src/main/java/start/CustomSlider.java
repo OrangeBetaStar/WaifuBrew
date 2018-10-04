@@ -78,7 +78,8 @@ public class CustomSlider extends JPanel implements ActionListener {
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
         g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth() + sliderKnob.getWidth(), sliderBackground.getHeight(), that);
         g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int)(sliderBackground.getWidth() * (level/100.0)) + (int)(sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), dialogueKnobX, dialogueKnobY, that);
+        g.drawImage(sliderKnob.getBufferedImage(), (int)(x + ((level/100.0) * length)), dialogueKnobY, that);
+        // dialogueKnobX = (int)(x + ((level/100.0) * length));
 
     }
 
@@ -88,6 +89,10 @@ public class CustomSlider extends JPanel implements ActionListener {
 
     public int getLevel() {
         return this.level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getX() {
@@ -101,7 +106,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed (MouseEvent event) {
-            if(event.getX() >= dialogueKnobX && event.getX() <= dialogueKnobX + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
+            if(event.getX() >= (int)(x + ((level/100.0) * length)) && event.getX() <= (int)(x + ((level/100.0) * length)) + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
                 sliderActive = true;
             }
         }
