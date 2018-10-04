@@ -81,3 +81,7 @@ Logs:
 09/18/18 - Fixed inversed case of dialogue speed slider. Fixed dialogue transparency of value turning 1 at 0. [Gaia]
 
 09/20/18 - Consistent naming scheme throughout the CustomSlider class. Now with relative positioning of the elements instead of relying on each other for placement in ConfigPane. [BetaStar] Removal of bak folder since elements are no longer needed [Gaia]
+
+10/01/18 - Fixed font to the same one that was used on original system button font. It no longer relies on cut pre-made image for system images. When you run, it makes fresh new one everytime! (idea of Gaia) When there is no picture while using getImageByName(), it returns black image instead of null so that program can still run for debugging purpose without crashing. Added reset button. Now users are not forced to save the current settings. Relative positioning of ConfigPane button placement. Added set value.
+
+10/03/18 - Improved failed retrieval defaultImage. Fixed default case when font can not be found. Defaults to serif. No more cutting images for system button images.
