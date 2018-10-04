@@ -252,6 +252,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                     settingSliders[1].setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                     settingSliders[2].setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
 
+
                 }
             }
             else {

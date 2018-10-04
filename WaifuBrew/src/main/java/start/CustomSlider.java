@@ -78,7 +78,8 @@ public class CustomSlider extends JPanel implements ActionListener {
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
         g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth() + sliderKnob.getWidth(), sliderBackground.getHeight(), that);
         g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int)(sliderBackground.getWidth() * (level/100.0)) + (int)(sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), dialogueKnobX, dialogueKnobY, that);
+        g.drawImage(sliderKnob.getBufferedImage(), (int)(x + ((level/100.0) * length)), dialogueKnobY, that);
+        // dialogueKnobX = (int)(x + ((level/100.0) * length));
 
     }
 
