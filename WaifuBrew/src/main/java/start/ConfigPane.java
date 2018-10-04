@@ -162,8 +162,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
             if (
                     !this.settingSlidersMap.get("barTransparency").isSliderActive() &&
-                    !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
-                    !this.settingSlidersMap.get("textSize").isSliderActive()
+                            !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
+                            !this.settingSlidersMap.get("textSize").isSliderActive()
             ) {
                 g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
             }
@@ -172,8 +172,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         // DISABLES CONFIGPANE BG WHEN USING SLIDER & PREVIEW OF TRANSPARENCY
         if (
                 !this.settingSlidersMap.get("barTransparency").isSliderActive() &&
-                !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
-                !this.settingSlidersMap.get("textSize").isSliderActive()
+                        !this.settingSlidersMap.get("textSpeed").isSliderActive() &&
+                        !this.settingSlidersMap.get("textSize").isSliderActive()
         ) {
 
             if (stringTimer.isRunning()) {
@@ -215,16 +215,17 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
         }
-        if (saveDialogue.isActive())
+        if (saveDialogue.isActive()) {
             saveDialogue.paintComponent(g);
-
+        }
     }
+
 
     private boolean checkLockInSetting() {
         return (
-                this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
-                this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
-                ((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize()
+                !(this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
+                        this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
+                        ((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize())
         );
     }
 
@@ -233,13 +234,14 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         public void mouseClicked(MouseEvent event) {
             // Disable original back and save button for noticeBox buttons.
+            System.out.println(saveDialogue.isActive());
             if (!saveDialogue.isActive()) {
                 CustomButton button = settingButtonsMap.get("back");
                 if (
-                        event.getX() >= button.getX() - settingButtonsMap.get("back").getWidth() / 2 &&
-                        event.getY() >= button.getY() - button.getHeight() / 2 &&
-                        event.getX() <= button.getX() + button.getWidth() / 2 &&
-                        event.getY() <= button.getY() + button.getHeight() / 2
+                        event.getX() >= button.getX() - button.getWidth() / 2 &&
+                                event.getY() >= button.getY() - button.getHeight() / 2 &&
+                                event.getX() <= button.getX() + button.getWidth() / 2 &&
+                                event.getY() <= button.getY() + button.getHeight() / 2
                 ) {
                     if (checkLockInSetting()) {
                         WaifuBrew.getInstance().setStage(0);
@@ -252,9 +254,9 @@ public class ConfigPane extends JPanel implements ActionListener {
                 button = settingButtonsMap.get("save");
                 if (
                         event.getX() >= button.getX() - button.getWidth() / 2 &&
-                        event.getY() >= button.getY() - button.getHeight() / 2 &&
-                        event.getX() <= button.getX() + button.getWidth() / 2 &&
-                        event.getY() <= button.getY() + button.getHeight() / 2
+                                event.getY() >= button.getY() - button.getHeight() / 2 &&
+                                event.getX() <= button.getX() + button.getWidth() / 2 &&
+                                event.getY() <= button.getY() + button.getHeight() / 2
                 ) {
                     WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                     WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
@@ -267,22 +269,22 @@ public class ConfigPane extends JPanel implements ActionListener {
                 button = settingButtonsMap.get("reset");
                 if (
                         event.getX() >= button.getX() - button.getWidth() / 2 &&
-                        event.getY() >= button.getY() - button.getHeight() / 2 &&
-                        event.getX() <= button.getX() + button.getWidth() / 2 &&
-                        event.getY() <= button.getY() + button.getHeight() / 2
+                                event.getY() >= button.getY() - button.getHeight() / 2 &&
+                                event.getX() <= button.getX() + button.getWidth() / 2 &&
+                                event.getY() <= button.getY() + button.getHeight() / 2
                 ) {
                     settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                     settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                     settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
                 }
             } else {
-                for (int noticeBoxButtonIndix = 0; noticeBoxButtonIndix < saveDialogue.getButton().length; noticeBoxButtonIndix++) {
-                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() &&
-                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndix].getWidth() &&
-                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() &&
-                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndix].getHeight()) {
+                for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() &&
+                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndex].getWidth() &&
+                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() &&
+                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndex].getHeight()) {
 
-                        if (noticeBoxButtonIndix == 0) {
+                        if (noticeBoxButtonIndex == 0) {
                             // Save is clicked
 
                             // Save all the settings.
@@ -297,7 +299,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                             // Go back to Main screen.
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                        } else if (noticeBoxButtonIndix == 1) {
+                        } else if (noticeBoxButtonIndex == 1) {
                             // Back is clicked
 
                             // Disable NoticeBox
@@ -305,7 +307,6 @@ public class ConfigPane extends JPanel implements ActionListener {
                             settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                             settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                             settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
-                            repaint();
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }
