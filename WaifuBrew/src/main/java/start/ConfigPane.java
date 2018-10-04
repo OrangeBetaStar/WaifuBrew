@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 @SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
@@ -16,11 +15,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image backgroundPicture;
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
-
-    // Apart Y: 80; Start X: 100; Start Y: 220;
-    // TODO: THIS WILL BE CHANGED TOO
-    private int backButtonX = 1100;
-    private int backButtonY = 600;
     private Timer stringTimer;
     private boolean stop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
@@ -57,9 +51,9 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            settingButton[0] = new CustomButton(backButtonX, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true);
-            settingButton[1] = new CustomButton(backButtonX, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
-            settingButton[2] = new CustomButton(backButtonX, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true);
+            settingButton[0] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true);
+            settingButton[1] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false);
+            settingButton[2] = new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true);
 
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
 
@@ -89,9 +83,9 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(saveDialogue.retrieveMouseHandler());
 
             // MouseListners for NoticeBox in ConfigPage
-            for(int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
-                addMouseListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
-                addMouseMotionListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
+            for(int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                addMouseListener(saveDialogue.getButton()[noticeBoxButtonIndex].retrieveMouseHandler());
+                addMouseMotionListener(saveDialogue.getButton()[noticeBoxButtonIndex].retrieveMouseHandler());
             }
 
             // Each of the slider's mouselisteners
@@ -109,17 +103,17 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
             stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                if (!a.isEmpty()) {
-                    if (tempString.length() != a.length()) {
-                        tempString = tempString + a.charAt(tempString.length());
+                    if (!a.isEmpty()) {
+                        if (tempString.length() != a.length()) {
+                            tempString = tempString + a.charAt(tempString.length());
+                        }
+                        else {
+                            tempString = a.substring(0,1);
+                            stringTimer.stop();
+                            stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
+                            stringTimer.start();
+                        }
                     }
-                    else {
-                        tempString = a.substring(0,1);
-                        stringTimer.stop();
-                        stringTimer.setDelay(100 - settingSliders[1].getLevel()); // Text speed is inverted.
-                        stringTimer.start();
-                    }
-                }
                 }
             });
 
@@ -209,7 +203,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             }
         }
         if(saveDialogue.isActive())
-        saveDialogue.paintComponent(g);
+            saveDialogue.paintComponent(g);
 
     }
 
@@ -260,13 +254,13 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
             else {
-                for(int noticeBoxButtonIndix = 0; noticeBoxButtonIndix < saveDialogue.getButton().length; noticeBoxButtonIndix++) {
-                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() &&
-                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndix].getWidth() &&
-                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() &&
-                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndix].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndix].getHeight()) {
+                for(int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() &&
+                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndex].getWidth() &&
+                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() &&
+                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndex].getHeight()) {
 
-                        if(noticeBoxButtonIndix == 0) {
+                        if(noticeBoxButtonIndex == 0) {
                             // Save is clicked
 
                             // Save all the settings.
@@ -282,7 +276,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }
-                        else if(noticeBoxButtonIndix == 1) {
+                        else if(noticeBoxButtonIndex == 1) {
                             // Back is clicked
 
                             // Disable NoticeBox
