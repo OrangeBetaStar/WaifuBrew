@@ -19,11 +19,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image backgroundPicture;
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
-
-    // Apart Y: 80; Start X: 100; Start Y: 220;
-    // TODO: THIS WILL BE CHANGED TOO
-    private int backButtonX = 1100;
-    private int backButtonY = 600;
     private Timer stringTimer;
     private boolean stop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
@@ -57,9 +52,9 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            this.settingButtonsMap.put("back", new CustomButton(backButtonX, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton(backButtonX, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false));
-            this.settingButtonsMap.put("reset", new CustomButton(backButtonX, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false));
+            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true));
 
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
 
