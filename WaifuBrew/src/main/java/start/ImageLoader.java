@@ -17,7 +17,7 @@ public class ImageLoader extends JPanel {
     private ArrayList<ImageDesc> load_first_images = new ArrayList<ImageDesc>();
     private ArrayList<ImageDesc> vectorImages = new ArrayList<ImageDesc>();
     private ArrayList<ImageDesc> bg_images = new ArrayList<ImageDesc>();
-    private ImageDesc[] character_imagesArr= new ImageDesc[Characters.length * Mood.length];
+    private ImageDesc[] character_imagesArr = new ImageDesc[Characters.length * Mood.length];
     private int charCounter = 0;
 
     // Creating a menu button fonts
@@ -32,28 +32,21 @@ public class ImageLoader extends JPanel {
 
     private String[] systemButtonStrings = {
             "Start",
-            "Save" ,
-            "Load" ,
-            "Back" ,
-            "Config" ,
-            "Exit" ,
-            "Reset" ,
+            "Save",
+            "Load",
+            "Back",
+            "Config",
+            "Exit",
+            "Reset",
             "Don't Save"};
-
-    /*
-    public static final String UTF8_BOM = "\uFEFF";
-    if (textString.startsWith(UTF8_BOM)) {
-        textString = textString.substring(1);
-    }
-                            */
 
     public ImageLoader(String RESOURCE_PATH) {
         this.RESOURCE_PATH = RESOURCE_PATH;
     }
 
-    public ArrayList<ArrayList<ImageDesc>> imgCompiler (LinkedList<String> fileList) {
+    public ArrayList<ArrayList<ImageDesc>> imgCompiler(LinkedList<String> fileList) {
 
-        for(String loadImage : fileList) {
+        for (String loadImage : fileList) {
             loadImage = loadImage.toLowerCase();
             // This will look inside resource folder and automatically load the images according to file names.
             if (loadImage.contains("load_first")) {
@@ -79,16 +72,14 @@ public class ImageLoader extends JPanel {
                         load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
                         count++;
                     }
-                }
-                else {
+                } else {
                     if (loadImage.contains("toggle_housing")) {
                         ImageSlicer toggleHousing = new ImageSlicer(200, 400, RESOURCE_PATH + loadImage, true);
                         BufferedImage[] sliderHousing = toggleHousing.getSprites();
                         for (int a = 0; a < sliderHousing.length; a++) {
                             vectorImages.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
                         }
-                    }
-                    else {
+                    } else {
                         vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
                     }
                 }
@@ -97,15 +88,15 @@ public class ImageLoader extends JPanel {
             } else if (loadImage.contains("char")) {
                 ImageSlicer charSlices = new ImageSlicer(400, 500, RESOURCE_PATH + loadImage, true);
                 BufferedImage[] charImageArray = charSlices.getSprites();
-                for(int inde = 0; inde < charImageArray.length; inde++) {
-                    character_imagesArr[Mood.length * charCounter + inde] = new ImageDesc(loadImage.substring(5, loadImage.indexOf(".png"))+"-"+getMood(inde).toString().toLowerCase(), charImageArray[inde]);
+                for (int inde = 0; inde < charImageArray.length; inde++) {
+                    character_imagesArr[Mood.length * charCounter + inde] = new ImageDesc(loadImage.substring(5, loadImage.indexOf(".png")) + "-" + getMood(inde).toString().toLowerCase(), charImageArray[inde]);
                 }
                 charCounter++;
             }
         }
 
-        for(ImageDesc asdf : character_imagesArr) {
-            System.out.println("Image Processed: "+asdf.getImageDescription());
+        for (ImageDesc asdf : character_imagesArr) {
+            System.out.println("Image Processed: " + asdf.getImageDescription());
         }
 
 
@@ -120,8 +111,8 @@ public class ImageLoader extends JPanel {
 
 
     public Mood getMood(int index) {
-        for(Mood a : Mood.values()) {
-            if(a.getValue() == index) {
+        for (Mood a : Mood.values()) {
+            if (a.getValue() == index) {
                 return a;
             }
         }

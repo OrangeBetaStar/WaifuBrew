@@ -18,7 +18,7 @@ public class ThreadFileLoad implements Runnable {
         System.out.println(Thread.currentThread().getName() + " - Load Thread running");
 
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
-        for(ImageDesc buttons : fileList.get(0)) {
+        for (ImageDesc buttons : fileList.get(0)) {
             systemImages[Integer.parseInt(buttons.getImageDescription())] = buttons.getImageItself();
         }
     }

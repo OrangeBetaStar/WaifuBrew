@@ -15,7 +15,7 @@ public class CustomButton extends JPanel implements ActionListener {
     private int y;
     private boolean wasPressed = false;
     private boolean mouseOver = false;
-    private double GUIScale = (double)WaifuBrew.getInstance().getSystemGUIScale();
+    private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private int defaultButtonHeight = 75;
     private Origin origin;
 
@@ -24,94 +24,77 @@ public class CustomButton extends JPanel implements ActionListener {
 
     private Handlerclass miniHandler = new Handlerclass();
 
-    public CustomButton (int x, int y, String fileName, Origin origin) {
+    public CustomButton(int x, int y, String fileName, Origin origin) {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        if(fileName.contains("start_button")) {
+        if (fileName.contains("start_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
-        }
-        else if(fileName.contains("save_button")) {
+        } else if (fileName.contains("save_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
-        }
-        else if(fileName.contains("load_button")) {
+        } else if (fileName.contains("load_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
-        }
-        else if(fileName.contains("back_button")) {
+        } else if (fileName.contains("back_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
-        }
-        else if(fileName.contains("config_button")) {
+        } else if (fileName.contains("config_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
-        }
-        else if(fileName.contains("exit_button")) {
+        } else if (fileName.contains("exit_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
-        }
-        else if(fileName.contains("reset_button")) {
+        } else if (fileName.contains("reset_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
-        }
-        else if(fileName.contains("savennot_button")) {
+        } else if (fileName.contains("savennot_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[7]);
-        }
-        else {
+        } else {
             // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
             // System.out.println("Please fix code: I/O access detected.");
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
         }
-        originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), defaultButtonHeight, true);
+        originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.origin = origin;
     }
 
-    public CustomButton (int x, int y, String fileName, Origin origin, double sizeY, boolean invert) {
+    public CustomButton(int x, int y, String fileName, Origin origin, double sizeY, boolean invert) {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        if(fileName.contains("start_button")) {
+        if (fileName.contains("start_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
-        }
-        else if(fileName.contains("save_button")) {
+        } else if (fileName.contains("save_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
-        }
-        else if(fileName.contains("load_button")) {
+        } else if (fileName.contains("load_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
-        }
-        else if(fileName.contains("back_button")) {
+        } else if (fileName.contains("back_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
-        }
-        else if(fileName.contains("config_button")) {
+        } else if (fileName.contains("config_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
-        }
-        else if(fileName.contains("exit_button")) {
+        } else if (fileName.contains("exit_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
-        }
-        else if(fileName.contains("reset_button")) {
+        } else if (fileName.contains("reset_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
-        }
-        else if(fileName.contains("savenot_button")) {
+        } else if (fileName.contains("savenot_button")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[7]);
-        }
-        else {
+        } else {
             // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
             // System.out.println("Please fix code: I/O access detected.");
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
         }
-        if(invert) {
+        if (invert) {
             System.out.println("inverted. " + fileName);
             originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
         }
-        if(sizeY == 0) {
-            originalButton.resize((int)(originalButton.getWidth() * (GUIScale/originalButton.getHeight())), defaultButtonHeight, true);
-        }
-        else {
-            originalButton.resize((int)(originalButton.getWidth() * (sizeY/originalButton.getHeight())), (int)sizeY, false);
+        if (sizeY == 0) {
+            originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
+        } else {
+            originalButton.resize((int) (originalButton.getWidth() * (sizeY / originalButton.getHeight())), (int) sizeY, false);
         }
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.origin = origin;
     }
 
-    public CustomButton (int x, int y, String fileName_1, String fileName_2) {
+    public CustomButton(int x, int y, String fileName_1, String fileName_2) {
         this.x = x;
         this.y = y;
         // originalButton will be shown and changed to mouseoverButton when mouse is over the pic.
@@ -270,19 +253,20 @@ public class CustomButton extends JPanel implements ActionListener {
             }
         }
     }
+
     private BufferedImage imageInverter(BufferedImage inputFile) {
 
-        for(int ConvY = 0; ConvY < inputFile.getHeight(); ConvY++){
-            for(int ConvX = 0; ConvX < inputFile.getWidth(); ConvX++){
+        for (int ConvY = 0; ConvY < inputFile.getHeight(); ConvY++) {
+            for (int ConvX = 0; ConvX < inputFile.getWidth(); ConvX++) {
                 int p = inputFile.getRGB(ConvX, ConvY);
-                int a = (p>>24)&0xff;
-                int r = (p>>16)&0xff;
-                int g = (p>>8)&0xff;
-                int b = p&0xff;
+                int a = (p >> 24) & 0xff;
+                int r = (p >> 16) & 0xff;
+                int g = (p >> 8) & 0xff;
+                int b = p & 0xff;
                 r = 255 - r;
                 g = 255 - g;
                 b = 255 - b;
-                p = (a<<24) | (r<<16) | (g<<8) | b;
+                p = (a << 24) | (r << 16) | (g << 8) | b;
                 inputFile.setRGB(ConvX, ConvY, p);
             }
         }
@@ -304,95 +288,96 @@ public class CustomButton extends JPanel implements ActionListener {
 
     private class Handlerclass extends MasterHandlerClass {
 
-        public void mousePressed (MouseEvent event) {
+        public void mousePressed(MouseEvent event) {
 
         }
-        public void mouseMoved (MouseEvent event) {
-            if(origin.getValue() == 0) {
+
+        public void mouseMoved(MouseEvent event) {
+            if (origin.getValue() == 0) {
                 if (event.getX() > x &&
-                    event.getX() < (x + originalButton.getWidth()) &&
-                    event.getY() > y &&
-                    event.getY() < (y + originalButton.getHeight())) {
+                        event.getX() < (x + originalButton.getWidth()) &&
+                        event.getY() > y &&
+                        event.getY() < (y + originalButton.getHeight())) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 1) {
+            if (origin.getValue() == 1) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                    event.getX() < (x + originalButton.getWidth() / 2) &&
-                    event.getY() > y &&
-                    event.getY() < (y + originalButton.getHeight())) {
+                        event.getX() < (x + originalButton.getWidth() / 2) &&
+                        event.getY() > y &&
+                        event.getY() < (y + originalButton.getHeight())) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 2) {
+            if (origin.getValue() == 2) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
-                    event.getX() < x &&
-                    event.getY() > y &&
-                    event.getY() < (y + originalButton.getHeight())) {
+                        event.getX() < x &&
+                        event.getY() > y &&
+                        event.getY() < (y + originalButton.getHeight())) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 3) {
+            if (origin.getValue() == 3) {
                 if (event.getX() > x &&
-                    event.getX() < (x + originalButton.getWidth()) &&
-                    event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                    event.getY() < (y + originalButton.getHeight() / 2)) {
+                        event.getX() < (x + originalButton.getWidth()) &&
+                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                        event.getY() < (y + originalButton.getHeight() / 2)) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 4) {
+            if (origin.getValue() == 4) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                    event.getX() < (x + originalButton.getWidth() / 2) &&
-                    event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                    event.getY() < (y + originalButton.getHeight() / 2)) {
+                        event.getX() < (x + originalButton.getWidth() / 2) &&
+                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                        event.getY() < (y + originalButton.getHeight() / 2)) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 5) {
+            if (origin.getValue() == 5) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
-                    event.getX() < x &&
-                    event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                    event.getY() < (y + originalButton.getHeight() / 2)) {
+                        event.getX() < x &&
+                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                        event.getY() < (y + originalButton.getHeight() / 2)) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 6) {
+            if (origin.getValue() == 6) {
                 if (event.getX() > x &&
-                    event.getX() < (x + originalButton.getWidth()) &&
-                    event.getY() > y - (originalButton.getHeight()) &&
-                    event.getY() < y) {
+                        event.getX() < (x + originalButton.getWidth()) &&
+                        event.getY() > y - (originalButton.getHeight()) &&
+                        event.getY() < y) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 7) {
+            if (origin.getValue() == 7) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                    event.getX() < (x + originalButton.getWidth() / 2) &&
-                    event.getY() > y - (originalButton.getHeight()) &&
-                    event.getY() < y) {
+                        event.getX() < (x + originalButton.getWidth() / 2) &&
+                        event.getY() > y - (originalButton.getHeight()) &&
+                        event.getY() < y) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
                 }
             }
-            if(origin.getValue() == 8) {
+            if (origin.getValue() == 8) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
-                    event.getX() < x &&
-                    event.getY() > y - (originalButton.getHeight()) &&
-                    event.getY() < y) {
+                        event.getX() < x &&
+                        event.getY() > y - (originalButton.getHeight()) &&
+                        event.getY() < y) {
                     mouseOver = true;
                 } else {
                     mouseOver = false;
@@ -400,8 +385,8 @@ public class CustomButton extends JPanel implements ActionListener {
             }
         }
 
-        public void mouseClicked (MouseEvent event) {
-            if(origin.getValue() == 0) {
+        public void mouseClicked(MouseEvent event) {
+            if (origin.getValue() == 0) {
                 if (event.getX() > x &&
                         event.getX() < (x + originalButton.getWidth()) &&
                         event.getY() > y &&
@@ -409,7 +394,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 1) {
+            if (origin.getValue() == 1) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                         event.getX() < (x + originalButton.getWidth() / 2) &&
                         event.getY() > y &&
@@ -417,7 +402,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 2) {
+            if (origin.getValue() == 2) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
                         event.getX() < x &&
                         event.getY() > y &&
@@ -425,7 +410,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 3) {
+            if (origin.getValue() == 3) {
                 if (event.getX() > x &&
                         event.getX() < (x + originalButton.getWidth()) &&
                         event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -433,7 +418,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 4) {
+            if (origin.getValue() == 4) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                         event.getX() < (x + originalButton.getWidth() / 2) &&
                         event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -441,7 +426,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 5) {
+            if (origin.getValue() == 5) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
                         event.getX() < x &&
                         event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -449,7 +434,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 6) {
+            if (origin.getValue() == 6) {
                 if (event.getX() > x &&
                         event.getX() < (x + originalButton.getWidth()) &&
                         event.getY() > y - (originalButton.getHeight()) &&
@@ -457,7 +442,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 7) {
+            if (origin.getValue() == 7) {
                 if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                         event.getX() < (x + originalButton.getWidth() / 2) &&
                         event.getY() > y - (originalButton.getHeight()) &&
@@ -465,7 +450,7 @@ public class CustomButton extends JPanel implements ActionListener {
                     wasPressed = true;
                 }
             }
-            if(origin.getValue() == 8) {
+            if (origin.getValue() == 8) {
                 if (event.getX() > (x - originalButton.getWidth()) &&
                         event.getX() < x &&
                         event.getY() > y - (originalButton.getHeight()) &&
@@ -475,9 +460,9 @@ public class CustomButton extends JPanel implements ActionListener {
             }
         }
 
-        public void mouseReleased (MouseEvent event) {
+        public void mouseReleased(MouseEvent event) {
             // TODO: If state wasn't changed, do not change the boolean to false
-            if(mouseOver)
+            if (mouseOver)
                 mouseOver = false;
         }
     }
