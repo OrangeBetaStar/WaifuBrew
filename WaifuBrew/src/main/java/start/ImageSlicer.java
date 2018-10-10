@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ImageSlicer {
 
-    BufferedImage[] sprites;
+    private BufferedImage[] sprites;
 
     public ImageSlicer(int widthCut, int heightCut, String fileName, boolean containsPath) {
         try {
@@ -27,17 +27,12 @@ public class ImageSlicer {
 
     private void imageSlice(int widthCut, int heightCut, BufferedImage imageSheet) {
 
-        // AS YOU SEE I HAD TROUBLE CALCULATING THIS THING FOR SOME REASON??????????
-
+        // Calculates size of the array.
         sprites = new BufferedImage[(imageSheet.getWidth()/widthCut) * (imageSheet.getHeight()/heightCut)];
-        // System.out.println("Willing to cut this " + imageSheet.getWidth()/widthCut + " times horizontally");
-        // System.out.println("and "+ imageSheet.getHeight()/heightCut + " times vertically");
+
+        // Cuts and puts it in the array.
         for(int verticalCalc = 0; verticalCalc < imageSheet.getHeight()/heightCut; verticalCalc++) {
             for(int horizontalCalc = 0; horizontalCalc < imageSheet.getWidth()/widthCut; horizontalCalc++) {
-                // System.out.println("Cutting at ("+(widthCut*horizontalCalc)+", "+(heightCut*verticalCalc)+") with size of x: "+widthCut+", y: "+heightCut);
-                // System.out.println("and putting it in... " + ((imageSheet.getWidth()/widthCut) * horizontalCalc) + verticalCalc);
-                // System.out.println(verticalCalc + " " + horizontalCalc);
-                // System.out.println((imageSheet.getWidth()/widthCut) * verticalCalc + horizontalCalc);
                 sprites[(imageSheet.getWidth()/widthCut) * verticalCalc + horizontalCalc] = imageSheet.getSubimage(widthCut*horizontalCalc, heightCut*verticalCalc, widthCut, heightCut);
             }
         }

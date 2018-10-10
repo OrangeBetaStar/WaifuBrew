@@ -28,6 +28,8 @@ public class NoticeBox extends JPanel {
     // Dialogue text string (warning message)
     private String dialogueBoxText = "";
 
+    private int padding = 10;
+
     // Font things
     private Font activeFont;
     private BufferedInputStream myStream;
@@ -40,7 +42,7 @@ public class NoticeBox extends JPanel {
         button = new CustomButton[1];
         dialogueBoxText = text;
         backgroundPane = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2), centreButton, Origin.MIDDLE_BOTTOM, 0, centreInvert);
+        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) + padding, centreButton, Origin.MIDDLE_BOTTOM, 0, centreInvert);
         addMouseListener(button[0].retrieveMouseHandler());
         addMouseMotionListener(button[0].retrieveMouseHandler());
 
@@ -51,8 +53,8 @@ public class NoticeBox extends JPanel {
         button = new CustomButton[2];
         dialogueBoxText = text;
         backgroundPane = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2), leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
-        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2), rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
+        button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2) + padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
+        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2) - padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
         addMouseListener(button[0].retrieveMouseHandler());
         addMouseMotionListener(button[0].retrieveMouseHandler());
         addMouseListener(button[1].retrieveMouseHandler());
@@ -92,7 +94,6 @@ public class NoticeBox extends JPanel {
 
     public void setActive(boolean activate) {
         isActive = activate;
-        System.out.println("Dialogue set to active");
     }
 
     private class Handlerclass extends MasterHandlerClass {
