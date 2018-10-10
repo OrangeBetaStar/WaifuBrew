@@ -225,7 +225,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         return (
                 !(this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
                         this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
-                        ((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10) != WaifuBrew.getInstance().getFontSize())
+                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize())
         );
     }
 
@@ -234,7 +234,6 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         public void mouseClicked(MouseEvent event) {
             // Disable original back and save button for noticeBox buttons.
-            System.out.println(saveDialogue.isActive());
             if (!saveDialogue.isActive()) {
                 CustomButton button = settingButtonsMap.get("back");
                 if (
@@ -260,9 +259,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 ) {
                     WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                     WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                    WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSpeed").getLevel() / 2) + 10);
-
-                    // System.out.println("ConfigPane.Handler: Set auto dia to: " + autoDialog.getValue());
+                    WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
                     WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
                     WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 }
@@ -275,7 +272,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 ) {
                     settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                     settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                    settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                    settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
                 }
             } else {
                 for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
@@ -290,7 +287,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                             // Save all the settings.
                             WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                             WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                            WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSpeed").getLevel() / 2) + 10);
+                            WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
                             WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
                             // Disable NoticeBox
@@ -306,7 +303,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                             saveDialogue.setActive(false);
                             settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                             settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                            settingSlidersMap.get("textSpeed").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                            settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         }

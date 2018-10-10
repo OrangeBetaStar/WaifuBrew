@@ -94,7 +94,6 @@ public class NoticeBox extends JPanel {
 
     public void setActive(boolean activate) {
         isActive = activate;
-        System.out.println("Dialogue set to active");
     }
 
     private class Handlerclass extends MasterHandlerClass {

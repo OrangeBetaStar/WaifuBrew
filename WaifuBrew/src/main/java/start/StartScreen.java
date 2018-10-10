@@ -105,13 +105,10 @@ public class StartScreen extends JPanel implements ActionListener {
                 if((event.getY() < buttonY + ((double)start_buton.getHeight() / 2)) && (event.getY() > buttonY - ((double)start_buton.getHeight() / 2))) {
                     if ((event.getX() < ((double)windowSize.x / spacing) + ((double)start_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) - ((double)start_buton.getWidth() / 2))) {
                         WaifuBrew.getInstance().setStage(1);
-                        System.out.println("Hit button and changed stage!");
                     } else if ((event.getX() < ((double)windowSize.x / spacing) * 2 + ((double)load_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 2 - ((double)load_buton.getWidth() / 2))) {
                         WaifuBrew.getInstance().setStage(3);
-                        System.out.println("Hit button and changed stage!");
                     } else if ((event.getX() < ((double)windowSize.x / spacing) * 3 + ((double)config_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 3 - ((double)config_buton.getWidth() / 2))) {
                         WaifuBrew.getInstance().setStage(2);
-                        System.out.println("Hit button and changed stage!");
                     } else if ((event.getX() < ((double)windowSize.x / spacing) * 4 + ((double)exit_buton.getWidth() / 2)) && (event.getX() > ((double)windowSize.x / spacing) * 4 - ((double)exit_buton.getWidth() / 2))) {
                         System.exit(0);
                     }
