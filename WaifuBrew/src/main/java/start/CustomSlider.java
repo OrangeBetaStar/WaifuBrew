@@ -59,7 +59,7 @@ public class CustomSlider extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(initStage) {
+        if (initStage) {
 
             // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
             sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
@@ -69,7 +69,7 @@ public class CustomSlider extends JPanel implements ActionListener {
             // SLIDER TRACK
             sliderBackground.resize(length, height, false);
             sliderKnob.resize(sliderBackground.getHeight(), sliderBackground.getHeight(), false);
-            dialogueKnobX = x + (int)(sliderBackground.getWidth() * (level/100.0));
+            dialogueKnobX = x + (int) (sliderBackground.getWidth() * (level / 100.0));
             dialogueKnobY = y;
 
             initStage = false;
@@ -77,8 +77,8 @@ public class CustomSlider extends JPanel implements ActionListener {
 
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
         g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth() + sliderKnob.getWidth(), sliderBackground.getHeight(), that);
-        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int)(sliderBackground.getWidth() * (level/100.0)) + (int)(sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), (int)(x + ((level/100.0) * length)), dialogueKnobY, that);
+        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int) (sliderBackground.getWidth() * (level / 100.0)) + (int) (sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
+        g.drawImage(sliderKnob.getBufferedImage(), (int) (x + ((level / 100.0) * length)), dialogueKnobY, that);
         // dialogueKnobX = (int)(x + ((level/100.0) * length));
 
     }
@@ -105,26 +105,28 @@ public class CustomSlider extends JPanel implements ActionListener {
 
     private class Handlerclass extends MasterHandlerClass {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
-        public void mousePressed (MouseEvent event) {
-            if(event.getX() >= (int)(x + ((level/100.0) * length)) && event.getX() <= (int)(x + ((level/100.0) * length)) + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
+        public void mousePressed(MouseEvent event) {
+            if (event.getX() >= (int) (x + ((level / 100.0) * length)) && event.getX() <= (int) (x + ((level / 100.0) * length)) + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
                 sliderActive = true;
             }
         }
-        public void mouseDragged (MouseEvent event) {
-            if(sliderActive) {
-                if(event.getX() >= x + (int)(sliderKnob.getWidth() * 0.5) && event.getX() <= x + sliderLeveler.getWidth() + (int)(sliderKnob.getWidth() * 0.5)) {
-                    dialogueKnobX = (int) (event.getX() - (sliderKnob.getWidth() * 0.5));
-                    level = (int)(((dialogueKnobX - x) / (double)sliderBackground.getWidth()) * 100);
 
-                    if(level <= 1 ) {
+        public void mouseDragged(MouseEvent event) {
+            if (sliderActive) {
+                if (event.getX() >= x + (int) (sliderKnob.getWidth() * 0.5) && event.getX() <= x + sliderLeveler.getWidth() + (int) (sliderKnob.getWidth() * 0.5)) {
+                    dialogueKnobX = (int) (event.getX() - (sliderKnob.getWidth() * 0.5));
+                    level = (int) (((dialogueKnobX - x) / (double) sliderBackground.getWidth()) * 100);
+
+                    if (level <= 1) {
                         // <= 1 because 1 == true and program thinks it wants to be opaque
                         level = 0;
                     }
                 }
             }
         }
-        public void mouseReleased (MouseEvent event) {
-            if(sliderActive) {
+
+        public void mouseReleased(MouseEvent event) {
+            if (sliderActive) {
                 sliderActive = false;
             }
         }

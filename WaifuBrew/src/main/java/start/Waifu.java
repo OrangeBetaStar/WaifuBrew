@@ -50,7 +50,7 @@ public class Waifu {
         this.mood = mood;
     }
 
-    public void addDialogue (String dialogue) {
+    public void addDialogue(String dialogue) {
         this.dialogue = dialogue;
     }
 }

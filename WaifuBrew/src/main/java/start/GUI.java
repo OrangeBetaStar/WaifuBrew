@@ -29,34 +29,33 @@ public class GUI extends JFrame {
     }
 
 
-
     public void revalidateGraphics() {
 
         stage = WaifuBrew.getInstance().getStage();
 
         // If stage changed
-        if(lastStage != stage) {
+        if (lastStage != stage) {
 
             // Remove old pane
-            if(lastStage == 1) {
+            if (lastStage == 1) {
                 remove(animationPane);
             }
-            if(lastStage == 2) {
+            if (lastStage == 2) {
                 remove(configPane);
             }
-            if(lastStage == 3) {
+            if (lastStage == 3) {
                 // remove load pane
             }
-            if(lastStage == 0 || lastStage == 10) {
+            if (lastStage == 0 || lastStage == 10) {
                 remove(startPage);
             }
 
             // Add new pane as active
-            if(stage == 1) {
+            if (stage == 1) {
                 add(animationPane);
                 animationPane.repaint();
             }
-            if(stage == 2) {
+            if (stage == 2) {
                 add(configPane);
                 configPane.repaint();
             }
@@ -64,7 +63,7 @@ public class GUI extends JFrame {
                 // add load pane
                 // load pane repaint
             }
-            if(stage == 0 || stage == 10) {
+            if (stage == 0 || stage == 10) {
                 add(startPage);
                 startPage.repaint();
             }
@@ -80,20 +79,20 @@ public class GUI extends JFrame {
         revalidateGraphics();
     }
 
-    public void init(){
+    public void init() {
         // Setting framerate
-        Timer t = new Timer((int)(1000/WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+        Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(!framelimiterDisable) {
+                if (!framelimiterDisable) {
                     revalidateGraphics();
                     revalidate();
                 } else {
-                    ((Timer)e.getSource()).stop();
+                    ((Timer) e.getSource()).stop();
                 }
             }
         });
         t.setRepeats(true);
-        t.setDelay((int)(1000/WaifuBrew.getInstance().getFrameRate()));
+        t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
 
         // Set application icon
