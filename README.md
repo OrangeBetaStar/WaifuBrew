@@ -88,6 +88,6 @@ Logs:
 
 10/03/18 - Improved failed retrieval defaultImage. Fixed default case when font can not be found. Defaults to serif. No more cutting images for system button images. [BetaStar]
 
-10/04/18 - Fixed the fault of UTF8 pom, but also creation of system buttons are internalized. Fixed buttons' behaviours and changed noticebox's righ behaviour (return -> don't save and exit). Alignment and padding for noticebox. [BetaStar] Refactoring system config storage arrays to hashmap to make it more understandable. [Gaia]
+10/04/18 - Fixed the fault of UTF8 bom, but also creation of system buttons are internalized. Fixed buttons' behaviours and changed noticebox's righ behaviour (return -> don't save and exit). Alignment and padding for noticebox. [BetaStar] Refactoring system config storage arrays to hashmap to make it more understandable. [Gaia]
 
 10/10/18 - Fixed saving bugs in configPane due to refactoring [BetaStar]
