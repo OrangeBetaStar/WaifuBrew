@@ -87,3 +87,7 @@ Logs:
 10/01/18 - Fixed font to the same one that was used on original system button font. It no longer relies on cut pre-made image for system images. When you run, it makes fresh new one everytime! (idea of Gaia) When there is no picture while using getImageByName(), it returns black image instead of null so that program can still run for debugging purpose without crashing. Added reset button. Now users are not forced to save the current settings. Relative positioning of ConfigPane button placement. Added set value. [BetaStar]
 
 10/03/18 - Improved failed retrieval defaultImage. Fixed default case when font can not be found. Defaults to serif. No more cutting images for system button images. [BetaStar]
+
+10/04/18 - Fixed the fault of UTF8 pom, but also creation of system buttons are internalized. Fixed buttons' behaviours and changed noticebox's righ behaviour (return -> don't save and exit). Alignment and padding for noticebox. [BetaStar] Refactoring system config storage arrays to hashmap to make it more understandable. [Gaia]
+
+10/10/18 - Fixed saving bugs in configPane due to refactoring [BetaStar]
