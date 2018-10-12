@@ -4,10 +4,6 @@ import javax.swing.*;
 
 public abstract class InteractiveObjects extends JPanel {
 
-    private javaxt.io.Image image;
-    private int x;
-    private int y;
-
     public abstract int getWidth();
 
     public abstract int getHeight();
