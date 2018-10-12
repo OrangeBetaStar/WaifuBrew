@@ -69,7 +69,9 @@ public class ImageLoader extends JPanel {
                         javaxt.io.Image tempCreation = menuCreationArea.copy();
                         tempCreation.resize(width + (padding * 2), fontSize + (padding * 2));
                         tempCreation.addText(textString, (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont, 255, 255, 255);
-                        load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
+                        // System.out.println("textString " + textString);
+                        load_first_images.add(new ImageDesc(textString, tempCreation.getBufferedImage()));
+                        //load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
                         count++;
                     }
                 } else {
@@ -80,6 +82,8 @@ public class ImageLoader extends JPanel {
                             vectorImages.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
                         }
                     } else {
+                        // textString load_first_slider_knob.png
+                        // System.out.println("textString " + loadImage);
                         vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
                     }
                 }
@@ -99,12 +103,16 @@ public class ImageLoader extends JPanel {
             System.out.println("Image Processed: " + asdf.getImageDescription());
         }
 
+        for (ImageDesc asdf : load_first_images) {
+            System.out.println("Exists: " + asdf.getImageDescription());
+        }
 
-        ArrayList<ArrayList<ImageDesc>> imagePackage = new ArrayList<ArrayList<ImageDesc>>();
+
+        ArrayList<ArrayList<ImageDesc>> imagePackage = new ArrayList<>();
         imagePackage.add(load_first_images);
         imagePackage.add(vectorImages);
         imagePackage.add(bg_images);
-        imagePackage.add(new ArrayList<ImageDesc>(Arrays.asList(character_imagesArr)));
+        imagePackage.add(new ArrayList<>(Arrays.asList(character_imagesArr)));
 
         return imagePackage;
     }

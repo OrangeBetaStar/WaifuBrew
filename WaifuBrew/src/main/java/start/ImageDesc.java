@@ -29,6 +29,9 @@ public class ImageDesc {
         }
     }
 
+    public ImageDesc(String textString) {
+    }
+
     public String getImageDescription() {
         return imageDescription;
     }

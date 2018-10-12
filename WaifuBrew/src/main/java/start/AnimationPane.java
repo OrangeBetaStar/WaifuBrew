@@ -59,19 +59,19 @@ public class AnimationPane extends JPanel {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
-            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_start_button.png", Origin.LEFT_TOP, 60, true);
+            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "start_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(startButton.retrieveMouseHandler());
             addMouseMotionListener(startButton.retrieveMouseHandler());
 
-            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_load_button.png", Origin.LEFT_TOP, 60, true);
+            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "load_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(loadButton.retrieveMouseHandler());
             addMouseMotionListener(loadButton.retrieveMouseHandler());
 
-            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_save_button.png", Origin.LEFT_TOP, 60, true);
+            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "save_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_config_button.png", Origin.LEFT_TOP, 60, true);
+            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "config_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
@@ -147,36 +147,12 @@ public class AnimationPane extends JPanel {
 
     private class Handlerclass extends MasterHandlerClass {
 
-        public void mouseClicked(MouseEvent event) {
-
-        }
-
-        public void mousePressed(MouseEvent event) {
-
-        }
-
         public void mouseReleased(MouseEvent event) {
             // There may be a dialogue without dialogue and only character movement
 
             // TODO: Have this inside if statement where it is not run on buttons.
             clickActivate = true;
             triggerNext();
-        }
-
-        public void mouseEntered(MouseEvent event) {
-
-        }
-
-        public void mouseExited(MouseEvent event) {
-
-        }
-
-        public void mouseMoved(MouseEvent event) {
-
-        }
-
-        public void mouseDragged(MouseEvent event) {
-
         }
     }
 
@@ -205,7 +181,6 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
-
             g.drawImage(dialogueBox.getBufferedImage(), res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2), this);
             g.drawString(e.get(advancer - 1).get(0).getName().toString(), 100, 430);
 
