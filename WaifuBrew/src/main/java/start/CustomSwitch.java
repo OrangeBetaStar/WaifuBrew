@@ -2,11 +2,12 @@ package start;
 
 // This class will enhouse on/off boolean with more graphical interface.
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
-public class CustomSwitch extends JPanel implements ActionListener {
+public class CustomSwitch extends InteractiveObjects implements ActionListener {
 
     private Handlerclass miniHandler = new Handlerclass();
     private boolean value;
@@ -74,10 +75,6 @@ public class CustomSwitch extends JPanel implements ActionListener {
         */
     }
 
-    public Handlerclass retrieveMouseHandler() {
-        return miniHandler;
-    }
-
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
@@ -86,12 +83,24 @@ public class CustomSwitch extends JPanel implements ActionListener {
         return value;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public int getWidth () {
+        return 0;
+    }
+
+    @Override
+    public int getHeight () {
+        return 0;
     }
 
     public int getSlidingPathWidth() {
@@ -100,6 +109,11 @@ public class CustomSwitch extends JPanel implements ActionListener {
 
     public int getSlidingPathHeight() {
         return slidingPathHeight;
+    }
+
+    @Override
+    public Handlerclass retrieveMouseHandler() {
+        return miniHandler;
     }
 
     private class Handlerclass extends MasterHandlerClass {
@@ -121,22 +135,6 @@ public class CustomSwitch extends JPanel implements ActionListener {
                     }
                 }
             }
-        }
-
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        public void mouseMoved(MouseEvent e) {
-
-        }
-
-        public void mouseDragged(MouseEvent e) {
-
         }
     }
 }

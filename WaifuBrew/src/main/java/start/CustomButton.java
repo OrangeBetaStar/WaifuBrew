@@ -1,12 +1,13 @@
 package start;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 // This class will handle the buttons that require transparency changes and launch actions
-public class CustomButton extends JPanel implements ActionListener {
+public class CustomButton extends InteractiveObjects implements ActionListener {
 
     private javaxt.io.Image originalButton;
     private javaxt.io.Image mouseoverButton;
@@ -74,10 +75,6 @@ public class CustomButton extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         repaint();
-    }
-
-    public Handlerclass retrieveMouseHandler() {
-        return miniHandler;
     }
 
     @Override
@@ -256,11 +253,12 @@ public class CustomButton extends JPanel implements ActionListener {
         return inputFile;
     }
 
+    @Override
+    public Handlerclass retrieveMouseHandler() {
+        return miniHandler;
+    }
+
     private class Handlerclass extends MasterHandlerClass {
-
-        public void mousePressed(MouseEvent event) {
-
-        }
 
         public void mouseMoved(MouseEvent event) {
             if (origin.getValue() == 0) {
