@@ -15,15 +15,8 @@ public class WaifuBrew {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     public final String RESOURCE_PATH = "src/main/java/resources/";
-    private BufferedImage[] systemImages;
     private ArrayList<ArrayList<ImageDesc>> fileList;
-
     private static WaifuBrew singleton;
-
-    // [n] array number / = n value
-    // [0] is dialogueTransparency = 70
-    // [1] is dialogueSpeed = 50
-//    private static int[] configStorage = new int[20]; //Increase if needed.
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
@@ -35,7 +28,7 @@ public class WaifuBrew {
     private Point[] defaultSize = {
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
-            new Point((screenSize.width / 2) - (1280 / 2),(screenSize.height / 2) - (720 / 2))};
+            new Point((screenSize.width / 2) - (1280 / 2), (screenSize.height / 2) - (720 / 2))};
 
     WaifuBrew() {
 
@@ -61,7 +54,6 @@ public class WaifuBrew {
 
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
-        systemImages = tfl.getSystemImages();
     }
 
     public static WaifuBrew getInstance() {
@@ -103,19 +95,19 @@ public class WaifuBrew {
         this.setFontName("Halogen");
     }
 
-    public int getDialogueTransparency () {
+    public int getDialogueTransparency() {
         return configStorage.get("dialogueTransparency");
     }
 
-    public void setDialogueTransparency (int dialogueTransparency) {
+    public void setDialogueTransparency(int dialogueTransparency) {
         configStorage.put("dialogueTransparency", dialogueTransparency);
     }
 
-    public int getDialogueSpeed () {
+    public int getDialogueSpeed() {
         return configStorage.get("dialogueSpeed");
     }
 
-    public void setDialogueSpeed (int dialogueSpeed) {
+    public void setDialogueSpeed(int dialogueSpeed) {
         configStorage.put("dialogueSpeed", dialogueSpeed);
     }
 
@@ -159,25 +151,22 @@ public class WaifuBrew {
         configStorage.put("stage", stage);
     }
 
-    public String getResoucePath () {
+    public String getResoucePath() {
         return RESOURCE_PATH;
     }
 
-    public Point[] getRes () {
+    public Point[] getRes() {
         return defaultSize;
     }
 
-    public GUI getGUIInstance(){
+    public GUI getGUIInstance() {
         return sample;
-    }
-
-    public BufferedImage[] getSystemImage() {
-        return systemImages;
     }
 
     public ArrayList<ImageDesc> getImageSet(int index) {
         return fileList.get(index);
     }
+
     public ArrayList<ImageDesc> getImageSet(ImageSelector imageSelector) {
         return fileList.get(imageSelector.getValue());
     }
@@ -186,14 +175,16 @@ public class WaifuBrew {
     public BufferedImage getImageByName(ImageSelector whichPile, String whichOne) {
 
         // Getting ImageSelector.VECTOR - blackbox is a fail-safe
-        for(ImageDesc pictures : fileList.get(whichPile.getValue())) {
-            if(pictures.getImageDescription().contains(whichOne)) {
+        for (ImageDesc pictures : fileList.get(whichPile.getValue())) {
+            if (pictures.getImageDescription().toLowerCase().contains(whichOne.toLowerCase())) {
                 return pictures.getImageItself();
             }
         }
+        // Failed case
+        System.out.println("Couldn't find: " + whichOne);
         javaxt.io.Image createDefaultImage = new javaxt.io.Image(getImageByName(ImageSelector.VECTOR, "blackbox"));
         createDefaultImage.resize(getFontSize() * 2, getFontSize());
-        createDefaultImage.addText(whichOne, 0, createDefaultImage.getHeight()/2, null, getFontSize(), 128, 128, 128);
+        createDefaultImage.addText(whichOne, 0, createDefaultImage.getHeight() / 2, null, getFontSize(), 128, 128, 128);
         return createDefaultImage.getBufferedImage();
     }
 

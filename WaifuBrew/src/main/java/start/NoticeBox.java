@@ -3,7 +3,6 @@ package start;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -80,10 +79,10 @@ public class NoticeBox extends JPanel {
         g.drawImage(backgroundPane.getBufferedImage(), (WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) - (height / 2), that);
         // Calcuate the width of the text with font: int width = g.getFontMetrics().stringWidth(text);
         g.setFont(activeFont);
-        g.setColor(new Color(0,0,0));
+        g.setColor(new Color(0, 0, 0));
         g.drawString(dialogueBoxText, (WaifuBrew.getInstance().getRes()[1].x / 2) - (g.getFontMetrics().stringWidth(dialogueBoxText) / 2), (WaifuBrew.getInstance().getRes()[1].y / 2));
 
-        for(int paintButton = 0; paintButton < button.length; paintButton++) {
+        for (int paintButton = 0; paintButton < button.length; paintButton++) {
             button[paintButton].paintComponent(g);
         }
     }
@@ -97,28 +96,8 @@ public class NoticeBox extends JPanel {
     }
 
     private class Handlerclass extends MasterHandlerClass {
-        public void mouseClicked(MouseEvent e) {
-
-        }
-        public void mousePressed(MouseEvent e) {
-
-        }
-        public void mouseReleased(MouseEvent e) {
-
-        }
-        public void mouseMoved(MouseEvent e) {
-
-        }
-        public void mouseEntered(MouseEvent e) {
-
-        }
-        public void mouseDragged(MouseEvent e) {
-
-        }
-        public void mouseExited(MouseEvent e) {
-
-        }
     }
+
     private void initFont() {
         try {
             // For real time preview later when font change is implemented

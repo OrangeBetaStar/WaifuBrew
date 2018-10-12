@@ -61,10 +61,9 @@ public class CustomSwitch extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
 
-        if(value) {
+        if (value) {
             g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
-        }
-        else {
+        } else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
         // g.drawString("The value: " + value, x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2));
@@ -105,22 +104,19 @@ public class CustomSwitch extends JPanel implements ActionListener {
 
     private class Handlerclass extends MasterHandlerClass {
         public void mouseClicked(MouseEvent e) {
-            if(centered) {
-                if((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
-                    if(value) {
+            if (centered) {
+                if ((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
+                    if (value) {
                         value = false;
-                    }
-                    else {
+                    } else {
                         value = true;
                     }
                 }
-            }
-            else {
-                if((e.getX() > x) && (e.getX() <= x + slidingPathWidth) && (e.getY() > y) && (e.getY() <= y + slidingPathHeight)) { // TODO: Check if this is working.
-                    if(value) {
+            } else {
+                if ((e.getX() > x) && (e.getX() <= x + slidingPathWidth) && (e.getY() > y) && (e.getY() <= y + slidingPathHeight)) { // TODO: Check if this is working.
+                    if (value) {
                         value = false;
-                    }
-                    else {
+                    } else {
                         value = true;
                     }
                 }
@@ -130,12 +126,15 @@ public class CustomSwitch extends JPanel implements ActionListener {
         public void mousePressed(MouseEvent e) {
 
         }
+
         public void mouseReleased(MouseEvent e) {
 
         }
+
         public void mouseMoved(MouseEvent e) {
 
         }
+
         public void mouseDragged(MouseEvent e) {
 
         }

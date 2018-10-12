@@ -17,7 +17,7 @@ public class ThreadLoadingScreen implements Runnable {
 
         JWindow window = new JWindow();
         //window.setLayout(null);
-        window.setBounds((screenSize.width / 2) - (1280 / 2) ,(screenSize.height / 2) - (720 / 2), 1280, 720);
+        window.setBounds((screenSize.width / 2) - (1280 / 2), (screenSize.height / 2) - (720 / 2), 1280, 720);
         window.setVisible(true);
         window.getContentPane().add(
         /*
@@ -32,7 +32,7 @@ public class ThreadLoadingScreen implements Runnable {
           }
         },
 */
-        new JLabel("Loading... :D", loadingImage, JLabel.CENTER));
+                new JLabel("Loading... :D", loadingImage, JLabel.CENTER));
 
         window.validate();
 

@@ -37,8 +37,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private BufferedInputStream myStream;
     private int fontSize = 24;
 
-    int upperBound = 90;
-
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
@@ -47,85 +45,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
     public ConfigPane() {
-        try {
-            init();
-
-            backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
-            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_back_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "config_save_button", Origin.MIDDLE_CENTRE, 0, false));
-            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "config_reset_button", Origin.MIDDLE_CENTRE, 0, true));
-
-            saveDialogue = new NoticeBox("Would you like to save the current settings?", "config_save_button", "config_savenot_button", false, true);
-
-            // Pre-scale
-            if (backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
-                if (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
-                    backgroundPicture.resize(((int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
-                } else {
-                    backgroundPicture.resize(((int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
-                }
-            }
-            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
-
-            this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency()));
-            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed()));
-            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2));
-            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
-
-            // Handlers listening to mouse like DOGS
-            addMouseListener(handler);
-            addMouseMotionListener(handler);
-            addMouseListener(autoDialog.retrieveMouseHandler());
-            addMouseMotionListener(autoDialog.retrieveMouseHandler());
-            addMouseListener(saveDialogue.retrieveMouseHandler());
-            addMouseMotionListener(saveDialogue.retrieveMouseHandler());
-
-            // MouseListners for NoticeBox in ConfigPage
-            for (int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
-                addMouseListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
-                addMouseMotionListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
-            }
-
-            // Each of the slider's mouselisteners
-            for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
-                CustomSlider slider = entry.getValue();
-                addMouseListener(slider.retrieveMouseHandler());
-                addMouseMotionListener(slider.retrieveMouseHandler());
-            }
-
-            // Each of the button's mouselisteners
-            for (Map.Entry<String, CustomButton> entry : this.settingButtonsMap.entrySet()) {
-                CustomButton button = entry.getValue();
-                addMouseListener(button.retrieveMouseHandler());
-                addMouseMotionListener(button.retrieveMouseHandler());
-            }
-
-            // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
-            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (!a.isEmpty()) {
-                        if (tempString.length() != a.length()) {
-                            tempString = tempString + a.charAt(tempString.length());
-                        } else {
-                            tempString = a.substring(0, 1);
-                            stringTimer.stop();
-                            stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
-                            stringTimer.start();
-                        }
-                    }
-                }
-            });
-
-            // Coalesce is disabled since there is no multiple firing of triggers.
-            stringTimer.setRepeats(true);
-            stringTimer.setCoalesce(false);
-
-        } catch (Exception e) {
-            System.out.println("File failure in Config class");
-            e.printStackTrace(); // Wall of error
-            System.exit(-1);
-        }
+        init();
     }
 
     @Override
@@ -345,6 +265,86 @@ public class ConfigPane extends JPanel implements ActionListener {
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
             configPaneFont = new Font("serif", Font.PLAIN, 24);
+        }
+
+        try {
+
+
+            backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
+            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
+            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
+
+            saveDialogue = new NoticeBox("Would you like to save the current settings?", "save_button", "don't_save_button", false, true);
+
+            // Pre-scale
+            if (backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
+                if (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
+                    backgroundPicture.resize(((int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
+                } else {
+                    backgroundPicture.resize(((int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
+                }
+            }
+            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
+
+            this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency()));
+            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed()));
+            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2));
+            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
+
+            // Handlers listening to mouse like DOGS
+            addMouseListener(handler);
+            addMouseMotionListener(handler);
+            addMouseListener(autoDialog.retrieveMouseHandler());
+            addMouseMotionListener(autoDialog.retrieveMouseHandler());
+            addMouseListener(saveDialogue.retrieveMouseHandler());
+            addMouseMotionListener(saveDialogue.retrieveMouseHandler());
+
+            // MouseListners for NoticeBox in ConfigPage
+            for (int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
+                addMouseListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
+                addMouseMotionListener(saveDialogue.getButton()[noticBoxButtonIndix].retrieveMouseHandler());
+            }
+
+            // Each of the slider's mouselisteners
+            for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
+                CustomSlider slider = entry.getValue();
+                addMouseListener(slider.retrieveMouseHandler());
+                addMouseMotionListener(slider.retrieveMouseHandler());
+            }
+
+            // Each of the button's mouselisteners
+            for (Map.Entry<String, CustomButton> entry : this.settingButtonsMap.entrySet()) {
+                CustomButton button = entry.getValue();
+                addMouseListener(button.retrieveMouseHandler());
+                addMouseMotionListener(button.retrieveMouseHandler());
+            }
+
+            // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
+            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (!a.isEmpty()) {
+                        if (tempString.length() != a.length()) {
+                            tempString = tempString + a.charAt(tempString.length());
+                        } else {
+                            tempString = a.substring(0, 1);
+                            stringTimer.stop();
+                            stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
+                            stringTimer.start();
+                        }
+                    }
+                }
+            });
+
+            // Coalesce is disabled since there is no multiple firing of triggers.
+            stringTimer.setRepeats(true);
+            stringTimer.setCoalesce(false);
+
+        } catch (Exception e) {
+            System.out.println("File failure in Config class");
+            e.printStackTrace(); // Wall of error
+            System.exit(-1);
         }
     }
 }
