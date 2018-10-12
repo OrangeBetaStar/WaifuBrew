@@ -29,8 +29,12 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        System.out.println("Calling: " + fileName.toLowerCase().substring(0, fileName.indexOf("_")));
-        originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
+        if(fileName.contains("_")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
+        }
+        else {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase()));
+        }
 
         originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
         mouseoverButton = originalButton.copy();
