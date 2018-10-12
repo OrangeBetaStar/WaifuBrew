@@ -103,13 +103,13 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     }
 
     @Override
-    public int getWidth () {
-        return 0;
+    public int getWidth() {
+        return length;
     }
 
     @Override
-    public int getHeight () {
-        return 0;
+    public int getHeight() {
+        return height;
     }
 
     @Override

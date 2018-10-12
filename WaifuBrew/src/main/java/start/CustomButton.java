@@ -29,10 +29,9 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        if(fileName.contains("_")) {
+        if (fileName.contains("_")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
-        }
-        else {
+        } else {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase()));
         }
 
@@ -48,17 +47,17 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         // originalButton will be shown when mouse isn't above the button.
 
         // TODO: This has to be fixed in order to load the required images.
-        if(fileName.contains("_")) {
+        if (fileName.contains("_")) {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
-        }
-        else {
+        } else {
             originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase()));
         }
 
+        // Black to white, white to black for better viewing
         if (invert) {
-            System.out.println("inverted. " + fileName);
             originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
         }
+
         if (sizeY == 0) {
             originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
         } else {

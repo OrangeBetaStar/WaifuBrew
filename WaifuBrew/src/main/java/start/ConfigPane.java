@@ -273,7 +273,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
             this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, false));
             this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
 
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "save_button", "don't_save_button", false, true);

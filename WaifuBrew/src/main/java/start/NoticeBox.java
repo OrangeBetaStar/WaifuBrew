@@ -1,6 +1,5 @@
 package start;
 
-
 import java.awt.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -58,9 +57,7 @@ public class NoticeBox extends InteractiveObjects {
         button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2) + padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
         button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2) - padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
         addMouseListener(button[0].retrieveMouseHandler());
-        addMouseMotionListener(button[0].retrieveMouseHandler());
         addMouseListener(button[1].retrieveMouseHandler());
-        addMouseMotionListener(button[1].retrieveMouseHandler());
 
         initFont();
     }
@@ -95,7 +92,6 @@ public class NoticeBox extends InteractiveObjects {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
 
         backgroundPane.resize(length, height);
         backgroundPane.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
