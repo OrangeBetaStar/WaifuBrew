@@ -6,9 +6,11 @@ import parser.exception.DialogueDataMissingException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public class AnimationPane extends JPanel {
 
     private boolean frameRateDisable = false;
 
-    private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
+    private HashMap<String, InteractiveObjects> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private CustomButton saveButton;
     private CustomButton loadButton;
     private CustomButton configButton;
@@ -113,7 +115,7 @@ public class AnimationPane extends JPanel {
             stringTimer.setCoalesce(false);
             stringTimer.start();
 
-
+            /*
             try {
                 myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
                 ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
@@ -123,7 +125,8 @@ public class AnimationPane extends JPanel {
                 System.err.println(myStream.toString() + " not loaded.  Using serif font.");
                 activeFont = new Font("serif", Font.PLAIN, 24);
             }
-
+            */
+            activeFont = new Font("MS Mincho", Font.BOLD, WaifuBrew.getInstance().getFontSize());
 
         } catch (IOException ex) {
             System.out.println("Simple IOException");
@@ -188,7 +191,6 @@ public class AnimationPane extends JPanel {
             // DialogueBox
             g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
             g.drawString(e.get(advancer - 1).get(0).getName().toString(), 100, 430);
-
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             if (initStory) {
 
@@ -204,7 +206,23 @@ public class AnimationPane extends JPanel {
         }
 
         if (tempString != "") {
-            g.drawString(tempString, 150, 550);
+
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+            FontRenderContext frc = g2d.getFontRenderContext();
+            TextLayout textTl = new TextLayout(tempString, activeFont, frc);
+            Shape outline = textTl.getOutline(null);
+
+            FontMetrics fm = g2d.getFontMetrics(activeFont);
+            g2d.translate((windowSize.x/10.0), ((windowSize.y/10.0) * 7)+ fm.getAscent());
+            g2d.setColor(Color.WHITE);
+            g2d.fill(outline);
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(Color.BLACK);
+            g2d.draw(outline);
+            g2d.dispose();
         }
 
         startButton.paintComponent(g);
