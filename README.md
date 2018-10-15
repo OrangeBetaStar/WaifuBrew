@@ -97,3 +97,5 @@ Logs:
 10/12/18 - Added checks when "_button" is not present in the name while calling to retrieve an image. Fixed bug for save dialogue where whitebox was spontaneously coming 1/4 of the screen. [BetaStar]
 
 10/14/18 - Dialogue now supports asian characters. Border outlining of dialogue texts are applied. Changed dialogue font to simpler one (MS Mincho) for wide use. [BetaStar]
+
+10/15/18 - Condensed area checker in ConfigPane. Now seperate methodd handles much of the similar bound check for any intractive objects (currently checks CustomButton and NoticeBox) since they are same inherted object of same abstract parent. [BetaStar]

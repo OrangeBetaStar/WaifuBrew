@@ -10,6 +10,20 @@ public class MasterHandlerClass implements MouseListener, MouseMotionListener {
 
     }
 
+    public boolean inBound(MouseEvent event, InteractiveObjects interactiveObject, boolean absoluteTrack) {
+        return (absoluteTrack ?
+                event.getX() > interactiveObject.getAbsoluteX() &&
+                        event.getX() < interactiveObject.getAbsoluteX() + interactiveObject.getWidth() &&
+                        event.getY() > interactiveObject.getAbsoluteY() &&
+                        event.getY() < interactiveObject.getAbsoluteY() + interactiveObject.getHeight() :
+                event.getX() >= interactiveObject.getX() - interactiveObject.getWidth() / 2 &&
+                        event.getY() >= interactiveObject.getY() - interactiveObject.getHeight() / 2 &&
+                        event.getX() <= interactiveObject.getX() + interactiveObject.getWidth() / 2 &&
+                        event.getY() <= interactiveObject.getY() + interactiveObject.getHeight() / 2
+
+        );
+    }
+
     public void mouseClicked(MouseEvent e) {
 
     }
