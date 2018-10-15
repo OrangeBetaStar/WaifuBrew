@@ -91,3 +91,9 @@ Logs:
 10/04/18 - Fixed the fault of UTF8 bom, but also creation of system buttons are internalized. Fixed buttons' behaviours and changed noticebox's righ behaviour (return -> don't save and exit). Alignment and padding for noticebox. [BetaStar] Refactoring system config storage arrays to hashmap to make it more understandable. [Gaia]
 
 10/10/18 - Fixed saving bugs in configPane due to refactoring [BetaStar]
+
+10/11/18 - More descriptive names are used in system image retrieval. Added InteractiveObject.java abstract class to deal with inheritance for user interactable GUI such as CustomSlider and CustomButton to be grouped together for cleaner implementation such as adding mouse listener to super. Patched the way that AniPane was retrieving its images. [BetaStar]
+
+10/12/18 - Added checks when "_button" is not present in the name while calling to retrieve an image. Fixed bug for save dialogue where whitebox was spontaneously coming 1/4 of the screen. [BetaStar]
+
+10/14/18 - Dialogue now supports asian characters. Border outlining of dialogue texts are applied. Changed dialogue font to simpler one (MS Mincho) for wide use. [BetaStar]
