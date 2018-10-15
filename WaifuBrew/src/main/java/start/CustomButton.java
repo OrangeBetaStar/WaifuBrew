@@ -1,12 +1,13 @@
 package start;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 // This class will handle the buttons that require transparency changes and launch actions
-public class CustomButton extends JPanel implements ActionListener {
+public class CustomButton extends InteractiveObjects implements ActionListener {
 
     private javaxt.io.Image originalButton;
     private javaxt.io.Image mouseoverButton;
@@ -28,27 +29,12 @@ public class CustomButton extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        if (fileName.contains("start_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
-        } else if (fileName.contains("save_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
-        } else if (fileName.contains("load_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
-        } else if (fileName.contains("back_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
-        } else if (fileName.contains("config_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
-        } else if (fileName.contains("exit_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
-        } else if (fileName.contains("reset_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
-        } else if (fileName.contains("savennot_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[7]);
+        if (fileName.contains("_")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
         } else {
-            // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
-            // System.out.println("Please fix code: I/O access detected.");
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase()));
         }
+
         originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
@@ -59,31 +45,19 @@ public class CustomButton extends JPanel implements ActionListener {
         this.x = x;
         this.y = y;
         // originalButton will be shown when mouse isn't above the button.
-        if (fileName.contains("start_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[0]);
-        } else if (fileName.contains("save_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[1]);
-        } else if (fileName.contains("load_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[2]);
-        } else if (fileName.contains("back_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[3]);
-        } else if (fileName.contains("config_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[4]);
-        } else if (fileName.contains("exit_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[5]);
-        } else if (fileName.contains("reset_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[6]);
-        } else if (fileName.contains("savenot_button")) {
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getSystemImage()[7]);
+
+        // TODO: This has to be fixed in order to load the required images.
+        if (fileName.contains("_")) {
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase().substring(0, fileName.indexOf("_"))));
         } else {
-            // originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName);
-            // System.out.println("Please fix code: I/O access detected.");
-            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, fileName));
+            originalButton = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BUTTONS, fileName.toLowerCase()));
         }
+
+        // Black to white, white to black for better viewing
         if (invert) {
-            System.out.println("inverted. " + fileName);
             originalButton = new javaxt.io.Image(imageInverter(originalButton.getBufferedImage()));
         }
+
         if (sizeY == 0) {
             originalButton.resize((int) (originalButton.getWidth() * (GUIScale / originalButton.getHeight())), defaultButtonHeight, true);
         } else {
@@ -104,10 +78,6 @@ public class CustomButton extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         repaint();
-    }
-
-    public Handlerclass retrieveMouseHandler() {
-        return miniHandler;
     }
 
     @Override
@@ -286,11 +256,12 @@ public class CustomButton extends JPanel implements ActionListener {
         return inputFile;
     }
 
+    @Override
+    public Handlerclass retrieveMouseHandler() {
+        return miniHandler;
+    }
+
     private class Handlerclass extends MasterHandlerClass {
-
-        public void mousePressed(MouseEvent event) {
-
-        }
 
         public void mouseMoved(MouseEvent event) {
             if (origin.getValue() == 0) {

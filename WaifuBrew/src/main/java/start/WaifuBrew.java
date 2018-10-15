@@ -15,7 +15,6 @@ public class WaifuBrew {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private GUI sample;
     public final String RESOURCE_PATH = "src/main/java/resources/";
-    private BufferedImage[] systemImages;
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
@@ -55,7 +54,6 @@ public class WaifuBrew {
 
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
-        systemImages = tfl.getSystemImages();
     }
 
     public static WaifuBrew getInstance() {
@@ -165,10 +163,6 @@ public class WaifuBrew {
         return sample;
     }
 
-    public BufferedImage[] getSystemImage() {
-        return systemImages;
-    }
-
     public ArrayList<ImageDesc> getImageSet(int index) {
         return fileList.get(index);
     }
@@ -182,10 +176,12 @@ public class WaifuBrew {
 
         // Getting ImageSelector.VECTOR - blackbox is a fail-safe
         for (ImageDesc pictures : fileList.get(whichPile.getValue())) {
-            if (pictures.getImageDescription().contains(whichOne)) {
+            if (pictures.getImageDescription().toLowerCase().contains(whichOne.toLowerCase())) {
                 return pictures.getImageItself();
             }
         }
+        // Failed case
+        System.out.println("Couldn't find: " + whichOne);
         javaxt.io.Image createDefaultImage = new javaxt.io.Image(getImageByName(ImageSelector.VECTOR, "blackbox"));
         createDefaultImage.resize(getFontSize() * 2, getFontSize());
         createDefaultImage.addText(whichOne, 0, createDefaultImage.getHeight() / 2, null, getFontSize(), 128, 128, 128);

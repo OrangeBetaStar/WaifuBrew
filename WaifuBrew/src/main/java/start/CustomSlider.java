@@ -1,10 +1,11 @@
 package start;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
-public class CustomSlider extends JPanel implements ActionListener {
+public class CustomSlider extends InteractiveObjects implements ActionListener {
     private javaxt.io.Image sliderBackground; // sliderTrack
     private javaxt.io.Image sliderLeveler; // dialogueTransparencySlider
     private javaxt.io.Image sliderKnob; // dialogueTransparencyKnob
@@ -52,10 +53,6 @@ public class CustomSlider extends JPanel implements ActionListener {
         repaint();
     }
 
-    public Handlerclass retrieveMouseHandler() {
-        return miniHandler;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -95,12 +92,29 @@ public class CustomSlider extends JPanel implements ActionListener {
         this.level = level;
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public int getWidth() {
+        return length;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public Handlerclass retrieveMouseHandler() {
+        return miniHandler;
     }
 
     private class Handlerclass extends MasterHandlerClass {

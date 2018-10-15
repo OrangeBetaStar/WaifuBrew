@@ -48,10 +48,10 @@ public class StartScreen extends JPanel implements ActionListener {
         }
 
         // These actually now gets images from sliced up system_image sheet.
-        start_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing), buttonY, "startscreen_start_button.png", Origin.MIDDLE_CENTRE);
-        load_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 2, buttonY, "startscreen_load_button.png", Origin.MIDDLE_CENTRE);
-        config_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 3, buttonY, "startscreen_config_button.png", Origin.MIDDLE_CENTRE);
-        exit_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 4, buttonY, "startscreen_exit_button.png", Origin.MIDDLE_CENTRE);
+        start_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing), buttonY, "start_button", Origin.MIDDLE_CENTRE);
+        load_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 2, buttonY, "load_button", Origin.MIDDLE_CENTRE);
+        config_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 3, buttonY, "config_button", Origin.MIDDLE_CENTRE);
+        exit_buton = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / spacing) * 4, buttonY, "exit_button", Origin.MIDDLE_CENTRE);
 
         addMouseListener(start_buton.retrieveMouseHandler());
         addMouseMotionListener(start_buton.retrieveMouseHandler());
@@ -91,7 +91,7 @@ public class StartScreen extends JPanel implements ActionListener {
 
     }
 
-    private class Handlerclass implements MouseListener, MouseMotionListener {
+    private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
 
@@ -113,25 +113,6 @@ public class StartScreen extends JPanel implements ActionListener {
                     }
                 }
             }
-        }
-
-        public void mousePressed(MouseEvent event) {
-        }
-
-        public void mouseReleased(MouseEvent event) {
-        }
-
-        public void mouseEntered(MouseEvent event) {
-        }
-
-        public void mouseExited(MouseEvent event) {
-        }
-
-        public void mouseDragged(MouseEvent event) {
-        }
-
-        public void mouseMoved(MouseEvent event) {
-
         }
     }
 

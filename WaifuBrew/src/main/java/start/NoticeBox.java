@@ -1,7 +1,5 @@
 package start;
 
-
-import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -9,11 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // This is what will be used to notify users if something may cause undesirable operation. (i.e.: going back to screen when settings are not saved.)
-public class NoticeBox extends JPanel {
+public class NoticeBox extends InteractiveObjects {
 
     // Size of notice box
     private int length = WaifuBrew.getInstance().getRes()[1].x / 2;
     private int height = WaifuBrew.getInstance().getRes()[1].y / 2;
+
+    // TODO: Perhaps this needs to be updated when the size of the window has been changed.
+    private int x = (WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2);
+    private int y = (WaifuBrew.getInstance().getRes()[1].y / 2) - (height / 2);
 
     // This will be (slightly transparent) backing of the notice box.
     private javaxt.io.Image backgroundPane;
@@ -55,11 +57,29 @@ public class NoticeBox extends JPanel {
         button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2) + padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
         button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2) - padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
         addMouseListener(button[0].retrieveMouseHandler());
-        addMouseMotionListener(button[0].retrieveMouseHandler());
         addMouseListener(button[1].retrieveMouseHandler());
-        addMouseMotionListener(button[1].retrieveMouseHandler());
 
         initFont();
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getWidth() {
+        return length;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     public Handlerclass retrieveMouseHandler() {
@@ -72,11 +92,12 @@ public class NoticeBox extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+
         backgroundPane.resize(length, height);
         backgroundPane.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
         backgroundPane.setOpacity(50);
-        g.drawImage(backgroundPane.getBufferedImage(), (WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) - (height / 2), that);
+        g.drawImage(backgroundPane.getBufferedImage(), x, y, that);
+
         // Calcuate the width of the text with font: int width = g.getFontMetrics().stringWidth(text);
         g.setFont(activeFont);
         g.setColor(new Color(0, 0, 0));

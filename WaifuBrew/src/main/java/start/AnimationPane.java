@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class AnimationPane extends JPanel {
 
@@ -20,13 +21,13 @@ public class AnimationPane extends JPanel {
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
     private DialogueParser dp;
-    private Point[] res;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
     private boolean frameRateDisable = false;
 
+    private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private CustomButton saveButton;
     private CustomButton loadButton;
     private CustomButton configButton;
@@ -43,6 +44,9 @@ public class AnimationPane extends JPanel {
     // Advancer keeps track of which line it reads
     private int advancer = 0;
 
+    // [1] is resolution of program window
+    private Point windowSize = WaifuBrew.getInstance().getRes()[1];
+
     // Retrieve String from JSON
     private String a = "Click anywhere to initiate dialog...!";
     private String tempString = "";
@@ -54,24 +58,25 @@ public class AnimationPane extends JPanel {
         addMouseListener(handler);
         addMouseMotionListener(handler);
 
-        this.res = WaifuBrew.getInstance().getRes();
+        // this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+
         try {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
             // GARBAGE IMPLEMENTATION
-            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_start_button.png", Origin.LEFT_TOP, 60, true);
+            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "start_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(startButton.retrieveMouseHandler());
             addMouseMotionListener(startButton.retrieveMouseHandler());
 
-            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_load_button.png", Origin.LEFT_TOP, 60, true);
+            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "load_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(loadButton.retrieveMouseHandler());
             addMouseMotionListener(loadButton.retrieveMouseHandler());
 
-            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_save_button.png", Origin.LEFT_TOP, 60, true);
+            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "save_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(saveButton.retrieveMouseHandler());
             addMouseMotionListener(saveButton.retrieveMouseHandler());
 
-            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "startscreen_config_button.png", Origin.LEFT_TOP, 60, true);
+            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "config_button", Origin.LEFT_TOP, 60, true);
             addMouseListener(configButton.retrieveMouseHandler());
             addMouseMotionListener(configButton.retrieveMouseHandler());
 
@@ -147,36 +152,12 @@ public class AnimationPane extends JPanel {
 
     private class Handlerclass extends MasterHandlerClass {
 
-        public void mouseClicked(MouseEvent event) {
-
-        }
-
-        public void mousePressed(MouseEvent event) {
-
-        }
-
         public void mouseReleased(MouseEvent event) {
             // There may be a dialogue without dialogue and only character movement
 
             // TODO: Have this inside if statement where it is not run on buttons.
             clickActivate = true;
             triggerNext();
-        }
-
-        public void mouseEntered(MouseEvent event) {
-
-        }
-
-        public void mouseExited(MouseEvent event) {
-
-        }
-
-        public void mouseMoved(MouseEvent event) {
-
-        }
-
-        public void mouseDragged(MouseEvent event) {
-
         }
     }
 
@@ -201,12 +182,11 @@ public class AnimationPane extends JPanel {
                 clickActivate = false;
             }
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
-                g.drawImage(characterImage[b - 1].getBufferedImage(), ((res[1].x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (res[1].y / 4) + (characterImage[b - 1].getHeight() / 2), this);
+                g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 4) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
             // DialogueBox
-
-            g.drawImage(dialogueBox.getBufferedImage(), res[1].x / 2 - dialogueBox.getWidth() / 2, res[1].y - dialogueBox.getHeight() - (res[1].x / 2 - dialogueBox.getWidth() / 2), this);
+            g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
             g.drawString(e.get(advancer - 1).get(0).getName().toString(), 100, 430);
 
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
@@ -231,9 +211,6 @@ public class AnimationPane extends JPanel {
         loadButton.paintComponent(g);
         saveButton.paintComponent(g);
         configButton.paintComponent(g);
-
-        // Use the bottom link for implementing string wrap around by distance used by font.
-        // https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
 
         initStage = false;
     }
