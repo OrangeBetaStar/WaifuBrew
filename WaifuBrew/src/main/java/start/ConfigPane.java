@@ -147,16 +147,25 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private class Handlerclass extends MasterHandlerClass {
 
+        private boolean inBound(MouseEvent event, InteractiveObjects interactiveObject, boolean absoluteTrack) {
+            return (absoluteTrack ?
+                    event.getX() > interactiveObject.getAbsoluteX() &&
+                            event.getX() < interactiveObject.getAbsoluteX() + interactiveObject.getWidth() &&
+                            event.getY() > interactiveObject.getAbsoluteY() &&
+                            event.getY() < interactiveObject.getAbsoluteY() + interactiveObject.getHeight() :
+                    event.getX() >= interactiveObject.getX() - interactiveObject.getWidth() / 2 &&
+                            event.getY() >= interactiveObject.getY() - interactiveObject.getHeight() / 2 &&
+                            event.getX() <= interactiveObject.getX() + interactiveObject.getWidth() / 2 &&
+                            event.getY() <= interactiveObject.getY() + interactiveObject.getHeight() / 2
+
+            );
+        }
+
         public void mouseClicked(MouseEvent event) {
             // Disable original back and save button for noticeBox buttons.
             if (!saveDialogue.isActive()) {
                 CustomButton button = settingButtonsMap.get("back");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     if (checkLockInSetting()) {
                         WaifuBrew.getInstance().setStage(0);
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -166,12 +175,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                     }
                 }
                 button = settingButtonsMap.get("save");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                     WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
                     WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
@@ -179,23 +183,14 @@ public class ConfigPane extends JPanel implements ActionListener {
                     WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 }
                 button = settingButtonsMap.get("reset");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                     settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                     settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
                 }
             } else {
                 for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() &&
-                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndex].getWidth() &&
-                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() &&
-                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndex].getHeight()) {
-
+                    if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
                         if (noticeBoxButtonIndex == 0) {
                             // Save is clicked
 

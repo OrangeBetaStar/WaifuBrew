@@ -94,6 +94,16 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     }
 
     @Override
+    public int getAbsoluteX() {
+        return this.x + this.slidingPathWidth / 2;
+    }
+
+    @Override
+    public int getAbsoluteY() {
+        return this.y + this.slidingPathHeight / 2;
+    }
+
+    @Override
     public int getWidth() {
         return slidingPathWidth;
     }

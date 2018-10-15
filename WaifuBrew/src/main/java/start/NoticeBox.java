@@ -73,6 +73,16 @@ public class NoticeBox extends InteractiveObjects {
     }
 
     @Override
+    public int getAbsoluteX() {
+        return this.x + this.length / 2;
+    }
+
+    @Override
+    public int getAbsoluteY() {
+        return this.y + this.height / 2;
+    }
+
+    @Override
     public int getWidth() {
         return length;
     }
