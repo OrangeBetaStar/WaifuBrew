@@ -29,16 +29,12 @@ public class AnimationPane extends JPanel {
     private boolean frameRateDisable = false;
 
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
-
     private SideBar configBar;
 
     private static Font activeFont;
 
-    // This thing below is temporary solution. Will be dealt with later.
-    int roughButtonSizeY = 160;
-
     // Advancer keeps track of which line it reads
-    private int advancer = 0;
+    private int advancer = 0; //line#
 
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
@@ -153,25 +149,20 @@ public class AnimationPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            if(inBound(event, aniPaneButton.get("config"), true)) {
+            if (inBound(event, aniPaneButton.get("config"), true)) {
                 configBar.setActive(true);
                 System.out.println("Pressed config");
-            }
-            else if(inBound(event, aniPaneButton.get("load"), true)) {
+            } else if (inBound(event, aniPaneButton.get("load"), true)) {
                 System.out.println("Pressed load");
-            }
-            else if(inBound(event, aniPaneButton.get("save"), true)) {
+            } else if (inBound(event, aniPaneButton.get("save"), true)) {
                 System.out.println("Pressed save");
-            }
-            else if(inBound(event, aniPaneButton.get("start"), true)) {
+            } else if (inBound(event, aniPaneButton.get("start"), true)) {
                 System.out.println("Pressed start");
-            }
-            else {
-                if(configBar.isActive()) {
+            } else {
+                if (configBar.isActive()) {
                     configBar.setActive(false);
 
-                }
-                else {
+                } else {
                     // To avoid advancing of the dialogue when pressed other place to disable configbar.
                     clickActivate = true;
                     triggerNext();
@@ -184,7 +175,6 @@ public class AnimationPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
 
 
         // Do not show character on first viewing
@@ -234,7 +224,7 @@ public class AnimationPane extends JPanel {
             Shape outline = textTl.getOutline(null);
 
             FontMetrics fm = g2d.getFontMetrics(activeFont);
-            g2d.translate((windowSize.x/10.0), ((windowSize.y/10.0) * 7)+ fm.getAscent());
+            g2d.translate((windowSize.x / 10.0), ((windowSize.y / 10.0) * 7) + fm.getAscent());
             g2d.setColor(Color.WHITE);
             g2d.fill(outline);
             g2d.setStroke(new BasicStroke(1));
@@ -248,13 +238,12 @@ public class AnimationPane extends JPanel {
 
         // Draws the buttons
         for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
-            if(configBar.isActive()) {
+            if (configBar.isActive()) {
                 // Paint every other buttons except config button when configBar is active.
-                if(!entry.getKey().equals("config")) {
+                if (!entry.getKey().equals("config")) {
                     entry.getValue().paintComponent(g);
                 }
-            }
-            else {
+            } else {
                 // Only paint config button when configBar is inactive
                 aniPaneButton.get("config").paintComponent(g);
                 break;

@@ -163,11 +163,11 @@ public class WaifuBrew {
         return sample;
     }
 
-    public ArrayList<ImageDesc> getImageSet(int index) {
+    public ArrayList<ImageDesc> getImageSetByIndex(int index) {
         return fileList.get(index);
     }
 
-    public ArrayList<ImageDesc> getImageSet(ImageSelector imageSelector) {
+    public ArrayList<ImageDesc> getImageSetBySelector(ImageSelector imageSelector) {
         return fileList.get(imageSelector.getValue());
     }
 

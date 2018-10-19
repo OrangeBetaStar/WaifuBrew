@@ -84,17 +84,14 @@ public class StartScreen extends JPanel implements ActionListener {
             // 4 - Exit
 
             for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
-                if(inBound(event, entry.getValue(), true)){
-                    if(entry.getKey().equals("start")){
+                if (inBound(event, entry.getValue(), true)) {
+                    if (entry.getKey().equals("start")) {
                         WaifuBrew.getInstance().setStage(1);
-                    }
-                    else if(entry.getKey().equals("config")){
+                    } else if (entry.getKey().equals("config")) {
                         WaifuBrew.getInstance().setStage(2);
-                    }
-                    else if(entry.getKey().equals("load")){
+                    } else if (entry.getKey().equals("load")) {
                         WaifuBrew.getInstance().setStage(3);
-                    }
-                    else if(entry.getKey().equals("exit")){
+                    } else if (entry.getKey().equals("exit")) {
                         System.exit(0);
                     }
                 }
