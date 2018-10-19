@@ -12,8 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AnimationPane extends JPanel {
 
@@ -26,18 +26,12 @@ public class AnimationPane extends JPanel {
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
-
     private boolean frameRateDisable = false;
 
-    private HashMap<String, InteractiveObjects> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
-    private CustomButton saveButton;
-    private CustomButton loadButton;
-    private CustomButton configButton;
-    private CustomButton startButton;
+    private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
 
-    // Delete after experiment
-    private static InputStream myStream;
-    private static Font ttfBase;
+    private SideBar configBar;
+
     private static Font activeFont;
 
     // This thing below is temporary solution. Will be dealt with later.
@@ -57,6 +51,9 @@ public class AnimationPane extends JPanel {
     public AnimationPane() {
         init();
 
+        // TODO: THIS
+        configBar = new SideBar();
+
         addMouseListener(handler);
         addMouseMotionListener(handler);
 
@@ -65,22 +62,22 @@ public class AnimationPane extends JPanel {
         try {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-            // GARBAGE IMPLEMENTATION
-            startButton = new CustomButton(640, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "start_button", Origin.LEFT_TOP, 60, true);
-            addMouseListener(startButton.retrieveMouseHandler());
-            addMouseMotionListener(startButton.retrieveMouseHandler());
+            /*
+            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, false));
+            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
+             */
 
-            loadButton = new CustomButton(760, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "load_button", Origin.LEFT_TOP, 60, true);
-            addMouseListener(loadButton.retrieveMouseHandler());
-            addMouseMotionListener(loadButton.retrieveMouseHandler());
+            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.LEFT_TOP, 60, true));
 
-            saveButton = new CustomButton(870, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "save_button", Origin.LEFT_TOP, 60, true);
-            addMouseListener(saveButton.retrieveMouseHandler());
-            addMouseMotionListener(saveButton.retrieveMouseHandler());
-
-            configButton = new CustomButton(1000, WaifuBrew.getInstance().getRes()[1].y - (roughButtonSizeY / 2), "config_button", Origin.LEFT_TOP, 60, true);
-            addMouseListener(configButton.retrieveMouseHandler());
-            addMouseMotionListener(configButton.retrieveMouseHandler());
+            for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
+                CustomButton button = entry.getValue();
+                addMouseListener(button.retrieveMouseHandler());
+                addMouseMotionListener(button.retrieveMouseHandler());
+            }
 
             dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9), true);
 
@@ -156,11 +153,30 @@ public class AnimationPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            // There may be a dialogue without dialogue and only character movement
+            if(inBound(event, aniPaneButton.get("config"), true)) {
+                configBar.setActive(true);
+                System.out.println("Pressed config");
+            }
+            else if(inBound(event, aniPaneButton.get("load"), true)) {
+                System.out.println("Pressed load");
+            }
+            else if(inBound(event, aniPaneButton.get("save"), true)) {
+                System.out.println("Pressed save");
+            }
+            else if(inBound(event, aniPaneButton.get("start"), true)) {
+                System.out.println("Pressed start");
+            }
+            else {
+                if(configBar.isActive()) {
+                    configBar.setActive(false);
 
-            // TODO: Have this inside if statement where it is not run on buttons.
-            clickActivate = true;
-            triggerNext();
+                }
+                else {
+                    // To avoid advancing of the dialogue when pressed other place to disable configbar.
+                    clickActivate = true;
+                    triggerNext();
+                }
+            }
         }
     }
 
@@ -168,6 +184,8 @@ public class AnimationPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+
 
         // Do not show character on first viewing
         if (advancer != 0) {
@@ -225,10 +243,24 @@ public class AnimationPane extends JPanel {
             g2d.dispose();
         }
 
-        startButton.paintComponent(g);
-        loadButton.paintComponent(g);
-        saveButton.paintComponent(g);
-        configButton.paintComponent(g);
+        // Buttons will paint over this Panel
+        configBar.paintComponent(g);
+
+        // Draws the buttons
+        for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
+            if(configBar.isActive()) {
+                // Paint every other buttons except config button when configBar is active.
+                if(!entry.getKey().equals("config")) {
+                    entry.getValue().paintComponent(g);
+                }
+            }
+            else {
+                // Only paint config button when configBar is inactive
+                aniPaneButton.get("config").paintComponent(g);
+                break;
+            }
+
+        }
 
         initStage = false;
     }

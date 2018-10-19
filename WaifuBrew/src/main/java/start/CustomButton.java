@@ -115,7 +115,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
 
     public int getAbsoluteY() {
         if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
-            return x;
+            return y;
         }
 
         if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
