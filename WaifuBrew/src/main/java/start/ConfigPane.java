@@ -277,8 +277,6 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(handler);
             addMouseListener(autoDialog.retrieveMouseHandler());
             addMouseMotionListener(autoDialog.retrieveMouseHandler());
-            addMouseListener(saveDialogue.retrieveMouseHandler());
-            addMouseMotionListener(saveDialogue.retrieveMouseHandler());
 
             // MouseListners for NoticeBox in ConfigPage
             for (int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {

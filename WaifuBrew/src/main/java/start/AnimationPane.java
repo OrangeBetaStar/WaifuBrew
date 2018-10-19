@@ -29,7 +29,7 @@ public class AnimationPane extends JPanel {
     private boolean frameRateDisable = false;
 
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
-    private SideBar configBar;
+    private SideBar configBar = new SideBar();
 
     private static Font activeFont;
 
@@ -47,90 +47,10 @@ public class AnimationPane extends JPanel {
     public AnimationPane() {
         init();
 
-        // TODO: THIS
-        configBar = new SideBar();
-
         addMouseListener(handler);
         addMouseMotionListener(handler);
 
-        // this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 0, true));
 
-        try {
-            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-
-            /*
-            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, false));
-            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
-             */
-
-            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.LEFT_TOP, 60, true));
-
-            for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
-                CustomButton button = entry.getValue();
-                addMouseListener(button.retrieveMouseHandler());
-                addMouseMotionListener(button.retrieveMouseHandler());
-            }
-
-            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9), true);
-
-            dp = new DialogueParser(RESOURCE_PATH + "test.json");
-            dp.parse();
-            e = dp.getPackagedDialogue();
-
-            // Add stage check to disable auto dialogue to start without being in the correct stage
-            Timer stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (!a.isEmpty()) {
-                        if (tempString.length() != a.length()) {
-                            tempString = tempString + a.charAt(tempString.length());
-                        } else { // TODO: Check if this works
-//                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
-//                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
-                            if (WaifuBrew.getInstance().getAutoAdvancer()) {
-                                clickActivate = true;
-                                // TODO: NEEDS AWAIT
-                                // TODO: FIX TRANSPARENCY
-                                if (WaifuBrew.getInstance().getStage() == 1) {
-                                    triggerNext();
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Coalesce is disabled since there is no multiple firing of triggers.
-            stringTimer.setRepeats(true);
-            stringTimer.setCoalesce(false);
-            stringTimer.start();
-
-            /*
-            try {
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
-                ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-                activeFont = ttfBase.deriveFont(Font.PLAIN, 24);
-            } catch (FontFormatException ex) {
-                ex.printStackTrace();
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, 24);
-            }
-            */
-            activeFont = new Font("MS Mincho", Font.BOLD, WaifuBrew.getInstance().getFontSize());
-
-        } catch (IOException ex) {
-            System.out.println("Simple IOException");
-            ex.printStackTrace();
-        } catch (DialogueDataMissingException ex) {
-            System.out.println("Missing Dialog!"); //Wait what, it is okay to have missing dialog. i.e.: just character change
-            ex.printStackTrace();
-        } catch (JSONException ex) {
-            System.out.println("There is an error with JSON");
-            ex.printStackTrace();
-        }
     }
 
     public void triggerNext() {
@@ -175,8 +95,7 @@ public class AnimationPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
+        
         // Do not show character on first viewing
         if (advancer != 0) {
 
@@ -267,6 +186,77 @@ public class AnimationPane extends JPanel {
         t.setRepeats(true);
         t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
+
+        try {
+            dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
+
+            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.LEFT_TOP, 60, true));
+
+            for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
+                CustomButton button = entry.getValue();
+                addMouseListener(button.retrieveMouseHandler());
+                addMouseMotionListener(button.retrieveMouseHandler());
+            }
+
+            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9), true);
+
+            dp = new DialogueParser(RESOURCE_PATH + "test.json");
+            dp.parse();
+            e = dp.getPackagedDialogue();
+
+            // Add stage check to disable auto dialogue to start without being in the correct stage
+            Timer stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (!a.isEmpty()) {
+                        if (tempString.length() != a.length()) {
+                            tempString = tempString + a.charAt(tempString.length());
+                        } else { // TODO: Check if this works
+//                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
+//                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
+                            if (WaifuBrew.getInstance().getAutoAdvancer()) {
+                                clickActivate = true;
+                                // TODO: NEEDS AWAIT
+                                // TODO: FIX TRANSPARENCY
+                                if (WaifuBrew.getInstance().getStage() == 1) {
+                                    triggerNext();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Coalesce is disabled since there is no multiple firing of triggers.
+            stringTimer.setRepeats(true);
+            stringTimer.setCoalesce(false);
+            stringTimer.start();
+
+            /*
+            try {
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
+                ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+                activeFont = ttfBase.deriveFont(Font.PLAIN, 24);
+            } catch (FontFormatException ex) {
+                ex.printStackTrace();
+                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+                activeFont = new Font("serif", Font.PLAIN, 24);
+            }
+            */
+            activeFont = new Font("MS Mincho", Font.BOLD, WaifuBrew.getInstance().getFontSize());
+
+        } catch (IOException ex) {
+            System.out.println("Simple IOException");
+            ex.printStackTrace();
+        } catch (DialogueDataMissingException ex) {
+            System.out.println("Missing Dialog!"); //Wait what, it is okay to have missing dialog. i.e.: just character change
+            ex.printStackTrace();
+        } catch (JSONException ex) {
+            System.out.println("There is an error with JSON");
+            ex.printStackTrace();
+        }
     }
 
 }
