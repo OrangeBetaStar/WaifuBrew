@@ -70,18 +70,15 @@ public class AnimationPane extends JPanel {
             if (inBound(event, aniPaneButton.get("config"), true) && aniPaneButton.get("config").getActiveButtonState()) {
                 configBar.setActive(true);
                 aniPaneButton.get("config").setActiveButtonState(false);
-                System.out.println("Pressed config");
             } else if (inBound(event, aniPaneButton.get("load"), true)) {
                 configBar.setActive(false);
                 WaifuBrew.getInstance().setStage(3);
                 aniPaneButton.get("config").setActiveButtonState(true);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 // Ask user if save progress?
-                System.out.println("Pressed load");
             } else if (inBound(event, aniPaneButton.get("save"), true)) {
                 configBar.setActive(false);
                 aniPaneButton.get("config").setActiveButtonState(true);
-                System.out.println("Pressed save");
             } else if (inBound(event, aniPaneButton.get("start"), true)) {
                 // Ask user if save progress?
                 // This button will go back to startscreen
@@ -89,7 +86,6 @@ public class AnimationPane extends JPanel {
                 configBar.setActive(false);
                 aniPaneButton.get("config").setActiveButtonState(true);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                System.out.println("Pressed start");
             } else {
                 if (configBar.isActive()) {
                     configBar.setActive(false);

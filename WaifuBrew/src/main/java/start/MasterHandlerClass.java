@@ -12,8 +12,8 @@ public class MasterHandlerClass implements MouseListener, MouseMotionListener {
 
     public boolean inBound(MouseEvent event, InteractiveObjects interactiveObject, boolean absoluteTrack) {
         if(absoluteTrack) {
-            System.out.println("Event mouse: " + event.getX() +  " [" + interactiveObject.getX() + " ~ " + (interactiveObject.getX() + interactiveObject.getWidth()) + "] : " +
-                    "" + event.getY() +  " [" + interactiveObject.getY() + " ~ " + (interactiveObject.getY() + interactiveObject.getHeight()) + "]");
+            System.out.println("Event mouse - X:" + event.getX() +  " [" + interactiveObject.getX() + " ~ " + (interactiveObject.getX() + interactiveObject.getWidth()) + "] : " +
+                    "Y:" + event.getY() +  " [" + interactiveObject.getY() + " ~ " + (interactiveObject.getY() + interactiveObject.getHeight()) + "]");
         }
         return (absoluteTrack ?
                 event.getX() > interactiveObject.getAbsoluteX() &&
