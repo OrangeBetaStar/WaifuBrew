@@ -1,7 +1,5 @@
 package start;
 
-// Same looking as SaveLoadPane, but clicking on SaveLoadBox
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,8 +38,7 @@ public class LoadPane extends JPanel {
                 loadPaneButtons.get("config").setActiveButtonState(false);
                 loadPaneButtons.get("back").setActiveButtonState(true);
                 System.out.println("Pressed config");
-            }
-            else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
+            } else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
                 configBar.setActive(false);
                 loadPaneButtons.get("back").setActiveButtonState(false);
                 loadPaneButtons.get("config").setActiveButtonState(true);

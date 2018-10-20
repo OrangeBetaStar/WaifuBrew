@@ -73,7 +73,9 @@ public class AnimationPane extends JPanel {
                 System.out.println("Pressed config");
             } else if (inBound(event, aniPaneButton.get("load"), true)) {
                 configBar.setActive(false);
+                WaifuBrew.getInstance().setStage(3);
                 aniPaneButton.get("config").setActiveButtonState(true);
+                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 // Ask user if save progress?
                 System.out.println("Pressed load");
             } else if (inBound(event, aniPaneButton.get("save"), true)) {
