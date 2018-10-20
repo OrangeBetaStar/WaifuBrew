@@ -5,9 +5,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import parser.exception.DialogueDataMissingException;
-import start.Characters;
-import start.Mood;
-import start.Waifu;
+import start.Containers.Characters;
+import start.Containers.Mood;
+import start.Loader.Waifu;
 
 import java.io.FileReader;
 import java.io.IOException;
