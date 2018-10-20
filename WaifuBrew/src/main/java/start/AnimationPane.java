@@ -190,10 +190,10 @@ public class AnimationPane extends JPanel {
         try {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.LEFT_TOP, 60, true));
-            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.LEFT_TOP, 60, true));
+            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.MIDDLE_CENTRE, 60, true));
+            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 60, true));
+            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 60, true));
+            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.MIDDLE_CENTRE, 60, true));
 
             for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
                 CustomButton button = entry.getValue();
