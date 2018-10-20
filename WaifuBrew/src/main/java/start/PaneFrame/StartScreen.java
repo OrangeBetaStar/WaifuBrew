@@ -34,6 +34,13 @@ public class StartScreen extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        /*Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g2.drawImage(image, x, y, width, height, this);
+        */
+
+        
         g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
 
         for (Map.Entry<String, CustomButton> entry : this.startScreenButtons.entrySet()) {
@@ -90,13 +97,29 @@ public class StartScreen extends JPanel implements ActionListener {
         backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
 
         // Calculates the scaling needed to fit the screen. Any ratio will work.
-        if (backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
-            if (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
-                backgroundPicture.resize(((int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
-            } else {
-                backgroundPicture.resize(((int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
-            }
+        double scale = Math.max(((double)windowSize.x / backgroundPicture.getWidth()), ((double)windowSize.y / backgroundPicture.getHeight()));
+        backgroundPicture.resize((int)((scale) * backgroundPicture.getWidth()), (int)((scale) * backgroundPicture.getHeight()));
+
+
+        // This is fit
+        /*
+        if(((double)backgroundPicture.getWidth() / backgroundPicture.getHeight()) <= ((double)windowSize.x / windowSize.y)) {
+            backgroundPicture.resize((int)(windowSize.y * ((double)backgroundPicture.getWidth() / backgroundPicture.getHeight())), windowSize.y);
+        } else {
+            backgroundPicture.resize(windowSize.x, (int)(windowSize.x * ((double)backgroundPicture.getWidth() / backgroundPicture.getHeight())));
         }
+        */
+
+        /*
+        if (backgroundPicture.getWidth() < backgroundPicture.getHeight() && backgroundPicture.getHeight() > windowSize.x) {
+            backgroundPicture.resize(backgroundPicture.getWidth() * windowSize.x / backgroundPicture.getHeight(), windowSize.x);
+        } else if (backgroundPicture.getWidth() > backgroundPicture.getHeight() && backgroundPicture.getWidth() > windowSize.x) {
+            backgroundPicture.resize(windowSize.x, backgroundPicture.getHeight() * windowSize.x / backgroundPicture.getWidth());
+        } else {
+            // no change
+        }
+        */
+
 
         startScreenButtons.put("start", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5), (windowSize.y / 6) * 5, "start_button", CustomButton.Origin.MIDDLE_CENTRE));
         startScreenButtons.put("load", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 2, (windowSize.y / 6) * 5, "load_button", CustomButton.Origin.MIDDLE_CENTRE));
