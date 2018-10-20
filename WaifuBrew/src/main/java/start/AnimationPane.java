@@ -49,8 +49,6 @@ public class AnimationPane extends JPanel {
 
         addMouseListener(handler);
         addMouseMotionListener(handler);
-
-
     }
 
     public void triggerNext() {
@@ -73,10 +71,19 @@ public class AnimationPane extends JPanel {
                 configBar.setActive(true);
                 System.out.println("Pressed config");
             } else if (inBound(event, aniPaneButton.get("load"), true)) {
+                configBar.setActive(false);
+
+                // Ask user if save progress?
                 System.out.println("Pressed load");
             } else if (inBound(event, aniPaneButton.get("save"), true)) {
+                configBar.setActive(false);
                 System.out.println("Pressed save");
             } else if (inBound(event, aniPaneButton.get("start"), true)) {
+                // Ask user if save progress?
+                // This button will go back to startscreen
+                WaifuBrew.getInstance().setStage(0);
+                configBar.setActive(false);
+                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 System.out.println("Pressed start");
             } else {
                 if (configBar.isActive()) {
@@ -103,27 +110,22 @@ public class AnimationPane extends JPanel {
             if (clickActivate) {
                 // This will get all the chars that are needed for each dialog.
                 for (int a = 0; a < e.get(advancer - 1).size(); a++) {
-                    //backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "bg_start.png"));
-                    // System.out.println(e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase());
                     characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
-                    //characterImage[a] = new javaxt.io.Image(RESOURCE_PATH + e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase() + ".png");
                 }
                 clickActivate = false;
             }
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
-                g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 4) + (characterImage[b - 1].getHeight() / 2), this);
+                g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 10) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
             // DialogueBox
             g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
-            g.drawString(e.get(advancer - 1).get(0).getName().toString(), 100, 430);
+            g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int)(windowSize.x / 9.0), (int)((windowSize.y / 10.0) * 6));
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             if (initStory) {
-
                 initStory = false;
             }
-            // g.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(3000/GUIScale)));
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
@@ -133,7 +135,7 @@ public class AnimationPane extends JPanel {
         }
 
         if (tempString != "") {
-
+            // Dialogue text rendering with boundary shading
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -143,7 +145,7 @@ public class AnimationPane extends JPanel {
             Shape outline = textTl.getOutline(null);
 
             FontMetrics fm = g2d.getFontMetrics(activeFont);
-            g2d.translate((windowSize.x / 10.0), ((windowSize.y / 10.0) * 7) + fm.getAscent());
+            g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8) + fm.getAscent());
             g2d.setColor(Color.WHITE);
             g2d.fill(outline);
             g2d.setStroke(new BasicStroke(1));
@@ -190,10 +192,11 @@ public class AnimationPane extends JPanel {
         try {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.MIDDLE_CENTRE, 60, true));
-            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 60, true));
-            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 60, true));
-            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "config_button", Origin.MIDDLE_CENTRE, 60, true));
+            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+            // Remake this as options, rather than config
+            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 50, true));
 
             for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
                 CustomButton button = entry.getValue();
@@ -201,7 +204,7 @@ public class AnimationPane extends JPanel {
                 addMouseMotionListener(button.retrieveMouseHandler());
             }
 
-            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9), true);
+            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.85), (int) (dialogueBox.getHeight() * 0.85), true);
 
             dp = new DialogueParser(RESOURCE_PATH + "test.json");
             dp.parse();

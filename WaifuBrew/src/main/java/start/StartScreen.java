@@ -87,10 +87,13 @@ public class StartScreen extends JPanel implements ActionListener {
                 if (inBound(event, entry.getValue(), true)) {
                     if (entry.getKey().equals("start")) {
                         WaifuBrew.getInstance().setStage(1);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     } else if (entry.getKey().equals("config")) {
                         WaifuBrew.getInstance().setStage(2);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     } else if (entry.getKey().equals("load")) {
                         WaifuBrew.getInstance().setStage(3);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     } else if (entry.getKey().equals("exit")) {
                         System.exit(0);
                     }

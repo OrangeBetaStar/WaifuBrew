@@ -24,11 +24,9 @@ public class ImageLoader extends JPanel {
     // Need a font, string, size, width
     private BufferedInputStream myStream;
     private Font menuFont;
-    private String textString;
     private int fontSize = 64; // probably use it for height
     private int width = 0;
     private int padding = 5;
-    private int count = 0;
 
     private String[] systemButtonStrings = {
             "Start",
@@ -38,7 +36,8 @@ public class ImageLoader extends JPanel {
             "Config",
             "Exit",
             "Reset",
-            "Don't Save"};
+            "Don't Save",
+            "Options"};
 
     public ImageLoader(String RESOURCE_PATH) {
         this.RESOURCE_PATH = RESOURCE_PATH;
@@ -69,10 +68,7 @@ public class ImageLoader extends JPanel {
                         javaxt.io.Image tempCreation = menuCreationArea.copy();
                         tempCreation.resize(width + (padding * 2), fontSize + (padding * 2));
                         tempCreation.addText(textString, (tempCreation.getWidth() / 2) - (width / 2) + padding, fontSize + padding, menuFont, 255, 255, 255);
-                        // System.out.println("textString " + textString);
                         load_first_images.add(new ImageDesc(textString, tempCreation.getBufferedImage()));
-                        //load_first_images.add(new ImageDesc(Integer.toString(count), tempCreation.getBufferedImage()));
-                        count++;
                     }
                 } else {
                     if (loadImage.contains("toggle_housing")) {
@@ -82,8 +78,6 @@ public class ImageLoader extends JPanel {
                             vectorImages.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
                         }
                     } else {
-                        // textString load_first_slider_knob.png
-                        // System.out.println("textString " + loadImage);
                         vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
                     }
                 }

@@ -80,7 +80,6 @@ public class SideBar extends InteractiveObjects implements ActionListener {
                 }
             }
 */
-
             g.drawImage(imageBlock.getBufferedImage(), x, y, this);
         }
     }

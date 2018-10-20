@@ -1,16 +1,16 @@
 package start;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
-    private JPanel waifuPanel;
 
     // TODO: Why create them when I do not need it right now.
     private StartScreen startPage;
     private AnimationPane animationPane;
     private ConfigPane configPane;
+    private LoadPane loadPane;
 
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
@@ -18,13 +18,10 @@ public class GUI extends JFrame {
 
     public GUI() {
         super("ワイファブルー by Tailsoft");
-
-        waifuPanel = new JPanel();
-        waifuPanel.setBackground(Color.BLACK);
         startPage = new StartScreen();
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
-        waifuPanel.setBounds(WaifuBrew.getInstance().getRes()[1].x, WaifuBrew.getInstance().getRes()[1].y, WaifuBrew.getInstance().getRes()[2].x, WaifuBrew.getInstance().getRes()[2].y);
+        loadPane = new LoadPane();
         init();
     }
 
@@ -44,7 +41,7 @@ public class GUI extends JFrame {
                 remove(configPane);
             }
             if (lastStage == 3) {
-                // remove load pane
+                remove(loadPane);
             }
             if (lastStage == 0 || lastStage == 10) {
                 remove(startPage);
@@ -60,8 +57,8 @@ public class GUI extends JFrame {
                 configPane.repaint();
             }
             if (stage == 3) {
-                // add load pane
-                // load pane repaint
+                add(loadPane);
+                loadPane.repaint();
             }
             if (stage == 0 || stage == 10) {
                 add(startPage);
