@@ -27,9 +27,6 @@ public class LoadPane extends JPanel {
 
         addMouseListener(handler);
         addMouseMotionListener(handler);
-
-        this.loadPaneButtons.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 60, true));
-        this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_TOP, 60, true));
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -38,13 +35,16 @@ public class LoadPane extends JPanel {
 
     private class Handlerclass extends MasterHandlerClass {
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, loadPaneButtons.get("config"), true)) {
+            if (inBound(event, loadPaneButtons.get("config"), true) && loadPaneButtons.get("config").getActiveButtonState()) {
                 configBar.setActive(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                loadPaneButtons.get("config").setActiveButtonState(false);
+                loadPaneButtons.get("back").setActiveButtonState(true);
                 System.out.println("Pressed config");
             }
-            else if (inBound(event, loadPaneButtons.get("back"), true)) {
+            else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
                 configBar.setActive(false);
+                loadPaneButtons.get("back").setActiveButtonState(false);
+                loadPaneButtons.get("config").setActiveButtonState(true);
                 System.out.println("Pressed back");
             }
         }
@@ -58,14 +58,15 @@ public class LoadPane extends JPanel {
         configBar.paintComponent(g);
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
+            CustomButton button = entry.getValue();
             if (configBar.isActive()) {
                 if (entry.getKey().equals("back")) {
-                    entry.getValue().paintComponent(g);
+                    button.paintComponent(g);
                 }
 
             } else {
                 if (entry.getKey().equals("config")) {
-                    entry.getValue().paintComponent(g);
+                    button.paintComponent(g);
                 }
             }
         }
@@ -87,6 +88,8 @@ public class LoadPane extends JPanel {
 
         // -----------------------------
 
+        this.loadPaneButtons.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 60, true));
+        this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_TOP, 60, true));
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();

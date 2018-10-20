@@ -19,6 +19,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private int defaultButtonHeight = 75;
     private Origin origin;
+    private boolean activeButton = true;
 
     // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
@@ -74,6 +75,14 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         // originalButton will be shown and changed to mouseoverButton when mouse is over the pic.
         originalButton = new javaxt.io.Image(RESOURCE_PATH + fileName_1);
         mouseoverButton = new javaxt.io.Image(RESOURCE_PATH + fileName_2);
+    }
+
+    public void setActiveButtonState(boolean active) {
+        this.activeButton = active;
+    }
+
+    public boolean getActiveButtonState() {
+        return this.activeButton;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -140,7 +149,6 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-
     /*  LEFT_TOP(0)
         MIDDLE_TOP(1)
         RIGHT_TOP(2)
@@ -151,75 +159,79 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         MIDDLE_BOTTOM(7)
         RIGHT_BOTTOM(8)
     */
-        if (origin.getValue() == 0) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x, y, originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x, y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-            }
-        }
 
-        if (origin.getValue() == 1) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y, originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-            }
-        }
+        if (activeButton) {
 
-        if (origin.getValue() == 2) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y, originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 0) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x, y, originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x, y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 3) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 1) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y, originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 4) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 2) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y, originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 5) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 3) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 6) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 4) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 7) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 5) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 8) {
-            if (!mouseOver) {
-                g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-            } else {
-                g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+            if (origin.getValue() == 6) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
+            }
+
+            if (origin.getValue() == 7) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
+            }
+
+            if (origin.getValue() == 8) {
+                if (!mouseOver) {
+                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
+                } else {
+                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
+                }
             }
         }
     }
@@ -264,177 +276,183 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseMoved(MouseEvent event) {
-            if (origin.getValue() == 0) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+            if (activeButton) {
+                if (origin.getValue() == 0) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 1) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 1) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 2) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 2) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 3) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 3) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 4) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 4) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 5) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 5) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 6) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 6) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 7) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 7) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 8) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 8) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
             }
         }
 
         public void mouseClicked(MouseEvent event) {
-            if (origin.getValue() == 0) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    wasPressed = true;
+            if (activeButton) {
+                if (origin.getValue() == 0) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 1) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    wasPressed = true;
+                if (origin.getValue() == 1) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 2) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y &&
-                        event.getY() < (y + originalButton.getHeight())) {
-                    wasPressed = true;
+                if (origin.getValue() == 2) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y &&
+                            event.getY() < (y + originalButton.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 3) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 3) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 4) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 4) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 5) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - ((originalButton.getHeight()) / 2) &&
-                        event.getY() < (y + originalButton.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 5) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - ((originalButton.getHeight()) / 2) &&
+                            event.getY() < (y + originalButton.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 6) {
-                if (event.getX() > x &&
-                        event.getX() < (x + originalButton.getWidth()) &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 6) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + originalButton.getWidth()) &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 7) {
-                if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
-                        event.getX() < (x + originalButton.getWidth() / 2) &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 7) {
+                    if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
+                            event.getX() < (x + originalButton.getWidth() / 2) &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 8) {
-                if (event.getX() > (x - originalButton.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - (originalButton.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 8) {
+                    if (event.getX() > (x - originalButton.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - (originalButton.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
             }
         }
 
         public void mouseReleased(MouseEvent event) {
             // TODO: If state wasn't changed, do not change the boolean to false
-            if (mouseOver)
-                mouseOver = false;
+            if (activeButton) {
+                if (mouseOver)
+                    mouseOver = false;
+            }
         }
     }
 }

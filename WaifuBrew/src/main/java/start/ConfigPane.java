@@ -148,6 +148,8 @@ public class ConfigPane extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
+
+
             // Disable original back and save button for noticeBox buttons.
             if (!saveDialogue.isActive()) {
                 CustomButton button = settingButtonsMap.get("back");

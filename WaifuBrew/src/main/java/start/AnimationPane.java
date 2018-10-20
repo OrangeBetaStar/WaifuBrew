@@ -67,28 +67,31 @@ public class AnimationPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, aniPaneButton.get("config"), true)) {
+            if (inBound(event, aniPaneButton.get("config"), true) && aniPaneButton.get("config").getActiveButtonState()) {
                 configBar.setActive(true);
+                aniPaneButton.get("config").setActiveButtonState(false);
                 System.out.println("Pressed config");
             } else if (inBound(event, aniPaneButton.get("load"), true)) {
                 configBar.setActive(false);
-
+                aniPaneButton.get("config").setActiveButtonState(true);
                 // Ask user if save progress?
                 System.out.println("Pressed load");
             } else if (inBound(event, aniPaneButton.get("save"), true)) {
                 configBar.setActive(false);
+                aniPaneButton.get("config").setActiveButtonState(true);
                 System.out.println("Pressed save");
             } else if (inBound(event, aniPaneButton.get("start"), true)) {
                 // Ask user if save progress?
                 // This button will go back to startscreen
                 WaifuBrew.getInstance().setStage(0);
                 configBar.setActive(false);
+                aniPaneButton.get("config").setActiveButtonState(true);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 System.out.println("Pressed start");
             } else {
                 if (configBar.isActive()) {
                     configBar.setActive(false);
-
+                    aniPaneButton.get("config").setActiveButtonState(true);
                 } else {
                     // To avoid advancing of the dialogue when pressed other place to disable configbar.
                     clickActivate = true;
@@ -102,7 +105,7 @@ public class AnimationPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         // Do not show character on first viewing
         if (advancer != 0) {
 
@@ -192,11 +195,11 @@ public class AnimationPane extends JPanel {
         try {
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "start_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "save_button", Origin.MIDDLE_CENTRE, 0, true));
             this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE, 0, true));
             // Remake this as options, rather than config
-            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 50, true));
+            this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 0, true));
 
             for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
                 CustomButton button = entry.getValue();
