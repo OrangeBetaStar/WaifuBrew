@@ -75,16 +75,16 @@ public class AnimationPane extends JPanel {
             if (inBound(event, aniPaneButton.get("config"), true) && aniPaneButton.get("config").getActiveButtonState()) {
                 configBar.setActive(true);
                 aniPaneButton.get("config").setActiveButtonState(false);
-            } else if (inBound(event, aniPaneButton.get("load"), true)) {
+            } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {
                 configBar.setActive(false);
                 WaifuBrew.getInstance().setStage(3);
                 aniPaneButton.get("config").setActiveButtonState(true);
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 // Ask user if save progress?
-            } else if (inBound(event, aniPaneButton.get("save"), true)) {
+            } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
                 configBar.setActive(false);
                 aniPaneButton.get("config").setActiveButtonState(true);
-            } else if (inBound(event, aniPaneButton.get("start"), true)) {
+            } else if (inBound(event, aniPaneButton.get("start"), true) && configBar.isActive()) {
                 // Ask user if save progress?
                 // This button will go back to startscreen
                 WaifuBrew.getInstance().setStage(0);
