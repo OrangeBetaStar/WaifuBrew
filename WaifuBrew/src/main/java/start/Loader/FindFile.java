@@ -15,7 +15,7 @@ public class FindFile {
 
         File dir = new File(folder);
 
-        if (dir.isDirectory() == false) {
+        if (!dir.isDirectory()) {
             System.out.println("Directory does not exists : " + folder);
             return null;
         }

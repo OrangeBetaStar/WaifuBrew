@@ -16,7 +16,7 @@ public class WaifuBrew {
 
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private GUI sample;
+    private GUI Frame;
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private static WaifuBrew singleton;
@@ -163,7 +163,7 @@ public class WaifuBrew {
     }
 
     public GUI getGUIInstance() {
-        return sample;
+        return Frame;
     }
 
     public ArrayList<ImageDesc> getImageSetByIndex(int index) {
@@ -192,15 +192,15 @@ public class WaifuBrew {
     }
 
     public void start() {
-        sample = new GUI();
-        sample.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Frame = new GUI();
+        Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // default size
-        sample.setSize(defaultSize[1].x, defaultSize[1].y);
+        Frame.setSize(defaultSize[1].x, defaultSize[1].y);
         // disable resizing of the window since scaling is retarded.
-        sample.setResizable(false);
+        Frame.setResizable(false);
         // this calculates the window should start from (centered)
-        sample.setLocation(defaultSize[2].x, defaultSize[2].y);
-        //sample.setLayout(new FlowLayout());
-        sample.setVisible(true);
+        Frame.setLocation(defaultSize[2].x, defaultSize[2].y);
+        //Frame.setLayout(new FlowLayout());
+        Frame.setVisible(true);
     }
 }

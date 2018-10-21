@@ -40,7 +40,6 @@ public class StartScreen extends JPanel implements ActionListener {
         g2.drawImage(image, x, y, width, height, this);
         */
 
-        
         g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
 
         for (Map.Entry<String, CustomButton> entry : this.startScreenButtons.entrySet()) {
