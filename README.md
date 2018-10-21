@@ -91,3 +91,17 @@ Logs:
 10/04/18 - Fixed the fault of UTF8 bom, but also creation of system buttons are internalized. Fixed buttons' behaviours and changed noticebox's righ behaviour (return -> don't save and exit). Alignment and padding for noticebox. [BetaStar] Refactoring system config storage arrays to hashmap to make it more understandable. [Gaia]
 
 10/10/18 - Fixed saving bugs in configPane due to refactoring [BetaStar]
+
+10/11/18 - More descriptive names are used in system image retrieval. Added InteractiveObject.java abstract class to deal with inheritance for user interactable GUI such as CustomSlider and CustomButton to be grouped together for cleaner implementation such as adding mouse listener to super. Patched the way that AniPane was retrieving its images. [BetaStar]
+
+10/12/18 - Added checks when "_button" is not present in the name while calling to retrieve an image. Fixed bug for save dialogue where whitebox was spontaneously coming 1/4 of the screen. [BetaStar]
+
+10/14/18 - Dialogue now supports asian characters. Border outlining of dialogue texts are applied. Changed dialogue font to simpler one (MS Mincho) for wide use. [BetaStar]
+
+10/15/18 - Condensed area checker in ConfigPane. Now seperate methodd handles much of the similar bound check for any intractive objects (currently checks CustomButton and NoticeBox) since they are same inherted object of same abstract parent. [BetaStar]
+
+10/18/18 - #65 Fully refactor ScreenScreen, AnimationPane in terms of button usage. Uses Hashmap just like ConfigPane to organize the buttons. Cleaner Handlerclass for StartScreen. (Completely redesigned from ground up to be more effective and cleaner solution.) Added MathClass and SplineInterpolator to check out methods of adding easing and calculation. Moved entire init lines in AniPane to init function. Cleaner that way and those init codes should've been in init() in the first place. Start setting up LoadPane. [BetaStar]
+
+10/19/18 - Fixed button locations in AniPane. Fixed the bug where buttons that overlap will trigger one below it instead of one above. Set AniPane to LoadPane stage change. Reorganized the methods in Pane classes. Split init methods into few descriptive init methods for cleaner solution. Added packages for better seperation. [BetaStar]
+
+10/20/18 - ConfigPane and StartScreen's BG calculation has been changed to two lines, simpler way of calculating scaling. More affective than before and elegant solution. Clearing up mess in ImageLoader and deleting unneeded pre-made picture. [BetaStar]

@@ -1,6 +1,9 @@
-package start;
+package start.CustomObjects;
 
 // This class will enhouse on/off boolean with more graphical interface.
+
+import start.Loader.ImageSelector;
+import start.Loader.WaifuBrew;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -91,6 +94,16 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     @Override
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public int getAbsoluteX() {
+        return this.x + this.slidingPathWidth / 2;
+    }
+
+    @Override
+    public int getAbsoluteY() {
+        return this.y + this.slidingPathHeight / 2;
     }
 
     @Override

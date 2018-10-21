@@ -1,4 +1,4 @@
-package start;
+package start.Loader;
 
 import javax.swing.*;
 import java.awt.*;

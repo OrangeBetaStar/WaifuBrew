@@ -1,4 +1,7 @@
-package start;
+package start.CustomObjects;
+
+import start.Loader.ImageSelector;
+import start.Loader.WaifuBrew;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -100,6 +103,16 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     @Override
     public int getY() {
         return this.y;
+    }
+
+    @Override
+    public int getAbsoluteX() {
+        return this.x + this.length / 2;
+    }
+
+    @Override
+    public int getAbsoluteY() {
+        return this.y + this.height / 2;
     }
 
     @Override

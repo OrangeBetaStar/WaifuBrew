@@ -1,12 +1,13 @@
 package parser;
+
 import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import parser.exception.DialogueDataMissingException;
-import start.Characters;
-import start.Mood;
-import start.Waifu;
+import start.Containers.Characters;
+import start.Containers.Mood;
+import start.Loader.Waifu;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class DialogueParser {
     private String tempMoveString = "";
     private List<String> subNameString;
     private List<String> subMoodString;
-    private List<List<Waifu>> packagedDialogue= new ArrayList<List<Waifu>>();
+    private List<List<Waifu>> packagedDialogue = new ArrayList<List<Waifu>>();
 
     private int index;
 
@@ -46,7 +47,7 @@ public class DialogueParser {
 
             while (i.hasNext()) {
                 JSONObject o = (JSONObject) i.next();
-                if(o.get("name") != null) {
+                if (o.get("name") != null) {
                     tempNameString = (String) o.get("name");
                     tempMoodString = (String) o.get("mood");
                     subNameString = Arrays.asList(tempNameString.split(","));
@@ -54,21 +55,18 @@ public class DialogueParser {
                     List<Characters> sceneCharList = new ArrayList<Characters>();
                     List<Mood> sceneMoodList = new ArrayList<Mood>();
                     for (String s : subNameString) {
-                        if(s.toLowerCase().contains("nico")) {
+                        if (s.toLowerCase().contains("nico")) {
                             sceneCharList.add(Characters.Yazawa_Nico);
-                        //    System.out.println("Added: Nico");
-                        }
-                        else if(s.toLowerCase().contains("maki")) {
+                            //    System.out.println("Added: Nico");
+                        } else if (s.toLowerCase().contains("maki")) {
                             sceneCharList.add(Characters.Nishikino_Maki);
-                        //    System.out.println("Added: Maki");
-                        }
-                        else if(s.toLowerCase().contains("arisa")) {
+                            //    System.out.println("Added: Maki");
+                        } else if (s.toLowerCase().contains("arisa")) {
                             sceneCharList.add(Characters.Ichigaya_Arisa);
-                        //    System.out.println("Added: Arisa");
-                        }
-                        else if(s.toLowerCase().contains("kibb")) {
+                            //    System.out.println("Added: Arisa");
+                        } else if (s.toLowerCase().contains("kibb")) {
                             sceneCharList.add(Characters.Kibbleru);
-                        //    System.out.println("Added: Kibb");
+                            //    System.out.println("Added: Kibb");
                         }
                     }
 
@@ -107,33 +105,22 @@ public class DialogueParser {
 
     // Below packages the everything from JSON into single arraylist of waifus
     public List<List<Waifu>> getPackagedDialogue() {
-        int n = 0;
-        int m = 0;
-        while (n < characterList.size()) {
+        int lineCounter = 0;
+        int characterCounterPerLine = 0;
+        while (lineCounter < characterList.size()) {
             List<Waifu> tempWaifu = new ArrayList<Waifu>();
-        //    System.out.println("n"+n);
-            while (m < characterList.get(n).size()) {
-             //   System.out.println("m"+m);
-             //   System.out.println("n: "+n+" m: "+m+" character: "+characterList.get(n).get(m)+" mood: "+moodList.get(n).get(m)+" dialogue: "+dialogueList[n]);
-                Waifu e = new Waifu(characterList.get(n).get(m), moodList.get(n).get(m), dialogueList[n]);
+            //    System.out.println("lineCounter"+lineCounter);
+            while (characterCounterPerLine < characterList.get(lineCounter).size()) {
+                //   System.out.println("characterCounterPerLine"+characterCounterPerLine);
+                //   System.out.println("lineCounter: "+lineCounter+" characterCounterPerLine: "+characterCounterPerLine+" character: "+characterList.get(lineCounter).get(characterCounterPerLine)+" mood: "+moodList.get(lineCounter).get(characterCounterPerLine)+" dialogue: "+dialogueList[lineCounter]);
+                Waifu e = new Waifu(characterList.get(lineCounter).get(characterCounterPerLine), moodList.get(lineCounter).get(characterCounterPerLine), dialogueList[lineCounter]);
                 tempWaifu.add(e);
-                m++;
+                characterCounterPerLine++;
             }
-            n++;
+            lineCounter++;
             packagedDialogue.add(tempWaifu);
-            m=0;
+            characterCounterPerLine = 0;
         }
-
-        // Content printer
-        /*
-        for(List<Waifu> e : packagedDialogue) {
-            for(Waifu f : e) {
-                System.out.println("Character: "+ f.getName());
-                System.out.println("Mood: "+ f.getMood());
-                System.out.println("Says: "+ f.getDialogue());
-            }
-        }
-        */
         return packagedDialogue;
     }
 }

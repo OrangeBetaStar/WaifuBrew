@@ -1,4 +1,7 @@
-package start;
+package start.Loader;
+
+import start.Containers.Characters;
+import start.Containers.Mood;
 
 import java.awt.*;
 

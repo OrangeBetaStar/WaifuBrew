@@ -1,4 +1,4 @@
-package start;
+package start.Loader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

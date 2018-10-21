@@ -1,4 +1,4 @@
-package start;
+package start.Loader;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -15,7 +15,7 @@ public class FindFile {
 
         File dir = new File(folder);
 
-        if (dir.isDirectory() == false) {
+        if (!dir.isDirectory()) {
             System.out.println("Directory does not exists : " + folder);
             return null;
         }

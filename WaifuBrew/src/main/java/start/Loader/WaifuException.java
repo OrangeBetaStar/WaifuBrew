@@ -1,4 +1,4 @@
-package start;
+package start.Loader;
 
 public class WaifuException extends Exception {
 

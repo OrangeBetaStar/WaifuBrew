@@ -1,4 +1,12 @@
-package start;
+package start.PaneFrame;
+
+import start.CustomObjects.CustomButton;
+import start.CustomObjects.CustomSlider;
+import start.CustomObjects.CustomSwitch;
+import start.CustomObjects.MasterHandlerClass;
+import start.Loader.ImageSelector;
+import start.CustomObjects.NoticeBox;
+import start.Loader.WaifuBrew;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +53,10 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
     public ConfigPane() {
-        init();
+        initFPS();
+        initFont();
+        initImage();
+        initStringTimer();
     }
 
     @Override
@@ -64,11 +75,11 @@ public class ConfigPane extends JPanel implements ActionListener {
                 System.err.println(myStream.toString() + " not loaded.  Using serif font.");
                 activeFont = new Font("serif", Font.PLAIN, fontSize);
             } catch (FileNotFoundException ex) {
-                System.out.println("FileNotFoundException in ConfigPane.init()");
+                System.out.println("FileNotFoundException in ConfigPane.initFPS()");
                 System.err.println(myStream.toString() + " not loaded.  Using serif font.");
                 activeFont = new Font("serif", Font.PLAIN, fontSize);
             } catch (IOException ex) {
-                System.out.println("IOException in ConfigPane.init()");
+                System.out.println("IOException in ConfigPane.initFPS()");
                 System.err.println(myStream.toString() + " not loaded.  Using serif font.");
                 activeFont = new Font("serif", Font.PLAIN, fontSize);
             }
@@ -148,15 +159,12 @@ public class ConfigPane extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
+
+
             // Disable original back and save button for noticeBox buttons.
             if (!saveDialogue.isActive()) {
                 CustomButton button = settingButtonsMap.get("back");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     if (checkLockInSetting()) {
                         WaifuBrew.getInstance().setStage(0);
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -166,12 +174,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                     }
                 }
                 button = settingButtonsMap.get("save");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                     WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
                     WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
@@ -179,23 +182,14 @@ public class ConfigPane extends JPanel implements ActionListener {
                     WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 }
                 button = settingButtonsMap.get("reset");
-                if (
-                        event.getX() >= button.getX() - button.getWidth() / 2 &&
-                                event.getY() >= button.getY() - button.getHeight() / 2 &&
-                                event.getX() <= button.getX() + button.getWidth() / 2 &&
-                                event.getY() <= button.getY() + button.getHeight() / 2
-                ) {
+                if (inBound(event, button, false)) {
                     settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                     settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                     settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
                 }
             } else {
                 for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                    if (event.getX() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() &&
-                            event.getX() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteX() + saveDialogue.getButton()[noticeBoxButtonIndex].getWidth() &&
-                            event.getY() > saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() &&
-                            event.getY() < saveDialogue.getButton()[noticeBoxButtonIndex].getAbsoluteY() + saveDialogue.getButton()[noticeBoxButtonIndex].getHeight()) {
-
+                    if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
                         if (noticeBoxButtonIndex == 0) {
                             // Save is clicked
 
@@ -228,8 +222,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
     }
 
-
-    public void init() {
+    private void initFPS() {
         // TODO: I wonder if I use this lambda
         Timer t = new Timer((int) (1000.0 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -243,7 +236,9 @@ public class ConfigPane extends JPanel implements ActionListener {
         t.setRepeats(true);
         t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
+    }
 
+    private void initFont() {
         // Configure font preview
         try {
             myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
@@ -256,36 +251,32 @@ public class ConfigPane extends JPanel implements ActionListener {
             activeFont = new Font("serif", Font.PLAIN, fontSize);
             configPaneFont = new Font("serif", Font.PLAIN, 24);
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException in ConfigPane.init()");
+            System.out.println("FileNotFoundException in ConfigPane.initFPS()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
             configPaneFont = new Font("serif", Font.PLAIN, 24);
         } catch (IOException ex) {
-            System.out.println("IOException in ConfigPane.init()");
+            System.out.println("IOException in ConfigPane.initFPS()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
             configPaneFont = new Font("serif", Font.PLAIN, 24);
         }
+    }
+
+    private void initImage() {
 
         try {
-
-
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, false));
-            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", CustomButton.Origin.MIDDLE_CENTRE, 0, false));
+            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
 
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "save_button", "don't_save_button", false, true);
 
             // Pre-scale
-            if (backgroundPicture.getWidth() < windowSize.x || backgroundPicture.getHeight() < windowSize.y) {
-                if (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight() < windowSize.y) {
-                    backgroundPicture.resize(((int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getWidth())), (int) (((double) windowSize.y / backgroundPicture.getHeight()) * backgroundPicture.getHeight()));
-                } else {
-                    backgroundPicture.resize(((int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getWidth())), (int) (((double) windowSize.x / backgroundPicture.getWidth()) * backgroundPicture.getHeight()));
-                }
-            }
+            double scale = Math.max(((double)windowSize.x / backgroundPicture.getWidth()), ((double)windowSize.y / backgroundPicture.getHeight()));
+            backgroundPicture.resize((int)((scale) * backgroundPicture.getWidth()), (int)((scale) * backgroundPicture.getHeight()));
             dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
 
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency()));
@@ -298,8 +289,6 @@ public class ConfigPane extends JPanel implements ActionListener {
             addMouseMotionListener(handler);
             addMouseListener(autoDialog.retrieveMouseHandler());
             addMouseMotionListener(autoDialog.retrieveMouseHandler());
-            addMouseListener(saveDialogue.retrieveMouseHandler());
-            addMouseMotionListener(saveDialogue.retrieveMouseHandler());
 
             // MouseListners for NoticeBox in ConfigPage
             for (int noticBoxButtonIndix = 0; noticBoxButtonIndix < saveDialogue.getButton().length; noticBoxButtonIndix++) {
@@ -320,31 +309,34 @@ public class ConfigPane extends JPanel implements ActionListener {
                 addMouseListener(button.retrieveMouseHandler());
                 addMouseMotionListener(button.retrieveMouseHandler());
             }
-
-            // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
-            stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (!a.isEmpty()) {
-                        if (tempString.length() != a.length()) {
-                            tempString = tempString + a.charAt(tempString.length());
-                        } else {
-                            tempString = a.substring(0, 1);
-                            stringTimer.stop();
-                            stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
-                            stringTimer.start();
-                        }
-                    }
-                }
-            });
-
-            // Coalesce is disabled since there is no multiple firing of triggers.
-            stringTimer.setRepeats(true);
-            stringTimer.setCoalesce(false);
-
         } catch (Exception e) {
             System.out.println("File failure in Config class");
             e.printStackTrace(); // Wall of error
             System.exit(-1);
         }
+    }
+
+    private void initStringTimer() {
+
+        // Builds character into sentence one by one. Using timers are bit meh since it needs to finish to change duration.
+        stringTimer = new Timer((WaifuBrew.getInstance().getDialogueSpeed()), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!a.isEmpty()) {
+                    if (tempString.length() != a.length()) {
+                        tempString = tempString + a.charAt(tempString.length());
+                    } else {
+                        tempString = a.substring(0, 1);
+                        stringTimer.stop();
+                        stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
+                        stringTimer.start();
+                    }
+                }
+            }
+        });
+
+        // Coalesce is disabled since there is no multiple firing of triggers.
+        stringTimer.setRepeats(true);
+        stringTimer.setCoalesce(false);
+
     }
 }
