@@ -49,6 +49,13 @@ public class LoadPane extends JPanel {
                 loadPaneButtons.get("options").setActiveButtonState(true);
                 System.out.println("Pressed back");
                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+            } else {
+                if (configBar.isActive()) {
+                    configBar.setActive(false);
+                    loadPaneButtons.get("options").setActiveButtonState(true);
+                } else {
+                    // Normal behavior
+                }
             }
         }
     }
