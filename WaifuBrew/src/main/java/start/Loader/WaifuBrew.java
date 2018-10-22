@@ -27,6 +27,7 @@ public class WaifuBrew {
     private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
 
+    private Dimension programDimension = new Dimension(1280, 720);
 
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
@@ -34,7 +35,7 @@ public class WaifuBrew {
     private Point[] defaultSize = {
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
-            new Point((screenSize.width / 2) - (1280 / 2), (screenSize.height / 2) - (720 / 2))};
+            new Point((screenSize.width / 2) - (programDimension.width / 2), (screenSize.height / 2) - (programDimension.height / 2))};
 
     WaifuBrew() {
 
@@ -61,6 +62,7 @@ public class WaifuBrew {
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
+        tfl.calculateEasing(programDimension);
         movement = tfl.getMovement();
     }
 

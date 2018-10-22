@@ -6,6 +6,7 @@ import parser.exception.DialogueDataMissingException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,11 +45,15 @@ public class ThreadFileLoad implements Runnable {
         }
 
         // Calculate easing array beforehand.
-        movement = mathClass.easeOut(0.0, 0.5, 0, 1280 / 4);
+        // movement = mathClass.easeOut(0.0, 0.5, 0, 1280 / 4);
     }
 
     public int[] getMovement() {
         return this.movement;
+    }
+
+    public void calculateEasing(Dimension e) {
+        movement = mathClass.easeOut(0.0, 0.5, 0, e.width / 4);
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
