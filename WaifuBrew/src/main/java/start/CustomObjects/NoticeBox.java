@@ -135,7 +135,7 @@ public class NoticeBox extends InteractiveObjects {
     private void initFont() {
         try {
             // For real time preview later when font change is implemented
-            myStream = new BufferedInputStream(new FileInputStream(WaifuBrew.getInstance().getResoucePath() + WaifuBrew.getInstance().getFontName() + ".ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(WaifuBrew.getInstance().getResoucePath() + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
             fontSize = 24;
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
             activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);

@@ -77,14 +77,23 @@ public class WaifuBrew {
     }
 
     // ConfigUI:
-    // 0 - Font
+    // 0 - SystemFont
+    // 1 - DialogueFont
 
-    public String getFontName() {
+    public String getSystemFont() {
         return configUI[0];
     }
 
-    public void setFontName(String fontName) {
-        configUI[0] = fontName;
+    public void setSystemFont(String systemFontName) {
+        configUI[0] = systemFontName;
+    }
+
+    public String getDialogueFont() {
+        return configUI[0];
+    }
+
+    public void setDialogueFont(String dialogueFont) {
+        configUI[1] = dialogueFont;
     }
 
     private void initConfig() {
@@ -95,7 +104,8 @@ public class WaifuBrew {
         configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
-        this.setFontName("Halogen");
+        this.setSystemFont("Halogen");
+        this.setDialogueFont("MS Mincho");
     }
 
     public int getDialogueTransparency() {

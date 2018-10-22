@@ -23,8 +23,6 @@ import java.util.Map;
 
 public class AnimationPane extends JPanel {
 
-    private boolean initStage = true;
-    private boolean initStory = true;
     private Handlerclass handler = new Handlerclass();
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
@@ -128,15 +126,9 @@ public class AnimationPane extends JPanel {
             g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
             g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
-            if (initStory) {
-                initStory = false;
-            }
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
-            if (initStage) {
-                dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
-            }
         }
 
         if (tempString != "") {
@@ -176,8 +168,6 @@ public class AnimationPane extends JPanel {
             }
 
         }
-
-        initStage = false;
     }
 
     private void initFPS() {
@@ -195,6 +185,7 @@ public class AnimationPane extends JPanel {
         t.start();
 
     }
+
     private void initImage() {
         addMouseListener(handler);
         addMouseMotionListener(handler);
@@ -214,6 +205,7 @@ public class AnimationPane extends JPanel {
         }
 
         dialogueBox.resize((int) (dialogueBox.getWidth() * 0.85), (int) (dialogueBox.getHeight() * 0.85), true);
+        dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
     }
 
     private void initDialogue() {
@@ -248,7 +240,7 @@ public class AnimationPane extends JPanel {
             stringTimer.setRepeats(true);
             stringTimer.setCoalesce(false);
             stringTimer.start();
-            activeFont = new Font("MS Mincho", Font.BOLD, WaifuBrew.getInstance().getFontSize());
+            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
 
         } catch (IOException ex) {
             System.out.println("Simple IOException");

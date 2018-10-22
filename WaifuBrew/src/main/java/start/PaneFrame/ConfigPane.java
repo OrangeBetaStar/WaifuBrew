@@ -13,6 +13,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -66,7 +68,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Configure font preview
             try {
                 // For real time preview later when font change is implemented
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
                 fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
@@ -130,9 +132,27 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawImage(tempDialogueBox.getBufferedImage(), WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2), this);
             stringTimer.start();
             if (!tempString.equals("")) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(tempString, activeFont, frc);
+                Shape outline = textTl.getOutline(null);
+
+                FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((windowSize.x / 9.0), ((windowSize.y / 13.0) * 9) + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
+                g2d.dispose();
+                /*
                 g.setFont(activeFont);
                 g.setColor(new Color(0, 0, 0));
                 g.drawString(tempString, 150, 550);
+                */
             }
             for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
                 CustomSlider slider = entry.getValue();
@@ -242,7 +262,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private void initFont() {
         // Configure font preview
         try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
             activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
