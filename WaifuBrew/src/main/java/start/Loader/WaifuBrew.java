@@ -20,6 +20,8 @@ public class WaifuBrew {
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
+    // Temp solution for list of easing
+    private int[] movement;
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
@@ -59,6 +61,10 @@ public class WaifuBrew {
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
+    }
+
+    public int[] getMovement() {
+        return movement;
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {

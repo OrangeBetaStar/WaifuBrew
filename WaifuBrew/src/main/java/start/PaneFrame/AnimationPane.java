@@ -70,7 +70,7 @@ public class AnimationPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, aniPaneButton.get("config"), true) && aniPaneButton.get("config").getActiveButtonState()) {
+            if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
                 configBar.setActive(true);
                 aniPaneButton.get("config").setActiveButtonState(false);
             } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {

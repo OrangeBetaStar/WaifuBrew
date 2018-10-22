@@ -1,7 +1,6 @@
 package start.CustomObjects;
 
 import start.Loader.ImageSelector;
-import start.Calculation.MathClass;
 import start.Loader.WaifuBrew;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     private boolean isActive = false;
     private boolean movementState = false;
     private javaxt.io.Image imageBlock;
-    private MathClass mathClass = new MathClass();
+
 
     private int[] movement;
     private int movementCounter = 0;
@@ -27,7 +26,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         imageBlock.resize(length, height);
         imageBlock.setBackgroundColor(128, 128, 128);
         imageBlock.setOpacity(75);
-        movement = mathClass.easeOut(0.0, 0.5, 0, (WaifuBrew.getInstance().getRes()[1].x / 4));
+        movement = WaifuBrew.getInstance().getMovement();
     }
 
     @Override
@@ -82,9 +81,9 @@ public class SideBar extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
+        // Open
         if (isActive && movementState) {
             try {
-                System.out.println(movement[movementCounter]);
                 g.drawImage(imageBlock.getBufferedImage(), (x + length) - movement[movementCounter], y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
@@ -93,6 +92,8 @@ public class SideBar extends InteractiveObjects implements ActionListener {
                 g.drawImage(imageBlock.getBufferedImage(), x, y, this);
             }
         }
+
+        // Close
         else if (!isActive && movementState) {
             try {
                 g.drawImage(imageBlock.getBufferedImage(), x + movement[movementCounter], y, this);
@@ -101,7 +102,9 @@ public class SideBar extends InteractiveObjects implements ActionListener {
                 movementCounter = 0;
                 movementState = false;
             }
-        } else if (isActive) {
+        }
+        // Static
+        else if (isActive) {
             g.drawImage(imageBlock.getBufferedImage(), x, y, this);
         }
     }

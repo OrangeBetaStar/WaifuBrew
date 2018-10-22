@@ -3,17 +3,22 @@ package start.Loader;
 import org.json.JSONException;
 import parser.DialogueParser;
 import parser.exception.DialogueDataMissingException;
+import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ThreadFileLoad implements Runnable {
 
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private volatile ArrayList<ArrayList<ImageDesc>> fileList;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private DialogueParser dp;
     private java.util.List<java.util.List<Waifu>> e;
+    private MathClass mathClass = new MathClass();
+    private int[] movement;
 
     public ThreadFileLoad() {
 
@@ -40,6 +45,12 @@ public class ThreadFileLoad implements Runnable {
             ex.printStackTrace();
         }
 
+        // Calculate easing array beforehand.
+        movement = mathClass.easeOut(0.0, 0.5, 0, (screenSize.width / 4));
+    }
+
+    public int[] getMovement() {
+        return this.movement;
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
