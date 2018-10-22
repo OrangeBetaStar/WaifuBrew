@@ -359,7 +359,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // Coalesce is disabled since there is no multiple firing of triggers.
         stringTimer.setRepeats(true);
-        stringTimer.setCoalesce(false);
+        stringTimer.setCoalesce(true);
 
     }
 }
