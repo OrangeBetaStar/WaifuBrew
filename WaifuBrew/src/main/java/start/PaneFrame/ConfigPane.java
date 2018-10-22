@@ -162,6 +162,11 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
     }
 
+    public void stageChange() {
+        // Reload anything that can have settings changed.
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        initStringTimer();
+    }
 
     private boolean checkLockInSetting() {
         return (
@@ -260,7 +265,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         try {
             myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            // activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
             configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
         } catch (FontFormatException ex) {
             ex.printStackTrace();

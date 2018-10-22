@@ -95,7 +95,6 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         }
         else if (!isActive && movementState) {
             try {
-                System.out.println(movement[movementCounter]);
                 g.drawImage(imageBlock.getBufferedImage(), x + movement[movementCounter], y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {

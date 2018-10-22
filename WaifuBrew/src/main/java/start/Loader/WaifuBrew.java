@@ -19,6 +19,7 @@ public class WaifuBrew {
     private GUI Frame;
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
+    private java.util.List<java.util.List<Waifu>> dialoguePackage;
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
@@ -57,6 +58,12 @@ public class WaifuBrew {
 
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
+        dialoguePackage = tfl.getDialoguePackage();
+    }
+
+    public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
+        // Perhaps I could redirect to the thread's method instead of WB class keeping a copy.
+        return dialoguePackage;
     }
 
     public static WaifuBrew getInstance() {

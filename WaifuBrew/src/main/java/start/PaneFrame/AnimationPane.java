@@ -1,8 +1,5 @@
 package start.PaneFrame;
 
-import org.json.JSONException;
-import parser.DialogueParser;
-import parser.exception.DialogueDataMissingException;
 import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
 import start.CustomObjects.Origin;
@@ -18,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,13 +24,15 @@ public class AnimationPane extends JPanel {
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
-    private DialogueParser dp;
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private SideBar configBar = new SideBar();
     private static Font activeFont;
+
+    // FPS maintainer
+    private Timer stringTimer;
 
     // Advancer keeps track of which line it reads
     private int advancer = 0; //line#
@@ -48,9 +46,12 @@ public class AnimationPane extends JPanel {
     private java.util.List<java.util.List<Waifu>> e;
 
     public AnimationPane() {
+        // parsing dialogue has to be done before on thread.
+        initParseDialogue();
         initFPS();
+        initFont();
         initImage();
-        initDialogue();
+        initStringTimer();
     }
 
     public void triggerNext() {
@@ -169,21 +170,31 @@ public class AnimationPane extends JPanel {
         }
     }
 
+    public void stageChange() {
+        // Reload anything that can have settings changed.
+
+        // Renew Font (Font and Size)
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+
+        // Renew FPS
+        stringTimer = null;
+        initStringTimer();
+
+        // Renew dialogueBox
+        dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
+        dialogueBox.resize((int) (dialogueBox.getWidth() * 0.85), (int) (dialogueBox.getHeight() * 0.85), true);
+        dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
+    }
+
     private void initFPS() {
-        // Dumb implementation. TODO: Improve.
-        final boolean frameRateDisable = false;
-        Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
+        Timer fpsTimer = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!frameRateDisable) {
-                    repaint();
-                } else {
-                    ((Timer) e.getSource()).stop();
-                }
+                repaint();
             }
         });
-        t.setRepeats(true);
-        t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
-        t.start();
+        fpsTimer.setRepeats(true);
+        fpsTimer.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
+        fpsTimer.start();
 
     }
 
@@ -209,50 +220,41 @@ public class AnimationPane extends JPanel {
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
     }
 
-    private void initDialogue() {
-        try {
-            dp = new DialogueParser(RESOURCE_PATH + "test.json");
-            dp.parse();
-            e = dp.getPackagedDialogue();
+    private void initFont() {
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+    }
 
-            // Add stage check to disable auto dialogue to start without being in the correct stage
-            Timer stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (!a.isEmpty()) {
-                        if (tempString.length() != a.length()) {
-                            tempString = tempString + a.charAt(tempString.length());
-                        } else { // TODO: Check if this works
+    private void initParseDialogue() {
+        e = WaifuBrew.getInstance().getDialoguePackage();
+    }
+
+    private void initStringTimer() {
+
+        // Add stage check to disable auto dialogue to start without being in the correct stage
+        stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!a.isEmpty()) {
+                    if (tempString.length() != a.length()) {
+                        tempString = tempString + a.charAt(tempString.length());
+                    } else { // TODO: Check if this works
 //                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
 //                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
-                            if (WaifuBrew.getInstance().getAutoAdvancer()) {
-                                clickActivate = true;
-                                // TODO: NEEDS AWAIT
-                                // TODO: FIX TRANSPARENCY
-                                if (WaifuBrew.getInstance().getStage() == 1) {
-                                    triggerNext();
-                                }
+                        if (WaifuBrew.getInstance().getAutoAdvancer()) {
+                            clickActivate = true;
+                            // TODO: NEEDS AWAIT
+                            // TODO: FIX TRANSPARENCY
+                            if (WaifuBrew.getInstance().getStage() == 1) {
+                                triggerNext();
                             }
                         }
                     }
                 }
-            });
+            }
+        });
 
-            // Coalesce is disabled since there is no multiple firing of triggers.
-            stringTimer.setRepeats(true);
-            stringTimer.setCoalesce(false);
-            stringTimer.start();
-            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
-
-        } catch (IOException ex) {
-            System.out.println("Simple IOException");
-            ex.printStackTrace();
-        } catch (DialogueDataMissingException ex) {
-            System.out.println("Missing Dialog!"); //Wait what, it is okay to have missing dialog. i.e.: just character change
-            ex.printStackTrace();
-        } catch (JSONException ex) {
-            System.out.println("There is an error with JSON");
-            ex.printStackTrace();
-        }
+        // Coalesce is disabled since there is no multiple firing of triggers.
+        stringTimer.setRepeats(true);
+        stringTimer.setCoalesce(true);
+        stringTimer.start();
     }
-
 }
