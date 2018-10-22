@@ -6,13 +6,11 @@ import parser.exception.DialogueDataMissingException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ThreadFileLoad implements Runnable {
 
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private volatile ArrayList<ArrayList<ImageDesc>> fileList;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private DialogueParser dp;
@@ -46,7 +44,7 @@ public class ThreadFileLoad implements Runnable {
         }
 
         // Calculate easing array beforehand.
-        movement = mathClass.easeOut(0.0, 0.5, 0, (screenSize.width / 4));
+        movement = mathClass.easeOut(0.0, 0.5, 0, 1280 / 4);
     }
 
     public int[] getMovement() {

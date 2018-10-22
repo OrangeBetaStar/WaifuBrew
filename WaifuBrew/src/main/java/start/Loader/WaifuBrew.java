@@ -61,6 +61,7 @@ public class WaifuBrew {
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
+        movement = tfl.getMovement();
     }
 
     public int[] getMovement() {
