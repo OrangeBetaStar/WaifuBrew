@@ -2,6 +2,7 @@ package start.PaneFrame;
 
 import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
+import start.CustomObjects.Origin;
 import start.Loader.ImageSelector;
 import start.Loader.WaifuBrew;
 
@@ -121,10 +122,10 @@ public class StartScreen extends JPanel implements ActionListener {
         */
 
 
-        startScreenButtons.put("start", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5), (windowSize.y / 6) * 5, "start_button", CustomButton.Origin.MIDDLE_CENTRE));
-        startScreenButtons.put("load", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 2, (windowSize.y / 6) * 5, "load_button", CustomButton.Origin.MIDDLE_CENTRE));
-        startScreenButtons.put("config", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 3, (windowSize.y / 6) * 5, "config_button", CustomButton.Origin.MIDDLE_CENTRE));
-        startScreenButtons.put("exit", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 4, (windowSize.y / 6) * 5, "exit_button", CustomButton.Origin.MIDDLE_CENTRE));
+        startScreenButtons.put("start", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5), (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE));
+        startScreenButtons.put("load", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 2, (windowSize.y / 6) * 5, "load_button", Origin.MIDDLE_CENTRE));
+        startScreenButtons.put("config", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 3, (windowSize.y / 6) * 5, "config_button", Origin.MIDDLE_CENTRE));
+        startScreenButtons.put("exit", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 4, (windowSize.y / 6) * 5, "exit_button", Origin.MIDDLE_CENTRE));
 
         for (Map.Entry<String, CustomButton> entry : this.startScreenButtons.entrySet()) {
             CustomButton button = entry.getValue();

@@ -1,8 +1,6 @@
 package start.PaneFrame;
 
-import start.CustomObjects.CustomButton;
-import start.CustomObjects.MasterHandlerClass;
-import start.CustomObjects.SideBar;
+import start.CustomObjects.*;
 import start.Loader.ImageSelector;
 import start.Loader.WaifuBrew;
 
@@ -17,7 +15,7 @@ import java.util.Map;
 public class LoadPane extends JPanel {
 
     private Handlerclass handler = new Handlerclass();
-    private CustomButton.SaveLoadBox saveLoadBox = new CustomButton.SaveLoadBox();
+    private SaveLoadBox saveLoadBox = new SaveLoadBox();
     private boolean frameRateDisable = false;
     private HashMap<String, CustomButton> loadPaneButtons = new HashMap<>(4);
     private SideBar configBar = new SideBar();
@@ -70,7 +68,7 @@ public class LoadPane extends JPanel {
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();
             if (configBar.isActive()) {
-                if (entry.getKey().equals("back")) {
+                if (entry.getKey().equals("back") && !configBar.isMoving()) {
                     button.paintComponent(g);
                 }
 
@@ -131,9 +129,8 @@ public class LoadPane extends JPanel {
         addMouseListener(handler);
         addMouseMotionListener(handler);
 
-        this.loadPaneButtons.put("options", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
-        // this.loadPaneButtons.put("", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
-        this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
+        this.loadPaneButtons.put("options", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 60, true));
+        this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_TOP, 60, true));
 
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {

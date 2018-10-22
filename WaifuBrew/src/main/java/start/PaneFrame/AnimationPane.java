@@ -5,6 +5,7 @@ import parser.DialogueParser;
 import parser.exception.DialogueDataMissingException;
 import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
+import start.CustomObjects.Origin;
 import start.CustomObjects.SideBar;
 import start.Loader.ImageSelector;
 import start.Loader.Waifu;
@@ -26,15 +27,13 @@ public class AnimationPane extends JPanel {
     private Handlerclass handler = new Handlerclass();
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
-    private DialogueParser dp;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
+    private DialogueParser dp;
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
-    private boolean frameRateDisable = false;
 
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private SideBar configBar = new SideBar();
-
     private static Font activeFont;
 
     // Advancer keeps track of which line it reads
@@ -171,6 +170,8 @@ public class AnimationPane extends JPanel {
     }
 
     private void initFPS() {
+        // Dumb implementation. TODO: Improve.
+        final boolean frameRateDisable = false;
         Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!frameRateDisable) {
@@ -192,11 +193,11 @@ public class AnimationPane extends JPanel {
 
         dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
 
-        this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "save_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
-        this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
-        this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "start_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
+        this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "save_button", Origin.MIDDLE_CENTRE, 0, true));
+        this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 0, true));
+        this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE, 0, true));
         // Remake this as options, rather than config
-        this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 0, true));
+        this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 0, true));
 
         for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
             CustomButton button = entry.getValue();

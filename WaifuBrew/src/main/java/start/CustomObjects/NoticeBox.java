@@ -46,7 +46,7 @@ public class NoticeBox extends InteractiveObjects {
         button = new CustomButton[1];
         dialogueBoxText = text;
         backgroundPane = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) + padding, centreButton, CustomButton.Origin.MIDDLE_BOTTOM, 0, centreInvert);
+        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2), (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) + padding, centreButton, Origin.MIDDLE_BOTTOM, 0, centreInvert);
         addMouseListener(button[0].retrieveMouseHandler());
         addMouseMotionListener(button[0].retrieveMouseHandler());
 
@@ -57,8 +57,8 @@ public class NoticeBox extends InteractiveObjects {
         button = new CustomButton[2];
         dialogueBoxText = text;
         backgroundPane = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2) + padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, leftButton, CustomButton.Origin.LEFT_BOTTOM, 0, leftInvert);
-        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2) - padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, rightButton, CustomButton.Origin.RIGHT_BOTTOM, 0, rightInvert);
+        button[0] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) - (length / 2) + padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, leftButton, Origin.LEFT_BOTTOM, 0, leftInvert);
+        button[1] = new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 2) + (length / 2) - padding, (WaifuBrew.getInstance().getRes()[1].y / 2) + (height / 2) - padding, rightButton, Origin.RIGHT_BOTTOM, 0, rightInvert);
         addMouseListener(button[0].retrieveMouseHandler());
         addMouseListener(button[1].retrieveMouseHandler());
 
