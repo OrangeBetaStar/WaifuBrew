@@ -10,21 +10,24 @@ import java.awt.event.ActionListener;
 
 public class SideBar extends InteractiveObjects implements ActionListener {
 
-    private int x = (WaifuBrew.getInstance().getRes()[1].x / 3) * 2;
+    private int x = (WaifuBrew.getInstance().getRes()[1].x / 4) * 3;
     private int y = 0;
-    private int length = WaifuBrew.getInstance().getRes()[1].x / 3;
+    private int length = WaifuBrew.getInstance().getRes()[1].x / 4;
     private int height = WaifuBrew.getInstance().getRes()[1].y;
     private boolean isActive = false;
+    private boolean movementState = false;
     private javaxt.io.Image imageBlock;
     private MathClass mathClass = new MathClass();
 
     private int[] movement;
+    private int movementCounter = 0;
 
-    public SideBar () {
-        imageBlock = new javaxt.io.Image (WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+    public SideBar() {
+        imageBlock = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         imageBlock.resize(length, height);
-        imageBlock.setBackgroundColor(128,128,128);
-        movement = mathClass.easeOut(0, 1, WaifuBrew.getInstance().getRes()[1].x, x);
+        imageBlock.setBackgroundColor(128, 128, 128);
+        imageBlock.setOpacity(75);
+        movement = mathClass.easeOut(0.0, 0.5, 0, (WaifuBrew.getInstance().getRes()[1].x / 4));
     }
 
     @Override
@@ -57,11 +60,18 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         return height;
     }
 
+    public boolean isMoving() {
+        return movementState;
+    }
+
     public boolean isActive() {
         return isActive;
     }
 
     public void setActive(boolean activate) {
+        if (this.isActive != activate) {
+            movementState = true;
+        }
         isActive = activate;
     }
 
@@ -72,21 +82,31 @@ public class SideBar extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-        if(isActive) {
-/*
-
-            for(int slidingCounter = 0; slidingCounter < movement.length; slidingCounter++) {
-                g.drawImage(imageBlock.getBufferedImage(), movement[slidingCounter], y, this);
-                try {
-                    Thread.sleep(100);
-                } catch(InterruptedException e) {
-
-                }
+        if (isActive && movementState) {
+            try {
+                System.out.println(movement[movementCounter]);
+                g.drawImage(imageBlock.getBufferedImage(), (x + length) - movement[movementCounter], y, this);
+                movementCounter++;
+            } catch (IndexOutOfBoundsException e) {
+                movementCounter = 0;
+                movementState = false;
+                g.drawImage(imageBlock.getBufferedImage(), x, y, this);
             }
-*/
+        }
+        else if (!isActive && movementState) {
+            try {
+                System.out.println(movement[movementCounter]);
+                g.drawImage(imageBlock.getBufferedImage(), x + movement[movementCounter], y, this);
+                movementCounter++;
+            } catch (IndexOutOfBoundsException e) {
+                movementCounter = 0;
+                movementState = false;
+            }
+        } else if (isActive) {
             g.drawImage(imageBlock.getBufferedImage(), x, y, this);
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();

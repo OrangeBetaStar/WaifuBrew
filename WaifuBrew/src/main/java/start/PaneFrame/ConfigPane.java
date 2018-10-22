@@ -159,62 +159,63 @@ public class ConfigPane extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
+            if(event.getButton() == MouseEvent.BUTTON1) {
 
-
-            // Disable original back and save button for noticeBox buttons.
-            if (!saveDialogue.isActive()) {
-                CustomButton button = settingButtonsMap.get("back");
-                if (inBound(event, button, false)) {
-                    if (checkLockInSetting()) {
-                        WaifuBrew.getInstance().setStage(0);
-                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else {
-                        // Save setting first!
-                        saveDialogue.setActive(true);
+                // Disable original back and save button for noticeBox buttons.
+                if (!saveDialogue.isActive()) {
+                    CustomButton button = settingButtonsMap.get("back");
+                    if (inBound(event, button, false)) {
+                        if (checkLockInSetting()) {
+                            WaifuBrew.getInstance().setStage(0);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        } else {
+                            // Save setting first!
+                            saveDialogue.setActive(true);
+                        }
                     }
-                }
-                button = settingButtonsMap.get("save");
-                if (inBound(event, button, false)) {
-                    WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
-                    WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                    WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
-                    WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
-                    WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                }
-                button = settingButtonsMap.get("reset");
-                if (inBound(event, button, false)) {
-                    settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                    settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                    settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
-                }
-            } else {
-                for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                    if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
-                        if (noticeBoxButtonIndex == 0) {
-                            // Save is clicked
+                    button = settingButtonsMap.get("save");
+                    if (inBound(event, button, false)) {
+                        WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                        WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                        WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
+                        WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    }
+                    button = settingButtonsMap.get("reset");
+                    if (inBound(event, button, false)) {
+                        settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                        settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                        settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
+                    }
+                } else {
+                    for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
+                            if (noticeBoxButtonIndex == 0) {
+                                // Save is clicked
 
-                            // Save all the settings.
-                            WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
-                            WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                            WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
-                            WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
+                                // Save all the settings.
+                                WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                                WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                                WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
+                                WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
-                            // Disable NoticeBox
-                            saveDialogue.setActive(false);
+                                // Disable NoticeBox
+                                saveDialogue.setActive(false);
 
-                            // Go back to Main screen.
-                            WaifuBrew.getInstance().setStage(0);
-                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                        } else if (noticeBoxButtonIndex == 1) {
-                            // Back is clicked
+                                // Go back to Main screen.
+                                WaifuBrew.getInstance().setStage(0);
+                                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                            } else if (noticeBoxButtonIndex == 1) {
+                                // Back is clicked
 
-                            // Disable NoticeBox
-                            saveDialogue.setActive(false);
-                            settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                            settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                            settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
-                            WaifuBrew.getInstance().setStage(0);
-                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                                // Disable NoticeBox
+                                saveDialogue.setActive(false);
+                                settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                                settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                                settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                                WaifuBrew.getInstance().setStage(0);
+                                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                            }
                         }
                     }
                 }

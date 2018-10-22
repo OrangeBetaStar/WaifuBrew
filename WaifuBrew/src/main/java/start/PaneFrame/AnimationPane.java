@@ -164,7 +164,7 @@ public class AnimationPane extends JPanel {
 
         // Draws the buttons
         for (Map.Entry<String, CustomButton> entry : this.aniPaneButton.entrySet()) {
-            if (configBar.isActive()) {
+            if (configBar.isActive() && !configBar.isMoving()) {
                 // Paint every other buttons except config button when configBar is active.
                 if (!entry.getKey().equals("config")) {
                     entry.getValue().paintComponent(g);

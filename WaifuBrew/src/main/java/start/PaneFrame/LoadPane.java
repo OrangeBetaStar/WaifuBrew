@@ -37,16 +37,18 @@ public class LoadPane extends JPanel {
 
     private class Handlerclass extends MasterHandlerClass {
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, loadPaneButtons.get("config"), true) && loadPaneButtons.get("config").getActiveButtonState()) {
+            if (inBound(event, loadPaneButtons.get("options"), true) && loadPaneButtons.get("options").getActiveButtonState()) {
                 configBar.setActive(true);
-                loadPaneButtons.get("config").setActiveButtonState(false);
+                loadPaneButtons.get("options").setActiveButtonState(false);
                 loadPaneButtons.get("back").setActiveButtonState(true);
-                System.out.println("Pressed config");
+                System.out.println("Pressed options");
             } else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
+                WaifuBrew.getInstance().setStage(0);
                 configBar.setActive(false);
                 loadPaneButtons.get("back").setActiveButtonState(false);
-                loadPaneButtons.get("config").setActiveButtonState(true);
+                loadPaneButtons.get("options").setActiveButtonState(true);
                 System.out.println("Pressed back");
+                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
             }
         }
     }
@@ -66,7 +68,7 @@ public class LoadPane extends JPanel {
                 }
 
             } else {
-                if (entry.getKey().equals("config")) {
+                if (entry.getKey().equals("options")) {
                     button.paintComponent(g);
                 }
             }
@@ -74,6 +76,35 @@ public class LoadPane extends JPanel {
     }
 
     public void initFPS() {
+        /*
+        double interpolation = 0;
+        final int TICKS_PER_SECOND = 25;
+        final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+        final int MAX_FRAMESKIP = 5;
+
+        @Override
+        public void run() {
+            double next_game_tick = System.currentTimeMillis();
+            int loops;
+
+            while (true) {
+                loops = 0;
+                while (System.currentTimeMillis() > next_game_tick
+                        && loops < MAX_FRAMESKIP) {
+
+                    update_game();
+
+                    next_game_tick += SKIP_TICKS;
+                    loops++;
+                }
+
+                interpolation = (System.currentTimeMillis() + SKIP_TICKS - next_game_tick
+                        / (double) SKIP_TICKS);
+                display_game(interpolation);
+            }
+        }
+        */
+
         Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!frameRateDisable) {
@@ -93,8 +124,10 @@ public class LoadPane extends JPanel {
         addMouseListener(handler);
         addMouseMotionListener(handler);
 
-        this.loadPaneButtons.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
+        this.loadPaneButtons.put("options", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
+        // this.loadPaneButtons.put("", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
         this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", CustomButton.Origin.MIDDLE_TOP, 60, true));
+
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();

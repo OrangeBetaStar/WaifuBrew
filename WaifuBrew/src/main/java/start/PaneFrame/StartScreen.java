@@ -55,20 +55,21 @@ public class StartScreen extends JPanel implements ActionListener {
             // 2 - ConfigPane
             // 3 - Load
             // 4 - Exit
-
-            for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
-                if (inBound(event, entry.getValue(), true)) {
-                    if (entry.getKey().equals("start")) {
-                        WaifuBrew.getInstance().setStage(1);
-                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else if (entry.getKey().equals("config")) {
-                        WaifuBrew.getInstance().setStage(2);
-                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else if (entry.getKey().equals("load")) {
-                        WaifuBrew.getInstance().setStage(3);
-                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else if (entry.getKey().equals("exit")) {
-                        System.exit(0);
+            if(event.getButton() == MouseEvent.BUTTON1) {
+                for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
+                    if (inBound(event, entry.getValue(), true)) {
+                        if (entry.getKey().equals("start")) {
+                            WaifuBrew.getInstance().setStage(1);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        } else if (entry.getKey().equals("config")) {
+                            WaifuBrew.getInstance().setStage(2);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        } else if (entry.getKey().equals("load")) {
+                            WaifuBrew.getInstance().setStage(3);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        } else if (entry.getKey().equals("exit")) {
+                            System.exit(0);
+                        }
                     }
                 }
             }
