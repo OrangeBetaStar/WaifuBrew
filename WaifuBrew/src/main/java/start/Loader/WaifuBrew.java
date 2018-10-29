@@ -19,11 +19,15 @@ public class WaifuBrew {
     private GUI Frame;
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
+    private java.util.List<java.util.List<Waifu>> dialoguePackage;
+    // Temp solution for list of easing
+    private int[] movement;
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
 
+    private Dimension programDimension = new Dimension(1280, 720);
 
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
@@ -31,7 +35,7 @@ public class WaifuBrew {
     private Point[] defaultSize = {
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
-            new Point((screenSize.width / 2) - (1280 / 2), (screenSize.height / 2) - (720 / 2))};
+            new Point((screenSize.width / 2) - (programDimension.width / 2), (screenSize.height / 2) - (programDimension.height / 2))};
 
     WaifuBrew() {
 
@@ -57,6 +61,18 @@ public class WaifuBrew {
 
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
+        dialoguePackage = tfl.getDialoguePackage();
+        tfl.calculateEasing(programDimension);
+        movement = tfl.getMovement();
+    }
+
+    public int[] getMovement() {
+        return movement;
+    }
+
+    public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
+        // Perhaps I could redirect to the thread's method instead of WB class keeping a copy.
+        return dialoguePackage;
     }
 
     public static WaifuBrew getInstance() {
@@ -77,14 +93,23 @@ public class WaifuBrew {
     }
 
     // ConfigUI:
-    // 0 - Font
+    // 0 - SystemFont
+    // 1 - DialogueFont
 
-    public String getFontName() {
+    public String getSystemFont() {
         return configUI[0];
     }
 
-    public void setFontName(String fontName) {
-        configUI[0] = fontName;
+    public void setSystemFont(String systemFontName) {
+        configUI[0] = systemFontName;
+    }
+
+    public String getDialogueFont() {
+        return configUI[0];
+    }
+
+    public void setDialogueFont(String dialogueFont) {
+        configUI[1] = dialogueFont;
     }
 
     private void initConfig() {
@@ -95,7 +120,8 @@ public class WaifuBrew {
         configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
-        this.setFontName("Halogen");
+        this.setSystemFont("Halogen");
+        this.setDialogueFont("MS Mincho");
     }
 
     public int getDialogueTransparency() {

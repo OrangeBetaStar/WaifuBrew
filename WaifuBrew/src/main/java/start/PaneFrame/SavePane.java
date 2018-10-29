@@ -2,8 +2,8 @@ package start.PaneFrame;
 
 // Same looking as SaveLoadPane, but clicking on SaveLoadBox
 
-import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
+import start.CustomObjects.SaveLoadBox;
 import start.Loader.WaifuBrew;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class SavePane extends JPanel {
 
-    private CustomButton.SaveLoadBox saveLoadBox = new CustomButton.SaveLoadBox();
+    private SaveLoadBox saveLoadBox = new SaveLoadBox();
     private boolean frameRateDisable = false;
 
     SavePane() {

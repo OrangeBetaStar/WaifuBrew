@@ -53,10 +53,12 @@ public class GUI extends JFrame {
             // Add new pane as active
             if (stage == 1) {
                 add(animationPane);
+                animationPane.stageChange();
                 animationPane.repaint();
             }
             if (stage == 2) {
                 add(configPane);
+                configPane.stageChange();
                 configPane.repaint();
             }
             if (stage == 3) {

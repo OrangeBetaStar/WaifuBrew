@@ -1,11 +1,7 @@
 package start.PaneFrame;
 
-import start.CustomObjects.CustomButton;
-import start.CustomObjects.CustomSlider;
-import start.CustomObjects.CustomSwitch;
-import start.CustomObjects.MasterHandlerClass;
+import start.CustomObjects.*;
 import start.Loader.ImageSelector;
-import start.CustomObjects.NoticeBox;
 import start.Loader.WaifuBrew;
 
 import javax.swing.*;
@@ -13,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -66,7 +64,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Configure font preview
             try {
                 // For real time preview later when font change is implemented
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
                 fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10; // This equation seems most appropriate
                 Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
@@ -130,9 +128,27 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.drawImage(tempDialogueBox.getBufferedImage(), WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2, WaifuBrew.getInstance().getRes()[1].y - dialogueBox.getHeight() - (WaifuBrew.getInstance().getRes()[1].x / 2 - dialogueBox.getWidth() / 2), this);
             stringTimer.start();
             if (!tempString.equals("")) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(tempString, activeFont, frc);
+                Shape outline = textTl.getOutline(null);
+
+                FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((windowSize.x / 9.0), ((windowSize.y / 13.0) * 9) + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
+                g2d.dispose();
+                /*
                 g.setFont(activeFont);
                 g.setColor(new Color(0, 0, 0));
                 g.drawString(tempString, 150, 550);
+                */
             }
             for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
                 CustomSlider slider = entry.getValue();
@@ -146,6 +162,11 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
     }
 
+    public void stageChange() {
+        // Reload anything that can have settings changed.
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        initStringTimer();
+    }
 
     private boolean checkLockInSetting() {
         return (
@@ -159,62 +180,63 @@ public class ConfigPane extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
+            if(event.getButton() == MouseEvent.BUTTON1) {
 
-
-            // Disable original back and save button for noticeBox buttons.
-            if (!saveDialogue.isActive()) {
-                CustomButton button = settingButtonsMap.get("back");
-                if (inBound(event, button, false)) {
-                    if (checkLockInSetting()) {
-                        WaifuBrew.getInstance().setStage(0);
-                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else {
-                        // Save setting first!
-                        saveDialogue.setActive(true);
+                // Disable original back and save button for noticeBox buttons.
+                if (!saveDialogue.isActive()) {
+                    CustomButton button = settingButtonsMap.get("back");
+                    if (inBound(event, button, false)) {
+                        if (checkLockInSetting()) {
+                            WaifuBrew.getInstance().setStage(0);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        } else {
+                            // Save setting first!
+                            saveDialogue.setActive(true);
+                        }
                     }
-                }
-                button = settingButtonsMap.get("save");
-                if (inBound(event, button, false)) {
-                    WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
-                    WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                    WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
-                    WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
-                    WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                }
-                button = settingButtonsMap.get("reset");
-                if (inBound(event, button, false)) {
-                    settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                    settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                    settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
-                }
-            } else {
-                for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                    if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
-                        if (noticeBoxButtonIndex == 0) {
-                            // Save is clicked
+                    button = settingButtonsMap.get("save");
+                    if (inBound(event, button, false)) {
+                        WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                        WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                        WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
+                        WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    }
+                    button = settingButtonsMap.get("reset");
+                    if (inBound(event, button, false)) {
+                        settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                        settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                        settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
+                    }
+                } else {
+                    for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
+                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
+                            if (noticeBoxButtonIndex == 0) {
+                                // Save is clicked
 
-                            // Save all the settings.
-                            WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
-                            WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                            WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
-                            WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
+                                // Save all the settings.
+                                WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
+                                WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
+                                WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
+                                WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
-                            // Disable NoticeBox
-                            saveDialogue.setActive(false);
+                                // Disable NoticeBox
+                                saveDialogue.setActive(false);
 
-                            // Go back to Main screen.
-                            WaifuBrew.getInstance().setStage(0);
-                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                        } else if (noticeBoxButtonIndex == 1) {
-                            // Back is clicked
+                                // Go back to Main screen.
+                                WaifuBrew.getInstance().setStage(0);
+                                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                            } else if (noticeBoxButtonIndex == 1) {
+                                // Back is clicked
 
-                            // Disable NoticeBox
-                            saveDialogue.setActive(false);
-                            settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
-                            settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                            settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
-                            WaifuBrew.getInstance().setStage(0);
-                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                                // Disable NoticeBox
+                                saveDialogue.setActive(false);
+                                settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
+                                settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
+                                settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                                WaifuBrew.getInstance().setStage(0);
+                                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                            }
                         }
                     }
                 }
@@ -241,9 +263,10 @@ public class ConfigPane extends JPanel implements ActionListener {
     private void initFont() {
         // Configure font preview
         try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getFontName() + ".ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            // activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
             configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
         } catch (FontFormatException ex) {
             ex.printStackTrace();
@@ -268,9 +291,9 @@ public class ConfigPane extends JPanel implements ActionListener {
         try {
             backgroundPicture = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, "config"));
             dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
-            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", CustomButton.Origin.MIDDLE_CENTRE, 0, false));
-            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", CustomButton.Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_CENTRE, 0, true));
+            this.settingButtonsMap.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "save_button", Origin.MIDDLE_CENTRE, 0, false));
+            this.settingButtonsMap.put("reset", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "reset_button", Origin.MIDDLE_CENTRE, 0, true));
 
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "save_button", "don't_save_button", false, true);
 
@@ -336,7 +359,7 @@ public class ConfigPane extends JPanel implements ActionListener {
 
         // Coalesce is disabled since there is no multiple firing of triggers.
         stringTimer.setRepeats(true);
-        stringTimer.setCoalesce(false);
+        stringTimer.setCoalesce(true);
 
     }
 }
