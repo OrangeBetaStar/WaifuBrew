@@ -41,4 +41,8 @@ public class ImageDesc {
     public BufferedImage getImageItself() {
         return imageItself;
     }
+
+    public void setImageItself(BufferedImage imageItself) {
+        this.imageItself = imageItself;
+    }
 }

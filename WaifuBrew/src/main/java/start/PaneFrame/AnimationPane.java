@@ -1,5 +1,6 @@
 package start.PaneFrame;
 
+import start.Containers.ImageDesc;
 import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
 import start.CustomObjects.Origin;
@@ -44,6 +45,7 @@ public class AnimationPane extends JPanel {
     private String a = "Click anywhere to initiate dialog...!";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
+    private ImageDesc background;
 
     public AnimationPane() {
         // parsing dialogue has to be done before on thread.
@@ -115,10 +117,22 @@ public class AnimationPane extends JPanel {
                 for (int a = 0; a < e.get(advancer - 1).size(); a++) {
                     characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
+
+                    // checking the uninitiated so it brings up error
+                    if(!(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
+                        background = new ImageDesc(e.get(advancer - 1).get(a).getBackground(), new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get(advancer - 1).get(a).getBackground())));
+                        javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
+                        double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
+                        tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                        background.setImageItself(tempBackground.getBufferedImage());
+                    }
                 }
                 clickActivate = false;
             }
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
+                // Draw background here
+
+                g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
                 g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 10) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
@@ -129,6 +143,7 @@ public class AnimationPane extends JPanel {
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
+            // What
         }
 
         if (tempString != "") {
