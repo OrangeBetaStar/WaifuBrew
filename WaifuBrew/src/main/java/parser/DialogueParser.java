@@ -20,14 +20,8 @@ public class DialogueParser {
     private HashMap<Integer, String> backgroundList = new HashMap<>();
     private List<List<Mood>> moodList = new ArrayList<List<Mood>>(); // Dynamic 2D arraylist
     private List<List<Characters>> characterList = new ArrayList<List<Characters>>(); // Dynamic 2D arraylist
-    private String tempNameString = "";
-    private String tempMoodString = "";
-    private String tempMoveString = "";
-    private String tempBGString = "";
-    private List<String> subNameString;
-    private List<String> subMoodString;
-    private List<List<Waifu>> packagedDialogue = new ArrayList<List<Waifu>>();
-
+    private String[] tempAttributeString = new String[3]; // [0]name [1]mood [2]bg
+    private List<List<Waifu>> packagedDialogue = new ArrayList<>();
     private int index;
 
     public DialogueParser(String fileName) {
@@ -35,7 +29,10 @@ public class DialogueParser {
     }
 
     public void parse() throws IOException, DialogueDataMissingException, JSONException {
+        List<String> subNameString;
+        List<String> subMoodString;
         JSONParser parser = new JSONParser();
+
         try {
             Object object = parser.parse(new FileReader(fileName));
             JSONObject obj = (JSONObject) object;
@@ -47,16 +44,13 @@ public class DialogueParser {
             while (i.hasNext()) {
                 JSONObject o = (JSONObject) i.next();
                 if (o.get("name") != null) {
-                    tempNameString = (String) o.get("name");
-                    //System.out.println("tempNameString: " + tempNameString);
-                    tempMoodString = (String) o.get("mood");
-                    //System.out.println("tempMoodString: " + tempMoodString);
-                    tempBGString = (String) o.get("bg");
-                    //System.out.println("tempDialoString: " + o.get("text"));
-                    subNameString = Arrays.asList(tempNameString.split(","));
-                    subMoodString = Arrays.asList(tempMoodString.split(","));
-                    List<Characters> sceneCharList = new ArrayList<Characters>();
-                    List<Mood> sceneMoodList = new ArrayList<Mood>();
+                    tempAttributeString[0] = (String) o.get("name");
+                    tempAttributeString[1] = (String) o.get("mood");
+                    tempAttributeString[2] = (String) o.get("bg");
+                    subNameString = Arrays.asList(tempAttributeString[0].split(","));
+                    subMoodString = Arrays.asList(tempAttributeString[1].split(","));
+                    List<Characters> sceneCharList = new ArrayList<>();
+                    List<Mood> sceneMoodList = new ArrayList<>();
                     for (String s : subNameString) {
                         if (s.toLowerCase().contains("nico")) {
                             sceneCharList.add(Characters.Yazawa_Nico);
@@ -88,9 +82,9 @@ public class DialogueParser {
 
                     } while (sceneCharList.size() != sceneMoodList.size());
 
-                    if(tempBGString != null) {
-                        backgroundList.put(index, tempBGString);
-                        tempBGString = null;
+                    if (tempAttributeString[2] != null) {
+                        backgroundList.put(index, tempAttributeString[2]);
+                        tempAttributeString[2] = null;
                     }
                     characterList.add(sceneCharList);
                     moodList.add(sceneMoodList);
@@ -103,7 +97,7 @@ public class DialogueParser {
             e.printStackTrace();
         }
 
-        for(String testString : dialogueList) {
+        for (String testString : dialogueList) {
             System.out.println(testString);
         }
     }
@@ -119,11 +113,10 @@ public class DialogueParser {
         while (lineCounter < characterList.size()) {
             List<Waifu> tempWaifu = new ArrayList<Waifu>();
             while (characterCounterPerLine < characterList.get(lineCounter).size()) {
-                if(backgroundList.get(lineCounter) != null) {
+                if (backgroundList.get(lineCounter) != null) {
                     Waifu e = new Waifu(characterList.get(lineCounter).get(characterCounterPerLine), moodList.get(lineCounter).get(characterCounterPerLine), dialogueList[lineCounter], backgroundList.get(lineCounter));
                     tempWaifu.add(e);
-                }
-                else {
+                } else {
                     Waifu e = new Waifu(characterList.get(lineCounter).get(characterCounterPerLine), moodList.get(lineCounter).get(characterCounterPerLine), dialogueList[lineCounter]);
                     tempWaifu.add(e);
                 }
