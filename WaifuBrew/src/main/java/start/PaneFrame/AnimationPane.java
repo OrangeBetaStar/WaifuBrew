@@ -156,10 +156,12 @@ public class AnimationPane extends JPanel {
                 }
                 clickActivate = false;
             }
-            for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
-                // Draw background here
 
-                g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
+            // Draw background here
+            g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
+
+            for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
+                // Draw character(s) here
                 g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 10) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
