@@ -4,7 +4,7 @@
       "name": "Yazawa Nico, Nishikino Maki",
       "text": "にこにこにいー",
       "mood": "HAPPY",
-      "bg": "placeholder"
+      "bg": "placeholder1"
     },
     {
       "name": "Yazawa Nico",
@@ -19,7 +19,8 @@
     {
       "name": "Yazawa Nico, Kibbleru",
       "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
-      "mood": "HAPPY, SAD"
+      "mood": "HAPPY, SAD",
+      "bg": "placeholder2"
     },
     {
       "name": "Nishikino Maki",
@@ -38,7 +39,8 @@
     {
       "name": "Ichigaya Arisa",
       "text": "Chomama chomamama chotto matte chotto!",
-      "mood": "SAD"
+      "mood": "SAD",
+      "bg": "bath"
     }
   ]
 }

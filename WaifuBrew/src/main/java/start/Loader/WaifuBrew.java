@@ -205,6 +205,7 @@ public class WaifuBrew {
 
         // Getting ImageSelector.VECTOR - blackbox is a fail-safe
         for (ImageDesc pictures : fileList.get(whichPile.getValue())) {
+            // System.out.println("The pick: "+whichPile + " " + whichOne);
             if (pictures.getImageDescription().toLowerCase().contains(whichOne.toLowerCase())) {
                 return pictures.getImageItself();
             }

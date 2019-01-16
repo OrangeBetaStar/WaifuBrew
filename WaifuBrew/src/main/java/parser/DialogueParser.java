@@ -48,8 +48,11 @@ public class DialogueParser {
                 JSONObject o = (JSONObject) i.next();
                 if (o.get("name") != null) {
                     tempNameString = (String) o.get("name");
+                    System.out.println("tempNameString: " + tempNameString);
                     tempMoodString = (String) o.get("mood");
+                    System.out.println("tempMoodString: " + tempMoodString);
                     tempBGString = (String) o.get("bg");
+                    System.out.println("tempDialoString: " + o.get("text"));
                     subNameString = Arrays.asList(tempNameString.split(","));
                     subMoodString = Arrays.asList(tempMoodString.split(","));
                     List<Characters> sceneCharList = new ArrayList<Characters>();
@@ -87,11 +90,12 @@ public class DialogueParser {
 
                     if(tempBGString != null) {
                         backgroundList.put(index, tempBGString);
+                        tempBGString = null;
                     }
                     characterList.add(sceneCharList);
                     moodList.add(sceneMoodList);
                 }
-                this.dialogueList[index] = (String) o.get("text");
+                this.dialogueList[index] = o.get("text") == null ? "" : o.get("text").toString();
                 index++;
             }
 
@@ -99,6 +103,9 @@ public class DialogueParser {
             e.printStackTrace();
         }
 
+        for(String testString : dialogueList) {
+            System.out.println(testString);
+        }
     }
 
     public String[] getDialogueList() {
