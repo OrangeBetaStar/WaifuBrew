@@ -48,11 +48,11 @@ public class DialogueParser {
                 JSONObject o = (JSONObject) i.next();
                 if (o.get("name") != null) {
                     tempNameString = (String) o.get("name");
-                    System.out.println("tempNameString: " + tempNameString);
+                    //System.out.println("tempNameString: " + tempNameString);
                     tempMoodString = (String) o.get("mood");
-                    System.out.println("tempMoodString: " + tempMoodString);
+                    //System.out.println("tempMoodString: " + tempMoodString);
                     tempBGString = (String) o.get("bg");
-                    System.out.println("tempDialoString: " + o.get("text"));
+                    //System.out.println("tempDialoString: " + o.get("text"));
                     subNameString = Arrays.asList(tempNameString.split(","));
                     subMoodString = Arrays.asList(tempMoodString.split(","));
                     List<Characters> sceneCharList = new ArrayList<Characters>();

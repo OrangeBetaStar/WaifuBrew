@@ -59,14 +59,14 @@ public class AnimationPane extends JPanel {
     }
 
     public void triggerNext() {
-        if (e.get(advancer).get(0).getDialogue() != null) {
-            tempString = "";
-            a = e.get(advancer).get(0).getDialogue();
-        } else {
-            tempString = "";
-            a = "";
-        }
-        if (advancer < e.size() - 1) {
+        if(advancer < e.size()) {
+            if (e.get(advancer).get(0).getDialogue() != null) {
+                tempString = "";
+                a = e.get(advancer).get(0).getDialogue();
+            } else {
+                tempString = "";
+                a = "";
+            }
             advancer++;
         }
     }
@@ -146,8 +146,6 @@ public class AnimationPane extends JPanel {
                         }
                     }
                     // Searches for next background image and resizes it
-                    System.out.println("background.getImageDescription(): "+ background.getImageDescription());
-                    System.out.println("e.get(advancer - 1).get(a).getBackground(): "+ e.get(advancer - 1).get(a).getBackground());
                     if(e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
                         background = new ImageDesc(e.get(advancer - 1).get(a).getBackground(), new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get(advancer - 1).get(a).getBackground())));
                         javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());

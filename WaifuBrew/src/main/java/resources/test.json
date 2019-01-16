@@ -41,6 +41,17 @@
       "text": "Chomama chomamama chotto matte chotto!",
       "mood": "SAD",
       "bg": "bath"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~2222",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico, Nishikino Maki",
+      "text": "にこにこにいー",
+      "mood": "HAPPY",
+      "bg": "placeholder1"
     }
   ]
 }
