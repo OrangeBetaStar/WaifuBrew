@@ -20,12 +20,14 @@ public class WaifuBrew {
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
-    // Temp solution for list of easing
-    private int[] movement;
+    
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static String[] configUI = new String[10];
     // Have a look below to see what each of the slots are for.
+
+    // Keeps the calculated easing from pre-run thread.
+    private ArrayList<double[]> easingArray;
 
     private Dimension programDimension = new Dimension(1280, 720);
 
@@ -62,12 +64,7 @@ public class WaifuBrew {
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
-        tfl.calculateEasing(programDimension);
-        movement = tfl.getMovement();
-    }
-
-    public int[] getMovement() {
-        return movement;
+        easingArray = tfl.getMovement();
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
@@ -198,6 +195,33 @@ public class WaifuBrew {
 
     public ArrayList<ImageDesc> getImageSetBySelector(ImageSelector imageSelector) {
         return fileList.get(imageSelector.getValue());
+    }
+
+    public double[] getMovement(EasingSelector selector) {
+        double[] returnEasingArray;
+        switch (selector.getValue()) {
+            // Linear
+            case 1:
+                returnEasingArray = easingArray.get(0);
+                break;
+            // Easing In
+            case 2:
+                returnEasingArray = easingArray.get(1);
+                break;
+            // Easing Out
+            case 3:
+                returnEasingArray = easingArray.get(2);
+                break;
+            // Out_In Expo
+            case 4:
+                returnEasingArray = easingArray.get(3);
+                break;
+            default:
+                // Defaults to linear
+                returnEasingArray = easingArray.get(0);
+                break;
+        }
+        return returnEasingArray;
     }
 
     // No image will result in blank image.
