@@ -57,7 +57,7 @@ public class WaifuBrew {
             e.printStackTrace();
         }
 
-        System.out.println("Threads should be done by now!  ");
+        System.out.println("Threads successfully merged!");
 
         // Getting files ready-ied by thread.
         fileList = tfl.getFileList();

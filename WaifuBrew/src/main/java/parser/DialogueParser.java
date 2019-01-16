@@ -96,10 +96,6 @@ public class DialogueParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        for (String testString : dialogueList) {
-            System.out.println(testString);
-        }
     }
 
     public String[] getDialogueList() {

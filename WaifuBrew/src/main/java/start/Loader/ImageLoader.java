@@ -95,11 +95,11 @@ public class ImageLoader extends JPanel {
         }
 
         for (ImageDesc asdf : character_imagesArr) {
-            System.out.println("Image Processed: " + asdf.getImageDescription());
+            System.out.println("Image Processed and converted: " + asdf.getImageDescription());
         }
 
         for (ImageDesc asdf : load_first_images) {
-            System.out.println("Exists: " + asdf.getImageDescription());
+            System.out.println("Successfully loaded: " + asdf.getImageDescription());
         }
 
 
