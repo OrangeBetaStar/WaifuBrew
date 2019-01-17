@@ -1,6 +1,4 @@
-package parser.exception;
-
-import java.awt.*;
+package start.Parser.ParserException;
 
 /*
  * Exception raised when expected data is missing

@@ -1,10 +1,10 @@
-package parser;
+package start.Parser;
 
 import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import parser.exception.DialogueDataMissingException;
+import start.Parser.ParserException.DialogueDataMissingException;
 import start.Containers.Characters;
 import start.Containers.Mood;
 import start.Loader.Waifu;

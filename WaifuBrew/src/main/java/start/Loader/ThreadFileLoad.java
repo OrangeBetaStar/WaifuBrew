@@ -1,8 +1,8 @@
 package start.Loader;
 
 import org.json.JSONException;
-import parser.DialogueParser;
-import parser.exception.DialogueDataMissingException;
+import start.Parser.DialogueParser;
+import start.Parser.ParserException.DialogueDataMissingException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
 

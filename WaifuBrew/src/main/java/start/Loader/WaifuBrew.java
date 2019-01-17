@@ -82,7 +82,7 @@ public class WaifuBrew {
             singleton.start();
 
         }
-        // catches any exception
+        // catches any ParserException
         catch (Exception e) {
             System.out.println("Catastrophic error!");
             throw new WaifuException(e);

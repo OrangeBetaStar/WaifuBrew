@@ -1,4 +1,4 @@
-package parser;
+package start.Parser;
 
 import org.junit.Before;
 import org.junit.Test;
