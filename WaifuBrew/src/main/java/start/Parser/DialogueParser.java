@@ -49,48 +49,56 @@ public class DialogueParser {
                     tempAttributeString[2] = (String) o.get("bg");
                     subNameString = Arrays.asList(tempAttributeString[0].split(","));
                     subMoodString = Arrays.asList(tempAttributeString[1].split(","));
-                    List<Characters> sceneCharList = new ArrayList<>();
-                    List<Mood> sceneMoodList = new ArrayList<>();
-                    for (String s : subNameString) {
-                        if (s.toLowerCase().contains("nico")) {
-                            sceneCharList.add(Characters.Yazawa_Nico);
-                            //    System.out.println("Added: Nico");
-                        } else if (s.toLowerCase().contains("maki")) {
-                            sceneCharList.add(Characters.Nishikino_Maki);
-                            //    System.out.println("Added: Maki");
-                        } else if (s.toLowerCase().contains("arisa")) {
-                            sceneCharList.add(Characters.Ichigaya_Arisa);
-                            //    System.out.println("Added: Arisa");
-                        } else if (s.toLowerCase().contains("kibb")) {
-                            sceneCharList.add(Characters.Kibbleru);
-                            //    System.out.println("Added: Kibb");
-                        }
-                    }
-
-                    do {
-                        for (String m : subMoodString) {
-                            if (m.toLowerCase().contains("happy")) {
-                                sceneMoodList.add(Mood.HAPPY);
-                            } else if (m.toLowerCase().contains("sad")) {
-                                sceneMoodList.add(Mood.SAD);
-                            } else if (m.toLowerCase().contains("normal")) {
-                                sceneMoodList.add(Mood.NORMAL);
-                            } else if (m.toLowerCase().contains("angry")) {
-                                sceneMoodList.add(Mood.ANGRY);
+                    if (subMoodString.size() == 1 || subMoodString.size() == subNameString.size()) {
+                        List<Characters> sceneCharList = new ArrayList<>();
+                        List<Mood> sceneMoodList = new ArrayList<>();
+                        for (String s : subNameString) {
+                            if (s.toLowerCase().contains("nico")) {
+                                sceneCharList.add(Characters.Yazawa_Nico);
+                                //    System.out.println("Added: Nico");
+                            } else if (s.toLowerCase().contains("maki")) {
+                                sceneCharList.add(Characters.Nishikino_Maki);
+                                //    System.out.println("Added: Maki");
+                            } else if (s.toLowerCase().contains("arisa")) {
+                                sceneCharList.add(Characters.Ichigaya_Arisa);
+                                //    System.out.println("Added: Arisa");
+                            } else if (s.toLowerCase().contains("kibb")) {
+                                sceneCharList.add(Characters.Kibbleru);
+                                //    System.out.println("Added: Kibb");
                             }
                         }
+                        do {
+                            for (String m : subMoodString) {
+                                if (m.toLowerCase().contains("happy")) {
+                                    sceneMoodList.add(Mood.HAPPY);
+                                } else if (m.toLowerCase().contains("sad")) {
+                                    sceneMoodList.add(Mood.SAD);
+                                } else if (m.toLowerCase().contains("normal")) {
+                                    sceneMoodList.add(Mood.NORMAL);
+                                } else if (m.toLowerCase().contains("angry")) {
+                                    sceneMoodList.add(Mood.ANGRY);
+                                } else {
+                                    throw new JSONException("Check JSON");
+                                }
+                            }
 
-                    } while (sceneCharList.size() != sceneMoodList.size());
+                        } while (sceneCharList.size() != sceneMoodList.size());
 
-                    if (tempAttributeString[2] != null) {
-                        backgroundList.put(index, tempAttributeString[2]);
-                        tempAttributeString[2] = null;
+                        if (tempAttributeString[2] != null) {
+                            backgroundList.put(index, tempAttributeString[2]);
+                            tempAttributeString[2] = null;
+                        }
+                        characterList.add(sceneCharList);
+                        moodList.add(sceneMoodList);
+                        this.dialogueList[index] = o.get("text") == null ? "" : o.get("text").toString();
+                        index++;
                     }
-                    characterList.add(sceneCharList);
-                    moodList.add(sceneMoodList);
+                    else {
+                        // throw new DialogueDataMissingException("There was imbalance of CHAR:MOOD in JSON. Index: " + (index + 1) + ". The line was skipped automatically.");
+                        System.out.println("There was imbalance of CHAR:MOOD in JSON. Index: " + (index + 1) + ". The line was skipped automatically.");
+                    }
+
                 }
-                this.dialogueList[index] = o.get("text") == null ? "" : o.get("text").toString();
-                index++;
             }
 
         } catch (Exception e) {
