@@ -112,8 +112,8 @@ public class ConfigPane extends JPanel implements ActionListener {
                 CustomSlider sliders = (CustomSlider)sliderObject.getValue();
                 g.drawString(sliders.getSliderDesc(), sliders.getX(), sliders.getY() - ((windowSize.x / 10) / 3));
             }
+            // Draw switch
             g.drawString(autoDialog.getSwitchDesc(), autoDialog.getX(), autoDialog.getY() - ((windowSize.x / 10) / 3));
-                    // (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
             if (!saveDialogue.isActive()) {
                 for (Map.Entry<String, CustomButton> entry : this.settingButtonsMap.entrySet()) {
@@ -148,11 +148,6 @@ public class ConfigPane extends JPanel implements ActionListener {
                 g2d.setColor(Color.BLACK);
                 g2d.draw(outline);
                 g2d.dispose();
-                /*
-                g.setFont(activeFont);
-                g.setColor(new Color(0, 0, 0));
-                g.drawString(tempString, 150, 550);
-                */
             }
             for (Map.Entry<String, CustomSlider> entry : this.settingSlidersMap.entrySet()) {
                 CustomSlider slider = entry.getValue();
