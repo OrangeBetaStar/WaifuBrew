@@ -73,12 +73,11 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        // super.paintComponent(g); // This is disabled so that weird square doesn't print on top left of the setting page
         if (initStage) {
 
-            // TODO: May be fix this? Why would I need to get WHITE.getRed and stuff???
             sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
-            sliderLeveler.setBackgroundColor(Color.CYAN.getRed(), Color.CYAN.getGreen(), Color.CYAN.getBlue());
+            // sliderLeveler.setBackgroundColor((int)(255/(double)level), (int)(255/(double)level), (int)(255/(double)level));
             // sliderKnob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
 
             // SLIDER TRACK
@@ -89,12 +88,14 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
 
             initStage = false;
         }
+        // Changing background
+        javaxt.io.Image tempSliderLeveler = sliderLeveler.copy();
+        tempSliderLeveler.setBackgroundColor((int)(255*((double)level)/100.0), (int)(255*((double)level)/100.0), (int)(255*((double)level)/100.0));
 
-        // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
+        // Draw slider (Some of the calculations may look weird since this was also accounting for snap back after re-entry to config.
         g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), dialogueKnobX, dialogueKnobY  - (sliderBackground.getHeight() / 2), that);
-
+        g.drawImage(tempSliderLeveler.getBufferedImage(), x, dialogueKnobY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
+        g.drawImage(sliderKnob.getBufferedImage(), x + (int)(sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), dialogueKnobY  - (sliderBackground.getHeight() / 2), that);
     }
 
     public boolean isSliderActive() {
