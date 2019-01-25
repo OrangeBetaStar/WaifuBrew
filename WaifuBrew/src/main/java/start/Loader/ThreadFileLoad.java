@@ -1,12 +1,11 @@
 package start.Loader;
 
 import org.json.JSONException;
-import parser.DialogueParser;
-import parser.exception.DialogueDataMissingException;
+import start.Parser.DialogueParser;
+import start.Parser.ParserException.DialogueDataMissingException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,7 +16,6 @@ public class ThreadFileLoad implements Runnable {
     private DialogueParser dp;
     private java.util.List<java.util.List<Waifu>> e;
     private MathClass mathClass = new MathClass();
-    private int[] movement;
 
     public ThreadFileLoad() {
 
@@ -48,12 +46,8 @@ public class ThreadFileLoad implements Runnable {
         // movement = mathClass.easeOut(0.0, 0.5, 0, 1280 / 4);
     }
 
-    public int[] getMovement() {
-        return this.movement;
-    }
-
-    public void calculateEasing(Dimension e) {
-        movement = mathClass.easeOut(0.0, 0.5, 0, e.width / 4);
+    public ArrayList<double[]> getMovement() {
+        return mathClass.getArrayList();
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {

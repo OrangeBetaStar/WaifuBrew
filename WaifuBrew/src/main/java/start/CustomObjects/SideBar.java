@@ -1,5 +1,6 @@
 package start.CustomObjects;
 
+import start.Loader.EasingSelector;
 import start.Loader.ImageSelector;
 import start.Loader.WaifuBrew;
 
@@ -18,7 +19,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     private javaxt.io.Image imageBlock;
 
 
-    private int[] movement;
+    private double[] movement;
     private int movementCounter = 0;
 
     public SideBar() {
@@ -26,7 +27,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         imageBlock.resize(length, height);
         imageBlock.setBackgroundColor(128, 128, 128);
         imageBlock.setOpacity(75);
-        movement = WaifuBrew.getInstance().getMovement();
+        movement = WaifuBrew.getInstance().getMovement(EasingSelector.OUT_SINE);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Open
         if (isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), (x + length) - movement[movementCounter], y, this);
+                g.drawImage(imageBlock.getBufferedImage(), (x + length) - (int)(movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;
@@ -96,7 +97,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Close
         else if (!isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), x + movement[movementCounter], y, this);
+                g.drawImage(imageBlock.getBufferedImage(), x + (int)(movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;

@@ -1,5 +1,6 @@
 package start.PaneFrame;
 
+import start.Containers.ImageDesc;
 import start.CustomObjects.CustomButton;
 import start.CustomObjects.MasterHandlerClass;
 import start.CustomObjects.Origin;
@@ -44,6 +45,9 @@ public class AnimationPane extends JPanel {
     private String a = "Click anywhere to initiate dialog...!";
     private String tempString = "";
     private java.util.List<java.util.List<Waifu>> e;
+    private ImageDesc background;
+
+    private boolean newStart = true;
 
     public AnimationPane() {
         // parsing dialogue has to be done before on thread.
@@ -55,14 +59,14 @@ public class AnimationPane extends JPanel {
     }
 
     public void triggerNext() {
-        if (e.get(advancer).get(0).getDialogue() != null) {
-            tempString = "";
-            a = e.get(advancer).get(0).getDialogue();
-        } else {
-            tempString = "";
-            a = "";
-        }
-        if (advancer < e.size() - 1) {
+        if(advancer < e.size()) {
+            if (e.get(advancer).get(0).getDialogue() != null) {
+                tempString = "";
+                a = e.get(advancer).get(0).getDialogue();
+            } else {
+                tempString = "";
+                a = "";
+            }
             advancer++;
         }
     }
@@ -115,10 +119,49 @@ public class AnimationPane extends JPanel {
                 for (int a = 0; a < e.get(advancer - 1).size(); a++) {
                     characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
+
+                    if(background == null) {
+                        for(int finder = 0; finder < e.get(advancer - 1).size(); finder++) {
+                            if(e.get(advancer - 1).get(a).getBackground() != null) {
+                                if(newStart) { // new / old. start / load
+                                    // New start needs to go from top to bottom
+                                    background = new ImageDesc(e.get((advancer - 1) + finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) + finder).get(a).getBackground()));
+                                    javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
+                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    background.setImageItself(tempBackground.getBufferedImage());
+                                }
+                                else {
+                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder
+                                    background = new ImageDesc(e.get((advancer - 1) - finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) - finder).get(a).getBackground()));
+                                    javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
+                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    background.setImageItself(tempBackground.getBufferedImage());
+                                }
+                            }
+                            if(background != null) {
+                                break;
+                            }
+                        }
+                    }
+                    // Searches for next background image and resizes it
+                    if(e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
+                        background = new ImageDesc(e.get(advancer - 1).get(a).getBackground(), new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get(advancer - 1).get(a).getBackground())));
+                        javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
+                        double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
+                        tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                        background.setImageItself(tempBackground.getBufferedImage());
+                    }
                 }
                 clickActivate = false;
             }
+
+            // Draw background here
+            g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
+
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
+                // Draw character(s) here
                 g.drawImage(characterImage[b - 1].getBufferedImage(), ((windowSize.x / (e.get(advancer - 1).size() + 1)) * b) - (characterImage[b - 1].getWidth() / 2), (windowSize.y / 10) + (characterImage[b - 1].getHeight() / 2), this);
             }
 
@@ -129,6 +172,7 @@ public class AnimationPane extends JPanel {
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
+            // What
         }
 
         if (tempString != "") {

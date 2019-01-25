@@ -3,7 +3,8 @@
     {
       "name": "Yazawa Nico, Nishikino Maki",
       "text": "にこにこにいー",
-      "mood": "HAPPY"
+      "mood": "HAPPY",
+      "bg": "placeholder1"
     },
     {
       "name": "Yazawa Nico",
@@ -16,9 +17,16 @@
       "mood": "HAPPY"
     },
     {
-      "name": "Yazawa Nico, Kibbleru",
+      "name": "Yazawa Nico, Kibbleru, Ichigaya Arisa",
       "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
-      "mood": "HAPPY, SAD"
+      "mood": "HAPPY, SAD, NORMAL",
+      "bg": "placeholder2"
+    },
+    {
+      "name": "Yazawa Nico, Kibbleru, Ichigaya Arisa",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
+      "mood": "HAPPY, SAD",
+      "bg": "placeholder2"
     },
     {
       "name": "Nishikino Maki",
@@ -37,7 +45,19 @@
     {
       "name": "Ichigaya Arisa",
       "text": "Chomama chomamama chotto matte chotto!",
-      "mood": "SAD"
+      "mood": "SAD",
+      "bg": "bath"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~2222",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico, Nishikino Maki",
+      "text": "にこにこにいー",
+      "mood": "HAPPY",
+      "bg": "sky"
     }
   ]
 }

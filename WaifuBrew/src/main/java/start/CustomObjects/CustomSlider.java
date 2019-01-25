@@ -20,6 +20,7 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     private int y; // dialogueTransparencyY
     private int length = 200;
     private int height = 20;
+    private String sliderDesc;
 
     private boolean initStage = true;
 
@@ -32,6 +33,18 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     public CustomSlider(int x, int y, int level) {
         this.x = x;
         this.y = y;
+        this.sliderDesc = "";
+
+        sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        sliderLeveler = sliderBackground.copy();
+        sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
+        this.level = level;
+    }
+
+    public CustomSlider(int x, int y, int level, String sliderDesc) {
+        this.x = x;
+        this.y = y;
+        this.sliderDesc = sliderDesc;
 
         sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         sliderLeveler = sliderBackground.copy();
@@ -40,6 +53,7 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     }
 
     // TODO: Haven't full implemented custom knob slider yet
+    /*
     public CustomSlider(int x, int y, int level, String fileName) {
         this.x = x;
         this.y = y;
@@ -51,6 +65,7 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         // sliderKnob = sliderBackground.copy();
         this.level = level;
     }
+    */
 
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -68,18 +83,17 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
 
             // SLIDER TRACK
             sliderBackground.resize(length, height, false);
-            sliderKnob.resize(sliderBackground.getHeight(), sliderBackground.getHeight(), false);
-            dialogueKnobX = x + (int) (sliderBackground.getWidth() * (level / 100.0));
+            sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
+            dialogueKnobX = x + ((int) (sliderBackground.getWidth() * (level / 100.0)) - sliderBackground.getHeight());
             dialogueKnobY = y;
 
             initStage = false;
         }
 
         // TODO: Calculate the following (x, y) to relative to resolution (current defaults to mid way of knob)
-        g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth() + sliderKnob.getWidth(), sliderBackground.getHeight(), that);
-        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int) (sliderBackground.getWidth() * (level / 100.0)) + (int) (sliderKnob.getWidth() * 0.5), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), (int) (x + ((level / 100.0) * length)), dialogueKnobY, that);
-        // dialogueKnobX = (int)(x + ((level/100.0) * length));
+        g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
+        g.drawImage(sliderLeveler.getBufferedImage(), x, dialogueKnobY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
+        g.drawImage(sliderKnob.getBufferedImage(), dialogueKnobX, dialogueKnobY  - (sliderBackground.getHeight() / 2), that);
 
     }
 
@@ -125,6 +139,10 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         return height;
     }
 
+    public String getSliderDesc() {
+        return sliderDesc;
+    }
+
     @Override
     public Handlerclass retrieveMouseHandler() {
         return miniHandler;
@@ -133,21 +151,30 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
         // TODO: FINE TUNE THE KNOBS SO THAT IT KEEPS THE ORIGINAL POSITION OF CLICK POINT OF SQUARE (CURRENT IS MIDDLE)
         public void mousePressed(MouseEvent event) {
-            if (event.getX() >= (int) (x + ((level / 100.0) * length)) && event.getX() <= (int) (x + ((level / 100.0) * length)) + sliderKnob.getWidth() && event.getY() >= dialogueKnobY && event.getY() <= dialogueKnobY + sliderKnob.getHeight()) {
+            if (event.getX() >= x &&
+                event.getX() <= x + sliderBackground.getWidth() &&
+                event.getY() >= dialogueKnobY - (sliderKnob.getHeight() / 4) && // One fourth way up above x (because button is twice as big
+                event.getY() <= dialogueKnobY + ((sliderKnob.getHeight() / 4) * 3)) { // Three fourth way down below x (because button is twice as big)
                 sliderActive = true;
+
+                // First press: move knob (Runs only once)
+                level = (int)(((event.getX() - x) / (double)sliderBackground.getWidth()) * 100.0);
+                dialogueKnobX = x + ((int) (sliderBackground.getWidth() * (level / 100.0)) - sliderBackground.getHeight());
             }
         }
 
         public void mouseDragged(MouseEvent event) {
             if (sliderActive) {
-                if (event.getX() >= x + (int) (sliderKnob.getWidth() * 0.5) && event.getX() <= x + sliderLeveler.getWidth() + (int) (sliderKnob.getWidth() * 0.5)) {
-                    dialogueKnobX = (int) (event.getX() - (sliderKnob.getWidth() * 0.5));
-                    level = (int) (((dialogueKnobX - x) / (double) sliderBackground.getWidth()) * 100);
 
-                    if (level <= 1) {
-                        // <= 1 because 1 == true and program thinks it wants to be opaque
-                        level = 0;
-                    }
+                if (event.getX() <= x) {
+                    level = 0;
+                }
+                else if (event.getX() >= (x + sliderBackground.getWidth())) {
+                    level = 100;
+                }
+                else {
+                    level = (int)(((event.getX() - x) / (double)sliderBackground.getWidth()) * 100.0);
+                    dialogueKnobX = x + ((int) (sliderBackground.getWidth() * (level / 100.0)) - sliderBackground.getHeight());
                 }
             }
         }
@@ -158,5 +185,4 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
             }
         }
     }
-
 }

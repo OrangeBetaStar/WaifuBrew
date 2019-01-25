@@ -18,7 +18,4 @@ public enum Characters {
     public int getValue() {
         return value;
     }
-
-
-
 }

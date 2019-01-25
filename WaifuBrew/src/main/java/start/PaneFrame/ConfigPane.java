@@ -106,10 +106,14 @@ public class ConfigPane extends JPanel implements ActionListener {
 
             g.setFont(configPaneFont);
             g.setColor(new Color(0, 0, 0));
-            g.drawString("Diologue Bar Transparency", this.settingSlidersMap.get("barTransparency").getX(), this.settingSlidersMap.get("barTransparency").getY() - ((windowSize.x / 10) / 3));
-            g.drawString("Diologue Text Speed", this.settingSlidersMap.get("textSpeed").getX(), this.settingSlidersMap.get("textSpeed").getY() - ((windowSize.x / 10) / 3));
-            g.drawString("Dialog Text Size", this.settingSlidersMap.get("textSize").getX(), this.settingSlidersMap.get("textSize").getY() - ((windowSize.x / 10) / 3));
-            g.drawString("Auto dialog advance", (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
+
+            // Draw sliders
+            for(Map.Entry sliderObject : settingSlidersMap.entrySet()) {
+                CustomSlider sliders = (CustomSlider)sliderObject.getValue();
+                g.drawString(sliders.getSliderDesc(), sliders.getX(), sliders.getY() - ((windowSize.x / 10) / 3));
+            }
+            g.drawString(autoDialog.getSwitchDesc(), autoDialog.getX(), autoDialog.getY() - ((windowSize.x / 10) / 3));
+                    // (windowSize.x / 10), (windowSize.y / 6) * 5 - ((windowSize.x / 10) / 3));
 
             if (!saveDialogue.isActive()) {
                 for (Map.Entry<String, CustomButton> entry : this.settingButtonsMap.entrySet()) {
@@ -180,7 +184,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseClicked(MouseEvent event) {
-            if(event.getButton() == MouseEvent.BUTTON1) {
+            if (event.getButton() == MouseEvent.BUTTON1) {
 
                 // Disable original back and save button for noticeBox buttons.
                 if (!saveDialogue.isActive()) {
@@ -298,14 +302,14 @@ public class ConfigPane extends JPanel implements ActionListener {
             saveDialogue = new NoticeBox("Would you like to save the current settings?", "save_button", "don't_save_button", false, true);
 
             // Pre-scale
-            double scale = Math.max(((double)windowSize.x / backgroundPicture.getWidth()), ((double)windowSize.y / backgroundPicture.getHeight()));
-            backgroundPicture.resize((int)((scale) * backgroundPicture.getWidth()), (int)((scale) * backgroundPicture.getHeight()));
+            double scale = Math.max(((double) windowSize.x / backgroundPicture.getWidth()), ((double) windowSize.y / backgroundPicture.getHeight()));
+            backgroundPicture.resize((int) ((scale) * backgroundPicture.getWidth()), (int) ((scale) * backgroundPicture.getHeight()));
             dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
 
-            this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency()));
-            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed()));
-            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2));
-            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, true);
+            this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
+            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
+            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2, "Dialog Text Size"));
+            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, false, "Auto dialog advance");
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);
