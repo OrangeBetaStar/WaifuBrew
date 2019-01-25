@@ -19,6 +19,7 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     private boolean centered;
     private javaxt.io.Image backgroundImage;
     private javaxt.io.Image knob;
+    private String switchDesc;
 
     /*
     private javaxt.io.Image left = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "toggle_housing-0"));
@@ -42,11 +43,13 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         knob.resize(slidingPathHeight, slidingPathHeight); // I meant to do that, intellij.
     }
 
-    public CustomSwitch(int x, int y, boolean value, boolean centered) {
+    public CustomSwitch(int x, int y, boolean value, boolean centered, String switchDesc) {
         this.x = x;
         this.y = y;
         this.value = value;
         this.centered = centered;
+        this.switchDesc = switchDesc;
+
         // Change the image later. This is just a sample
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
@@ -115,6 +118,8 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     public int getHeight() {
         return slidingPathHeight;
     }
+
+    public String getSwitchDesc() { return switchDesc; }
 
     @Override
     public Handlerclass retrieveMouseHandler() {
