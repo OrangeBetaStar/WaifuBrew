@@ -90,7 +90,7 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         }
         // Changing background
         javaxt.io.Image tempSliderLeveler = sliderLeveler.copy();
-        tempSliderLeveler.setBackgroundColor((int)(255*((double)level)/100.0), (int)(255*((double)level)/100.0), (int)(255*((double)level)/100.0));
+        tempSliderLeveler.setBackgroundColor(255 - ((int)(255*((double)level)/100.0)), 255 - ((int)(255*((double)level)/100.0)), 255 - ((int)(255*((double)level)/100.0)));
 
         // Draw slider (Some of the calculations may look weird since this was also accounting for snap back after re-entry to config.
         g.drawImage(sliderBackground.getBufferedImage(), x, dialogueKnobY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
