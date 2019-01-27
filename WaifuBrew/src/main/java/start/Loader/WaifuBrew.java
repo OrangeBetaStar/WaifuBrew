@@ -87,7 +87,6 @@ public class WaifuBrew {
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
-        // Perhaps I could redirect to the thread's method instead of WB class keeping a copy.
         return dialoguePackage;
     }
 
