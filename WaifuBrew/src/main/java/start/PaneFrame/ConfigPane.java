@@ -171,7 +171,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         return (
                 !(this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
                         this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
-                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize())
+                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize() ||
+                        this.autoDialog.getValue() != WaifuBrew.getInstance().getAutoAdvancer())
         );
     }
 
