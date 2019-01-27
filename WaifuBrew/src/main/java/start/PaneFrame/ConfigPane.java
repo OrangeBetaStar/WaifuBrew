@@ -26,7 +26,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
     private Timer stringTimer;
-    private boolean stop = false;
+    private boolean fpsLimitStop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
@@ -247,7 +247,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: I wonder if I use this lambda
         Timer t = new Timer((int) (1000.0 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!stop) {
+                if (!fpsLimitStop) {
                     repaint();
                 } else {
                     ((Timer) e.getSource()).stop();
