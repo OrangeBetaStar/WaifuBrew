@@ -1,0 +1,14 @@
+{
+  "user": [
+    {
+    "dialogueTransparency": "70",
+    "dialogueSpeed": "60",
+    "fontSize": "30",
+    "frameRate": "60",
+    "autoAdvancer": "0",
+    "GUIScaling": "100",
+    "systemFont": "Halogen",
+    "dialogueFont": "MS Mincho"
+    }
+  ]
+}
