@@ -207,6 +207,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                         settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                         settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
+                        autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                     }
                 } else {
                     for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
@@ -234,6 +235,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                                 settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                                 settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                                 settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                                autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                                 WaifuBrew.getInstance().setStage(0);
                                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                             }

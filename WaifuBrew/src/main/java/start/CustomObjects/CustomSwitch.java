@@ -129,6 +129,10 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         return slidingPathHeight;
     }
 
+    public void setValue(boolean value) {
+        this.value = value;
+    }
+
     public String getSwitchDesc() { return switchDesc; }
 
     @Override
@@ -153,7 +157,7 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
                 if ((e.getX() > x) &&
                     (e.getX() <= x + slidingPathHeight) &&
                     (e.getY() > y) &&
-                    (e.getY() <= y + slidingPathHeight)) { // TODO: Check if this is working.
+                    (e.getY() <= y + slidingPathHeight)) {
                         if (value) {
                             value = false;
                         } else {
