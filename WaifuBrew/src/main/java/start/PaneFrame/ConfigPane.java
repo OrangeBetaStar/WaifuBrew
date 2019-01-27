@@ -346,6 +346,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 if (!a.isEmpty()) {
                     if (tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
+                        stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
                     } else {
                         tempString = a.substring(0, 1);
                         stringTimer.stop();
