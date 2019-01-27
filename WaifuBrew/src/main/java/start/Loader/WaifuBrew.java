@@ -20,10 +20,11 @@ public class WaifuBrew {
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
+    private HashMap loadedSettings;
     
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
-    private static String[] configUI = new String[10];
+    private static HashMap<String, String> configUI = new HashMap<>();
     // Have a look below to see what each of the slots are for.
 
     // Keeps the calculated easing from pre-run thread.
@@ -65,10 +66,27 @@ public class WaifuBrew {
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
         easingArray = tfl.getMovement();
+        loadedSettings = tfl.getLoadedSettings();
+        if(loadedSettings != null) {
+            applyLoadedSettings();
+        }
+    }
+
+    private void applyLoadedSettings() {
+        if(loadedSettings != null) {
+            for (String name: (String[])loadedSettings.keySet().toArray(new String[0])){
+                try {
+                    configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
+                } catch (NumberFormatException e) {
+                    if(name.equals("systemFont")) {
+                        configUI.replace(name, loadedSettings.get(name).toString());
+                    }
+                }
+            }
+        }
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {
-        // Perhaps I could redirect to the thread's method instead of WB class keeping a copy.
         return dialoguePackage;
     }
 
@@ -94,19 +112,19 @@ public class WaifuBrew {
     // 1 - DialogueFont
 
     public String getSystemFont() {
-        return configUI[0];
+        return configUI.get("systemFont");
     }
 
-    public void setSystemFont(String systemFontName) {
-        configUI[0] = systemFontName;
+    public void setSystemFont(String systemFont) {
+        configUI.replace("systemFont", systemFont);
     }
 
     public String getDialogueFont() {
-        return configUI[0];
+        return configUI.get("dialogueFont");
     }
 
     public void setDialogueFont(String dialogueFont) {
-        configUI[1] = dialogueFont;
+        configUI.replace("dialogueFont", dialogueFont);
     }
 
     private void initConfig() {
@@ -117,8 +135,8 @@ public class WaifuBrew {
         configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
-        this.setSystemFont("Halogen");
-        this.setDialogueFont("MS Mincho");
+        configUI.put("systemFont", "Halogen");
+        configUI.put("dialogueFont", "MS Mincho");
     }
 
     public int getDialogueTransparency() {
@@ -126,7 +144,7 @@ public class WaifuBrew {
     }
 
     public void setDialogueTransparency(int dialogueTransparency) {
-        configStorage.put("dialogueTransparency", dialogueTransparency);
+        configStorage.replace("dialogueTransparency", dialogueTransparency);
     }
 
     public int getDialogueSpeed() {
@@ -134,7 +152,7 @@ public class WaifuBrew {
     }
 
     public void setDialogueSpeed(int dialogueSpeed) {
-        configStorage.put("dialogueSpeed", dialogueSpeed);
+        configStorage.replace("dialogueSpeed", dialogueSpeed);
     }
 
     public int getFrameRate() {
@@ -142,7 +160,7 @@ public class WaifuBrew {
     }
 
     public void setFrameRate(int frameRate) {
-        configStorage.put("frameRate", frameRate);
+        configStorage.replace("frameRate", frameRate);
     }
 
     public int getSystemGUIScale() {
@@ -150,7 +168,7 @@ public class WaifuBrew {
     }
 
     public void setSystemGUIScale(int GUIScale) {
-        configStorage.put("GUIScaling", GUIScale);
+        configStorage.replace("GUIScaling", GUIScale);
     }
 
     public boolean getAutoAdvancer() {
@@ -158,7 +176,7 @@ public class WaifuBrew {
     }
 
     public void setAutoAdvancer(boolean autoAdvancer) {
-        configStorage.put("autoAdvancer", autoAdvancer ? 1 : 0);
+        configStorage.replace("autoAdvancer", autoAdvancer ? 1 : 0);
     }
 
     public int getFontSize() {
@@ -166,7 +184,7 @@ public class WaifuBrew {
     }
 
     public void setFontSize(int fontSize) {
-        configStorage.put("fontSize", fontSize);
+        configStorage.replace("fontSize", fontSize);
     }
 
     public int getStage() {
@@ -174,7 +192,7 @@ public class WaifuBrew {
     }
 
     public void setStage(int stage) {
-        configStorage.put("stage", stage);
+        configStorage.replace("stage", stage);
     }
 
     public String getResoucePath() {

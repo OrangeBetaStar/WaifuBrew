@@ -32,7 +32,7 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
         backgroundImage.resize(slidingPathWidth, slidingPathHeight);
-        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob.jpg"));
+        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "blackbox"));
         knob.resize(slidingPathHeight, slidingPathHeight); // I meant to do that, intellij.
     }
 
@@ -46,9 +46,9 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         // Change the image later. This is just a sample
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         backgroundImage.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
-        backgroundImage.resize(slidingPathWidth, slidingPathHeight);
-        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
-        knob.resize(slidingPathHeight, slidingPathHeight); // I meant to do that, intellij.
+        backgroundImage.resize(slidingPathHeight, slidingPathHeight);
+        knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "blackbox"));
+        knob.resize(slidingPathHeight / 2, slidingPathHeight / 2); // I meant to do that, intellij.
 
         /*
         left.resize((int)(left.getWidth() * ((double)slidingPathHeight/left.getHeight())), slidingPathHeight, true);
@@ -59,13 +59,30 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     }
 
     public void paintComponent(Graphics g) {
+        // This is centred
+        if (centered) {
+            g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
+            if (value) {
+                g.drawImage(knob.getBufferedImage(), x - (knob.getWidth() / 2), y - (knob.getHeight() / 2), that);
+            }
+        }
+        else {
+            g.drawImage(backgroundImage.getBufferedImage(), x, y, that);
+            if (value) {
+                g.drawImage(knob.getBufferedImage(), x + ((backgroundImage.getWidth() / 2) - (knob.getWidth() / 2)), y + ((backgroundImage.getHeight() / 2) - (knob.getHeight() / 2)), that);
+            }
+        }
+        /*
         g.drawImage(backgroundImage.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
-
         if (value) {
             g.drawImage(knob.getBufferedImage(), x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
         } else {
             g.drawImage(knob.getBufferedImage(), x + (backgroundImage.getWidth() / 2) - knob.getWidth(), y - (backgroundImage.getHeight() / 2), that);
         }
+        */
+
+
+
         // g.drawString("The value: " + value, x - (backgroundImage.getWidth() / 2), y - (backgroundImage.getHeight() / 2));
         /*
         g.drawImage(left.getBufferedImage(), x - (backgroundImage.getWidth() / 2) - (left.getWidth() / 2), y - (backgroundImage.getHeight() / 2), that);
@@ -112,6 +129,10 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         return slidingPathHeight;
     }
 
+    public void setValue(boolean value) {
+        this.value = value;
+    }
+
     public String getSwitchDesc() { return switchDesc; }
 
     @Override
@@ -122,7 +143,10 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
         public void mouseClicked(MouseEvent e) {
             if (centered) {
-                if ((e.getX() > (x - (slidingPathWidth / 2))) && (e.getX() <= (x + (slidingPathWidth / 2))) && (e.getY() > (y - (slidingPathHeight / 2))) && (e.getY() <= (y + (slidingPathHeight / 2)))) {
+                if ((e.getX() > (x - (slidingPathHeight / 2))) &&
+                    (e.getX() <= (x + (slidingPathHeight / 2))) &&
+                    (e.getY() > (y - (slidingPathHeight / 2))) &&
+                    (e.getY() <= (y + (slidingPathHeight / 2)))) {
                     if (value) {
                         value = false;
                     } else {
@@ -130,12 +154,15 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
                     }
                 }
             } else {
-                if ((e.getX() > x) && (e.getX() <= x + slidingPathWidth) && (e.getY() > y) && (e.getY() <= y + slidingPathHeight)) { // TODO: Check if this is working.
-                    if (value) {
-                        value = false;
-                    } else {
-                        value = true;
-                    }
+                if ((e.getX() > x) &&
+                    (e.getX() <= x + slidingPathHeight) &&
+                    (e.getY() > y) &&
+                    (e.getY() <= y + slidingPathHeight)) {
+                        if (value) {
+                            value = false;
+                        } else {
+                            value = true;
+                        }
                 }
             }
         }

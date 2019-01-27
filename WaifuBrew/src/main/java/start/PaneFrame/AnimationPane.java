@@ -132,7 +132,7 @@ public class AnimationPane extends JPanel {
                                     background.setImageItself(tempBackground.getBufferedImage());
                                 }
                                 else {
-                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder
+                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder )
                                     background = new ImageDesc(e.get((advancer - 1) - finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) - finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
                                     double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
@@ -281,8 +281,8 @@ public class AnimationPane extends JPanel {
                     if (tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
                     } else { // TODO: Check if this works
-//                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
-//                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
+                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
+                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
                         if (WaifuBrew.getInstance().getAutoAdvancer()) {
                             clickActivate = true;
                             // TODO: NEEDS AWAIT

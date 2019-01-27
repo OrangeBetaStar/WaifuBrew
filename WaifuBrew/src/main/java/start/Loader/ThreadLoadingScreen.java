@@ -13,7 +13,7 @@ public class ThreadLoadingScreen implements Runnable {
         System.out.println(Thread.currentThread().getName() + " - Loadscreen Thread running");
 
         ImageIcon loadingImage = new ImageIcon((RESOURCE_PATH + "loading.gif"));
-        final javaxt.io.Image backgroundImage = new javaxt.io.Image(RESOURCE_PATH + "bg_bath.png");
+        // final javaxt.io.Image backgroundImage = new javaxt.io.Image(RESOURCE_PATH + "bg_bath.png");
 
         JWindow window = new JWindow();
         //window.setLayout(null);

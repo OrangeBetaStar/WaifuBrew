@@ -26,7 +26,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image dialogueBox; // So it doesn't use HDD every time and kill performance
     private javaxt.io.Image tempDialogueBox; // Preview
     private Timer stringTimer;
-    private boolean stop = false;
+    private boolean fpsLimitStop = false;
     private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
@@ -171,7 +171,8 @@ public class ConfigPane extends JPanel implements ActionListener {
         return (
                 !(this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
                         this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
-                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize())
+                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize() ||
+                        this.autoDialog.getValue() != WaifuBrew.getInstance().getAutoAdvancer())
         );
     }
 
@@ -206,6 +207,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                         settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                         settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
+                        autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                     }
                 } else {
                     for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
@@ -233,6 +235,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                                 settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                                 settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                                 settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                                autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                                 WaifuBrew.getInstance().setStage(0);
                                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                             }
@@ -247,7 +250,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         // TODO: I wonder if I use this lambda
         Timer t = new Timer((int) (1000.0 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!stop) {
+                if (!fpsLimitStop) {
                     repaint();
                 } else {
                     ((Timer) e.getSource()).stop();
@@ -304,7 +307,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
             this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
             this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2, "Dialog Text Size"));
-            autoDialog = new CustomSwitch((windowSize.x / 10) * 3, (windowSize.y / 6) * 5, false, false, "Auto dialog advance");
+            autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, false, false, "Auto dialog advance");
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);
@@ -346,6 +349,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 if (!a.isEmpty()) {
                     if (tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
+                        stringTimer.setDelay(100 - settingSlidersMap.get("textSpeed").getLevel()); // Text speed is inverted.
                     } else {
                         tempString = a.substring(0, 1);
                         stringTimer.stop();
