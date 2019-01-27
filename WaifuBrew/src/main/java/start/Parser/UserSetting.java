@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,8 +37,9 @@ public class UserSetting {
                     System.out.println(keyThings + " : " + o.get(keyThings));
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("The file \"user.json\" was not found to load settings! Loading to default.");
         } catch (Exception e) {
-            System.out.println("user.json was not found to load settings! Loading to default.");
             e.printStackTrace();
         }
     }

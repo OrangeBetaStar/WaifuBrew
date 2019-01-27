@@ -18,7 +18,6 @@ public class ThreadFileLoad implements Runnable {
     private DialogueParser dp;
     private UserSetting us;
     private java.util.List<java.util.List<Waifu>> e;
-    private HashMap loadedSettings;
     private MathClass mathClass = new MathClass();
 
     public ThreadFileLoad() {
@@ -35,16 +34,17 @@ public class ThreadFileLoad implements Runnable {
             // Load user setting
             us = new UserSetting(RESOURCE_PATH + "user.json");
             us.parse();
-            loadedSettings = us.getLoadedSettings();
-            if(loadedSettings != null) {
-                // Load setting here.
 
+            /*
+            // HashMap Printer
+            if(loadedSettings != null) {
                 for (String name: (String[])loadedSettings.keySet().toArray(new String[0])){
                     String key =name.toString();
                     String value = loadedSettings.get(name).toString();
                     System.out.println(key + " " + value);
                 }
             }
+            */
 
             // Load dialogues
             dp = new DialogueParser(RESOURCE_PATH + "test.json");
@@ -76,5 +76,9 @@ public class ThreadFileLoad implements Runnable {
 
     public ArrayList<ArrayList<ImageDesc>> getFileList() {
         return fileList;
+    }
+
+    public HashMap getLoadedSettings() {
+        return us.getLoadedSettings();
     }
 }
