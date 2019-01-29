@@ -22,7 +22,6 @@ import java.util.Map;
 public class AnimationPane extends JPanel {
 
     private Handlerclass handler = new Handlerclass();
-    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
@@ -32,7 +31,7 @@ public class AnimationPane extends JPanel {
     private SideBar configBar = new SideBar();
     private static Font activeFont;
 
-    // FPS maintainer
+    // String timer for each character
     private Timer stringTimer;
 
     // Advancer keeps track of which line it reads
@@ -280,11 +279,7 @@ public class AnimationPane extends JPanel {
                 if (!a.isEmpty()) {
                     if (tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
-                    } else { // TODO: Check if this works
-                        /*
-                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
-                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
-                            */
+                    } else {
                         if (WaifuBrew.getInstance().getAutoAdvancer()) {
                             clickActivate = true;
                             // TODO: NEEDS AWAIT
