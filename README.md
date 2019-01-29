@@ -105,3 +105,11 @@ Logs:
 10/19/18 - Fixed button locations in AniPane. Fixed the bug where buttons that overlap will trigger one below it instead of one above. Set AniPane to LoadPane stage change. Reorganized the methods in Pane classes. Split init methods into few descriptive init methods for cleaner solution. Added packages for better seperation. [BetaStar]
 
 10/20/18 - ConfigPane and StartScreen's BG calculation has been changed to two lines, simpler way of calculating scaling. More affective than before and elegant solution. Clearing up mess in ImageLoader and deleting unneeded pre-made picture. [BetaStar]
+
+01/15/18 - A long hiatus and fresh mind! Startscreen has been updated with BG implementation, bug fix of lines not reaching end of the line. The drawing was enhanced so that it does not overlap and easing is now universal (readibly available with singleton call. Cleaned comments and implementations aesthetically [BetaStar]
+
+01/25/18 - Fixed bug when only slider knob was snapping back into place after reset to last saved setting. (The slider leveler wasn't recalculating). Reversed the variable slider colour change. Makes more sense when colour darks when value goes higher. [BetaStar]
+
+01/26/18 - Loads saved user settings from files. The toggle system (Both calculation and aesthetics). AutoAdvancer (working condition, but needs speed modification). AutoAdvancer was added to check&save method. The textscroll speed is now real time with slider. Maven project fix (pom.xml). Applied github's security patch. [BetaStar]
+
+01/28/18 - Outputs user.json for setting save.

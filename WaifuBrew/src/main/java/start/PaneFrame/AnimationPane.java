@@ -281,8 +281,10 @@ public class AnimationPane extends JPanel {
                     if (tempString.length() != a.length()) {
                         tempString = tempString + a.charAt(tempString.length());
                     } else { // TODO: Check if this works
+                        /*
                             System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
                             System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
+                            */
                         if (WaifuBrew.getInstance().getAutoAdvancer()) {
                             clickActivate = true;
                             // TODO: NEEDS AWAIT

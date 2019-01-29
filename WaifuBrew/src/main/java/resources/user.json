@@ -1,14 +1,1 @@
-{
-  "user": [
-    {
-    "dialogueTransparency": "70",
-    "dialogueSpeed": "60",
-    "fontSize": "30",
-    "frameRate": "60",
-    "autoAdvancer": "0",
-    "GUIScaling": "100",
-    "systemFont": "Halogen",
-    "dialogueFont": "MS Mincho"
-    }
-  ]
-}
+{"user":[{"frameRate":"60","dialogueSpeed":"82","stage":"2","autoAdvancer":"0","systemFont":"Halogen","GUIScaling":"100","dialogueFont":"MS Mincho","dialogueTransparency":"77","fontSize":"47"}]}

@@ -75,6 +75,10 @@ public class WaifuBrew {
     private void applyLoadedSettings() {
         if(loadedSettings != null) {
             for (String name: (String[])loadedSettings.keySet().toArray(new String[0])){
+                if(name.equals("stage")) {
+                    // Perhaps in debug mode, I can start taking advantage of this.
+                    continue;
+                }
                 try {
                     configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
                 } catch (NumberFormatException e) {
@@ -84,6 +88,11 @@ public class WaifuBrew {
                 }
             }
         }
+    }
+
+    public void exportSettings() {
+        FileExporter fw = new FileExporter();
+        fw.exportSettings(configStorage, configUI);
     }
 
     public java.util.List<java.util.List<Waifu>> getDialoguePackage() {

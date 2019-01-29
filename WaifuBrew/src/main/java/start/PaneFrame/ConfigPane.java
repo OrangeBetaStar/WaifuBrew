@@ -200,6 +200,9 @@ public class ConfigPane extends JPanel implements ActionListener {
                         WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
                         WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
                         WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
+
+                        // Export the newly saved file.
+                        WaifuBrew.getInstance().exportSettings();
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     }
                     button = settingButtonsMap.get("reset");
@@ -223,6 +226,9 @@ public class ConfigPane extends JPanel implements ActionListener {
 
                                 // Disable NoticeBox
                                 saveDialogue.setActive(false);
+
+                                // Export the newly saved file.
+                                WaifuBrew.getInstance().exportSettings();
 
                                 // Go back to Main screen.
                                 WaifuBrew.getInstance().setStage(0);
