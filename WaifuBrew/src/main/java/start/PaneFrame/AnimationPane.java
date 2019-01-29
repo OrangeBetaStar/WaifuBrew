@@ -165,7 +165,9 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
-            g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
+            g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int)((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
+            // (windowSize.x / 9.0), ((windowSize.y / 12.0) * 8)
+            // windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2)
             g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             g.setFont(activeFont);
@@ -184,8 +186,8 @@ public class AnimationPane extends JPanel {
             TextLayout textTl = new TextLayout(tempString, activeFont, frc);
             Shape outline = textTl.getOutline(null);
 
-            FontMetrics fm = g2d.getFontMetrics(activeFont);
-            g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8) + fm.getAscent());
+            // FontMetrics fm = g2d.getFontMetrics(activeFont);
+            g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8));// + fm.getAscent());
             g2d.setColor(Color.WHITE);
             g2d.fill(outline);
             g2d.setStroke(new BasicStroke(1));
@@ -225,7 +227,7 @@ public class AnimationPane extends JPanel {
 
         // Renew dialogueBox
         dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-        dialogueBox.resize((int) (dialogueBox.getWidth() * 0.85), (int) (dialogueBox.getHeight() * 0.85), true);
+        dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
     }
 

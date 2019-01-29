@@ -42,8 +42,10 @@ public class WaifuBrew {
 
     WaifuBrew() {
 
+        // Must run first. Loads default settings (before overriding with available loaded user settings.
         initConfig();
 
+        // Threaded loading things.
         ThreadFileLoad tfl = new ThreadFileLoad();
         ThreadLoadingScreen tls = new ThreadLoadingScreen();
         Thread ttfl = new Thread(tfl, "ThreadFileLoad");
@@ -80,7 +82,18 @@ public class WaifuBrew {
                     continue;
                 }
                 try {
-                    configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
+                    if(name.contains("dimension")) {
+                        if(name.toLowerCase().contains("x")) {
+                            configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
+                        }
+                        else if(name.toLowerCase().contains("y")){
+                            // Must be dimensionY
+                            configStorage.replace("dimensionY", Integer.parseInt(loadedSettings.get(name).toString()));
+                        }
+                    }
+                    else {
+                        configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
+                    }
                 } catch (NumberFormatException e) {
                     if(name.equals("systemFont")) {
                         configUI.replace(name, loadedSettings.get(name).toString());
@@ -88,6 +101,10 @@ public class WaifuBrew {
                 }
             }
         }
+
+        // if loaded dimension is different from default, recalculate.
+        defaultSize[1] = new Point(configStorage.get("dimensionX"), configStorage.get("dimensionY"));
+        defaultSize[2] = new Point((screenSize.width / 2) - (configStorage.get("dimensionX") / 2), (screenSize.height / 2) - (configStorage.get("dimensionY") / 2));
     }
 
     public void exportSettings() {
@@ -144,6 +161,8 @@ public class WaifuBrew {
         configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
+        configStorage.put("dimensionX", 1280);
+        configStorage.put("dimensionY", 720);
         configUI.put("systemFont", "Halogen");
         configUI.put("dialogueFont", "MS Mincho");
     }
