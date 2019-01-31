@@ -131,7 +131,7 @@ public class AnimationPane extends JPanel {
                                     background.setImageItself(tempBackground.getBufferedImage());
                                 }
                                 else {
-                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder )
+                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder ) ["after the load scenario"]
                                     background = new ImageDesc(e.get((advancer - 1) - finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) - finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
                                     double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));

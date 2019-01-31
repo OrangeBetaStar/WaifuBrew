@@ -53,32 +53,47 @@ public class DialogueParser {
                         List<Characters> sceneCharList = new ArrayList<>();
                         List<Mood> sceneMoodList = new ArrayList<>();
                         for (String s : subNameString) {
-                            if (s.toLowerCase().contains("nico")) {
-                                sceneCharList.add(Characters.Yazawa_Nico);
-                                //    System.out.println("Added: Nico");
-                            } else if (s.toLowerCase().contains("maki")) {
-                                sceneCharList.add(Characters.Nishikino_Maki);
-                                //    System.out.println("Added: Maki");
-                            } else if (s.toLowerCase().contains("arisa")) {
-                                sceneCharList.add(Characters.Ichigaya_Arisa);
-                                //    System.out.println("Added: Arisa");
-                            } else if (s.toLowerCase().contains("kibb")) {
-                                sceneCharList.add(Characters.Kibbleru);
-                                //    System.out.println("Added: Kibb");
+                            for(Characters chars : Characters.values()) {
+                                if(s.charAt(0) != ' ') {
+                                    // first element
+                                    try {
+                                        if(chars.toString().contains(s.substring(0, s.indexOf(' ')))) {
+                                            sceneCharList.add(chars);
+                                            break;
+                                        }
+                                    } catch (StringIndexOutOfBoundsException e) {
+                                        // Cases when there is no spaces in the name
+                                        if(chars.toString().contains(s)) {
+                                            sceneCharList.add(chars);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    // second, third, etc.
+                                    try {
+                                        if(chars.toString().contains(s.substring(1).substring(0, s.substring(1).indexOf(' ')))) {
+                                            sceneCharList.add(chars);
+                                            break;
+                                        }
+                                    } catch (StringIndexOutOfBoundsException e) {
+                                        // Cases when there is no spaces in the name
+                                        if(chars.toString().contains(s.substring(1))) {
+                                            sceneCharList.add(chars);
+                                            break;
+                                        }
+                                    }
+                                }
                             }
                         }
                         do {
                             for (String m : subMoodString) {
-                                if (m.toLowerCase().contains("happy")) {
-                                    sceneMoodList.add(Mood.HAPPY);
-                                } else if (m.toLowerCase().contains("sad")) {
-                                    sceneMoodList.add(Mood.SAD);
-                                } else if (m.toLowerCase().contains("normal")) {
-                                    sceneMoodList.add(Mood.NORMAL);
-                                } else if (m.toLowerCase().contains("angry")) {
-                                    sceneMoodList.add(Mood.ANGRY);
-                                } else {
-                                    throw new JSONException("Check JSON");
+                                for(Mood moods : Mood.values()) {
+                                    if(m.replaceAll("\\s+","").toLowerCase().contains(moods.toString().toLowerCase())) {
+                                        // System.out.println(m + " " + moods + " " + "are same.");
+                                        sceneMoodList.add(moods);
+                                        break;
+                                    }
                                 }
                             }
 

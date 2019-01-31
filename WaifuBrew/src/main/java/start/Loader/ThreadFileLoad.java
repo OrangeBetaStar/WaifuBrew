@@ -29,6 +29,7 @@ public class ThreadFileLoad implements Runnable {
         System.out.println(Thread.currentThread().getName() + " - Load Thread running");
 
         fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
+        // Have the ImageLoader take in Dimension from UserSetting to calculate proper dimension for buttons
 
         try {
             // Load user setting

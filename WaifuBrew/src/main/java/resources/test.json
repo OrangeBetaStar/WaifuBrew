@@ -58,6 +58,65 @@
       "text": "にこにこにいー",
       "mood": "HAPPY",
       "bg": "sky"
+    },
+    {
+      "name": "Yazawa Nico, Nishikino Maki",
+      "text": "にこにこにいー",
+      "mood": "HAPPY",
+      "bg": "placeholder1"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Egao todokeru Yazawa Nico nico~",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Kibbleru",
+      "text": "Nico nii de oboeteru love Nico!",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico, Kibbleru, Ichigaya Arisa",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
+      "mood": "HAPPY, SAD, NORMAL",
+      "bg": "placeholder2"
+    },
+    {
+      "name": "Yazawa Nico, Kibbleru, Ichigaya Arisa",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~",
+      "mood": "HAPPY, SAD",
+      "bg": "placeholder2"
+    },
+    {
+      "name": "Nishikino Maki",
+      "text": "Gay.",
+      "mood": "NORMAL"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Nani????",
+      "mood": "ANGRY"
+    },
+    {
+      "name": "Yazawa Nico",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Ichigaya Arisa",
+      "text": "Chomama chomamama chotto matte chotto!",
+      "mood": "SAD",
+      "bg": "bath"
+    },
+    {
+      "name": "Yazawa Nico",
+      "text": "Ah! Dame dame dame!!~ Nico nii wa minna mo yo~2222",
+      "mood": "HAPPY"
+    },
+    {
+      "name": "Yazawa Nico, Nishikino Maki",
+      "text": "にこにこにいー",
+      "mood": "HAPPY",
+      "bg": "sky"
     }
   ]
 }
