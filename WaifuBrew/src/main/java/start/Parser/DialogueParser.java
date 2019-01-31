@@ -38,6 +38,7 @@ public class DialogueParser {
             JSONObject obj = (JSONObject) object;
             JSONArray data = (JSONArray) obj.get("route");
             Iterator i = data.iterator();
+            String stringProcessor[];
 
             this.dialogueList = new String[data.size()];
 
@@ -53,46 +54,27 @@ public class DialogueParser {
                         List<Characters> sceneCharList = new ArrayList<>();
                         List<Mood> sceneMoodList = new ArrayList<>();
                         for (String s : subNameString) {
+                            nextChar:
                             for(Characters chars : Characters.values()) {
-                                if(s.charAt(0) != ' ') {
-                                    // first element
-                                    try {
-                                        if(chars.toString().contains(s.substring(0, s.indexOf(' ')))) {
-                                            sceneCharList.add(chars);
-                                            break;
-                                        }
-                                    } catch (StringIndexOutOfBoundsException e) {
-                                        // Cases when there is no spaces in the name
-                                        if(chars.toString().contains(s)) {
-                                            sceneCharList.add(chars);
-                                            break;
-                                        }
-                                    }
-                                }
-                                else {
-                                    // second, third, etc.
-                                    try {
-                                        if(chars.toString().contains(s.substring(1).substring(0, s.substring(1).indexOf(' ')))) {
-                                            sceneCharList.add(chars);
-                                            break;
-                                        }
-                                    } catch (StringIndexOutOfBoundsException e) {
-                                        // Cases when there is no spaces in the name
-                                        if(chars.toString().contains(s.substring(1))) {
-                                            sceneCharList.add(chars);
-                                            break;
-                                        }
+                                stringProcessor = chars.toString().split("_");
+                                for(String uwu : stringProcessor) {
+                                    if(s.contains(uwu)) {
+                                        sceneCharList.add(chars);
+                                        break nextChar;
                                     }
                                 }
                             }
                         }
                         do {
                             for (String m : subMoodString) {
+                                nextMood:
                                 for(Mood moods : Mood.values()) {
-                                    if(m.replaceAll("\\s+","").toLowerCase().contains(moods.toString().toLowerCase())) {
-                                        // System.out.println(m + " " + moods + " " + "are same.");
-                                        sceneMoodList.add(moods);
-                                        break;
+                                    stringProcessor = moods.toString().split("_");
+                                    for(String uwu : stringProcessor) {
+                                        if(m.contains(uwu)) {
+                                            sceneMoodList.add(moods);
+                                            break nextMood;
+                                        }
                                     }
                                 }
                             }
