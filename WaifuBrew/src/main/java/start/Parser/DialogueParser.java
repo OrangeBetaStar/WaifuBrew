@@ -57,8 +57,8 @@ public class DialogueParser {
                             nextChar:
                             for(Characters chars : Characters.values()) {
                                 stringProcessor = chars.toString().split("_");
-                                for(String uwu : stringProcessor) {
-                                    if(s.contains(uwu)) {
+                                for(String nameParts : stringProcessor) {
+                                    if(s.contains(nameParts)) {
                                         sceneCharList.add(chars);
                                         break nextChar;
                                     }
@@ -70,8 +70,8 @@ public class DialogueParser {
                                 nextMood:
                                 for(Mood moods : Mood.values()) {
                                     stringProcessor = moods.toString().split("_");
-                                    for(String uwu : stringProcessor) {
-                                        if(m.contains(uwu)) {
+                                    for(String moodParts : stringProcessor) {
+                                        if(m.contains(moodParts)) {
                                             sceneMoodList.add(moods);
                                             break nextMood;
                                         }
