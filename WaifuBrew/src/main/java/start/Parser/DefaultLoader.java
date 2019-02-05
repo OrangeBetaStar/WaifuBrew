@@ -12,9 +12,11 @@ import java.util.Iterator;
 public class DefaultLoader {
 
     private String fileName;
+    private String category;
     private HashMap<String, String> settingLoad;
-    public DefaultLoader(String fileName) {
+    public DefaultLoader(String fileName, String category) {
         this.fileName = fileName;
+        this.category = category;
     }
 
     public void parse() {
@@ -23,7 +25,7 @@ public class DefaultLoader {
         try {
             Object object = parser.parse(new FileReader(fileName));
             JSONObject obj = (JSONObject) object;
-            JSONArray data = (JSONArray) obj.get("user");
+            JSONArray data = (JSONArray) obj.get(category);
             Iterator i = data.iterator();
             settingLoad = new HashMap<>();
             while (i.hasNext()) {
@@ -38,7 +40,7 @@ public class DefaultLoader {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("The file \"user.json\" was not found to load settings! Loading to default.");
+            System.out.println("The file \"" + fileName + "\" was not found to load settings! Loading to default.");
         } catch (Exception e) {
             e.printStackTrace();
         }

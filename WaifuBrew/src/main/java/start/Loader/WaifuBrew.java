@@ -21,6 +21,7 @@ public class WaifuBrew {
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
     private HashMap loadedSettings;
+    private HashMap loadedSaves;
     
     private static WaifuBrew singleton;
     private static HashMap<String, Integer> configStorage = new HashMap<>();
@@ -72,6 +73,15 @@ public class WaifuBrew {
         if(loadedSettings != null) {
             applyLoadedSettings();
         }
+        loadedSaves = tfl.getSaves();
+        // HashMap Printer
+        /*if(loadedSaves != null) {
+            for (String name: (String[])loadedSaves.keySet().toArray(new String[0])){
+                String key =name.toString();
+                String value = loadedSaves.get(name).toString();
+                System.out.println(key + " " + value);
+            }
+        }*/
     }
 
     private void applyLoadedSettings() {

@@ -16,8 +16,9 @@ public class ThreadFileLoad implements Runnable {
     private volatile ArrayList<ArrayList<ImageDesc>> fileList;
     private volatile ArrayList<ArrayList<ImageDesc>> loadList;
     private final String RESOURCE_PATH = "src/main/java/resources/";
-    private DialogueParser dp;
-    private DefaultLoader us;
+    private DialogueParser dp; // dialogue parse
+    private DefaultLoader sd; // save data
+    private DefaultLoader us; // user setting
     private java.util.List<java.util.List<Waifu>> e;
     private MathClass mathClass = new MathClass();
 
@@ -34,8 +35,11 @@ public class ThreadFileLoad implements Runnable {
 
         try {
             // Load user setting
-            us = new DefaultLoader(RESOURCE_PATH + "user.json");
+            us = new DefaultLoader(RESOURCE_PATH + "user.json", "user");
             us.parse();
+
+            sd = new DefaultLoader(RESOURCE_PATH + "saves.json", "saves");
+            sd.parse();
 
             /*
             // HashMap Printer
@@ -82,5 +86,9 @@ public class ThreadFileLoad implements Runnable {
 
     public HashMap getLoadedSettings() {
         return us.getLoadedSettings();
+    }
+
+    public HashMap getSaves() {
+        return sd.getLoadedSettings();
     }
 }
