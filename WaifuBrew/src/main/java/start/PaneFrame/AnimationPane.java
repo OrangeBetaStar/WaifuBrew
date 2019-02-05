@@ -85,7 +85,7 @@ public class AnimationPane extends JPanel {
             } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
                 configBar.setActive(false);
                 aniPaneButton.get("config").setActiveButtonState(true);
-            } else if (inBound(event, aniPaneButton.get("start"), true) && configBar.isActive()) {
+            } else if (inBound(event, aniPaneButton.get("exit"), true) && configBar.isActive()) {
                 // Ask user if save progress?
                 // This button will go back to startscreen
                 WaifuBrew.getInstance().setStage(0);
@@ -251,7 +251,7 @@ public class AnimationPane extends JPanel {
 
         this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "save_button", Origin.MIDDLE_CENTRE, 0, true));
         this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 0, true));
-        this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE, 0, true));
+        this.aniPaneButton.put("exit", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "exit_button", Origin.MIDDLE_CENTRE, 0, true));
         // Remake this as options, rather than config
         this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 0, true));
 

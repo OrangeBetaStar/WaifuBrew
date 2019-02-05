@@ -41,7 +41,8 @@ public class ImageLoader extends JPanel {
             "Exit",
             "Reset",
             "Don't Save",
-            "Options"};
+            "Options",
+            "Quit"};
 
     public ImageLoader(String RESOURCE_PATH) {
         this.RESOURCE_PATH = RESOURCE_PATH;
