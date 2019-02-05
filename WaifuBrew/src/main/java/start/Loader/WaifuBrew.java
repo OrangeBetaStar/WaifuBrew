@@ -87,7 +87,6 @@ public class WaifuBrew {
                             configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
                         }
                         else if(name.toLowerCase().contains("y")){
-                            // Must be dimensionY
                             configStorage.replace("dimensionY", Integer.parseInt(loadedSettings.get(name).toString()));
                         }
                     }

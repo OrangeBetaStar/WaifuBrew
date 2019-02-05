@@ -3,9 +3,9 @@ package start.Loader;
 import org.json.JSONException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
+import start.Parser.DefaultLoader;
 import start.Parser.DialogueParser;
 import start.Parser.ParserException.DialogueDataMissingException;
-import start.Parser.UserSetting;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ThreadFileLoad implements Runnable {
     private volatile ArrayList<ArrayList<ImageDesc>> loadList;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private DialogueParser dp;
-    private UserSetting us;
+    private DefaultLoader us;
     private java.util.List<java.util.List<Waifu>> e;
     private MathClass mathClass = new MathClass();
 
@@ -34,7 +34,7 @@ public class ThreadFileLoad implements Runnable {
 
         try {
             // Load user setting
-            us = new UserSetting(RESOURCE_PATH + "user.json");
+            us = new DefaultLoader(RESOURCE_PATH + "user.json");
             us.parse();
 
             /*

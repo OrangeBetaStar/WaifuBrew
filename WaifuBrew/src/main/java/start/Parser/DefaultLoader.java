@@ -9,11 +9,11 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class UserSetting {
+public class DefaultLoader {
 
     private String fileName;
     private HashMap<String, String> settingLoad;
-    public UserSetting(String fileName) {
+    public DefaultLoader(String fileName) {
         this.fileName = fileName;
     }
 
