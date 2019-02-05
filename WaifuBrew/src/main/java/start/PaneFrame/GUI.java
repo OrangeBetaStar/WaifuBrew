@@ -14,6 +14,7 @@ public class GUI extends JFrame {
     private AnimationPane animationPane;
     private ConfigPane configPane;
     private LoadPane loadPane;
+    private SavePane savePane;
 
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
@@ -25,6 +26,7 @@ public class GUI extends JFrame {
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
         loadPane = new LoadPane();
+        savePane = new SavePane();
         init();
     }
 
@@ -46,6 +48,9 @@ public class GUI extends JFrame {
             if (lastStage == 3) {
                 remove(loadPane);
             }
+            if (lastStage == 4) {
+                remove(savePane);
+            }
             if (lastStage == 0 || lastStage == 10) {
                 remove(startPage);
             }
@@ -64,6 +69,10 @@ public class GUI extends JFrame {
             if (stage == 3) {
                 add(loadPane);
                 loadPane.repaint();
+            }
+            if (stage == 4) {
+                add(savePane);
+                savePane.repaint();
             }
             if (stage == 0 || stage == 10) {
                 add(startPage);

@@ -19,8 +19,9 @@ public class ImageLoader extends JPanel {
 
     private String RESOURCE_PATH;
     private ArrayList<ImageDesc> load_first_images = new ArrayList<ImageDesc>();
-    private ArrayList<ImageDesc> vectorImages = new ArrayList<ImageDesc>();
+    private ArrayList<ImageDesc> vector_images = new ArrayList<ImageDesc>();
     private ArrayList<ImageDesc> bg_images = new ArrayList<ImageDesc>();
+    private ArrayList<ImageDesc> thumbnail_images = new ArrayList<ImageDesc>();
     private ImageDesc[] character_imagesArr = new ImageDesc[Characters.length * Mood.length];
     private int charCounter = 0;
 
@@ -70,29 +71,36 @@ public class ImageLoader extends JPanel {
             load_first_images.add(new ImageDesc(textString, tempCreation.getBufferedImage()));
         }
 
-        for (String loadImage : fileList) {
-            loadImage = loadImage.toLowerCase();
-            // This will look inside resource folder and automatically load the images according to file names.
-            if (loadImage.contains("load_first")) {
-                if (loadImage.contains("toggle_housing")) {
-                    ImageSlicer toggleHousing = new ImageSlicer(200, 400, RESOURCE_PATH + loadImage, true);
-                    BufferedImage[] sliderHousing = toggleHousing.getSprites();
-                    for (int a = 0; a < sliderHousing.length; a++) {
-                        vectorImages.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
+        try {
+            for (String loadImage : fileList) {
+                loadImage = loadImage.toLowerCase();
+                // This will look inside resource folder and automatically load the images according to file names.
+                if (loadImage.contains("load_first")) {
+                    if (loadImage.contains("toggle_housing")) {
+                        ImageSlicer toggleHousing = new ImageSlicer(200, 400, RESOURCE_PATH + loadImage, true);
+                        BufferedImage[] sliderHousing = toggleHousing.getSprites();
+                        for (int a = 0; a < sliderHousing.length; a++) {
+                            vector_images.add(new ImageDesc("toggle_housing-" + Integer.toString(a), sliderHousing[a]));
+                        }
+                    } else {
+                        vector_images.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
                     }
-                } else {
-                    vectorImages.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
+                } else if (loadImage.contains("bg")) {
+                    bg_images.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
+                } else if (loadImage.contains("thumbnail")) {
+                    thumbnail_images.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
+                } else if (loadImage.contains("char")) {
+                    ImageSlicer charSlices = new ImageSlicer(400, 500, RESOURCE_PATH + loadImage, true);
+                    BufferedImage[] charImageArray = charSlices.getSprites();
+                    for (int inde = 0; inde < charImageArray.length; inde++) {
+                        character_imagesArr[Mood.length * charCounter + inde] = new ImageDesc(loadImage.substring(5, loadImage.indexOf(".png")) + "-" + getMood(inde).toString().toLowerCase(), charImageArray[inde]);
+                    }
+                    charCounter++;
                 }
-            } else if (loadImage.contains("bg")) {
-                bg_images.add(new ImageDesc(loadImage, new javaxt.io.Image(RESOURCE_PATH + loadImage)));
-            } else if (loadImage.contains("char")) {
-                ImageSlicer charSlices = new ImageSlicer(400, 500, RESOURCE_PATH + loadImage, true);
-                BufferedImage[] charImageArray = charSlices.getSprites();
-                for (int inde = 0; inde < charImageArray.length; inde++) {
-                    character_imagesArr[Mood.length * charCounter + inde] = new ImageDesc(loadImage.substring(5, loadImage.indexOf(".png")) + "-" + getMood(inde).toString().toLowerCase(), charImageArray[inde]);
-                }
-                charCounter++;
             }
+        } catch (NullPointerException e) {
+            System.out.println("No required resource file found. Check directory.");
+            System.exit(-1);
         }
 
         for (ImageDesc asdf : character_imagesArr) {
@@ -106,9 +114,11 @@ public class ImageLoader extends JPanel {
 
         ArrayList<ArrayList<ImageDesc>> imagePackage = new ArrayList<>();
         imagePackage.add(load_first_images);
-        imagePackage.add(vectorImages);
+        imagePackage.add(vector_images);
         imagePackage.add(bg_images);
         imagePackage.add(new ArrayList<>(Arrays.asList(character_imagesArr)));
+        imagePackage.add(new ArrayList<ImageDesc>()); // TODO: Placeholder for effects
+        imagePackage.add(thumbnail_images);
 
         return imagePackage;
     }

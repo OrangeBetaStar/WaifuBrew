@@ -299,5 +299,6 @@ public class WaifuBrew {
         Frame.setLocation(defaultSize[2].x, defaultSize[2].y);
         //Frame.setLayout(new FlowLayout());
         Frame.setVisible(true);
+        Frame.setAlwaysOnTop(true);
     }
 }

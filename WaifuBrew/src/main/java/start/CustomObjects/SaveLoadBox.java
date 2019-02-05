@@ -10,10 +10,11 @@ import java.awt.event.ActionListener;
 // This is the element used in Save/Load Pane as progress snapshot.
 public class SaveLoadBox extends InteractiveObjects implements ActionListener {
 
-    private int x = (WaifuBrew.getInstance().getRes()[1].x / 2);
-    private int y = (WaifuBrew.getInstance().getRes()[1].y / 2);
-    private int length = WaifuBrew.getInstance().getRes()[1].x / 4;
-    private int height = WaifuBrew.getInstance().getRes()[1].y / 7;
+    Point sizeCalc = WaifuBrew.getInstance().getRes()[1];
+    private int x = (sizeCalc.x / 2);
+    private int y = (sizeCalc.y / 2);
+    private int length = sizeCalc.x / 3;
+    private int height = sizeCalc.y / 5;
     private javaxt.io.Image imageBlock;
 
     public SaveLoadBox () {
@@ -59,8 +60,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-
         g.drawImage(imageBlock.getBufferedImage(), x, y, this);
+
+        g.drawImage(new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.THUMBNAILS, "1")).getBufferedImage(), x, y, x / 2, y/2, this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {

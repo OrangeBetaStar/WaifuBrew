@@ -81,35 +81,6 @@ public class LoadPane extends JPanel {
     }
 
     public void initFPS() {
-        /*
-        double interpolation = 0;
-        final int TICKS_PER_SECOND = 25;
-        final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
-        final int MAX_FRAMESKIP = 5;
-
-        @Override
-        public void run() {
-            double next_game_tick = System.currentTimeMillis();
-            int loops;
-
-            while (true) {
-                loops = 0;
-                while (System.currentTimeMillis() > next_game_tick
-                        && loops < MAX_FRAMESKIP) {
-
-                    update_game();
-
-                    next_game_tick += SKIP_TICKS;
-                    loops++;
-                }
-
-                interpolation = (System.currentTimeMillis() + SKIP_TICKS - next_game_tick
-                        / (double) SKIP_TICKS);
-                display_game(interpolation);
-            }
-        }
-        */
-
         Timer t = new Timer((int) (1000 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!frameRateDisable) {

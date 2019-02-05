@@ -49,7 +49,7 @@ public class StartScreen extends JPanel implements ActionListener {
             // 1 - AnimationPane
             // 2 - ConfigPane
             // 3 - Load
-            // 4 - Exit
+            // 4 - Quit
             if(event.getButton() == MouseEvent.BUTTON1) {
                 for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
                     if (inBound(event, entry.getValue(), true)) {

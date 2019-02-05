@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class ThreadFileLoad implements Runnable {
 
     private volatile ArrayList<ArrayList<ImageDesc>> fileList;
+    private volatile ArrayList<ArrayList<ImageDesc>> loadList;
     private final String RESOURCE_PATH = "src/main/java/resources/";
     private DialogueParser dp;
     private UserSetting us;
