@@ -23,6 +23,7 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     private Origin origin;
     private boolean mouseOver = false;
     private boolean wasPressed = false;
+    private boolean activeButton = true;
     private int advancerPosition;
 
     // Viewable
@@ -102,177 +103,183 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseMoved(MouseEvent event) {
-            if (origin.getValue() == 0) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+            if (activeButton) {
+                if (origin.getValue() == 0) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 1) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 1) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 2) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 2) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 3) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 3) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 4) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 4) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 5) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 5) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 6) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 6) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 7) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 7) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
-            }
-            if (origin.getValue() == 8) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    mouseOver = true;
-                } else {
-                    mouseOver = false;
+                if (origin.getValue() == 8) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        mouseOver = true;
+                    } else {
+                        mouseOver = false;
+                    }
                 }
             }
         }
 
         public void mouseClicked(MouseEvent event) {
-            if (origin.getValue() == 0) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    wasPressed = true;
+            if (activeButton) {
+                if (origin.getValue() == 0) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 1) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    wasPressed = true;
+                if (origin.getValue() == 1) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 2) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y &&
-                        event.getY() < (y + imageBlock.getHeight())) {
-                    wasPressed = true;
+                if (origin.getValue() == 2) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y &&
+                            event.getY() < (y + imageBlock.getHeight())) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 3) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 3) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 4) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 4) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 5) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                        event.getY() < (y + imageBlock.getHeight() / 2)) {
-                    wasPressed = true;
+                if (origin.getValue() == 5) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
+                            event.getY() < (y + imageBlock.getHeight() / 2)) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 6) {
-                if (event.getX() > x &&
-                        event.getX() < (x + imageBlock.getWidth()) &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 6) {
+                    if (event.getX() > x &&
+                            event.getX() < (x + imageBlock.getWidth()) &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 7) {
-                if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                        event.getX() < (x + imageBlock.getWidth() / 2) &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 7) {
+                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
+                            event.getX() < (x + imageBlock.getWidth() / 2) &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
-            }
-            if (origin.getValue() == 8) {
-                if (event.getX() > (x - imageBlock.getWidth()) &&
-                        event.getX() < x &&
-                        event.getY() > y - (imageBlock.getHeight()) &&
-                        event.getY() < y) {
-                    wasPressed = true;
+                if (origin.getValue() == 8) {
+                    if (event.getX() > (x - imageBlock.getWidth()) &&
+                            event.getX() < x &&
+                            event.getY() > y - (imageBlock.getHeight()) &&
+                            event.getY() < y) {
+                        wasPressed = true;
+                    }
                 }
             }
         }
 
         public void mouseReleased(MouseEvent event) {
             // TODO: If state wasn't changed, do not change the boolean to false
-            if (mouseOver)
-                mouseOver = false;
+            if (activeButton) {
+                if (mouseOver)
+                    mouseOver = false;
+            }
         }
     }
 
@@ -293,76 +300,77 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         MIDDLE_BOTTOM(7)
         RIGHT_BOTTOM(8)
     */
-
-        if (origin.getValue() == 0) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x, y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+        if (activeButton) {
+            if (origin.getValue() == 0) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x, y, imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 1) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 1) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 2) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 2) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 3) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 3) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 4) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 4) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 5) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 5) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 6) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 6) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 7) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 7) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
-        }
 
-        if (origin.getValue() == 8) {
-            if (!mouseOver) {
-                g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-            } else {
-                g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+            if (origin.getValue() == 8) {
+                if (!mouseOver) {
+                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
+                } else {
+                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
+                }
             }
         }
     }
