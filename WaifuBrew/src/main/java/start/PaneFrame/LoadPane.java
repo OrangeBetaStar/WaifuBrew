@@ -1,5 +1,6 @@
 package start.PaneFrame;
 
+import start.Containers.LoadSaveWrapper;
 import start.CustomObjects.*;
 import start.Loader.ImageSelector;
 import start.Loader.WaifuBrew;
@@ -9,13 +10,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoadPane extends JPanel {
 
     private Handlerclass handler = new Handlerclass();
-    private SaveLoadBox saveLoadBox = new SaveLoadBox();
+    private ArrayList<SaveLoadBox> saveLoadBox = new ArrayList<>();
     private boolean frameRateDisable = false;
     private HashMap<String, CustomButton> loadPaneButtons = new HashMap<>(4);
     private SideBar configBar = new SideBar();
@@ -27,6 +29,7 @@ public class LoadPane extends JPanel {
     LoadPane() {
         initFPS();
         initImage();
+        initPanelBlocks();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -62,8 +65,18 @@ public class LoadPane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getBufferedImage(), 0, 0, this);
-        saveLoadBox.paintComponent(g);
+
+        for(SaveLoadBox a : saveLoadBox) {
+            a.paintComponent(g);
+        }
+
         configBar.paintComponent(g);
+
+        /*
+        for(LoadSaveWrapper a : WaifuBrew.getInstance().getLoadSaveContainers()) {
+            g.drawImage(backgroundImage.getBufferedImage(), )
+        }
+        */
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();
@@ -113,5 +126,27 @@ public class LoadPane extends JPanel {
         backgroundImage = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
         backgroundImage.resize(windowSize.x, windowSize.y);
         backgroundImage.setBackgroundColor(64, 64, 64);
+    }
+
+    private void initPanelBlocks() {
+        // Fetching loaded saves from file
+
+        for(LoadSaveWrapper a : WaifuBrew.getInstance().getLoadSaveContainers()) {
+            if(a.getSaveDate() != null) {
+                if((a.getPanelLocation() % 2) == 0) {
+                    System.out.println("Panel location (right) " + a.getPanelLocation());
+                    saveLoadBox.add(new SaveLoadBox((windowSize.x / 3) * 2, windowSize.y / 4 * ((a.getPanelLocation() / 2)), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    System.out.println("X: " + (windowSize.x / 3) * 2 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
+
+
+                }
+                else {
+                    System.out.println("Panel location (left) " + a.getPanelLocation());
+                    saveLoadBox.add(new SaveLoadBox(windowSize.x / 3, windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    System.out.println("X: " + windowSize.x / 3 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
+
+                }
+            }
+        }
     }
 }

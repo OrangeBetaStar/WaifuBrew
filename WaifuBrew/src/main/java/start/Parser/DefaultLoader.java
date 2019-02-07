@@ -36,7 +36,7 @@ public class DefaultLoader {
 
                 for(String keyThings : arrayString) {
                     settingLoad.put(keyThings, (String) o.get(keyThings));
-                    System.out.println(keyThings + " : " + o.get(keyThings));
+                    // System.out.println(keyThings + " : " + o.get(keyThings));
                 }
             }
         } catch (FileNotFoundException e) {

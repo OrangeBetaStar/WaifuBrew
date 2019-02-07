@@ -4,12 +4,14 @@ package start.Loader;
  */
 
 import start.Containers.ImageDesc;
+import start.Containers.LoadSaveWrapper;
 import start.PaneFrame.GUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class WaifuBrew {
@@ -22,11 +24,13 @@ public class WaifuBrew {
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
     private HashMap loadedSettings;
     private HashMap loadedSaves;
-    
+
     private static WaifuBrew singleton;
+
+    // Data storage
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static HashMap<String, String> configUI = new HashMap<>();
-    // Have a look below to see what each of the slots are for.
+    private static ArrayList<LoadSaveWrapper> loadSaveContainers = new ArrayList<>();
 
     // Keeps the calculated easing from pre-run thread.
     private ArrayList<double[]> easingArray;
@@ -45,6 +49,7 @@ public class WaifuBrew {
 
         // Must run first. Loads default settings (before overriding with available loaded user settings.
         initConfig();
+        initLoadSave();
 
         // Threaded loading things.
         ThreadFileLoad tfl = new ThreadFileLoad();
@@ -69,11 +74,16 @@ public class WaifuBrew {
         fileList = tfl.getFileList();
         dialoguePackage = tfl.getDialoguePackage();
         easingArray = tfl.getMovement();
+
         loadedSettings = tfl.getLoadedSettings();
-        if(loadedSettings != null) {
+        if (loadedSettings != null) {
             applyLoadedSettings();
         }
+
         loadedSaves = tfl.getSaves();
+        if (loadedSaves != null) {
+            applyLoadedSaves();
+        }
         // HashMap Printer
         /*if(loadedSaves != null) {
             for (String name: (String[])loadedSaves.keySet().toArray(new String[0])){
@@ -84,29 +94,29 @@ public class WaifuBrew {
         }*/
     }
 
+    private void applyLoadedSaves() {
+        // Overwrite the thing there. Pre-configured to file loaded.
+    }
+
     private void applyLoadedSettings() {
-        if(loadedSettings != null) {
-            for (String name: (String[])loadedSettings.keySet().toArray(new String[0])){
-                if(name.equals("stage")) {
-                    // Perhaps in debug mode, I can start taking advantage of this.
-                    continue;
+        for (String name : (String[]) loadedSettings.keySet().toArray(new String[0])) {
+            if (name.equals("stage")) {
+                // Perhaps in debug mode, I can start taking advantage of this.
+                continue;
+            }
+            try {
+                if (name.contains("dimension")) {
+                    if (name.toLowerCase().contains("x")) {
+                        configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
+                    } else if (name.toLowerCase().contains("y")) {
+                        configStorage.replace("dimensionY", Integer.parseInt(loadedSettings.get(name).toString()));
+                    }
+                } else {
+                    configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
                 }
-                try {
-                    if(name.contains("dimension")) {
-                        if(name.toLowerCase().contains("x")) {
-                            configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
-                        }
-                        else if(name.toLowerCase().contains("y")){
-                            configStorage.replace("dimensionY", Integer.parseInt(loadedSettings.get(name).toString()));
-                        }
-                    }
-                    else {
-                        configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
-                    }
-                } catch (NumberFormatException e) {
-                    if(name.equals("systemFont")) {
-                        configUI.replace(name, loadedSettings.get(name).toString());
-                    }
+            } catch (NumberFormatException e) {
+                if (name.equals("systemFont")) {
+                    configUI.replace(name, loadedSettings.get(name).toString());
                 }
             }
         }
@@ -142,10 +152,6 @@ public class WaifuBrew {
         }
     }
 
-    // ConfigUI:
-    // 0 - SystemFont
-    // 1 - DialogueFont
-
     public String getSystemFont() {
         return configUI.get("systemFont");
     }
@@ -163,6 +169,7 @@ public class WaifuBrew {
     }
 
     private void initConfig() {
+        // Pre-configure default conditions
         configStorage.put("dialogueTransparency", 70);
         configStorage.put("dialogueSpeed", 60);
         configStorage.put("fontSize", 30);
@@ -174,6 +181,17 @@ public class WaifuBrew {
         configStorage.put("dimensionY", 720);
         configUI.put("systemFont", "Halogen");
         configUI.put("dialogueFont", "MS Mincho");
+    }
+
+    private void initLoadSave() {
+        // Pre-configure blank states of load / save panels
+        for(int panelProduction = 1; panelProduction <= 8; panelProduction++) {
+            loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
+        }
+    }
+
+    public ArrayList<LoadSaveWrapper> getLoadSaveContainers() {
+        return loadSaveContainers;
     }
 
     public int getDialogueTransparency() {

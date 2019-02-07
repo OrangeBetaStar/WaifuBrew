@@ -17,7 +17,7 @@ import java.util.Map;
 public class SavePane extends JPanel {
 
     private Handlerclass handler = new Handlerclass();
-    private SaveLoadBox saveLoadBox = new SaveLoadBox();
+    // private SaveLoadBox saveLoadBox = new SaveLoadBox();
     private boolean frameRateDisable = false;
     private HashMap<String, CustomButton> savePaneButtons = new HashMap<>(4);
     private SideBar configBar = new SideBar();
@@ -64,7 +64,7 @@ public class SavePane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getBufferedImage(), 0, 0, this);
-        saveLoadBox.paintComponent(g);
+        // saveLoadBox.paintComponent(g);
         configBar.paintComponent(g);
 
         for (Map.Entry<String, CustomButton> entry : this.savePaneButtons.entrySet()) {
