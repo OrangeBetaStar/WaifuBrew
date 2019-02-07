@@ -135,14 +135,14 @@ public class LoadPane extends JPanel {
             if(a.getSaveDate() != null) {
                 if((a.getPanelLocation() % 2) == 0) {
                     // System.out.println("Panel location (right) " + a.getPanelLocation());
-                    saveLoadBox.add(new SaveLoadBox((windowSize.x / 3) * 2, windowSize.y / 4 * ((a.getPanelLocation() / 2)), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    saveLoadBox.add(new SaveLoadBox((windowSize.x / 5) * 3, windowSize.y / 5 * ((a.getPanelLocation() / 2)), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + (windowSize.x / 3) * 2 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
 
 
                 }
                 else {
                     // System.out.println("Panel location (left) " + a.getPanelLocation());
-                    saveLoadBox.add(new SaveLoadBox(windowSize.x / 3, windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    saveLoadBox.add(new SaveLoadBox(windowSize.x / 5, windowSize.y / 5 * ((a.getPanelLocation() / 2) + 1), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + windowSize.x / 3 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
 
                 }
