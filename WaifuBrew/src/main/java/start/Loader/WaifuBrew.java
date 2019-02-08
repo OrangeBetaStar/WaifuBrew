@@ -1,7 +1,4 @@
 package start.Loader;
-/*
- * Project by BetaStar and Gaia
- */
 
 import start.Containers.ImageDesc;
 import start.Containers.LoadSaveWrapper;
@@ -87,7 +84,7 @@ public class WaifuBrew {
         }
 
         // Load fonts (this is checked way to load hashmap)
-        if(tfl.getFonts() != null) {
+        if(!tfl.getFonts().isEmpty()) {
             for (String name: (String[])tfl.getFonts().keySet().toArray(new String[0])){
                 systemFont.put(name, (Font) tfl.getFonts().get(name));
             }
@@ -152,7 +149,6 @@ public class WaifuBrew {
         try {
             singleton = new WaifuBrew();
             singleton.start();
-
         }
         // catches any ParserException
         catch (Exception e) {

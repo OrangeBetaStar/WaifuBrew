@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/CustomObjects/NoticeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/CustomObjects/NoticeBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/Loader/ThreadFileLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Loader/ThreadFileLoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" afterDir="false" />
     </list>
@@ -25,8 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9572">
-              <caret line="358" column="78" selection-start-line="358" selection-start-column="78" selection-end-line="358" selection-end-column="78" />
+            <state relative-caret-position="587">
+              <caret line="300" column="8" selection-start-line="300" selection-start-column="8" selection-end-line="300" selection-end-column="8" />
               <folding>
                 <element signature="e#16285#16286#0" expanded="true" />
                 <element signature="e#16318#16319#0" expanded="true" />
@@ -37,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+            <state relative-caret-position="342">
+              <caret line="252" column="110" selection-start-line="252" selection-start-column="110" selection-end-line="252" selection-end-column="110" />
             </state>
           </provider>
         </entry>
@@ -82,37 +80,37 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="183" column="43" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+            <state relative-caret-position="-7654">
+              <caret line="89" column="13" lean-forward="true" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5316#5317#0" expanded="true" />
-                <element signature="e#5393#5394#0" expanded="true" />
-                <element signature="e#5829#5830#0" expanded="true" />
-                <element signature="e#5943#5944#0" expanded="true" />
-                <element signature="e#6817#6818#0" expanded="true" />
-                <element signature="e#6935#6936#0" expanded="true" />
-                <element signature="e#7994#7995#0" expanded="true" />
-                <element signature="e#8102#8103#0" expanded="true" />
-                <element signature="e#8348#8349#0" expanded="true" />
-                <element signature="e#8472#8473#0" expanded="true" />
-                <element signature="e#8558#8559#0" expanded="true" />
-                <element signature="e#8666#8667#0" expanded="true" />
-                <element signature="e#8758#8759#0" expanded="true" />
-                <element signature="e#8870#8871#0" expanded="true" />
-                <element signature="e#8973#8974#0" expanded="true" />
-                <element signature="e#9105#9106#0" expanded="true" />
-                <element signature="e#9189#9190#0" expanded="true" />
-                <element signature="e#9293#9294#0" expanded="true" />
-                <element signature="e#9371#9372#0" expanded="true" />
-                <element signature="e#9463#9464#0" expanded="true" />
-                <element signature="e#9537#9538#0" expanded="true" />
-                <element signature="e#9602#9603#0" expanded="true" />
-                <element signature="e#9665#9666#0" expanded="true" />
-                <element signature="e#9772#9773#0" expanded="true" />
+                <element signature="e#5280#5281#0" expanded="true" />
+                <element signature="e#5357#5358#0" expanded="true" />
+                <element signature="e#5792#5793#0" expanded="true" />
+                <element signature="e#5906#5907#0" expanded="true" />
+                <element signature="e#6780#6781#0" expanded="true" />
+                <element signature="e#6898#6899#0" expanded="true" />
+                <element signature="e#7957#7958#0" expanded="true" />
+                <element signature="e#8065#8066#0" expanded="true" />
+                <element signature="e#8311#8312#0" expanded="true" />
+                <element signature="e#8435#8436#0" expanded="true" />
+                <element signature="e#8521#8522#0" expanded="true" />
+                <element signature="e#8629#8630#0" expanded="true" />
+                <element signature="e#8721#8722#0" expanded="true" />
+                <element signature="e#8833#8834#0" expanded="true" />
+                <element signature="e#8936#8937#0" expanded="true" />
+                <element signature="e#9068#9069#0" expanded="true" />
+                <element signature="e#9152#9153#0" expanded="true" />
+                <element signature="e#9256#9257#0" expanded="true" />
+                <element signature="e#9334#9335#0" expanded="true" />
+                <element signature="e#9426#9427#0" expanded="true" />
+                <element signature="e#9500#9501#0" expanded="true" />
+                <element signature="e#9565#9566#0" expanded="true" />
+                <element signature="e#9628#9629#0" expanded="true" />
+                <element signature="e#9735#9736#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,7 +138,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/ImageLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
+            <state relative-caret-position="-1660">
               <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
               <folding>
                 <element signature="e#1531#1532#0" expanded="true" />
@@ -153,7 +151,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/LoadPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1443">
+            <state relative-caret-position="4551">
               <caret line="137" column="146" selection-start-line="137" selection-start-column="146" selection-end-line="137" selection-end-column="146" />
             </state>
           </provider>
@@ -238,10 +236,10 @@
         <option value="$PROJECT_DIR$/src/main/java/start/Containers/LoadSaveWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/PaneFrame/LoadPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/resources/user.json" />
-        <option value="$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/Loader/ThreadFileLoad.java" />
-        <option value="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" />
+        <option value="$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java" />
+        <option value="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" />
       </list>
     </option>
   </component>
@@ -387,7 +385,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549659762678" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549660296746" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/junit-4.12.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -640,7 +638,7 @@
     <frame x="-8" y="-8" width="2954" height="2016" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12577747" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12577747" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -649,15 +647,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4927436" weight="0.13913967" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6579129" weight="0.25225705" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6575674" visible="true" weight="0.25225705" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.19278607" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989634" weight="0.32873076" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49944875" weight="0.32917964" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4989634" weight="0.17100371" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5162405" side_tool="true" visible="true" weight="0.30801913" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.4837595" visible="true" weight="0.30801913" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34243262" side_tool="true" visible="true" weight="0.25225705" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4837595" weight="0.30801913" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -974,17 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/ImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-          <folding>
-            <element signature="e#1531#1532#0" expanded="true" />
-            <element signature="e#1581#1582#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/FindFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -1006,26 +993,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9572">
-          <caret line="358" column="78" selection-start-line="358" selection-start-column="78" selection-end-line="358" selection-end-column="78" />
-          <folding>
-            <element signature="e#16285#16286#0" expanded="true" />
-            <element signature="e#16318#16319#0" expanded="true" />
-            <element signature="e#16423#16424#0" expanded="true" />
-            <element signature="e#16448#16449#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/LoadPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1443">
-          <caret line="137" column="146" selection-start-line="137" selection-start-column="146" selection-end-line="137" selection-end-column="146" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/ThreadFileLoad.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1162">
@@ -1043,44 +1010,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/ImageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+        <state relative-caret-position="-1660">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+          <folding>
+            <element signature="e#1531#1532#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="183" column="43" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+        <state relative-caret-position="-7654">
+          <caret line="89" column="13" lean-forward="true" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5316#5317#0" expanded="true" />
-            <element signature="e#5393#5394#0" expanded="true" />
-            <element signature="e#5829#5830#0" expanded="true" />
-            <element signature="e#5943#5944#0" expanded="true" />
-            <element signature="e#6817#6818#0" expanded="true" />
-            <element signature="e#6935#6936#0" expanded="true" />
-            <element signature="e#7994#7995#0" expanded="true" />
-            <element signature="e#8102#8103#0" expanded="true" />
-            <element signature="e#8348#8349#0" expanded="true" />
-            <element signature="e#8472#8473#0" expanded="true" />
-            <element signature="e#8558#8559#0" expanded="true" />
-            <element signature="e#8666#8667#0" expanded="true" />
-            <element signature="e#8758#8759#0" expanded="true" />
-            <element signature="e#8870#8871#0" expanded="true" />
-            <element signature="e#8973#8974#0" expanded="true" />
-            <element signature="e#9105#9106#0" expanded="true" />
-            <element signature="e#9189#9190#0" expanded="true" />
-            <element signature="e#9293#9294#0" expanded="true" />
-            <element signature="e#9371#9372#0" expanded="true" />
-            <element signature="e#9463#9464#0" expanded="true" />
-            <element signature="e#9537#9538#0" expanded="true" />
-            <element signature="e#9602#9603#0" expanded="true" />
-            <element signature="e#9665#9666#0" expanded="true" />
-            <element signature="e#9772#9773#0" expanded="true" />
+            <element signature="e#5280#5281#0" expanded="true" />
+            <element signature="e#5357#5358#0" expanded="true" />
+            <element signature="e#5792#5793#0" expanded="true" />
+            <element signature="e#5906#5907#0" expanded="true" />
+            <element signature="e#6780#6781#0" expanded="true" />
+            <element signature="e#6898#6899#0" expanded="true" />
+            <element signature="e#7957#7958#0" expanded="true" />
+            <element signature="e#8065#8066#0" expanded="true" />
+            <element signature="e#8311#8312#0" expanded="true" />
+            <element signature="e#8435#8436#0" expanded="true" />
+            <element signature="e#8521#8522#0" expanded="true" />
+            <element signature="e#8629#8630#0" expanded="true" />
+            <element signature="e#8721#8722#0" expanded="true" />
+            <element signature="e#8833#8834#0" expanded="true" />
+            <element signature="e#8936#8937#0" expanded="true" />
+            <element signature="e#9068#9069#0" expanded="true" />
+            <element signature="e#9152#9153#0" expanded="true" />
+            <element signature="e#9256#9257#0" expanded="true" />
+            <element signature="e#9334#9335#0" expanded="true" />
+            <element signature="e#9426#9427#0" expanded="true" />
+            <element signature="e#9500#9501#0" expanded="true" />
+            <element signature="e#9565#9566#0" expanded="true" />
+            <element signature="e#9628#9629#0" expanded="true" />
+            <element signature="e#9735#9736#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/LoadPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4551">
+          <caret line="137" column="146" selection-start-line="137" selection-start-column="146" selection-end-line="137" selection-end-column="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/SaveLoadBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="300" column="8" selection-start-line="300" selection-start-column="8" selection-end-line="300" selection-end-column="8" />
+          <folding>
+            <element signature="e#16285#16286#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#16423#16424#0" expanded="true" />
+            <element signature="e#16448#16449#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="252" column="110" selection-start-line="252" selection-start-column="110" selection-end-line="252" selection-end-column="110" />
         </state>
       </provider>
     </entry>

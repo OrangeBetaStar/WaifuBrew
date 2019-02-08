@@ -12,9 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +58,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.settingSlidersMap.get("textSize").isSliderActive()) {
-            
+
                 Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
                 fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10;
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
@@ -253,29 +250,9 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
     private void initFont() {
-        // Configure font preview
-        try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFontName() + ".ttf"));
-            Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            // activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
             activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
             configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
-        } catch (FontFormatException ex) {
-            ex.printStackTrace();
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException in ConfigPane.initFPS()");
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        } catch (IOException ex) {
-            System.out.println("IOException in ConfigPane.initFPS()");
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        }
     }
 
     private void initImage() {
