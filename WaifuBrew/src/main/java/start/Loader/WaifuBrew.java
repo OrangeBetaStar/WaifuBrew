@@ -260,11 +260,11 @@ public class WaifuBrew {
         configStorage.replace("autoAdvancer", autoAdvancer ? 1 : 0);
     }
 
-    public int getFontSize() {
+    public int getPlayFontSize() {
         return configStorage.get("fontSize");
     }
 
-    public void setFontSize(int fontSize) {
+    public void setPlayFontSize(int fontSize) {
         configStorage.replace("fontSize", fontSize);
     }
 
@@ -334,10 +334,12 @@ public class WaifuBrew {
             }
         }
         // Failed case
-        System.out.println("Couldn't find: " + whichOne);
+        System.out.println("Could not find: \"" + whichOne + "\" image from resource folder.");
         javaxt.io.Image createDefaultImage = new javaxt.io.Image(getImageByName(ImageSelector.VECTOR, "blackbox"));
-        createDefaultImage.resize(getFontSize() * 2, getFontSize());
-        createDefaultImage.addText(whichOne, 0, createDefaultImage.getHeight() / 2, null, getFontSize(), 128, 128, 128);
+
+        // TODO: Make the fonts not rely on play text size (placement / scales fine though)
+        createDefaultImage.resize(getPlayFontSize() * 4, getPlayFontSize() * 2);
+        createDefaultImage.addText(whichOne, createDefaultImage.getWidth() / 12, createDefaultImage.getHeight() / 2, getSystemFontName(), getPlayFontSize(), 128, 128, 128);
         return createDefaultImage.getBufferedImage();
     }
 

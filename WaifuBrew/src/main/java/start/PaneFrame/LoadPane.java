@@ -23,6 +23,9 @@ public class LoadPane extends JPanel {
     private SideBar configBar = new SideBar();
     private javaxt.io.Image backgroundImage;
 
+    private int scrubPage;
+    private  CustomSlider panelScrubThrough;
+
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
@@ -30,6 +33,7 @@ public class LoadPane extends JPanel {
         initFPS();
         initImage();
         initPanelBlocks();
+        initInteractiveUI();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -71,12 +75,7 @@ public class LoadPane extends JPanel {
         }
 
         configBar.paintComponent(g);
-
-        /*
-        for(LoadSaveWrapper a : WaifuBrew.getInstance().getLoadSaveContainers()) {
-            g.drawImage(backgroundImage.getBufferedImage(), )
-        }
-        */
+        panelScrubThrough.paintComponent(g);
 
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();
@@ -135,14 +134,13 @@ public class LoadPane extends JPanel {
             if(a.getSaveDate() != null) {
                 if((a.getPanelLocation() % 2) == 0) {
                     // System.out.println("Panel location (right) " + a.getPanelLocation());
-                    saveLoadBox.add(new SaveLoadBox((windowSize.x / 6) * 3, (windowSize.y / 6 * ((a.getPanelLocation() / 2))) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    saveLoadBox.add(new SaveLoadBox(((windowSize.x / 5) * 3) + (windowSize.y / 10), (windowSize.y / 6 * ((a.getPanelLocation() / 2))) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + (windowSize.x / 3) * 2 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
-
 
                 }
                 else {
                     // System.out.println("Panel location (left) " + a.getPanelLocation());
-                    saveLoadBox.add(new SaveLoadBox(windowSize.x / 6, (windowSize.y / 6 * ((a.getPanelLocation() / 2) + 1)) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
+                    saveLoadBox.add(new SaveLoadBox((windowSize.x / 6) + (windowSize.y / 10), (windowSize.y / 6 * ((a.getPanelLocation() / 2) + 1)) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + windowSize.x / 3 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
 
                 }
@@ -153,5 +151,13 @@ public class LoadPane extends JPanel {
             addMouseListener(addMouseHandler.retrieveMouseHandler());
             addMouseMotionListener(addMouseHandler.retrieveMouseHandler());
         }
+    }
+
+    private void initInteractiveUI() {
+
+        // TODO: Have slider be using Origin so that it's easier to implement
+        panelScrubThrough = new CustomSlider((windowSize.x / 2), (windowSize.y / 15) * 13, scrubPage);
+        addMouseListener(panelScrubThrough.retrieveMouseHandler());
+        addMouseMotionListener(panelScrubThrough.retrieveMouseHandler());
     }
 }

@@ -221,7 +221,7 @@ public class AnimationPane extends JPanel {
         // Reload anything that can have settings changed.
 
         // Renew Font (Font and Size)
-        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
 
         // Renew FPS
         stringTimer = null;
@@ -268,7 +268,7 @@ public class AnimationPane extends JPanel {
     }
 
     private void initFont() {
-        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
     }
 
     private void initParseDialogue() {
