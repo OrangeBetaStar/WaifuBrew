@@ -37,8 +37,10 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     private String route;
     private String saveDate;
 
+    // Misc
     private Handlerclass miniHandler = new Handlerclass();
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
+    private Font sysFont = new Font (WaifuBrew.getInstance().getSystemFontName(), Font.PLAIN, 12);
 
     public SaveLoadBox(int x, int y, Origin origin, String route, String saveDate, String thumbnailName) {
         imageBlock = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
@@ -296,6 +298,8 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         padding = (int) (imageBlock.getHeight() * 0.1);
         thumbnailScaling = (int) (imageBlock.getHeight() * 1.6);
 
+
+
         if (activeButton) {
             if (origin.getValue() == 0) {
                 if (!mouseOver) {
@@ -304,6 +308,7 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
                 g.drawImage(thumbnail.getBufferedImage(),  (x + padding),  (y + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.setFont(sysFont);
                 g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
                 g.drawString("Route: " + route, (x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
             }
@@ -348,8 +353,10 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
                 g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling), (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.setFont(sysFont);
                 g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
                 g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
+                System.out.println(WaifuBrew.getInstance().getSystemFontName());
 
             }
 

@@ -30,6 +30,7 @@ public class WaifuBrew {
     // Data storage
     private static HashMap<String, Integer> configStorage = new HashMap<>();
     private static HashMap<String, String> configUI = new HashMap<>();
+    private static HashMap<String, Font> systemFont = new HashMap<>();
     private static ArrayList<LoadSaveWrapper> loadSaveContainers = new ArrayList<>();
 
     // Keeps the calculated easing from pre-run thread.
@@ -84,6 +85,14 @@ public class WaifuBrew {
         if (loadedSaves != null) {
             applyLoadedSaves();
         }
+
+        // Load fonts (this is checked way to load hashmap)
+        if(tfl.getFonts() != null) {
+            for (String name: (String[])tfl.getFonts().keySet().toArray(new String[0])){
+                systemFont.put(name, (Font) tfl.getFonts().get(name));
+            }
+        }
+
         // HashMap Printer
         /*if(loadedSaves != null) {
             for (String name: (String[])loadedSaves.keySet().toArray(new String[0])){
@@ -152,12 +161,33 @@ public class WaifuBrew {
         }
     }
 
-    public String getSystemFont() {
+    public String getSystemFontName() {
         return configUI.get("systemFont");
     }
 
-    public void setSystemFont(String systemFont) {
+    public void setSystemFontName(String systemFont) {
         configUI.replace("systemFont", systemFont);
+    }
+
+    public Font getSystemFont(String fontName) {
+
+        /*if(loadedSaves != null) {
+            for (String name: (String[])loadedSaves.keySet().toArray(new String[0])){
+                String key =name.toString();
+                String value = loadedSaves.get(name).toString();
+                System.out.println(key + " " + value);
+            }
+        }*/
+
+        if(!systemFont.isEmpty()) {
+            for (String name: systemFont.keySet().toArray(new String[0])){
+                if(name.contains(fontName)) {
+                    return systemFont.get(name);
+                }
+            }
+        }
+        return new Font("serif", Font.PLAIN, 12);
+        // return systemFont.get(fontName) != null ? systemFont.get(fontName) : new Font("serif", Font.PLAIN, 12);
     }
 
     public String getDialogueFont() {

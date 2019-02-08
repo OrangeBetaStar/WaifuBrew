@@ -61,26 +61,10 @@ public class ConfigPane extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.settingSlidersMap.get("textSize").isSliderActive()) {
-            // Configure font preview
-            try {
-                // For real time preview later when font change is implemented
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
-                fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10; // This equation seems most appropriate
-                Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
+            
+                Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
+                fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10;
                 activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
-            } catch (FontFormatException ex) {
-                ex.printStackTrace();
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            } catch (FileNotFoundException ex) {
-                System.out.println("FileNotFoundException in ConfigPane.initFPS()");
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            } catch (IOException ex) {
-                System.out.println("IOException in ConfigPane.initFPS()");
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            }
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
@@ -271,7 +255,7 @@ public class ConfigPane extends JPanel implements ActionListener {
     private void initFont() {
         // Configure font preview
         try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFontName() + ".ttf"));
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
             // activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
             activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
