@@ -23,7 +23,7 @@ public class LoadPane extends JPanel {
     private SideBar configBar = new SideBar();
     private javaxt.io.Image backgroundImage;
 
-    private int scrubPage;
+    private int scrubPage; // use this when scrubbing through panels
     private  CustomSlider panelScrubThrough;
 
     // [1] is resolution of program window

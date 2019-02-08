@@ -20,7 +20,7 @@ public class WaifuBrew {
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
     private HashMap loadedSettings;
-    private HashMap loadedSaves;
+    private ArrayList<HashMap> loadedSaves;
 
     private static WaifuBrew singleton;
 
@@ -33,7 +33,7 @@ public class WaifuBrew {
     // Keeps the calculated easing from pre-run thread.
     private ArrayList<double[]> easingArray;
 
-    private Dimension programDimension = new Dimension(1280, 720);
+    private Dimension programDimension = new Dimension(1280, 720); // The default
 
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
@@ -100,8 +100,22 @@ public class WaifuBrew {
         }*/
     }
 
+    /*
+    for(int panelProduction = 1; panelProduction <= 8; panelProduction++) {
+            loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
+        }
+     */
+
     private void applyLoadedSaves() {
         // Overwrite the thing there. Pre-configured to file loaded.
+        if(!loadedSaves.isEmpty()) {
+            for(HashMap eachPanel : loadedSaves) {
+                for (String key: (String[])eachPanel.keySet().toArray(new String[0])){
+                    // System.out.println("Key: " + key + ", Value: " + eachPanel.get(key));
+                    // TODO: Compare with pre-loaded hashmap and insert loaded one into appropriate place (perhaps by save_panel)
+                }
+            }
+        }
     }
 
     private void applyLoadedSettings() {

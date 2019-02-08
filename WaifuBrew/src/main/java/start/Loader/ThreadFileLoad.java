@@ -114,11 +114,11 @@ public class ThreadFileLoad implements Runnable {
     }
 
     public HashMap getLoadedSettings() {
-        return us.getLoadedSettings();
+        return us.getLastObject();
     }
 
-    public HashMap getSaves() {
-        return sd.getLoadedSettings();
+    public ArrayList getSaves() {
+        return sd.getMultipleObject();
     }
 
     public HashMap getFonts() {
