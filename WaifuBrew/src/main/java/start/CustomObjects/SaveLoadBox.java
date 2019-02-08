@@ -20,6 +20,8 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     private int y = 0;
     private int length = (int) (sizeCalc.x / 3.5);
     private int height = sizeCalc.y / 7;
+    private int padding = 0; // will be overwritten
+    private int thumbnailScaling = 0;
 
     // Data
     private Origin origin;
@@ -289,6 +291,11 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         MIDDLE_BOTTOM(7)
         RIGHT_BOTTOM(8)
     */
+
+        // calculate first for easier implementation
+        padding = (int) (imageBlock.getHeight() * 0.1);
+        thumbnailScaling = (int) (imageBlock.getHeight() * 1.6);
+
         if (activeButton) {
             if (origin.getValue() == 0) {
                 if (!mouseOver) {
@@ -296,7 +303,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) (x + imageBlock.getHeight() * 0.1), (int) (y + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
+                g.drawImage(thumbnail.getBufferedImage(),  (x + padding),  (y + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
+                g.drawString("Route: " + route, (x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
             }
 
             if (origin.getValue() == 1) {
@@ -305,8 +314,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth() / 2)) + imageBlock.getHeight() * 0.1), (int) (y + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
-
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  (y + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
             }
 
             if (origin.getValue() == 2) {
@@ -315,8 +325,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth())) + imageBlock.getHeight() * 0.1), (int) ((y) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
-
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
             }
 
             if (origin.getValue() == 3) {
@@ -325,8 +336,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight() / 2)) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
-
+                g.drawImage(thumbnail.getBufferedImage(),  ((x) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
+                g.drawString("Route: " + route,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
             }
 
             if (origin.getValue() == 4) {
@@ -335,7 +347,10 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth() / 2)) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight() / 2)) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 1.6), (int) (((imageBlock.getHeight() * 1.6) / 16.0) * 8.0), that);
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling), (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
+
             }
 
             if (origin.getValue() == 5) {
@@ -344,7 +359,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth())) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight() / 2)) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
             }
 
             if (origin.getValue() == 6) {
@@ -353,7 +370,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight())) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
+                g.drawImage(thumbnail.getBufferedImage(),  ((x) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
+                g.drawString("Route: " + route,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
             }
 
             if (origin.getValue() == 7) {
@@ -362,7 +381,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth() / 2)) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight())) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
             }
 
             if (origin.getValue() == 8) {
@@ -371,7 +392,9 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 } else {
                     g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
                 }
-                g.drawImage(thumbnail.getBufferedImage(), (int) ((x - (imageBlock.getWidth())) + imageBlock.getHeight() * 0.1), (int) ((y - (imageBlock.getHeight())) + imageBlock.getHeight() * 0.1), (int) (imageBlock.getHeight() * 0.8), (int) (((imageBlock.getHeight() * 0.8) / 16) * 8), that);
+                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
+                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
             }
         }
     }
