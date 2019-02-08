@@ -24,7 +24,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image tempDialogueBox; // Preview
     private Timer stringTimer;
     private boolean fpsLimitStop = false;
-    private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
     private HashMap<String, CustomButton> settingButtonsMap = new HashMap<>(3);
@@ -269,7 +268,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Pre-scale
             double scale = Math.max(((double) windowSize.x / backgroundPicture.getWidth()), ((double) windowSize.y / backgroundPicture.getHeight()));
             backgroundPicture.resize((int) ((scale) * backgroundPicture.getWidth()), (int) ((scale) * backgroundPicture.getHeight()));
-            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
+            dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
 
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
             this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
