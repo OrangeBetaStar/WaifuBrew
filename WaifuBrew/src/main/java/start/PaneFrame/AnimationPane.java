@@ -27,8 +27,10 @@ public class AnimationPane extends JPanel {
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
+    // Disable text and text background to see only scenery
     private boolean rightClickTempDisableBox = false;
 
+    // Interactive objects.
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private SideBar configBar = new SideBar();
     private static Font activeFont;

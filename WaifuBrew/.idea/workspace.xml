@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/saves.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/saves.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/thumbnail_1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/AnimationPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/AnimationPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/LoadPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/SaveLoadPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/SavePane.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -79,10 +79,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/AnimationPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="214" column="9" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+            <state relative-caret-position="2966">
+              <caret line="249" selection-start-line="249" selection-end-line="249" />
               <folding>
-                <element signature="e#14945#14946#0" expanded="true" />
+                <element signature="e#15026#15027#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,7 +122,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/Parser/DefaultLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="719">
               <caret line="56" column="38" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="38" />
             </state>
           </provider>
@@ -383,7 +383,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549703785402" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549739857109" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/junit-4.12.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -987,13 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/Parser/DefaultLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="56" column="38" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/Containers/LoadSaveWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1070,12 +1063,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/Parser/DefaultLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="56" column="38" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/AnimationPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="214" column="9" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+        <state relative-caret-position="2966">
+          <caret line="249" selection-start-line="249" selection-end-line="249" />
           <folding>
-            <element signature="e#14945#14946#0" expanded="true" />
+            <element signature="e#15026#15027#0" expanded="true" />
           </folding>
         </state>
       </provider>
