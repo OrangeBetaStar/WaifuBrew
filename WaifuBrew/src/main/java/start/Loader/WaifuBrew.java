@@ -21,6 +21,7 @@ public class WaifuBrew {
     private HashMap loadedSettings;
     private ArrayList<HashMap> loadedSaves;
 
+    // The program itself
     private static WaifuBrew singleton;
 
     // Data storage

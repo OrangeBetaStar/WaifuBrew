@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoadPane extends JPanel {
+public class SaveLoadPane extends JPanel {
 
     private Handlerclass handler = new Handlerclass();
     private ArrayList<SaveLoadBox> saveLoadBox = new ArrayList<>();
@@ -29,7 +29,10 @@ public class LoadPane extends JPanel {
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
-    public LoadPane() {
+    // To have this pane behave as load or save. (for mouse handler)
+    boolean clickLoad = true;
+
+    public SaveLoadPane() {
         initFPS();
         initImage();
         initPanelBlocks();
@@ -42,6 +45,9 @@ public class LoadPane extends JPanel {
 
     private class Handlerclass extends MasterHandlerClass {
         public void mouseReleased(MouseEvent event) {
+
+
+
             if (inBound(event, loadPaneButtons.get("options"), true) && loadPaneButtons.get("options").getActiveButtonState()) {
                 configBar.setActive(true);
                 loadPaneButtons.get("options").setActiveButtonState(false);
@@ -89,6 +95,15 @@ public class LoadPane extends JPanel {
                     button.paintComponent(g);
                 }
             }
+        }
+    }
+
+    public void stageChange(String mode) {
+        if(mode.equals("load")) {
+            clickLoad = true;
+        }
+        else {
+            clickLoad = false;
         }
     }
 

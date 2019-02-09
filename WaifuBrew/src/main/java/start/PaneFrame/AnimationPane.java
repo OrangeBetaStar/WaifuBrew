@@ -27,6 +27,8 @@ public class AnimationPane extends JPanel {
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
+    private boolean rightClickTempDisableBox = false;
+
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private SideBar configBar = new SideBar();
     private static Font activeFont;
@@ -73,36 +75,46 @@ public class AnimationPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
-                configBar.setActive(true);
-                aniPaneButton.get("config").setActiveButtonState(false);
-            } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {
-                configBar.setActive(false);
-                WaifuBrew.getInstance().setStage(3);
-                aniPaneButton.get("config").setActiveButtonState(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                // Ask user if save progress?
-            } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
-                configBar.setActive(false);
-                WaifuBrew.getInstance().setStage(4);
-                aniPaneButton.get("config").setActiveButtonState(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-            } else if (inBound(event, aniPaneButton.get("exit"), true) && configBar.isActive()) {
-                // Ask user if save progress?
-                // This button will go back to startscreen
-                WaifuBrew.getInstance().setStage(0);
-                configBar.setActive(false);
-                aniPaneButton.get("config").setActiveButtonState(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-            } else {
-                if (configBar.isActive()) {
-                    configBar.setActive(false);
-                    aniPaneButton.get("config").setActiveButtonState(true);
-                } else {
-                    // To avoid advancing of the dialogue when pressed other place to disable configbar.
-                    clickActivate = true;
-                    triggerNext();
+            if (event.getButton() == MouseEvent.BUTTON1) {
+                if(rightClickTempDisableBox) {
+                    rightClickTempDisableBox = false;
                 }
+                else { // When dialogue bar hasn't been disabled for one click.
+                    if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
+                        configBar.setActive(true);
+                        aniPaneButton.get("config").setActiveButtonState(false);
+                    } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {
+                        configBar.setActive(false);
+                        WaifuBrew.getInstance().setStage(3);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        // Ask user if save progress?
+                    } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
+                        configBar.setActive(false);
+                        WaifuBrew.getInstance().setStage(4);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    } else if (inBound(event, aniPaneButton.get("exit"), true) && configBar.isActive()) {
+                        // Ask user if save progress?
+                        // This button will go back to startscreen
+                        WaifuBrew.getInstance().setStage(0);
+                        configBar.setActive(false);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    } else {
+                        if (configBar.isActive()) {
+                            configBar.setActive(false);
+                            aniPaneButton.get("config").setActiveButtonState(true);
+                        } else {
+                            // To avoid advancing of the dialogue when pressed other place to disable configbar.
+                            clickActivate = true;
+                            triggerNext();
+                        }
+                    }
+                }
+            }
+            else if (event.getButton() == MouseEvent.BUTTON3) {
+                rightClickTempDisableBox = true;
             }
         }
     }
@@ -167,35 +179,36 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
-            g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int)((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
-            // (windowSize.x / 9.0), ((windowSize.y / 12.0) * 8)
-            // windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2)
-            g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
+            if(!rightClickTempDisableBox) {
+                g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int) ((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
+                g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
+            }
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
             // What
         }
+        if(!rightClickTempDisableBox) {
+            if (tempString != "") {
+                // Dialogue text rendering with boundary shading
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        if (tempString != "") {
-            // Dialogue text rendering with boundary shading
-            Graphics2D g2d = (Graphics2D) g.create();
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(tempString, activeFont, frc);
+                Shape outline = textTl.getOutline(null);
 
-            FontRenderContext frc = g2d.getFontRenderContext();
-            TextLayout textTl = new TextLayout(tempString, activeFont, frc);
-            Shape outline = textTl.getOutline(null);
-
-            // FontMetrics fm = g2d.getFontMetrics(activeFont);
-            g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8));// + fm.getAscent());
-            g2d.setColor(Color.WHITE);
-            g2d.fill(outline);
-            g2d.setStroke(new BasicStroke(1));
-            g2d.setColor(Color.BLACK);
-            g2d.draw(outline);
-            g2d.dispose();
+                // FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8));// + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
+                g2d.dispose();
+            }
         }
 
         // Buttons will paint over this Panel
