@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class WaifuBrew {
@@ -100,20 +99,29 @@ public class WaifuBrew {
         }*/
     }
 
-    /*
-    for(int panelProduction = 1; panelProduction <= 8; panelProduction++) {
-            loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
-        }
-     */
-
     private void applyLoadedSaves() {
         // Overwrite the thing there. Pre-configured to file loaded.
         if(!loadedSaves.isEmpty()) {
             for(HashMap eachPanel : loadedSaves) {
-                for (String key: (String[])eachPanel.keySet().toArray(new String[0])){
-                    // System.out.println("Key: " + key + ", Value: " + eachPanel.get(key));
-                    // TODO: Compare with pre-loaded hashmap and insert loaded one into appropriate place (perhaps by save_panel)
+
+                // Overwrite: loadSaveContainers (delete)
+                // System.out.println(Integer.parseInt((String)eachPanel.get("save_panel")));
+                // loadSaveContainers.remove(Integer.parseInt((String)eachPanel.get("save_panel")));
+                for(int deleteFinder = 0; deleteFinder < loadSaveContainers.size(); deleteFinder++) {
+                    if(loadSaveContainers.get(deleteFinder).getPanelLocation() == Integer.parseInt((String)eachPanel.get("save_panel"))) {
+
+                        loadSaveContainers.get(deleteFinder).setSaveDate((String)eachPanel.get("save_date"));
+                        loadSaveContainers.get(deleteFinder).setRouteStory((String)eachPanel.get("route"));
+                        loadSaveContainers.get(deleteFinder).setThumbnailFile((String)eachPanel.get("thumbnail"));
+                        loadSaveContainers.get(deleteFinder).setAdvancerDialogue(Integer.parseInt((String)eachPanel.get("advancer")));
+                    }
                 }
+
+                // ArrayList<LoadSaveWrapper> loadSaveContainers
+
+
+                // Date saveDate, int panelLocation, int advancerDialogue, String routeStory, String thumbnailFile
+                // loadSaveContainers.add(new LoadSaveWrapper())
             }
         }
     }
@@ -226,7 +234,8 @@ public class WaifuBrew {
     private void initLoadSave() {
         // Pre-configure blank states of load / save panels
         for(int panelProduction = 1; panelProduction <= 8; panelProduction++) {
-            loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
+            // loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime().toString(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
+            loadSaveContainers.add(new LoadSaveWrapper("Empty", panelProduction, 0, "Empty", "Slot: " + panelProduction));
         }
     }
 

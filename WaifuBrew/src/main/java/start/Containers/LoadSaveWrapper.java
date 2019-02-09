@@ -1,15 +1,13 @@
 package start.Containers;
 
-import java.util.Date;
-
 public class LoadSaveWrapper {
-    private Date saveDate;
+    private String saveDate;
     private int panelLocation;
     private int advancerDialogue;
     private String routeStory;
     private String thumbnailFile;
 
-    public LoadSaveWrapper(Date saveDate, int panelLocation, int advancerDialogue, String routeStory, String thumbnailFile) {
+    public LoadSaveWrapper(String saveDate, int panelLocation, int advancerDialogue, String routeStory, String thumbnailFile) {
         this.saveDate = saveDate;
         this.panelLocation = panelLocation;
         this.advancerDialogue = advancerDialogue;
@@ -17,7 +15,7 @@ public class LoadSaveWrapper {
         this.thumbnailFile = thumbnailFile;
     }
 
-    public void setSaveDate(Date saveDate) {
+    public void setSaveDate(String saveDate) {
         this.saveDate = saveDate;
     }
 
@@ -37,7 +35,7 @@ public class LoadSaveWrapper {
         this.thumbnailFile = thumbnailFile;
     }
 
-    public Date getSaveDate() {
+    public String getSaveDate() {
         return saveDate;
     }
 
