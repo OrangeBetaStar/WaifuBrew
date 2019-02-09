@@ -100,28 +100,18 @@ public class WaifuBrew {
     }
 
     private void applyLoadedSaves() {
-        // Overwrite the thing there. Pre-configured to file loaded.
         if(!loadedSaves.isEmpty()) {
             for(HashMap eachPanel : loadedSaves) {
-
-                // Overwrite: loadSaveContainers (delete)
-                // System.out.println(Integer.parseInt((String)eachPanel.get("save_panel")));
-                // loadSaveContainers.remove(Integer.parseInt((String)eachPanel.get("save_panel")));
                 for(int deleteFinder = 0; deleteFinder < loadSaveContainers.size(); deleteFinder++) {
                     if(loadSaveContainers.get(deleteFinder).getPanelLocation() == Integer.parseInt((String)eachPanel.get("save_panel"))) {
 
+                        // Perhaps I can automate this with Enum later on.
                         loadSaveContainers.get(deleteFinder).setSaveDate((String)eachPanel.get("save_date"));
                         loadSaveContainers.get(deleteFinder).setRouteStory((String)eachPanel.get("route"));
                         loadSaveContainers.get(deleteFinder).setThumbnailFile((String)eachPanel.get("thumbnail"));
                         loadSaveContainers.get(deleteFinder).setAdvancerDialogue(Integer.parseInt((String)eachPanel.get("advancer")));
                     }
                 }
-
-                // ArrayList<LoadSaveWrapper> loadSaveContainers
-
-
-                // Date saveDate, int panelLocation, int advancerDialogue, String routeStory, String thumbnailFile
-                // loadSaveContainers.add(new LoadSaveWrapper())
             }
         }
     }
@@ -129,7 +119,7 @@ public class WaifuBrew {
     private void applyLoadedSettings() {
         for (String name : (String[]) loadedSettings.keySet().toArray(new String[0])) {
             if (name.equals("stage")) {
-                // Perhaps in debug mode, I can start taking advantage of this.
+                // Perhaps in debug mode, I can start taking advantage of this. (Go straight into specified stage, etc)
                 continue;
             }
             try {
