@@ -16,11 +16,11 @@ import java.util.Map;
 
 public class SaveLoadPane extends JPanel {
 
-    private Handlerclass handler = new Handlerclass();
+    // Containers
     private ArrayList<SaveLoadBox> saveLoadBox = new ArrayList<>();
-    private boolean frameRateDisable = false;
     private HashMap<String, CustomButton> loadPaneButtons = new HashMap<>(4);
     private SideBar configBar = new SideBar();
+
     private javaxt.io.Image backgroundImage;
 
     private int scrubPage; // use this when scrubbing through panels
@@ -28,6 +28,12 @@ public class SaveLoadPane extends JPanel {
 
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
+
+    // Misc
+    private boolean frameRateDisable = false;
+
+    // MouseHandler
+    private Handlerclass handler = new Handlerclass();
 
     // To have this pane behave as load or save. (for mouse handler)
     boolean clickLoad = true;
@@ -46,26 +52,42 @@ public class SaveLoadPane extends JPanel {
     private class Handlerclass extends MasterHandlerClass {
         public void mouseReleased(MouseEvent event) {
 
+            if (event.getButton() == MouseEvent.BUTTON1) {
+                for(int boundCheck = 0; boundCheck < saveLoadBox.size(); boundCheck++) {
+                    if (inBound(event, saveLoadBox.get(boundCheck), false)) {
 
+                        // If save has a valid date, then it's good to load.
+                        if(saveLoadBox.get(boundCheck).isValidSaveDate()) {
+                            WaifuBrew.getInstance().setCurrentSave(boundCheck + 1);
+                            WaifuBrew.getInstance().setStage(1);
+                            WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        }
+                    }
+                }
 
-            if (inBound(event, loadPaneButtons.get("options"), true) && loadPaneButtons.get("options").getActiveButtonState()) {
-                configBar.setActive(true);
-                loadPaneButtons.get("options").setActiveButtonState(false);
-                loadPaneButtons.get("back").setActiveButtonState(true);
-                System.out.println("Pressed options");
-            } else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
-                WaifuBrew.getInstance().setStage(0);
-                configBar.setActive(false);
-                loadPaneButtons.get("back").setActiveButtonState(false);
-                loadPaneButtons.get("options").setActiveButtonState(true);
-                System.out.println("Pressed back");
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-            } else {
-                if (configBar.isActive()) {
+                // "Option is clicked while also option is viewable"
+                if (inBound(event, loadPaneButtons.get("options"), true) && loadPaneButtons.get("options").getActiveButtonState()) {
+                    configBar.setActive(true);
+                    loadPaneButtons.get("options").setActiveButtonState(false);
+                    loadPaneButtons.get("back").setActiveButtonState(true);
+                    // System.out.println("Pressed options");
+
+                    // "Back is clicked when back is also viewable"
+                } else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
+                    WaifuBrew.getInstance().setStage(0);
                     configBar.setActive(false);
+                    loadPaneButtons.get("back").setActiveButtonState(false);
                     loadPaneButtons.get("options").setActiveButtonState(true);
+                    // System.out.println("Pressed back");
+                    WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                 } else {
-                    // Normal behavior
+                    // Clicked somewhere else to disable config bar.
+                    if (configBar.isActive()) {
+                        configBar.setActive(false);
+                        loadPaneButtons.get("options").setActiveButtonState(true);
+                    } else {
+                        // Normal behavior
+                    }
                 }
             }
         }

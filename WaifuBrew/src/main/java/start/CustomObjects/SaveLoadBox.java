@@ -89,6 +89,10 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         return height;
     }
 
+    public boolean isValidSaveDate() {
+        return !saveDate.equals("Empty");
+    }
+
     @Override
     public MasterHandlerClass retrieveMouseHandler() {
         return miniHandler;

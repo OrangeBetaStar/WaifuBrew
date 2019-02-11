@@ -228,7 +228,6 @@ public class AnimationPane extends JPanel {
                 aniPaneButton.get("config").paintComponent(g);
                 break;
             }
-
         }
     }
 
@@ -246,6 +245,9 @@ public class AnimationPane extends JPanel {
         dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
         dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
+
+        // Have to select correct route as well.
+        advancer = WaifuBrew.getInstance().getCurrentSave().getAdvancerDialogue();
     }
 
     private void initFPS() {

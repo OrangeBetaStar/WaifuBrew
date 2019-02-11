@@ -30,6 +30,8 @@ public class WaifuBrew {
     private static HashMap<String, Font> systemFont = new HashMap<>();
     private static ArrayList<LoadSaveWrapper> loadSaveContainers = new ArrayList<>();
 
+    private static LoadSaveWrapper currentSave;
+
     // Keeps the calculated easing from pre-run thread.
     private ArrayList<double[]> easingArray;
 
@@ -100,17 +102,18 @@ public class WaifuBrew {
         }*/
     }
 
+    // Overwrite the pre-defined loadSaveContainer
     private void applyLoadedSaves() {
         if(!loadedSaves.isEmpty()) {
             for(HashMap eachPanel : loadedSaves) {
-                for(int deleteFinder = 0; deleteFinder < loadSaveContainers.size(); deleteFinder++) {
-                    if(loadSaveContainers.get(deleteFinder).getPanelLocation() == Integer.parseInt((String)eachPanel.get("save_panel"))) {
+                for(int loadSaveIndex = 0; loadSaveIndex < loadSaveContainers.size(); loadSaveIndex++) {
+                    if(loadSaveContainers.get(loadSaveIndex).getPanelLocation() == Integer.parseInt((String)eachPanel.get("save_panel"))) {
 
                         // Perhaps I can automate this with Enum later on.
-                        loadSaveContainers.get(deleteFinder).setSaveDate((String)eachPanel.get("save_date"));
-                        loadSaveContainers.get(deleteFinder).setRouteStory((String)eachPanel.get("route"));
-                        loadSaveContainers.get(deleteFinder).setThumbnailFile((String)eachPanel.get("thumbnail"));
-                        loadSaveContainers.get(deleteFinder).setAdvancerDialogue(Integer.parseInt((String)eachPanel.get("advancer")));
+                        loadSaveContainers.get(loadSaveIndex).setSaveDate((String)eachPanel.get("save_date"));
+                        loadSaveContainers.get(loadSaveIndex).setRouteStory((String)eachPanel.get("route"));
+                        loadSaveContainers.get(loadSaveIndex).setThumbnailFile((String)eachPanel.get("thumbnail"));
+                        loadSaveContainers.get(loadSaveIndex).setAdvancerDialogue(Integer.parseInt((String)eachPanel.get("advancer")));
                     }
                 }
             }
@@ -232,6 +235,19 @@ public class WaifuBrew {
 
     public ArrayList<LoadSaveWrapper> getLoadSaveContainers() {
         return loadSaveContainers;
+    }
+
+    public void setCurrentSave(int whichSavePanel) {
+        for(LoadSaveWrapper panelToLoad : loadSaveContainers) {
+            if(panelToLoad.getPanelLocation() == whichSavePanel) {
+                currentSave = panelToLoad;
+                break;
+            }
+        }
+    }
+
+    public LoadSaveWrapper getCurrentSave() {
+        return currentSave;
     }
 
     public int getDialogueTransparency() {
