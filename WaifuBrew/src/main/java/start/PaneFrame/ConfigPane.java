@@ -270,7 +270,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
 
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
-            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
+            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), Origin.MIDDLE_CENTRE, "Dialog Text Speed"));
             this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getPlayFontSize() - 10) * 2, "Dialog Text Size"));
             autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, WaifuBrew.getInstance().getAutoAdvancer(), false, "Auto dialog advance");
 
