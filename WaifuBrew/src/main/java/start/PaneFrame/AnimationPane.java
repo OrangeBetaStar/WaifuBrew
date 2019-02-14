@@ -21,7 +21,6 @@ import java.util.Map;
 
 public class AnimationPane extends JPanel {
 
-    private Handlerclass handler = new Handlerclass();
     private javaxt.io.Image dialogueBox;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
@@ -44,6 +43,9 @@ public class AnimationPane extends JPanel {
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
+    // internal mouselistener
+    private Handlerclass handler = new Handlerclass();
+
     // Retrieve String from JSON
     private String a = "Click anywhere to initiate dialog...!";
     private String tempString = "";
@@ -53,7 +55,7 @@ public class AnimationPane extends JPanel {
     private boolean newStart = true;
 
     public AnimationPane() {
-        // parsing dialogue has to be done before on thread.
+        // parsing dialogue has to be done before this payload.
         initParseDialogue();
         initFPS();
         initFont();
@@ -62,7 +64,7 @@ public class AnimationPane extends JPanel {
     }
 
     public void triggerNext() {
-        if(advancer < e.size()) {
+        if (advancer < e.size()) {
             if (e.get(advancer).get(0).getDialogue() != null) {
                 tempString = "";
                 a = e.get(advancer).get(0).getDialogue();
@@ -78,10 +80,9 @@ public class AnimationPane extends JPanel {
 
         public void mouseReleased(MouseEvent event) {
             if (event.getButton() == MouseEvent.BUTTON1) {
-                if(rightClickTempDisableBox) {
+                if (rightClickTempDisableBox) {
                     rightClickTempDisableBox = false;
-                }
-                else { // When dialogue bar hasn't been disabled for one click.
+                } else { // When dialogue bar hasn't been disabled for one click.
                     if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
                         configBar.setActive(true);
                         aniPaneButton.get("config").setActiveButtonState(false);
@@ -114,8 +115,7 @@ public class AnimationPane extends JPanel {
                         }
                     }
                 }
-            }
-            else if (event.getButton() == MouseEvent.BUTTON3) {
+            } else if (event.getButton() == MouseEvent.BUTTON3) {
                 rightClickTempDisableBox = true;
             }
         }
@@ -135,37 +135,36 @@ public class AnimationPane extends JPanel {
                     characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
 
-                    if(background == null) {
-                        for(int finder = 0; finder < e.get(advancer - 1).size(); finder++) {
-                            if(e.get(advancer - 1).get(a).getBackground() != null) {
-                                if(newStart) { // new / old. start / load
+                    if (background == null) {
+                        for (int finder = 0; finder < e.get(advancer - 1).size(); finder++) {
+                            if (e.get(advancer - 1).get(a).getBackground() != null) {
+                                if (newStart) { // new / old. start / load
                                     // New start needs to go from top to bottom
                                     background = new ImageDesc(e.get((advancer - 1) + finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) + finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                                     background.setImageItself(tempBackground.getBufferedImage());
-                                }
-                                else {
+                                } else {
                                     // TODO: Load needs to go from bottom to top (current just mirror of above with -finder ) ["after the load scenario"]
                                     background = new ImageDesc(e.get((advancer - 1) - finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) - finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                                     background.setImageItself(tempBackground.getBufferedImage());
                                 }
                             }
-                            if(background != null) {
+                            if (background != null) {
                                 break;
                             }
                         }
                     }
                     // Searches for next background image and resizes it
-                    if(e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
+                    if (e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
                         background = new ImageDesc(e.get(advancer - 1).get(a).getBackground(), new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get(advancer - 1).get(a).getBackground())));
                         javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                        double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                        tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                        double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                        tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                         background.setImageItself(tempBackground.getBufferedImage());
                     }
                 }
@@ -173,7 +172,7 @@ public class AnimationPane extends JPanel {
             }
 
             // Draw background here
-            g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
+            g.drawImage(background.getImageItself(), (windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
 
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
                 // Draw character(s) here
@@ -181,7 +180,7 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
-            if(!rightClickTempDisableBox) {
+            if (!rightClickTempDisableBox) {
                 g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int) ((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
                 g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
             }
@@ -191,7 +190,7 @@ public class AnimationPane extends JPanel {
         } else {
             // What
         }
-        if(!rightClickTempDisableBox) {
+        if (!rightClickTempDisableBox) {
             if (tempString != "") {
                 // Dialogue text rendering with boundary shading
                 Graphics2D g2d = (Graphics2D) g.create();
@@ -243,7 +242,7 @@ public class AnimationPane extends JPanel {
 
         // Renew dialogueBox
         dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-        dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
+        dialogueBox.resize((int) (((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int) (((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
 
         // Have to select correct route as well.

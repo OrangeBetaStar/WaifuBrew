@@ -86,8 +86,8 @@ public class WaifuBrew {
         }
 
         // Load fonts (this is checked way to load hashmap)
-        if(!tfl.getFonts().isEmpty()) {
-            for (String name: (String[])tfl.getFonts().keySet().toArray(new String[0])){
+        if (!tfl.getFonts().isEmpty()) {
+            for (String name : (String[]) tfl.getFonts().keySet().toArray(new String[0])) {
                 systemFont.put(name, (Font) tfl.getFonts().get(name));
             }
         }
@@ -104,16 +104,16 @@ public class WaifuBrew {
 
     // Overwrite the pre-defined loadSaveContainer
     private void applyLoadedSaves() {
-        if(!loadedSaves.isEmpty()) {
-            for(HashMap eachPanel : loadedSaves) {
-                for(int loadSaveIndex = 0; loadSaveIndex < loadSaveContainers.size(); loadSaveIndex++) {
-                    if(loadSaveContainers.get(loadSaveIndex).getPanelLocation() == Integer.parseInt((String)eachPanel.get("save_panel"))) {
+        if (!loadedSaves.isEmpty()) {
+            for (HashMap eachPanel : loadedSaves) {
+                for (int loadSaveIndex = 0; loadSaveIndex < loadSaveContainers.size(); loadSaveIndex++) {
+                    if (loadSaveContainers.get(loadSaveIndex).getPanelLocation() == Integer.parseInt((String) eachPanel.get("save_panel"))) {
 
                         // Perhaps I can automate this with Enum later on.
-                        loadSaveContainers.get(loadSaveIndex).setSaveDate((String)eachPanel.get("save_date"));
-                        loadSaveContainers.get(loadSaveIndex).setRouteStory((String)eachPanel.get("route"));
-                        loadSaveContainers.get(loadSaveIndex).setThumbnailFile((String)eachPanel.get("thumbnail"));
-                        loadSaveContainers.get(loadSaveIndex).setAdvancerDialogue(Integer.parseInt((String)eachPanel.get("advancer")));
+                        loadSaveContainers.get(loadSaveIndex).setSaveDate((String) eachPanel.get("save_date"));
+                        loadSaveContainers.get(loadSaveIndex).setRouteStory((String) eachPanel.get("route"));
+                        loadSaveContainers.get(loadSaveIndex).setThumbnailFile((String) eachPanel.get("thumbnail"));
+                        loadSaveContainers.get(loadSaveIndex).setAdvancerDialogue(Integer.parseInt((String) eachPanel.get("advancer")));
                     }
                 }
             }
@@ -191,9 +191,9 @@ public class WaifuBrew {
             }
         }*/
 
-        if(!systemFont.isEmpty()) {
-            for (String name: systemFont.keySet().toArray(new String[0])){
-                if(name.contains(fontName)) {
+        if (!systemFont.isEmpty()) {
+            for (String name : systemFont.keySet().toArray(new String[0])) {
+                if (name.contains(fontName)) {
                     return systemFont.get(name);
                 }
             }
@@ -227,7 +227,7 @@ public class WaifuBrew {
 
     private void initLoadSave() {
         // Pre-configure blank states of load / save panels
-        for(int panelProduction = 1; panelProduction <= 8; panelProduction++) {
+        for (int panelProduction = 1; panelProduction <= 8; panelProduction++) {
             // loadSaveContainers.add(new LoadSaveWrapper(Calendar.getInstance().getTime().toString(), panelProduction, panelProduction, "uwu", Integer.toString(panelProduction)));
             loadSaveContainers.add(new LoadSaveWrapper("Empty", panelProduction, 0, "Empty", "Slot: " + panelProduction));
         }
@@ -238,8 +238,8 @@ public class WaifuBrew {
     }
 
     public void setCurrentSave(int whichSavePanel) {
-        for(LoadSaveWrapper panelToLoad : loadSaveContainers) {
-            if(panelToLoad.getPanelLocation() == whichSavePanel) {
+        for (LoadSaveWrapper panelToLoad : loadSaveContainers) {
+            if (panelToLoad.getPanelLocation() == whichSavePanel) {
                 currentSave = panelToLoad;
                 break;
             }

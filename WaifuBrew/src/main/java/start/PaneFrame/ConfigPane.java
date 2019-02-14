@@ -57,9 +57,9 @@ public class ConfigPane extends JPanel implements ActionListener {
         super.paintComponent(g);
         if (this.settingSlidersMap.get("textSize").isSliderActive()) {
 
-                Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
-                fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10;
-                activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
+            Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
+            fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10;
+            activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
@@ -87,8 +87,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.setColor(new Color(0, 0, 0));
 
             // Draw sliders
-            for(Map.Entry sliderObject : settingSlidersMap.entrySet()) {
-                CustomSlider sliders = (CustomSlider)sliderObject.getValue();
+            for (Map.Entry sliderObject : settingSlidersMap.entrySet()) {
+                CustomSlider sliders = (CustomSlider) sliderObject.getValue();
                 g.drawString(sliders.getSliderDesc(), sliders.getX(), sliders.getY() - ((windowSize.x / 10) / 3));
             }
             // Draw switch
@@ -248,9 +248,9 @@ public class ConfigPane extends JPanel implements ActionListener {
     }
 
     private void initFont() {
-            Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
-            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
-            configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
+        Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
+        configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
     }
 
     private void initImage() {
@@ -267,10 +267,10 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Pre-scale
             double scale = Math.max(((double) windowSize.x / backgroundPicture.getWidth()), ((double) windowSize.y / backgroundPicture.getHeight()));
             backgroundPicture.resize((int) ((scale) * backgroundPicture.getWidth()), (int) ((scale) * backgroundPicture.getHeight()));
-            dialogueBox.resize((int)(((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int)(((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
+            dialogueBox.resize((int) (((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int) (((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
 
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
-            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), Origin.MIDDLE_CENTRE, "Dialog Text Speed"));
+            this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
             this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getPlayFontSize() - 10) * 2, "Dialog Text Size"));
             autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, WaifuBrew.getInstance().getAutoAdvancer(), false, "Auto dialog advance");
 

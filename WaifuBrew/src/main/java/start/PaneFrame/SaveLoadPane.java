@@ -24,7 +24,7 @@ public class SaveLoadPane extends JPanel {
     private javaxt.io.Image backgroundImage;
 
     private int scrubPage; // use this when scrubbing through panels
-    private  CustomSlider panelScrubThrough;
+    private CustomSlider panelScrubThrough;
 
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
@@ -50,14 +50,15 @@ public class SaveLoadPane extends JPanel {
     }
 
     private class Handlerclass extends MasterHandlerClass {
+
         public void mouseReleased(MouseEvent event) {
 
             if (event.getButton() == MouseEvent.BUTTON1) {
-                for(int boundCheck = 0; boundCheck < saveLoadBox.size(); boundCheck++) {
+                for (int boundCheck = 0; boundCheck < saveLoadBox.size(); boundCheck++) {
                     if (inBound(event, saveLoadBox.get(boundCheck), false)) {
 
                         // If save has a valid date, then it's good to load.
-                        if(saveLoadBox.get(boundCheck).isValidSaveDate()) {
+                        if (saveLoadBox.get(boundCheck).isValidSaveDate()) {
                             WaifuBrew.getInstance().setCurrentSave(boundCheck + 1);
                             WaifuBrew.getInstance().setStage(1);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -98,7 +99,7 @@ public class SaveLoadPane extends JPanel {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getBufferedImage(), 0, 0, this);
 
-        for(SaveLoadBox a : saveLoadBox) {
+        for (SaveLoadBox a : saveLoadBox) {
             a.paintComponent(g);
         }
 
@@ -121,10 +122,9 @@ public class SaveLoadPane extends JPanel {
     }
 
     public void stageChange(String mode) {
-        if(mode.equals("load")) {
+        if (mode.equals("load")) {
             clickLoad = true;
-        }
-        else {
+        } else {
             clickLoad = false;
         }
     }
@@ -152,7 +152,6 @@ public class SaveLoadPane extends JPanel {
         this.loadPaneButtons.put("options", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 60, true));
         this.loadPaneButtons.put("back", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "back_button", Origin.MIDDLE_TOP, 60, true));
 
-
         for (Map.Entry<String, CustomButton> entry : this.loadPaneButtons.entrySet()) {
             CustomButton button = entry.getValue();
             addMouseListener(button.retrieveMouseHandler());
@@ -167,15 +166,14 @@ public class SaveLoadPane extends JPanel {
     private void initPanelBlocks() {
         // Fetching loaded saves from file
 
-        for(LoadSaveWrapper a : WaifuBrew.getInstance().getLoadSaveContainers()) {
-            if(a.getSaveDate() != null) {
-                if((a.getPanelLocation() % 2) == 0) {
+        for (LoadSaveWrapper a : WaifuBrew.getInstance().getLoadSaveContainers()) {
+            if (a.getSaveDate() != null) {
+                if ((a.getPanelLocation() % 2) == 0) {
                     // System.out.println("Panel location (right) " + a.getPanelLocation());
                     saveLoadBox.add(new SaveLoadBox(((windowSize.x / 5) * 3) + (windowSize.y / 10), (windowSize.y / 6 * ((a.getPanelLocation() / 2))) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + (windowSize.x / 3) * 2 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
 
-                }
-                else {
+                } else {
                     // System.out.println("Panel location (left) " + a.getPanelLocation());
                     saveLoadBox.add(new SaveLoadBox((windowSize.x / 6) + (windowSize.y / 10), (windowSize.y / 6 * ((a.getPanelLocation() / 2) + 1)) + (windowSize.y / 10), Origin.MIDDLE_CENTRE, a.getRouteStory(), a.getSaveDate().toString(), a.getThumbnailFile()));
                     // System.out.println("X: " + windowSize.x / 3 + ", Y: " + windowSize.y / 4 * ((a.getPanelLocation() / 2) + 1));
@@ -184,16 +182,15 @@ public class SaveLoadPane extends JPanel {
             }
         }
         // mousehandler for boxes
-        for(SaveLoadBox addMouseHandler : saveLoadBox) {
+        for (SaveLoadBox addMouseHandler : saveLoadBox) {
             addMouseListener(addMouseHandler.retrieveMouseHandler());
             addMouseMotionListener(addMouseHandler.retrieveMouseHandler());
         }
     }
 
     private void initInteractiveUI() {
-
-        // TODO: Have slider be using Origin so that it's easier to implement
-        panelScrubThrough = new CustomSlider((windowSize.x / 2), (windowSize.y / 15) * 13, scrubPage);
+        // initializing a slider that slides the save/load panels & add mouse listeners
+        panelScrubThrough = new CustomSlider((windowSize.x / 2), (windowSize.y / 15) * 13, scrubPage, Origin.MIDDLE_BOTTOM, "");
         addMouseListener(panelScrubThrough.retrieveMouseHandler());
         addMouseMotionListener(panelScrubThrough.retrieveMouseHandler());
     }
