@@ -173,7 +173,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 1) {
+            else if (origin.getValue() == 1) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y, originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -181,7 +181,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 2) {
+            else if (origin.getValue() == 2) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y, originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -189,7 +189,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 3) {
+            else if (origin.getValue() == 3) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -197,7 +197,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 4) {
+            else if (origin.getValue() == 4) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -205,7 +205,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 5) {
+            else if (origin.getValue() == 5) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -213,7 +213,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 6) {
+            else if (origin.getValue() == 6) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -221,7 +221,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 7) {
+            else if (origin.getValue() == 7) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -229,7 +229,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                 }
             }
 
-            if (origin.getValue() == 8) {
+            else if (origin.getValue() == 8) {
                 if (!mouseOver) {
                     g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
                 } else {
@@ -290,7 +290,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 1) {
+                else if (origin.getValue() == 1) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y &&
@@ -300,7 +300,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 2) {
+                else if (origin.getValue() == 2) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y &&
@@ -310,7 +310,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 3) {
+                else if (origin.getValue() == 3) {
                     if (event.getX() > x &&
                             event.getX() < (x + originalButton.getWidth()) &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -320,7 +320,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 4) {
+                else if (origin.getValue() == 4) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -330,7 +330,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 5) {
+                else if (origin.getValue() == 5) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -340,7 +340,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 6) {
+                else if (origin.getValue() == 6) {
                     if (event.getX() > x &&
                             event.getX() < (x + originalButton.getWidth()) &&
                             event.getY() > y - (originalButton.getHeight()) &&
@@ -350,7 +350,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 7) {
+                else if (origin.getValue() == 7) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y - (originalButton.getHeight()) &&
@@ -360,7 +360,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         mouseOver = false;
                     }
                 }
-                if (origin.getValue() == 8) {
+                else if (origin.getValue() == 8) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y - (originalButton.getHeight()) &&
@@ -383,7 +383,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 1) {
+                else if (origin.getValue() == 1) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y &&
@@ -391,7 +391,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 2) {
+                else if (origin.getValue() == 2) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y &&
@@ -399,7 +399,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 3) {
+                else if (origin.getValue() == 3) {
                     if (event.getX() > x &&
                             event.getX() < (x + originalButton.getWidth()) &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -407,7 +407,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 4) {
+                else if (origin.getValue() == 4) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -415,7 +415,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 5) {
+                else if (origin.getValue() == 5) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y - ((originalButton.getHeight()) / 2) &&
@@ -423,7 +423,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 6) {
+                else if (origin.getValue() == 6) {
                     if (event.getX() > x &&
                             event.getX() < (x + originalButton.getWidth()) &&
                             event.getY() > y - (originalButton.getHeight()) &&
@@ -431,7 +431,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 7) {
+                else if (origin.getValue() == 7) {
                     if (event.getX() > x - ((originalButton.getWidth()) / 2) &&
                             event.getX() < (x + originalButton.getWidth() / 2) &&
                             event.getY() > y - (originalButton.getHeight()) &&
@@ -439,7 +439,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
                         wasPressed = true;
                     }
                 }
-                if (origin.getValue() == 8) {
+                else if (origin.getValue() == 8) {
                     if (event.getX() > (x - originalButton.getWidth()) &&
                             event.getX() < x &&
                             event.getY() > y - (originalButton.getHeight()) &&
