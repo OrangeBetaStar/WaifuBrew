@@ -21,8 +21,10 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     private Origin origin;
 
     // position
-    private int x; // dialogueX
-    private int y; // dialogueTransparencyY
+    private int x; // absolute location of X
+    private int y; // absolute location of Y
+    private int knobX;
+    private int knobY;
 
     // dimension
     private int length = 200;
@@ -110,45 +112,47 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         }
         // Changing sliderLeveler colour
         javaxt.io.Image tempSliderLeveler = sliderLeveler.copy();
-        tempSliderLeveler.setBackgroundColor(255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)));
 
-        if (origin.getValue() == 0) {
+        // TODO: if any goes 100, kill
+        if(level >= 100) {
+            tempSliderLeveler.setBackgroundColor(255, 255, 255);
+        }
+        else if(level <= 0) {
+            tempSliderLeveler.setBackgroundColor(0, 0, 0);
+        }
+        else {
+            tempSliderLeveler.setBackgroundColor(255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)));
+
+        }
+
+        // calculate x
+        if(origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+            knobX = x;
+        }
+        else if(origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+            knobX = x - (sliderBackground.getWidth() / 2);
+        }
+        else if(origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+            knobX = x - sliderBackground.getWidth();
+        }
+
+        // calculate y
+        if(origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+            knobY = y;
+        }
+        else if(origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+            knobY = y - (sliderBackground.getHeight() / 2);
+        }
+        else if(origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+            knobY = y - sliderBackground.getHeight();
+        }
             g.drawImage(sliderBackground.getBufferedImage(), x, y, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
             g.drawImage(tempSliderLeveler.getBufferedImage(), x, y, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
             g.drawImage(sliderKnob.getBufferedImage(), x + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), y - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 1) {
-            g.drawImage(sliderBackground.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - (sliderBackground.getWidth() / 2)) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), y - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 2) {
-            g.drawImage(sliderBackground.getBufferedImage(), (x - sliderBackground.getWidth()), y, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), (x - sliderBackground.getWidth()), y, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - sliderBackground.getWidth()) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), y - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 3) {
-            g.drawImage(sliderBackground.getBufferedImage(), x, y - (sliderBackground.getHeight() / 2), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), x, y - (sliderBackground.getHeight() / 2), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), x + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - (sliderBackground.getHeight() / 2)) - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 4) {
-            g.drawImage(sliderBackground.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y - (sliderBackground.getHeight() / 2), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y - (sliderBackground.getHeight() / 2), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - (sliderBackground.getWidth() / 2)) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - (sliderBackground.getHeight() / 2)) - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 5) {
-            g.drawImage(sliderBackground.getBufferedImage(), (x - sliderBackground.getWidth()), y - (sliderBackground.getHeight() / 2), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), (x - sliderBackground.getWidth()), y - (sliderBackground.getHeight() / 2), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - sliderBackground.getWidth()) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - (sliderBackground.getHeight() / 2)) - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 6) {
-            g.drawImage(sliderBackground.getBufferedImage(), x, y - sliderBackground.getHeight(), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), x, y - sliderBackground.getHeight(), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), x + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - sliderBackground.getHeight()) - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 7) {
-            g.drawImage(sliderBackground.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y - sliderBackground.getHeight(), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), x - (sliderBackground.getWidth() / 2), y - sliderBackground.getHeight(), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - (sliderBackground.getWidth() / 2)) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - sliderBackground.getHeight()) - (sliderBackground.getHeight() / 2), that);
-        } else if (origin.getValue() == 8) {
-            g.drawImage(sliderBackground.getBufferedImage(), (x - sliderBackground.getWidth()), y - sliderBackground.getHeight(), sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-            g.drawImage(tempSliderLeveler.getBufferedImage(), (x - sliderBackground.getWidth()), y - sliderBackground.getHeight(), (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-            g.drawImage(sliderKnob.getBufferedImage(), (x - sliderBackground.getWidth()) + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), (y - sliderBackground.getHeight()) - (sliderBackground.getHeight() / 2), that);
-        }
+
+            g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()).deriveFont(Font.BOLD, WaifuBrew.getInstance().getSystemFontSize()));
+            g.drawString(Integer.toString(level), x + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), y - (sliderBackground.getHeight() / 2) - (WaifuBrew.getInstance().getSystemFontSize() / 2));
+
     }
 
     public boolean isSliderActive() {
@@ -220,72 +224,72 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
              */
 
             if (origin.getValue() == 0) {
-                if (event.getX() >= x &&
-                        event.getX() <= x + sliderBackground.getWidth() &&
+                if (event.getX() >= (x - (sliderKnob.getWidth() / 2)) &&
+                        event.getX() <= x + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= y - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= y + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - x) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 1) {
-                if (event.getX() >= (x - (sliderBackground.getWidth() / 2)) &&
-                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - (sliderBackground.getWidth() / 2)) &&
+                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= y - (sliderBackground.getHeight() / 4) &&
                         event.getY() <= y + ((sliderBackground.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - (x - (sliderBackground.getWidth() / 2))) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 2) {
-                if (event.getX() >= (x - sliderBackground.getWidth()) &&
-                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - sliderBackground.getWidth()) &&
+                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= y - (sliderBackground.getHeight() / 4) &&
                         event.getY() <= y + ((sliderBackground.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - (x - sliderBackground.getWidth())) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 3) {
-                if (event.getX() >= x &&
-                        event.getX() <= x + sliderBackground.getWidth() &&
+                if (event.getX() >= (x - (sliderKnob.getWidth() / 2)) &&
+                        event.getX() <= x + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight() / 2)) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight() / 2)) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - x) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 4) {
-                if (event.getX() >= (x - (sliderBackground.getWidth() / 2)) &&
-                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - (sliderBackground.getWidth() / 2)) &&
+                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight() / 2)) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight() / 2)) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - (x - (sliderBackground.getWidth() / 2))) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 5) {
-                if (event.getX() >= (x - sliderBackground.getWidth()) &&
-                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - sliderBackground.getWidth()) &&
+                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight() / 2)) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight() / 2)) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - (x - sliderBackground.getWidth())) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 6) {
-                if (event.getX() >= x &&
-                        event.getX() <= x + sliderBackground.getWidth() &&
+                if (event.getX() >= (x - (sliderKnob.getWidth() / 2)) &&
+                        event.getX() <= x + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight()) - (sliderKnob.getWidth() / 2)) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight())) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - x) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 7) {
-                if (event.getX() >= (x - (sliderBackground.getWidth() / 2)) &&
-                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - (sliderBackground.getWidth() / 2)) &&
+                        event.getX() <= (x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight())) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight())) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;
                     level = (int) (((event.getX() - (x - (sliderBackground.getWidth() / 2))) / (double) sliderBackground.getWidth()) * 100.0);
                 }
             } else if (origin.getValue() == 8) {
-                if (event.getX() >= (x - sliderBackground.getWidth()) &&
-                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() &&
+                if (event.getX() >= ((x - (sliderKnob.getWidth() / 2)) - sliderBackground.getWidth()) &&
+                        event.getX() <= (x - sliderBackground.getWidth()) + sliderBackground.getWidth() + (sliderKnob.getWidth() / 2) &&
                         event.getY() >= (y - (sliderBackground.getHeight())) - (sliderKnob.getHeight() / 4) &&
                         event.getY() <= (y - (sliderBackground.getHeight())) + ((sliderKnob.getHeight() / 4) * 3)) {
                     sliderActive = true;

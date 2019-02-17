@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class StartScreen extends JPanel implements ActionListener {
+public class StartScreenPane extends JPanel implements ActionListener {
 
     private javaxt.io.Image backgroundPicture;
     private HashMap<String, CustomButton> startScreenButtons = new HashMap<>(4);
@@ -27,7 +27,7 @@ public class StartScreen extends JPanel implements ActionListener {
         repaint();
     }
 
-    public StartScreen() {
+    public StartScreenPane() {
         initFPS();
         initImage();
     }

@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame {
+public class GUIManager extends JFrame {
 
     // TODO: Why create them when I do not need it right now.
-    private StartScreen startPage;
+    private StartScreenPane startPage;
     private AnimationPane animationPane;
     private ConfigPane configPane;
     private SaveLoadPane saveLoadPane;
@@ -19,9 +19,9 @@ public class GUI extends JFrame {
     private int lastStage = 10; // Remembers last opened stage
     private boolean framelimiterDisable = false;
 
-    public GUI() {
+    public GUIManager() {
         super("ワイファブルー by Tailsoft");
-        startPage = new StartScreen();
+        startPage = new StartScreenPane();
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
         saveLoadPane = new SaveLoadPane();

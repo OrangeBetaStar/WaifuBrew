@@ -2,7 +2,7 @@ package start.Loader;
 
 import start.Containers.ImageDesc;
 import start.Containers.LoadSaveWrapper;
-import start.PaneFrame.GUI;
+import start.PaneFrame.GUIManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class WaifuBrew {
 
     // Get resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private GUI Frame;
+    private GUIManager Frame;
     public final String RESOURCE_PATH = "src/main/java/resources/";
     private ArrayList<ArrayList<ImageDesc>> fileList;
     private java.util.List<java.util.List<Waifu>> dialoguePackage;
@@ -133,6 +133,7 @@ public class WaifuBrew {
                         configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
                     } else if (name.toLowerCase().contains("y")) {
                         configStorage.replace("dimensionY", Integer.parseInt(loadedSettings.get(name).toString()));
+                        configStorage.replace("sysFontSize", Integer.parseInt(loadedSettings.get(name).toString()) / 30);
                     }
                 } else {
                     configStorage.replace(name, Integer.parseInt(loadedSettings.get(name).toString()));
@@ -215,13 +216,14 @@ public class WaifuBrew {
         // Pre-configure default conditions
         configStorage.put("dialogueTransparency", 70);
         configStorage.put("dialogueSpeed", 60);
-        configStorage.put("fontSize", 30);
+        configStorage.put("playFontSize", 30);
         configStorage.put("frameRate", 60);
         configStorage.put("GUIScaling", 100);
         configStorage.put("autoAdvancer", 0);
         configStorage.put("stage", 0);
         configStorage.put("dimensionX", 1280);
         configStorage.put("dimensionY", 720);
+        configStorage.put("sysFontSize", 24);
         configUI.put("systemFont", "Halogen");
         configUI.put("dialogueFont", "MS Mincho");
     }
@@ -292,11 +294,19 @@ public class WaifuBrew {
     }
 
     public int getPlayFontSize() {
-        return configStorage.get("fontSize");
+        return configStorage.get("playFontSize");
     }
 
     public void setPlayFontSize(int fontSize) {
-        configStorage.replace("fontSize", fontSize);
+        configStorage.replace("playFontSize", fontSize);
+    }
+
+    public int getSystemFontSize() {
+        return configStorage.get("sysFontSize");
+    }
+
+    public void setSystemFontSize(int fontSize) {
+        configStorage.replace("sysFontSize", fontSize);
     }
 
     public int getStage() {
@@ -315,7 +325,7 @@ public class WaifuBrew {
         return defaultSize;
     }
 
-    public GUI getGUIInstance() {
+    public GUIManager getGUIInstance() {
         return Frame;
     }
 
@@ -375,7 +385,7 @@ public class WaifuBrew {
     }
 
     public void start() {
-        Frame = new GUI();
+        Frame = new GUIManager();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // default size
         Frame.setSize(defaultSize[1].x, defaultSize[1].y);

@@ -144,6 +144,18 @@ public class ConfigPane extends JPanel implements ActionListener {
         // Reload anything that can have settings changed.
         activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
         initStringTimer();
+
+        Long frameLimiter = System.nanoTime();
+
+        // use thread
+
+        /*System.out.println("Frame limit calculation: " + (1000.0 / WaifuBrew.getInstance().getFrameRate()) * 10000000);
+        while(this.getParent() != null) {
+            if((System.nanoTime() - frameLimiter) > ((1000.0 / WaifuBrew.getInstance().getFrameRate()) * 10000000)) {
+                repaint();
+            }
+        }*/
+
     }
 
     private boolean checkLockInSetting() {
@@ -233,6 +245,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private void initFPS() {
         // TODO: I wonder if I use this lambda
+
+
         Timer t = new Timer((int) (1000.0 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!fpsLimitStop) {
@@ -242,15 +256,17 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
         });
+
         t.setRepeats(true);
         t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
+
     }
 
     private void initFont() {
         Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
         activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
-        configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
+        configPaneFont = ttfBase.deriveFont(Font.PLAIN, WaifuBrew.getInstance().getSystemFontSize());
     }
 
     private void initImage() {
