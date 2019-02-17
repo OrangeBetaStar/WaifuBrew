@@ -40,7 +40,7 @@ public class WaifuBrew {
     // [0] is Computer monitor resolution
     // [1] is resolution of program window
     // [2] is where window should go (top-left) to be centered in the monitor
-    private Point[] defaultSize = {
+    private Point[] defaultSize = { // This will be recalculated after the load thread is done loading.
             new Point(screenSize.width, screenSize.height),
             new Point(1280, 720),
             new Point((screenSize.width / 2) - (programDimension.width / 2), (screenSize.height / 2) - (programDimension.height / 2))};
@@ -127,6 +127,7 @@ public class WaifuBrew {
                 continue;
             }
             try {
+                // this can be simplified.
                 if (name.contains("dimension")) {
                     if (name.toLowerCase().contains("x")) {
                         configStorage.replace("dimensionX", Integer.parseInt(loadedSettings.get(name).toString()));
@@ -168,7 +169,7 @@ public class WaifuBrew {
         }
         // catches any ParserException
         catch (Exception e) {
-            System.out.println("Catastrophic error!");
+            System.out.println("Catastrophic error. Program did not start!");
             throw new WaifuException(e);
         }
     }

@@ -140,7 +140,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
     }
 
-    public void stageChange() {
+    public void stageChange(int lastStage) {
         // Reload anything that can have settings changed.
         activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
         initStringTimer();

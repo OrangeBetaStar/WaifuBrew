@@ -230,7 +230,7 @@ public class AnimationPane extends JPanel {
         }
     }
 
-    public void stageChange() {
+    public void stageChange(int lastStage) {
         // Reload anything that can have settings changed.
 
         // Renew Font (Font and Size)
@@ -245,8 +245,10 @@ public class AnimationPane extends JPanel {
         dialogueBox.resize((int) (((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int) (((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
 
-        // Have to select correct route as well.
-        advancer = WaifuBrew.getInstance().getCurrentSave().getAdvancerDialogue();
+        if(!(lastStage == 0 || lastStage == 10)) {
+            // Have to select correct route as well.
+            advancer = WaifuBrew.getInstance().getCurrentSave().getAdvancerDialogue();
+        }
     }
 
     private void initFPS() {
