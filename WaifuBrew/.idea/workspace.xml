@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05758ac-651a-4407-9200-782e14329540" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/user.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/start/CustomObjects/CustomSlider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/CustomObjects/CustomSlider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/Loader/WaifuBrew.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/GUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/start/PaneFrame/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/start/PaneFrame/StartScreenPane.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/libs/javaxt-core_v1.8.1/bin/target/" />
@@ -45,10 +39,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
+            <state relative-caret-position="3478">
               <caret line="109" selection-start-line="109" selection-end-line="109" />
             </state>
           </provider>
@@ -79,24 +73,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/CustomSlider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="125" column="9" lean-forward="true" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+            <state relative-caret-position="744">
+              <caret line="288" column="74" selection-start-line="288" selection-start-column="74" selection-end-line="288" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6637#6638#0" expanded="true" />
-                <element signature="e#6699#6700#0" expanded="true" />
-                <element signature="e#6772#6773#0" expanded="true" />
-                <element signature="e#6840#6841#0" expanded="true" />
-                <element signature="e#6908#6909#0" expanded="true" />
-                <element signature="e#7002#7003#0" expanded="true" />
-                <element signature="e#7096#7097#0" expanded="true" />
-                <element signature="e#7168#7169#0" expanded="true" />
-                <element signature="e#7241#7242#0" expanded="true" />
-                <element signature="e#7311#7312#0" expanded="true" />
-                <element signature="e#7409#7410#0" expanded="true" />
+                <element signature="e#6689#6690#0" expanded="true" />
+                <element signature="e#6751#6752#0" expanded="true" />
+                <element signature="e#6824#6825#0" expanded="true" />
+                <element signature="e#6892#6893#0" expanded="true" />
+                <element signature="e#6960#6961#0" expanded="true" />
+                <element signature="e#7054#7055#0" expanded="true" />
+                <element signature="e#7148#7149#0" expanded="true" />
+                <element signature="e#7220#7221#0" expanded="true" />
+                <element signature="e#7293#7294#0" expanded="true" />
+                <element signature="e#7363#7364#0" expanded="true" />
+                <element signature="e#7461#7462#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -391,7 +385,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550427835094" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550428523117" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/junit-4.12.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -644,7 +638,7 @@
     <frame x="-8" y="-8" width="2954" height="2016" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1658604" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1658604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -653,7 +647,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4903248" weight="0.22623473" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.65134764" visible="true" weight="0.16781731" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.65134764" visible="true" weight="0.16781731" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49965447" weight="0.19277748" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1066,31 +1060,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/CustomSlider.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="125" column="9" lean-forward="true" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6637#6638#0" expanded="true" />
-            <element signature="e#6699#6700#0" expanded="true" />
-            <element signature="e#6772#6773#0" expanded="true" />
-            <element signature="e#6840#6841#0" expanded="true" />
-            <element signature="e#6908#6909#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7096#7097#0" expanded="true" />
-            <element signature="e#7168#7169#0" expanded="true" />
-            <element signature="e#7241#7242#0" expanded="true" />
-            <element signature="e#7311#7312#0" expanded="true" />
-            <element signature="e#7409#7410#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3478">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/start/PaneFrame/ConfigPane.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/start/CustomObjects/CustomSlider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        <state relative-caret-position="744">
+          <caret line="288" column="74" selection-start-line="288" selection-start-column="74" selection-end-line="288" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6689#6690#0" expanded="true" />
+            <element signature="e#6751#6752#0" expanded="true" />
+            <element signature="e#6824#6825#0" expanded="true" />
+            <element signature="e#6892#6893#0" expanded="true" />
+            <element signature="e#6960#6961#0" expanded="true" />
+            <element signature="e#7054#7055#0" expanded="true" />
+            <element signature="e#7148#7149#0" expanded="true" />
+            <element signature="e#7220#7221#0" expanded="true" />
+            <element signature="e#7293#7294#0" expanded="true" />
+            <element signature="e#7363#7364#0" expanded="true" />
+            <element signature="e#7461#7462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
