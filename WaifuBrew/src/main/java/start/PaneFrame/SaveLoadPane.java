@@ -181,6 +181,7 @@ public class SaveLoadPane extends JPanel {
                 }
             }
         }
+
         // mousehandler for boxes
         for (SaveLoadBox addMouseHandler : saveLoadBox) {
             addMouseListener(addMouseHandler.retrieveMouseHandler());
@@ -190,7 +191,7 @@ public class SaveLoadPane extends JPanel {
 
     private void initInteractiveUI() {
         // initializing a slider that slides the save/load panels & add mouse listeners
-        panelScrubThrough = new CustomSlider((windowSize.x / 2), (windowSize.y / 15) * 14, scrubPage, Origin.RIGHT_TOP, "");
+        panelScrubThrough = new CustomSlider((windowSize.x / 2), (windowSize.y / 15) * 14, scrubPage, Origin.MIDDLE_BOTTOM, "");
         addMouseListener(panelScrubThrough.retrieveMouseHandler());
         addMouseMotionListener(panelScrubThrough.retrieveMouseHandler());
     }
