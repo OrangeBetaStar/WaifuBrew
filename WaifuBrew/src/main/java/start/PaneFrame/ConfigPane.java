@@ -145,6 +145,7 @@ public class ConfigPane extends JPanel implements ActionListener {
         activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
         initStringTimer();
 
+        // TODO: try implementing frame limiter with system time instead of timer. (consistency)
         Long frameLimiter = System.nanoTime();
 
         // use thread
