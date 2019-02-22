@@ -83,21 +83,21 @@ public class AnimationPane extends JPanel {
                 if (rightClickTempDisableBox) {
                     rightClickTempDisableBox = false;
                 } else { // When dialogue bar hasn't been disabled for one click.
-                    if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
+                    if (inBound(event, aniPaneButton.get("config")) && !configBar.isActive()) {
                         configBar.setActive(true);
                         aniPaneButton.get("config").setActiveButtonState(false);
-                    } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {
+                    } else if (inBound(event, aniPaneButton.get("load")) && configBar.isActive()) {
                         configBar.setActive(false);
                         WaifuBrew.getInstance().setStage(3);
                         aniPaneButton.get("config").setActiveButtonState(true);
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                         // Ask user if save progress?
-                    } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
+                    } else if (inBound(event, aniPaneButton.get("save")) && configBar.isActive()) {
                         configBar.setActive(false);
                         WaifuBrew.getInstance().setStage(4);
                         aniPaneButton.get("config").setActiveButtonState(true);
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                    } else if (inBound(event, aniPaneButton.get("exit"), true) && configBar.isActive()) {
+                    } else if (inBound(event, aniPaneButton.get("exit")) && configBar.isActive()) {
                         // Ask user if save progress?
                         // This button will go back to startscreen
                         WaifuBrew.getInstance().setStage(0);

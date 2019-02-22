@@ -18,6 +18,10 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     // Position and size
     private int x = 0;
     private int y = 0;
+    private int activePosX = 0;
+    private int activePosY = 0;
+
+    // Trait
     private int length = (int) (sizeCalc.x / 2.5);
     private int height = sizeCalc.y / 7;
     private int padding = 0; // will be overwritten
@@ -70,13 +74,18 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return x + (length / 2);
+    public int getActivePosX() {
+        return activePosX;
     }
 
     @Override
-    public int getAbsoluteY() {
-        return y + (height / 2);
+    public int getActivePosY() {
+        return activePosY;
+    }
+
+    @Override
+    public Origin getOrigin() {
+        return origin;
     }
 
     @Override
@@ -102,6 +111,7 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
 
         public void mouseMoved(MouseEvent event) {
             if (activeButton) {
+
                 if (origin.getValue() == 0) {
                     if (event.getX() > x &&
                             event.getX() < (x + imageBlock.getWidth()) &&
@@ -289,106 +299,41 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         thumbnailScaling = (int) (imageBlock.getHeight() * 1.6);
 
         if (activeButton) {
-            if (origin.getValue() == 0) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x, y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  (x + padding),  (y + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()));
-                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
-                g.drawString("Route: " + route, (x) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
+            // calculating active x value
+            if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+                activePosX = x;
             }
 
-            if (origin.getValue() == 1) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  (y + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
+            if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+                activePosX = x - (imageBlock.getWidth() / 2);
             }
 
-            if (origin.getValue() == 2) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y, imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y) + padding * 4);
+            if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+                activePosX = x - (imageBlock.getWidth());
             }
 
-            if (origin.getValue() == 3) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
-                g.drawString("Route: " + route,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
+            // calculating active y value
+            if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+                activePosY = y;
             }
 
-            if (origin.getValue() == 4) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling), (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.setFont(sysFont.deriveFont(Font.PLAIN, 24));
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
+            if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+                activePosY = y - (imageBlock.getHeight() / 2);
             }
 
-            if (origin.getValue() == 5) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight() / 2), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight() / 2), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y - (imageBlock.getHeight() / 2)) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight() / 2)) + padding * 4);
+            if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+                activePosY = y - (imageBlock.getHeight());
             }
 
-            if (origin.getValue() == 6) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x, y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x, y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
-                g.drawString("Route: " + route,(x) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
+            if (!mouseOver) {
+                g.drawImage(imageBlock.getBufferedImage(), activePosX, activePosY, imageBlock.getWidth(), imageBlock.getHeight(), that);
+            } else {
+                g.drawImage(imageBlockMouseOver.getBufferedImage(), activePosX, activePosY, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
             }
-
-            if (origin.getValue() == 7) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth() / 2), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth() / 2), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth() / 2)) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth() / 2)) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
-            }
-
-            if (origin.getValue() == 8) {
-                if (!mouseOver) {
-                    g.drawImage(imageBlock.getBufferedImage(), x - (imageBlock.getWidth()), y - (imageBlock.getHeight()), imageBlock.getWidth(), imageBlock.getHeight(), that);
-                } else {
-                    g.drawImage(imageBlockMouseOver.getBufferedImage(), x - (imageBlockMouseOver.getWidth()), y - (imageBlockMouseOver.getHeight()), imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
-                }
-                g.drawImage(thumbnail.getBufferedImage(),  ((x - (imageBlock.getWidth())) + padding),  ((y - (imageBlock.getHeight())) + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-                g.drawString("Save Date: " + saveDate,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 2);
-                g.drawString("Route: " + route,(x - (imageBlock.getWidth())) +  ((padding * 2) + (thumbnailScaling)), (y - (imageBlock.getHeight())) + padding * 4);
-            }
+            g.drawImage(thumbnail.getBufferedImage(),  (activePosX + padding),  (activePosY + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+            g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()));
+            g.drawString("Save Date: " + saveDate,activePosX +  ((padding * 2) + (thumbnailScaling)), activePosY + padding * 2);
+            g.drawString("Route: " + route, activePosX +  ((padding * 2) + (thumbnailScaling)), activePosY + padding * 4);
         }
     }
 

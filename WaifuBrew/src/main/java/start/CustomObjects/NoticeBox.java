@@ -76,13 +76,13 @@ public class NoticeBox extends InteractiveObjects {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return this.x + this.length / 2;
+    public int getActivePosX() {
+        return x;
     }
 
     @Override
-    public int getAbsoluteY() {
-        return this.y + this.height / 2;
+    public int getActivePosY() {
+        return y;
     }
 
     @Override
@@ -93,6 +93,11 @@ public class NoticeBox extends InteractiveObjects {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public Origin getOrigin() {
+        return Origin.MIDDLE_CENTRE;
     }
 
     public Handlerclass retrieveMouseHandler() {

@@ -15,8 +15,12 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
     private javaxt.io.Image originalButton;
     private javaxt.io.Image mouseoverButton;
     private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
+
     private int x;
     private int y;
+    private int activePosX;
+    private int activePosY;
+
     private boolean wasPressed = false;
     private boolean mouseOver = false;
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
@@ -102,42 +106,29 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         return originalButton.getHeight();
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
-    public int getAbsoluteX() {
-        if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
-            return x;
-        }
-
-        if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
-            return (x - (originalButton.getWidth() / 2));
-        }
-
-        if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
-            return (x - (originalButton.getWidth()));
-        }
-        return x;
+    @Override
+    public Origin getOrigin() {
+        return origin;
     }
 
-    public int getAbsoluteY() {
-        if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
-            return y;
-        }
+    @Override
+    public int getActivePosX() {
+        return activePosX;
+    }
 
-        if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
-            return (y - (originalButton.getHeight() / 2));
-        }
-
-        if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
-            return (y - (originalButton.getHeight()));
-        }
-        return y;
+    @Override
+    public int getActivePosY() {
+        return activePosY;
     }
 
     public boolean isPressed() {
@@ -152,89 +143,40 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-    /*  LEFT_TOP(0)
-        MIDDLE_TOP(1)
-        RIGHT_TOP(2)
-        LEFT_CENTRE(3)
-        MIDDLE_CENTRE(4)
-        RIGHT_CENTRE(5)
-        LEFT_BOTTOM(6)
-        MIDDLE_BOTTOM(7)
-        RIGHT_BOTTOM(8)
-    */
 
+        // calculating active x value
+        if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+            activePosX = x;
+        }
+
+        if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+            activePosX = x - (originalButton.getWidth() / 2);
+        }
+
+        if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+            activePosX = x - (originalButton.getWidth());
+        }
+
+        // calculating active y value
+        if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+            activePosY = y;
+        }
+
+        if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+            activePosY = y - (originalButton.getHeight() / 2);
+        }
+
+        if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+            activePosY = y - (originalButton.getHeight());
+        }
+
+        // gui
         if (activeButton) {
 
-            if (origin.getValue() == 0) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x, y, originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x, y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 1) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y, originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 2) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y, originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 3) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 4) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 5) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight() / 2), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight() / 2), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 6) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x, y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x, y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 7) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth() / 2), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth() / 2), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
-            }
-
-            else if (origin.getValue() == 8) {
-                if (!mouseOver) {
-                    g.drawImage(originalButton.getBufferedImage(), x - (originalButton.getWidth()), y - (originalButton.getHeight()), originalButton.getWidth(), originalButton.getHeight(), that);
-                } else {
-                    g.drawImage(mouseoverButton.getBufferedImage(), x - (mouseoverButton.getWidth()), y - (mouseoverButton.getHeight()), mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
-                }
+            if (!mouseOver) {
+                g.drawImage(originalButton.getBufferedImage(), activePosX, activePosY, originalButton.getWidth(), originalButton.getHeight(), that);
+            } else {
+                g.drawImage(mouseoverButton.getBufferedImage(), activePosX, activePosY, mouseoverButton.getWidth(), mouseoverButton.getHeight(), that);
             }
         }
     }

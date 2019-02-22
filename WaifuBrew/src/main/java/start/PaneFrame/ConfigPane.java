@@ -177,7 +177,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 // Disable original back and save button for noticeBox buttons.
                 if (!saveDialogue.isActive()) {
                     CustomButton button = settingButtonsMap.get("back");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         if (checkLockInSetting()) {
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -187,7 +187,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         }
                     }
                     button = settingButtonsMap.get("save");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                         WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
                         WaifuBrew.getInstance().setPlayFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
@@ -198,7 +198,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     }
                     button = settingButtonsMap.get("reset");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                         settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
                         settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getPlayFontSize() - 10) * 2));
@@ -206,7 +206,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                     }
                 } else {
                     for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
+                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex])) {
                             if (noticeBoxButtonIndex == 0) {
                                 // Save is clicked
 
@@ -289,7 +289,7 @@ public class ConfigPane extends JPanel implements ActionListener {
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
             this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
             this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getPlayFontSize() - 10) * 2, "Dialog Text Size"));
-            autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, WaifuBrew.getInstance().getAutoAdvancer(), false, "Auto dialog advance");
+            autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, WaifuBrew.getInstance().getAutoAdvancer(), Origin.LEFT_TOP, "Auto dialog advance");
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);

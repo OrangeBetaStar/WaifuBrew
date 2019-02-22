@@ -55,7 +55,7 @@ public class SaveLoadPane extends JPanel {
 
             if (event.getButton() == MouseEvent.BUTTON1) {
                 for (int boundCheck = 0; boundCheck < saveLoadBox.size(); boundCheck++) {
-                    if (inBound(event, saveLoadBox.get(boundCheck), false)) {
+                    if (inBound(event, saveLoadBox.get(boundCheck))) {
 
                         // If save has a valid date, then it's good to load.
                         if (saveLoadBox.get(boundCheck).isValidSaveDate()) {
@@ -67,14 +67,14 @@ public class SaveLoadPane extends JPanel {
                 }
 
                 // "Option is clicked while also option is viewable"
-                if (inBound(event, loadPaneButtons.get("options"), true) && loadPaneButtons.get("options").getActiveButtonState()) {
+                if (inBound(event, loadPaneButtons.get("options")) && loadPaneButtons.get("options").getActiveButtonState()) {
                     configBar.setActive(true);
                     loadPaneButtons.get("options").setActiveButtonState(false);
                     loadPaneButtons.get("back").setActiveButtonState(true);
                     // System.out.println("Pressed options");
 
                     // "Back is clicked when back is also viewable"
-                } else if (inBound(event, loadPaneButtons.get("back"), true) && loadPaneButtons.get("back").getActiveButtonState()) {
+                } else if (inBound(event, loadPaneButtons.get("back")) && loadPaneButtons.get("back").getActiveButtonState()) {
                     WaifuBrew.getInstance().setStage(0);
                     configBar.setActive(false);
                     loadPaneButtons.get("back").setActiveButtonState(false);

@@ -41,16 +41,6 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return x + (length / 2);
-    }
-
-    @Override
-    public int getAbsoluteY() {
-        return y + (height / 2);
-    }
-
-    @Override
     public int getWidth() {
         return length;
     }
@@ -58,6 +48,21 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public int getActivePosX() {
+        return x;
+    }
+
+    @Override
+    public int getActivePosY() {
+        return y;
+    }
+
+    @Override
+    public Origin getOrigin() {
+        return Origin.MIDDLE_CENTRE;
     }
 
     public boolean isMoving() {

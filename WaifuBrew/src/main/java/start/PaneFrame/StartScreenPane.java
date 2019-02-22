@@ -52,7 +52,7 @@ public class StartScreenPane extends JPanel implements ActionListener {
             // 4 - Quit
             if(event.getButton() == MouseEvent.BUTTON1) {
                 for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
-                    if (inBound(event, entry.getValue(), true)) {
+                    if (inBound(event, entry.getValue())) {
                         if (entry.getKey().equals("start")) {
                             WaifuBrew.getInstance().setStage(1);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();

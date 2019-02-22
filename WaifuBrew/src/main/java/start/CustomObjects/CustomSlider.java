@@ -24,8 +24,8 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     private int x; // absolute location of X
     private int y; // absolute location of Y
 
-    private int knobX;
-    private int knobY;
+    private int activePosX;
+    private int activePosY;
 
     // dimension
     private int length = 200;
@@ -77,6 +77,18 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         this.level = level;
     }
 
+    public CustomSlider(int x, int y, int level, Origin origin, String sliderDesc, String customSliderName) {
+        this.x = x;
+        this.y = y;
+        this.origin = origin;
+        this.sliderDesc = sliderDesc;
+
+        sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
+        sliderLeveler = sliderBackground.copy();
+        sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, customSliderName));
+        this.level = level;
+    }
+
     // TODO: Haven't full implemented custom knob slider yet
     /*
     public CustomSlider(int x, int y, int level, String fileName) {
@@ -119,29 +131,29 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
 
         // calculate the numbering for x
         if(origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
-            knobX = x;
+            activePosX = x;
         } else if(origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
-            knobX = x - (sliderBackground.getWidth() / 2);
+            activePosX = x - (sliderBackground.getWidth() / 2);
         } else if(origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
-            knobX = (x - sliderBackground.getWidth());
+            activePosX = (x - sliderBackground.getWidth());
         }
 
         // calculate the numbering for y
         if(origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
-            knobY = y;
+            activePosY = y;
         } else if(origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
-            knobY = y - (sliderBackground.getHeight() / 2);
+            activePosY = y - (sliderBackground.getHeight() / 2);
         } else if(origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
-            knobY = y - sliderBackground.getHeight();
+            activePosY = y - sliderBackground.getHeight();
         }
 
-        g.drawImage(sliderBackground.getBufferedImage(), knobX, knobY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
-        g.drawImage(tempSliderLeveler.getBufferedImage(), knobX, knobY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
-        g.drawImage(sliderKnob.getBufferedImage(), knobX + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), knobY - (sliderBackground.getHeight() / 2), that);
+        g.drawImage(sliderBackground.getBufferedImage(), activePosX, activePosY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
+        g.drawImage(tempSliderLeveler.getBufferedImage(), activePosX, activePosY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
+        g.drawImage(sliderKnob.getBufferedImage(), activePosX + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), activePosY - (sliderBackground.getHeight() / 2), that);
         // setting up font with proper sizing
         g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()).deriveFont(Font.BOLD, WaifuBrew.getInstance().getSystemFontSize()));
         // using the font metrics to center the text above the slider knob
-        g.drawString(Integer.toString(level), knobX + (int) (sliderBackground.getWidth() * (level / 100.0)) - (g.getFontMetrics().stringWidth(Integer.toString(level)) / 2), knobY - (sliderBackground.getHeight() / 2) - (WaifuBrew.getInstance().getSystemFontSize() / 2));
+        g.drawString(Integer.toString(level), activePosX + (int) (sliderBackground.getWidth() * (level / 100.0)) - (g.getFontMetrics().stringWidth(Integer.toString(level)) / 2), activePosY - (sliderBackground.getHeight() / 2) - (WaifuBrew.getInstance().getSystemFontSize() / 2));
     }
 
     public boolean isSliderActive() {
@@ -167,13 +179,18 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return this.x + this.length / 2;
+    public Origin getOrigin() {
+        return origin;
     }
 
     @Override
-    public int getAbsoluteY() {
-        return this.y + this.height / 2;
+    public int getActivePosX() {
+        return activePosX;
+    }
+
+    @Override
+    public int getActivePosY() {
+        return activePosY;
     }
 
     @Override
@@ -286,6 +303,7 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         public void mouseDragged(MouseEvent event) {
             if (sliderActive) {
 
+                // having just the x will have active area limitless to y axis
                 if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
                     if (event.getX() <= x) {
                         level = 0;
