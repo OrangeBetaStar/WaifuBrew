@@ -47,6 +47,8 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         backgroundImage.resize(bigBox, bigBox);
         knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "blackbox"));
         knob.resize(smallBox, smallBox); // I meant to do that, intellij.
+
+        initPositionCalc();
     }
 
     public CustomSwitch(int x, int y, boolean value, Origin origin, String switchDesc) {
@@ -62,10 +64,11 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         backgroundImage.resize(bigBox, bigBox);
         knob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "blackbox"));
         knob.resize(smallBox / 2, smallBox / 2); // I meant to do that, intellij.
+
+        initPositionCalc();
     }
 
-    public void paintComponent(Graphics g) {
-
+    private void initPositionCalc() {
         // calculate active x
         if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
             activePosX = x;
@@ -83,7 +86,9 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         } else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
             activePosY = y - (backgroundImage.getHeight());
         }
+    }
 
+    public void paintComponent(Graphics g) {
         // gui
         g.drawImage(backgroundImage.getBufferedImage(), activePosX, activePosY, that);
         if (value) {

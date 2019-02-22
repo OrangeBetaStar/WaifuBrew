@@ -53,6 +53,9 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.origin = origin;
+
+        // calculate active area of this
+        initPositionCalc();
     }
 
     public CustomButton(int x, int y, String fileName, Origin origin, double sizeY, boolean invert) {
@@ -80,6 +83,9 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         mouseoverButton = originalButton.copy();
         originalButton.setOpacity(20);
         this.origin = origin;
+
+        // calculate active area of this
+        initPositionCalc();
     }
 
     public CustomButton(int x, int y, String fileName_1, String fileName_2) {
@@ -147,9 +153,7 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         return y >= 128 ? Color.black : Color.white;
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-
+    private void initPositionCalc() {
         // calculating active x value
         if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
             activePosX = x;
@@ -175,10 +179,13 @@ public class CustomButton extends InteractiveObjects implements ActionListener {
         if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
             activePosY = y - (originalButton.getHeight());
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
 
         // gui
         if (activeButton) {
-
             if (!mouseOver) {
                 g.drawImage(originalButton.getBufferedImage(), activePosX, activePosY, originalButton.getWidth(), originalButton.getHeight(), that);
             } else {

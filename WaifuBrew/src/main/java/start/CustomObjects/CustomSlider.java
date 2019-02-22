@@ -23,18 +23,15 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
     // position
     private int x; // absolute location of X
     private int y; // absolute location of Y
+    private int activePosX; // calculated position respect to origin
+    private int activePosY; // calculated position respect to origin
 
-    private int activePosX;
-    private int activePosY;
-
-    // dimension
+    // dimension of slider
     private int length = 200;
     private int height = 20;
 
     // description of slider (shown)
     private String sliderDesc;
-
-    private boolean initStage = true;
 
     // this that this that left right left right up down up down
     private java.awt.image.ImageObserver that = WaifuBrew.getInstance().getGUIInstance();
@@ -51,6 +48,12 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         sliderLeveler = sliderBackground.copy();
         sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         this.level = level;
+
+        sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+        sliderBackground.resize(length, height, false);
+        sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
+
+        initPositionCalc();
     }
 
     public CustomSlider(int x, int y, int level, String sliderDesc) {
@@ -63,6 +66,12 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         sliderLeveler = sliderBackground.copy();
         sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         this.level = level;
+
+        sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+        sliderBackground.resize(length, height, false);
+        sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
+
+        initPositionCalc();
     }
 
     public CustomSlider(int x, int y, int level, Origin origin, String sliderDesc) {
@@ -75,6 +84,12 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         sliderLeveler = sliderBackground.copy();
         sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "slider_knob"));
         this.level = level;
+
+        sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+        sliderBackground.resize(length, height, false);
+        sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
+
+        initPositionCalc();
     }
 
     public CustomSlider(int x, int y, int level, Origin origin, String sliderDesc, String customSliderName) {
@@ -87,55 +102,22 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         sliderLeveler = sliderBackground.copy();
         sliderKnob = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, customSliderName));
         this.level = level;
+
+        sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
+        sliderBackground.resize(length, height, false);
+        sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
+
+        initPositionCalc();
     }
 
-    // TODO: Haven't full implemented custom knob slider yet
-    /*
-    public CustomSlider(int x, int y, int level, String fileName) {
-        this.x = x;
-        this.y = y;
-
-        sliderBackground = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "whitebox"));
-        sliderLeveler = sliderBackground.copy();
-        // Find a better way to implement fileName as it uses IO
-        sliderKnob = new javaxt.io.Image(RESOURCE_PATH + fileName);
-        // sliderKnob = sliderBackground.copy();
-        this.level = level;
-    }
-    */
-
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        // super.paintComponent(g); // This is disabled so that weird square doesn't print on top left of the setting page
-        if (initStage) {
-
-            sliderBackground.setBackgroundColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue());
-            // sliderLeveler.setBackgroundColor((int)(255/(double)level), (int)(255/(double)level), (int)(255/(double)level));
-            // sliderKnob.setBackgroundColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
-
-            // SLIDER TRACK
-            sliderBackground.resize(length, height, false);
-            sliderKnob.resize(sliderBackground.getHeight() * 2, sliderBackground.getHeight() * 2, false);
-
-            initStage = false;
-        }
-        // Changing sliderLeveler colour
-        javaxt.io.Image tempSliderLeveler = sliderLeveler.copy();
-
-        // Changing colours
-        tempSliderLeveler.setBackgroundColor(255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)));
-
+    private void initPositionCalc() {
         // calculate the numbering for x
         if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
             activePosX = x;
         } else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
             activePosX = x - (sliderBackground.getWidth() / 2);
         } else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
-            activePosX = (x - sliderBackground.getWidth());
+            activePosX = x - sliderBackground.getWidth();
         }
 
         // calculate the numbering for y
@@ -146,7 +128,23 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         } else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
             activePosY = y - sliderBackground.getHeight();
         }
+    }
 
+    public void actionPerformed(ActionEvent e) {
+        repaint();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        // super.paintComponent(g); // This is disabled so that weird square doesn't print on top left of the setting page
+
+        // Changing sliderLeveler colour
+        javaxt.io.Image tempSliderLeveler = sliderLeveler.copy();
+
+        // Changing colours
+        tempSliderLeveler.setBackgroundColor(255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)));
+
+        // gui
         g.drawImage(sliderBackground.getBufferedImage(), activePosX, activePosY, sliderBackground.getWidth(), sliderBackground.getHeight(), that);
         g.drawImage(tempSliderLeveler.getBufferedImage(), activePosX, activePosY, (int) (sliderBackground.getWidth() * (level / 100.0)), sliderBackground.getHeight(), that);
         g.drawImage(sliderKnob.getBufferedImage(), activePosX + (int) (sliderBackground.getWidth() * (level / 100.0)) - (sliderKnob.getWidth() / 2), activePosY - (sliderBackground.getHeight() / 2), that);
@@ -235,30 +233,13 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
             if (sliderActive) {
 
                 // having just the x will have active area limitless to y axis
-                if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
-                    if (event.getX() <= x) {
-                        level = 0;
-                    } else if (event.getX() >= (x + sliderBackground.getWidth())) {
-                        level = 100;
-                    } else {
-                        level = (int) (((event.getX() - x) / (double) sliderBackground.getWidth()) * 100.0);
-                    }
-                } else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
-                    if (event.getX() <= (x - (sliderBackground.getWidth() / 2))) {
-                        level = 0;
-                    } else if (event.getX() >= ((x - (sliderBackground.getWidth() / 2)) + sliderBackground.getWidth())) {
-                        level = 100;
-                    } else {
-                        level = (int) (((event.getX() - (x - (sliderBackground.getWidth() / 2))) / (double) sliderBackground.getWidth()) * 100.0);
-                    }
-                } else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
-                    if (event.getX() <= (x - sliderBackground.getWidth())) {
-                        level = 0;
-                    } else if (event.getX() >= ((x - sliderBackground.getWidth()) + sliderBackground.getWidth())) {
-                        level = 100;
-                    } else {
-                        level = (int) (((event.getX() - (x - sliderBackground.getWidth())) / (double) sliderBackground.getWidth()) * 100.0);
-                    }
+                level = (int) (((event.getX() - activePosX) / (double) sliderBackground.getWidth()) * 100.0);
+
+                // fixes range issue
+                if (level <= 0) {
+                    level = 0;
+                } else if (level >= 100) {
+                    level = 100;
                 }
             }
         }
