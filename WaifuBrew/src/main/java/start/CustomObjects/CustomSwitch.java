@@ -69,30 +69,25 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         // calculate active x
         if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
             activePosX = x;
-        }
-        else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+        } else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
             activePosX = x - (backgroundImage.getWidth() / 2);
-        }
-        else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+        } else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
             activePosX = x - (backgroundImage.getWidth());
         }
 
         // calculate active y
         if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
             activePosY = y;
-        }
-        else if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+        } else if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
             activePosY = y - (backgroundImage.getHeight() / 2);
-        }
-        else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+        } else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
             activePosY = y - (backgroundImage.getHeight());
         }
 
         // gui
         g.drawImage(backgroundImage.getBufferedImage(), activePosX, activePosY, that);
         if (value) {
-            // TODO:: ************** FIX THIS SHIT **************
-            g.drawImage(knob.getBufferedImage(), activePosX + (backgroundImage.getWidth() / 2) - (knob.getWidth() / 2), activePosY + (backgroundImage.getHeight()) - (knob.getHeight() / 2), that);
+            g.drawImage(knob.getBufferedImage(), activePosX + (backgroundImage.getWidth() / 2) - (knob.getWidth() / 2), activePosY + (backgroundImage.getHeight() / 2) - (knob.getHeight() / 2), that);
         }
     }
 
@@ -143,7 +138,9 @@ public class CustomSwitch extends InteractiveObjects implements ActionListener {
         this.value = value;
     }
 
-    public String getSwitchDesc() { return switchDesc; }
+    public String getSwitchDesc() {
+        return switchDesc;
+    }
 
     @Override
     public Handlerclass retrieveMouseHandler() {

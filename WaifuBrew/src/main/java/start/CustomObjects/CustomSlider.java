@@ -130,20 +130,20 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
         tempSliderLeveler.setBackgroundColor(255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)), 255 - ((int) (255 * ((double) level) / 100.0)));
 
         // calculate the numbering for x
-        if(origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+        if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
             activePosX = x;
-        } else if(origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+        } else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
             activePosX = x - (sliderBackground.getWidth() / 2);
-        } else if(origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+        } else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
             activePosX = (x - sliderBackground.getWidth());
         }
 
         // calculate the numbering for y
-        if(origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+        if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
             activePosY = y;
-        } else if(origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+        } else if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
             activePosY = y - (sliderBackground.getHeight() / 2);
-        } else if(origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+        } else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
             activePosY = y - sliderBackground.getHeight();
         }
 
@@ -292,10 +292,9 @@ public class CustomSlider extends InteractiveObjects implements ActionListener {
             }
 
             // fixes range issue
-            if(level <= 0) {
+            if (level <= 0) {
                 level = 0;
-            }
-            else if(level >= 100) {
+            } else if (level >= 100) {
                 level = 100;
             }
         }

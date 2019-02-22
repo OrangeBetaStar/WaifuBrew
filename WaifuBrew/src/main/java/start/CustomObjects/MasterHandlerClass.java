@@ -12,12 +12,12 @@ public class MasterHandlerClass implements MouseListener, MouseMotionListener {
 
     public boolean inBound(MouseEvent event, InteractiveObjects interactiveObject) {
         System.out.println("Mouse activity logging in MasterHandlerClass");
-        System.out.println("Event mouse - X:" + event.getX() +  " [" + interactiveObject.getActivePosX() + " ~ " + (interactiveObject.getActivePosX() + interactiveObject.getWidth()) + "] : " + "Y:" + event.getY() +  " [" + interactiveObject.getActivePosY() + " ~ " + (interactiveObject.getActivePosY() + interactiveObject.getHeight()) + "]");
+        System.out.println("Event mouse - X:" + event.getX() + " [" + interactiveObject.getActivePosX() + " ~ " + (interactiveObject.getActivePosX() + interactiveObject.getWidth()) + "] : " + "Y:" + event.getY() + " [" + interactiveObject.getActivePosY() + " ~ " + (interactiveObject.getActivePosY() + interactiveObject.getHeight()) + "]");
 
         return event.getX() >= interactiveObject.getActivePosX() &&
-        event.getX() <= interactiveObject.getActivePosX() + interactiveObject.getWidth() &&
-        event.getY() >= interactiveObject.getActivePosY() &&
-        event.getY() <= interactiveObject.getActivePosY() + interactiveObject.getHeight();
+                event.getX() <= interactiveObject.getActivePosX() + interactiveObject.getWidth() &&
+                event.getY() >= interactiveObject.getActivePosY() &&
+                event.getY() <= interactiveObject.getActivePosY() + interactiveObject.getHeight();
     }
 
     public void mouseClicked(MouseEvent e) {

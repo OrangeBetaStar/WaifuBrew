@@ -90,7 +90,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Open
         if (isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), (x + length) - (int)(movement[movementCounter] * length), y, this);
+                g.drawImage(imageBlock.getBufferedImage(), (x + length) - (int) (movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;
@@ -102,7 +102,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Close
         else if (!isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), x + (int)(movement[movementCounter] * length), y, this);
+                g.drawImage(imageBlock.getBufferedImage(), x + (int) (movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;

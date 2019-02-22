@@ -112,172 +112,24 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         public void mouseMoved(MouseEvent event) {
             if (activeButton) {
 
-                if (origin.getValue() == 0) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 1) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 2) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 3) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 4) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 5) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 6) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 7) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
-                }
-                if (origin.getValue() == 8) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        mouseOver = true;
-                    } else {
-                        mouseOver = false;
-                    }
+                if (event.getX() >= activePosX &&
+                        event.getX() <= activePosX + imageBlock.getWidth() &&
+                        event.getY() >= activePosY &&
+                        event.getY() <= activePosY + imageBlock.getHeight()) {
+                    mouseOver = true;
+                } else {
+                    mouseOver = false;
                 }
             }
         }
 
         public void mouseClicked(MouseEvent event) {
             if (activeButton) {
-                if (origin.getValue() == 0) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 1) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 2) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y &&
-                            event.getY() < (y + imageBlock.getHeight())) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 3) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 4) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 5) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y - ((imageBlock.getHeight()) / 2) &&
-                            event.getY() < (y + imageBlock.getHeight() / 2)) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 6) {
-                    if (event.getX() > x &&
-                            event.getX() < (x + imageBlock.getWidth()) &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 7) {
-                    if (event.getX() > x - ((imageBlock.getWidth()) / 2) &&
-                            event.getX() < (x + imageBlock.getWidth() / 2) &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        wasPressed = true;
-                    }
-                }
-                if (origin.getValue() == 8) {
-                    if (event.getX() > (x - imageBlock.getWidth()) &&
-                            event.getX() < x &&
-                            event.getY() > y - (imageBlock.getHeight()) &&
-                            event.getY() < y) {
-                        wasPressed = true;
-                    }
+                if (event.getX() >= activePosX &&
+                        event.getX() <= activePosX + imageBlock.getWidth() &&
+                        event.getY() >= activePosY &&
+                        event.getY() <= activePosY + imageBlock.getHeight()) {
+                    wasPressed = true;
                 }
             }
         }
@@ -325,15 +177,16 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
                 activePosY = y - (imageBlock.getHeight());
             }
 
+            // gui
             if (!mouseOver) {
                 g.drawImage(imageBlock.getBufferedImage(), activePosX, activePosY, imageBlock.getWidth(), imageBlock.getHeight(), that);
             } else {
                 g.drawImage(imageBlockMouseOver.getBufferedImage(), activePosX, activePosY, imageBlockMouseOver.getWidth(), imageBlockMouseOver.getHeight(), that);
             }
-            g.drawImage(thumbnail.getBufferedImage(),  (activePosX + padding),  (activePosY + padding),  (thumbnailScaling),  (int) (((thumbnailScaling) / 16.0) * 8.0), that);
-            g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()));
-            g.drawString("Save Date: " + saveDate,activePosX +  ((padding * 2) + (thumbnailScaling)), activePosY + padding * 2);
-            g.drawString("Route: " + route, activePosX +  ((padding * 2) + (thumbnailScaling)), activePosY + padding * 4);
+            g.drawImage(thumbnail.getBufferedImage(), (activePosX + padding), (activePosY + padding), (thumbnailScaling), (int) (((thumbnailScaling) / 16.0) * 8.0), that);
+            g.setFont(WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName()).deriveFont(Font.PLAIN, WaifuBrew.getInstance().getSystemFontSize()));
+            g.drawString("Save Date: " + saveDate, activePosX + ((padding * 2) + (thumbnailScaling)), activePosY + padding * 2);
+            g.drawString("Route: " + route, activePosX + ((padding * 2) + (thumbnailScaling)), activePosY + padding * 4);
         }
     }
 
