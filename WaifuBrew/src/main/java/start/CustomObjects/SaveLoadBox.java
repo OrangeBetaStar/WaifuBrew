@@ -61,6 +61,36 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         this.route = route;
         this.saveDate = saveDate;
         this.thumbnail = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.THUMBNAILS, thumbnailName));
+
+        initPositionCalc();
+    }
+
+    private void initPositionCalc() {
+        // calculating active x value
+        if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
+            activePosX = x;
+        }
+
+        else if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
+            activePosX = x - (imageBlock.getWidth() / 2);
+        }
+
+        else if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
+            activePosX = x - (imageBlock.getWidth());
+        }
+
+        // calculating active y value
+        if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
+            activePosY = y;
+        }
+
+        else if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
+            activePosY = y - (imageBlock.getHeight() / 2);
+        }
+
+        else if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
+            activePosY = y - (imageBlock.getHeight());
+        }
     }
 
     @Override
@@ -151,31 +181,6 @@ public class SaveLoadBox extends InteractiveObjects implements ActionListener {
         thumbnailScaling = (int) (imageBlock.getHeight() * 1.6);
 
         if (activeButton) {
-            // calculating active x value
-            if (origin.getValue() == 0 || origin.getValue() == 3 || origin.getValue() == 6) {
-                activePosX = x;
-            }
-
-            if (origin.getValue() == 1 || origin.getValue() == 4 || origin.getValue() == 7) {
-                activePosX = x - (imageBlock.getWidth() / 2);
-            }
-
-            if (origin.getValue() == 2 || origin.getValue() == 5 || origin.getValue() == 8) {
-                activePosX = x - (imageBlock.getWidth());
-            }
-
-            // calculating active y value
-            if (origin.getValue() == 0 || origin.getValue() == 1 || origin.getValue() == 2) {
-                activePosY = y;
-            }
-
-            if (origin.getValue() == 3 || origin.getValue() == 4 || origin.getValue() == 5) {
-                activePosY = y - (imageBlock.getHeight() / 2);
-            }
-
-            if (origin.getValue() == 6 || origin.getValue() == 7 || origin.getValue() == 8) {
-                activePosY = y - (imageBlock.getHeight());
-            }
 
             // gui
             if (!mouseOver) {
