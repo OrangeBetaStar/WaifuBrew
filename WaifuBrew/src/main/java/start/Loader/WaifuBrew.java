@@ -224,6 +224,7 @@ public class WaifuBrew {
         configStorage.put("dimensionX", 1280);
         configStorage.put("dimensionY", 720);
         configStorage.put("sysFontSize", 24);
+        configStorage.put("stringPadding", 10);
         configUI.put("systemFont", "Halogen");
         configUI.put("dialogueFont", "MS Mincho");
     }
@@ -307,6 +308,14 @@ public class WaifuBrew {
 
     public void setSystemFontSize(int fontSize) {
         configStorage.replace("sysFontSize", fontSize);
+    }
+
+    public int getStringPadding() {
+        return configStorage.get("stringPadding");
+    }
+
+    public void setStringPadding(int stringPadding) {
+        configStorage.replace("stringPadding", stringPadding);
     }
 
     public int getStage() {

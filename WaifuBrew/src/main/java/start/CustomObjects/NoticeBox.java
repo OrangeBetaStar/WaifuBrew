@@ -146,14 +146,14 @@ public class NoticeBox extends InteractiveObjects {
             activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
         } catch (FontFormatException ex) {
             ex.printStackTrace();
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+            System.err.println(myStream.toString() + " not loaded.  Using serif font. (NoticeBox)");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException in ConfigPane.initFPS()");
+            System.out.println("FileNotFoundException in NoticeBox.initFont()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         } catch (IOException ex) {
-            System.out.println("IOException in ConfigPane.initFPS()");
+            System.out.println("IOException in NoticeBox.initFont()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         }

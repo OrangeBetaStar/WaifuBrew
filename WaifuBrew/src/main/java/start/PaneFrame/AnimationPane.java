@@ -48,7 +48,13 @@ public class AnimationPane extends JPanel {
 
     // Retrieve String from JSON
     private String a = "Click anywhere to initiate dialog...!";
-    private String tempString = "";
+
+    private String[] stringBuilderArray;
+    private String stringBuilderTester = "";
+
+
+    private String stringBuilder = "";
+    private String stringShower = "";
     private java.util.List<java.util.List<Waifu>> e;
     private ImageDesc background;
 
@@ -66,13 +72,20 @@ public class AnimationPane extends JPanel {
     public void triggerNext() {
         if (advancer < e.size()) {
             if (e.get(advancer).get(0).getDialogue() != null) {
-                tempString = "";
+                stringBuilder = "";
                 a = e.get(advancer).get(0).getDialogue();
+                stringBuilderArray = e.get(advancer).get(0).getDialogue().split("\\s");
+
             } else {
-                tempString = "";
+                stringBuilder = "";
                 a = "";
+
+                stringBuilderTester = "";
             }
             advancer++;
+        }
+        else {
+            // stringBuilder = "end of dialogue";
         }
     }
 
@@ -181,8 +194,27 @@ public class AnimationPane extends JPanel {
 
             // DialogueBox
             if (!rightClickTempDisableBox) {
+                // Character name box calculator
+                g.drawImage(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "black"),
+                        (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6) - (g.getFontMetrics(activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20)).getAscent()),
+                        g.getFontMetrics(activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20)).stringWidth(e.get(advancer - 1).get(0).getName().toString()) + (WaifuBrew.getInstance().getStringPadding() * 2),
+                        WaifuBrew.getInstance().getSystemFontSize() + 20, this);
                 g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int) ((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
-                g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(e.get(advancer - 1).get(0).getName().toString(), activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20), frc);
+                Shape outline = textTl.getOutline(null);
+
+                // FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((int) (windowSize.x / 9.0) + WaifuBrew.getInstance().getStringPadding(), (int) ((windowSize.y / 10.0) * 6));// + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
             }
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             g.setFont(activeFont);
@@ -191,14 +223,14 @@ public class AnimationPane extends JPanel {
             // What
         }
         if (!rightClickTempDisableBox) {
-            if (tempString != "") {
+            if (stringShower != "") {
                 // Dialogue text rendering with boundary shading
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
                 FontRenderContext frc = g2d.getFontRenderContext();
-                TextLayout textTl = new TextLayout(tempString, activeFont, frc);
+                TextLayout textTl = new TextLayout(stringShower, activeFont, frc);
                 Shape outline = textTl.getOutline(null);
 
                 // FontMetrics fm = g2d.getFontMetrics(activeFont);
@@ -209,6 +241,12 @@ public class AnimationPane extends JPanel {
                 g2d.setColor(Color.BLACK);
                 g2d.draw(outline);
                 g2d.dispose();
+
+                /*
+                if(g2d.getFontMetrics().stringWidth(stringShower) >= windowSize.x - ((windowSize.x / 9.0) * 2)) {
+                    // add enter
+                }
+                */
             }
         }
 
@@ -298,14 +336,36 @@ public class AnimationPane extends JPanel {
         // Add stage check to disable auto dialogue to start without being in the correct stage
         stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+
+                if(stringBuilderArray != null) {
+                    if (stringBuilderArray.length != 0) {
+                        // check if stringBuilderTester contains everything that stringBuilderArray has. (true == skip)
+
+                        /*for (int buildingString = 0; buildingString < stringBuilderArray.length; buildingString++) {
+                            stringBuilderTester = stringBuilderTester.concat(" " + stringBuilderArray[buildingString]);
+
+                            System.out.println(stringBuilderTester);
+                        }*/
+                    }
+                }
+
+
                 if (!a.isEmpty()) {
-                    if (tempString.length() != a.length()) {
-                        tempString = tempString + a.charAt(tempString.length());
+                    if (stringBuilder.length() != a.length()) {
+                        stringBuilder = stringBuilder + a.charAt(stringBuilder.length());
+
+                        stringShower = stringBuilder;
+
+                        // add enter here (fix length too) perhaps use string array?
+
+                        // use regex to split up the string into array and use array to build the shit
+
                     } else {
                         if (WaifuBrew.getInstance().getAutoAdvancer()) {
                             clickActivate = true;
-                            // TODO: NEEDS AWAIT
-                            // TODO: FIX TRANSPARENCY
+                            // TODO: NEEDS AWAIT (Used another timer, but did not work...)
+                            // TODO: FIX TRANSPARENCY (Seems to be fixed...?)
                             if (WaifuBrew.getInstance().getStage() == 1) {
                                 triggerNext();
                             }
