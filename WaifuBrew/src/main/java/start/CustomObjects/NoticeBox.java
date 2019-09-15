@@ -76,13 +76,13 @@ public class NoticeBox extends InteractiveObjects {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return this.x + this.length / 2;
+    public int getActivePosX() {
+        return x;
     }
 
     @Override
-    public int getAbsoluteY() {
-        return this.y + this.height / 2;
+    public int getActivePosY() {
+        return y;
     }
 
     @Override
@@ -93,6 +93,11 @@ public class NoticeBox extends InteractiveObjects {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public Origin getOrigin() {
+        return Origin.MIDDLE_CENTRE;
     }
 
     public Handlerclass retrieveMouseHandler() {
@@ -135,20 +140,20 @@ public class NoticeBox extends InteractiveObjects {
     private void initFont() {
         try {
             // For real time preview later when font change is implemented
-            myStream = new BufferedInputStream(new FileInputStream(WaifuBrew.getInstance().getResoucePath() + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
+            myStream = new BufferedInputStream(new FileInputStream(WaifuBrew.getInstance().getResoucePath() + WaifuBrew.getInstance().getSystemFontName() + ".ttf"));
             fontSize = 24;
             Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
             activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
         } catch (FontFormatException ex) {
             ex.printStackTrace();
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
+            System.err.println(myStream.toString() + " not loaded.  Using serif font. (NoticeBox)");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException in ConfigPane.initFPS()");
+            System.out.println("FileNotFoundException in NoticeBox.initFont()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         } catch (IOException ex) {
-            System.out.println("IOException in ConfigPane.initFPS()");
+            System.out.println("IOException in NoticeBox.initFont()");
             System.err.println(myStream.toString() + " not loaded.  Using serif font.");
             activeFont = new Font("serif", Font.PLAIN, fontSize);
         }

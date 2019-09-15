@@ -1,6 +1,8 @@
 package start.Containers;
 
 public enum Mood {
+    // These can be used with '_' to be more specific with the names. (Check parser's new implementation)
+
     HAPPY(0),
     NORMAL(1),
     SAD(2),

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class StartScreen extends JPanel implements ActionListener {
+public class StartScreenPane extends JPanel implements ActionListener {
 
     private javaxt.io.Image backgroundPicture;
     private HashMap<String, CustomButton> startScreenButtons = new HashMap<>(4);
@@ -27,7 +27,7 @@ public class StartScreen extends JPanel implements ActionListener {
         repaint();
     }
 
-    public StartScreen() {
+    public StartScreenPane() {
         initFPS();
         initImage();
     }
@@ -35,12 +35,6 @@ public class StartScreen extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        /*Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2.drawImage(image, x, y, width, height, this);
-        */
-
         g.drawImage(backgroundPicture.getBufferedImage(), (windowSize.x / 2) - (backgroundPicture.getWidth() / 2), (windowSize.y / 2) - (backgroundPicture.getHeight() / 2), this);
 
         for (Map.Entry<String, CustomButton> entry : this.startScreenButtons.entrySet()) {
@@ -55,10 +49,10 @@ public class StartScreen extends JPanel implements ActionListener {
             // 1 - AnimationPane
             // 2 - ConfigPane
             // 3 - Load
-            // 4 - Exit
+            // 4 - Quit
             if(event.getButton() == MouseEvent.BUTTON1) {
                 for (Map.Entry<String, CustomButton> entry : startScreenButtons.entrySet()) {
-                    if (inBound(event, entry.getValue(), true)) {
+                    if (inBound(event, entry.getValue())) {
                         if (entry.getKey().equals("start")) {
                             WaifuBrew.getInstance().setStage(1);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -68,7 +62,7 @@ public class StartScreen extends JPanel implements ActionListener {
                         } else if (entry.getKey().equals("load")) {
                             WaifuBrew.getInstance().setStage(3);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                        } else if (entry.getKey().equals("exit")) {
+                        } else if (entry.getKey().equals("quit")) {
                             System.exit(0);
                         }
                     }
@@ -101,31 +95,10 @@ public class StartScreen extends JPanel implements ActionListener {
         double scale = Math.max(((double)windowSize.x / backgroundPicture.getWidth()), ((double)windowSize.y / backgroundPicture.getHeight()));
         backgroundPicture.resize((int)((scale) * backgroundPicture.getWidth()), (int)((scale) * backgroundPicture.getHeight()));
 
-
-        // This is fit
-        /*
-        if(((double)backgroundPicture.getWidth() / backgroundPicture.getHeight()) <= ((double)windowSize.x / windowSize.y)) {
-            backgroundPicture.resize((int)(windowSize.y * ((double)backgroundPicture.getWidth() / backgroundPicture.getHeight())), windowSize.y);
-        } else {
-            backgroundPicture.resize(windowSize.x, (int)(windowSize.x * ((double)backgroundPicture.getWidth() / backgroundPicture.getHeight())));
-        }
-        */
-
-        /*
-        if (backgroundPicture.getWidth() < backgroundPicture.getHeight() && backgroundPicture.getHeight() > windowSize.x) {
-            backgroundPicture.resize(backgroundPicture.getWidth() * windowSize.x / backgroundPicture.getHeight(), windowSize.x);
-        } else if (backgroundPicture.getWidth() > backgroundPicture.getHeight() && backgroundPicture.getWidth() > windowSize.x) {
-            backgroundPicture.resize(windowSize.x, backgroundPicture.getHeight() * windowSize.x / backgroundPicture.getWidth());
-        } else {
-            // no change
-        }
-        */
-
-
         startScreenButtons.put("start", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5), (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE));
         startScreenButtons.put("load", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 2, (windowSize.y / 6) * 5, "load_button", Origin.MIDDLE_CENTRE));
         startScreenButtons.put("config", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 3, (windowSize.y / 6) * 5, "config_button", Origin.MIDDLE_CENTRE));
-        startScreenButtons.put("exit", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 4, (windowSize.y / 6) * 5, "exit_button", Origin.MIDDLE_CENTRE));
+        startScreenButtons.put("quit", new CustomButton((WaifuBrew.getInstance().getRes()[1].x / 5) * 4, (windowSize.y / 6) * 5, "quit_button", Origin.MIDDLE_CENTRE));
 
         for (Map.Entry<String, CustomButton> entry : this.startScreenButtons.entrySet()) {
             CustomButton button = entry.getValue();

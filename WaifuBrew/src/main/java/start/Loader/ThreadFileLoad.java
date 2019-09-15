@@ -3,20 +3,27 @@ package start.Loader;
 import org.json.JSONException;
 import start.Calculation.MathClass;
 import start.Containers.ImageDesc;
+import start.Parser.DefaultLoader;
 import start.Parser.DialogueParser;
 import start.Parser.ParserException.DialogueDataMissingException;
-import start.Parser.UserSetting;
 
+import java.awt.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class ThreadFileLoad implements Runnable {
 
-    private volatile ArrayList<ArrayList<ImageDesc>> fileList;
+    private volatile ArrayList<ArrayList<ImageDesc>> imageLoad;
+    private volatile HashMap<String, Font> sysFont = new HashMap<>();
     private final String RESOURCE_PATH = "src/main/java/resources/";
-    private DialogueParser dp;
-    private UserSetting us;
+    private DialogueParser dp; // dialogue parse
+    private DefaultLoader sd; // save data
+    private DefaultLoader us; // user setting
     private java.util.List<java.util.List<Waifu>> e;
     private MathClass mathClass = new MathClass();
 
@@ -28,12 +35,40 @@ public class ThreadFileLoad implements Runnable {
     public void run() {
         System.out.println(Thread.currentThread().getName() + " - Load Thread running");
 
-        fileList = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
+        imageLoad = new ImageLoader(RESOURCE_PATH).imgCompiler(new FindFile().listFile(RESOURCE_PATH, ".png"));
+        LinkedList<String> fontLoad = new FindFile().listFile(RESOURCE_PATH, ".ttf");
+
+        BufferedInputStream myStream;
+        for(String loadedFontNames : fontLoad) {
+            try {
+                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + loadedFontNames));
+                sysFont.put(loadedFontNames, Font.createFont(Font.TRUETYPE_FONT, myStream));
+                System.out.println("Loaded font: " + "\"" + loadedFontNames + "\"");
+            } catch (FontFormatException ex) {
+                ex.printStackTrace();
+                sysFont.put("serif", new Font("serif", Font.PLAIN, 12));
+                System.err.println("\"" + loadedFontNames + "\" has failed. Loading serif font.");
+            } catch (FileNotFoundException ex) {
+                System.out.println("FileNotFoundException in ThreadFileLoad");
+                sysFont.put("serif", new Font("serif", Font.PLAIN, 12));
+                System.err.println("\"" + loadedFontNames + "\" has failed. Loading serif font.");
+            } catch (IOException ex) {
+                System.out.println("IOException in in ThreadFileLoad");
+                sysFont.put("serif", new Font("serif", Font.PLAIN, 12));
+                System.err.println("\"" + loadedFontNames + "\" has failed. Loading serif font.");
+            }
+        }
+
+
+        // Have the ImageLoader take in Dimension from UserSetting to calculate proper dimension for buttons
 
         try {
             // Load user setting
-            us = new UserSetting(RESOURCE_PATH + "user.json");
+            us = new DefaultLoader(RESOURCE_PATH + "user.json", "user");
             us.parse();
+
+            sd = new DefaultLoader(RESOURCE_PATH + "saves.json", "saves");
+            sd.parse();
 
             /*
             // HashMap Printer
@@ -75,10 +110,18 @@ public class ThreadFileLoad implements Runnable {
     }
 
     public ArrayList<ArrayList<ImageDesc>> getFileList() {
-        return fileList;
+        return imageLoad;
     }
 
     public HashMap getLoadedSettings() {
-        return us.getLoadedSettings();
+        return us.getLastObject();
+    }
+
+    public ArrayList getSaves() {
+        return sd.getMultipleObject();
+    }
+
+    public HashMap getFonts() {
+        return sysFont;
     }
 }

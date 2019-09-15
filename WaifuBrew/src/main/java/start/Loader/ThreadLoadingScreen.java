@@ -17,7 +17,7 @@ public class ThreadLoadingScreen implements Runnable {
 
         JWindow window = new JWindow();
         //window.setLayout(null);
-        window.setBounds((screenSize.width / 2) - (1280 / 2), (screenSize.height / 2) - (720 / 2), 1280, 720);
+        window.setBounds((screenSize.width / 2) - (800 / 2), (screenSize.height / 2) - (600 / 2), 800, 600);
         window.setVisible(true);
         window.getContentPane().add(
         /*

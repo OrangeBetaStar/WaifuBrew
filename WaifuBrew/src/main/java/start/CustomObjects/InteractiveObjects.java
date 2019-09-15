@@ -4,9 +4,11 @@ import javax.swing.*;
 
 public abstract class InteractiveObjects extends JPanel {
 
-    public abstract int getAbsoluteX();
+    public abstract Origin getOrigin();
 
-    public abstract int getAbsoluteY();
+    public abstract int getActivePosX();
+
+    public abstract int getActivePosY();
 
     public abstract int getWidth();
 

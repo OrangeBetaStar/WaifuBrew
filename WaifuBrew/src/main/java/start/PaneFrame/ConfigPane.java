@@ -12,13 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("serial")
 public class ConfigPane extends JPanel implements ActionListener {
 
     // LOAD IMAGE
@@ -27,7 +23,6 @@ public class ConfigPane extends JPanel implements ActionListener {
     private javaxt.io.Image tempDialogueBox; // Preview
     private Timer stringTimer;
     private boolean fpsLimitStop = false;
-    private String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
 
     private HashMap<String, CustomSlider> settingSlidersMap = new HashMap<>(3);
     private HashMap<String, CustomButton> settingButtonsMap = new HashMap<>(3);
@@ -61,26 +56,10 @@ public class ConfigPane extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.settingSlidersMap.get("textSize").isSliderActive()) {
-            // Configure font preview
-            try {
-                // For real time preview later when font change is implemented
-                myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
-                fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10; // This equation seems most appropriate
-                Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-                activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
-            } catch (FontFormatException ex) {
-                ex.printStackTrace();
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            } catch (FileNotFoundException ex) {
-                System.out.println("FileNotFoundException in ConfigPane.initFPS()");
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            } catch (IOException ex) {
-                System.out.println("IOException in ConfigPane.initFPS()");
-                System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-                activeFont = new Font("serif", Font.PLAIN, fontSize);
-            }
+
+            Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
+            fontSize = (this.settingSlidersMap.get("textSize").getLevel() / 2) + 10;
+            activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
         }
         if (backgroundPicture != null) {
             // I want to centre the image that is 960:640 to widescreen format, but do not want to stretch. I will zoom in.
@@ -108,8 +87,8 @@ public class ConfigPane extends JPanel implements ActionListener {
             g.setColor(new Color(0, 0, 0));
 
             // Draw sliders
-            for(Map.Entry sliderObject : settingSlidersMap.entrySet()) {
-                CustomSlider sliders = (CustomSlider)sliderObject.getValue();
+            for (Map.Entry sliderObject : settingSlidersMap.entrySet()) {
+                CustomSlider sliders = (CustomSlider) sliderObject.getValue();
                 g.drawString(sliders.getSliderDesc(), sliders.getX(), sliders.getY() - ((windowSize.x / 10) / 3));
             }
             // Draw switch
@@ -161,17 +140,30 @@ public class ConfigPane extends JPanel implements ActionListener {
         }
     }
 
-    public void stageChange() {
+    public void stageChange(int lastStage) {
         // Reload anything that can have settings changed.
-        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
         initStringTimer();
+
+        // TODO: try implementing frame limiter with system time instead of timer. (consistency)
+        Long frameLimiter = System.nanoTime();
+
+        // use thread
+
+        /*System.out.println("Frame limit calculation: " + (1000.0 / WaifuBrew.getInstance().getFrameRate()) * 10000000);
+        while(this.getParent() != null) {
+            if((System.nanoTime() - frameLimiter) > ((1000.0 / WaifuBrew.getInstance().getFrameRate()) * 10000000)) {
+                repaint();
+            }
+        }*/
+
     }
 
     private boolean checkLockInSetting() {
         return (
                 !(this.settingSlidersMap.get("barTransparency").getLevel() != WaifuBrew.getInstance().getDialogueTransparency() ||
                         this.settingSlidersMap.get("textSpeed").getLevel() != WaifuBrew.getInstance().getDialogueSpeed() ||
-                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getFontSize() ||
+                        (((this.settingSlidersMap.get("textSize").getLevel() / 2) + 10)) != WaifuBrew.getInstance().getPlayFontSize() ||
                         this.autoDialog.getValue() != WaifuBrew.getInstance().getAutoAdvancer())
         );
     }
@@ -185,7 +177,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                 // Disable original back and save button for noticeBox buttons.
                 if (!saveDialogue.isActive()) {
                     CustomButton button = settingButtonsMap.get("back");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         if (checkLockInSetting()) {
                             WaifuBrew.getInstance().setStage(0);
                             WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -195,10 +187,10 @@ public class ConfigPane extends JPanel implements ActionListener {
                         }
                     }
                     button = settingButtonsMap.get("save");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                         WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                        WaifuBrew.getInstance().setFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
+                        WaifuBrew.getInstance().setPlayFontSize((settingSlidersMap.get("textSize").getLevel() / 2) + 10);
                         WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
                         // Export the newly saved file.
@@ -206,22 +198,22 @@ public class ConfigPane extends JPanel implements ActionListener {
                         WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
                     }
                     button = settingButtonsMap.get("reset");
-                    if (inBound(event, button, false)) {
+                    if (inBound(event, button)) {
                         settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                         settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                        settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getFontSize() - 10) * 2));
+                        settingSlidersMap.get("textSize").setLevel(((WaifuBrew.getInstance().getPlayFontSize() - 10) * 2));
                         autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                     }
                 } else {
                     for (int noticeBoxButtonIndex = 0; noticeBoxButtonIndex < saveDialogue.getButton().length; noticeBoxButtonIndex++) {
-                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex], true)) {
+                        if (inBound(event, saveDialogue.getButton()[noticeBoxButtonIndex])) {
                             if (noticeBoxButtonIndex == 0) {
                                 // Save is clicked
 
                                 // Save all the settings.
                                 WaifuBrew.getInstance().setDialogueTransparency(settingSlidersMap.get("barTransparency").getLevel());
                                 WaifuBrew.getInstance().setDialogueSpeed(settingSlidersMap.get("textSpeed").getLevel());
-                                WaifuBrew.getInstance().setFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
+                                WaifuBrew.getInstance().setPlayFontSize(((settingSlidersMap.get("textSize").getLevel() / 2) + 10));
                                 WaifuBrew.getInstance().setAutoAdvancer(autoDialog.getValue());
 
                                 // Disable NoticeBox
@@ -240,7 +232,7 @@ public class ConfigPane extends JPanel implements ActionListener {
                                 saveDialogue.setActive(false);
                                 settingSlidersMap.get("barTransparency").setLevel(WaifuBrew.getInstance().getDialogueTransparency());
                                 settingSlidersMap.get("textSpeed").setLevel(WaifuBrew.getInstance().getDialogueSpeed());
-                                settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getFontSize() - 10) * 2);
+                                settingSlidersMap.get("textSize").setLevel((WaifuBrew.getInstance().getPlayFontSize() - 10) * 2);
                                 autoDialog.setValue(WaifuBrew.getInstance().getAutoAdvancer());
                                 WaifuBrew.getInstance().setStage(0);
                                 WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
@@ -254,6 +246,8 @@ public class ConfigPane extends JPanel implements ActionListener {
 
     private void initFPS() {
         // TODO: I wonder if I use this lambda
+
+
         Timer t = new Timer((int) (1000.0 / WaifuBrew.getInstance().getFrameRate()), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!fpsLimitStop) {
@@ -263,35 +257,17 @@ public class ConfigPane extends JPanel implements ActionListener {
                 }
             }
         });
+
         t.setRepeats(true);
         t.setDelay((int) (1000 / WaifuBrew.getInstance().getFrameRate()));
         t.start();
+
     }
 
     private void initFont() {
-        // Configure font preview
-        try {
-            myStream = new BufferedInputStream(new FileInputStream(RESOURCE_PATH + WaifuBrew.getInstance().getSystemFont() + ".ttf"));
-            Font ttfBase = Font.createFont(Font.TRUETYPE_FONT, myStream);
-            // activeFont = ttfBase.deriveFont(Font.PLAIN, fontSize);
-            activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
-            configPaneFont = ttfBase.deriveFont(Font.PLAIN, 24);
-        } catch (FontFormatException ex) {
-            ex.printStackTrace();
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException in ConfigPane.initFPS()");
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        } catch (IOException ex) {
-            System.out.println("IOException in ConfigPane.initFPS()");
-            System.err.println(myStream.toString() + " not loaded.  Using serif font.");
-            activeFont = new Font("serif", Font.PLAIN, fontSize);
-            configPaneFont = new Font("serif", Font.PLAIN, 24);
-        }
+        Font ttfBase = WaifuBrew.getInstance().getSystemFont(WaifuBrew.getInstance().getSystemFontName());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
+        configPaneFont = ttfBase.deriveFont(Font.PLAIN, WaifuBrew.getInstance().getSystemFontSize());
     }
 
     private void initImage() {
@@ -308,12 +284,12 @@ public class ConfigPane extends JPanel implements ActionListener {
             // Pre-scale
             double scale = Math.max(((double) windowSize.x / backgroundPicture.getWidth()), ((double) windowSize.y / backgroundPicture.getHeight()));
             backgroundPicture.resize((int) ((scale) * backgroundPicture.getWidth()), (int) ((scale) * backgroundPicture.getHeight()));
-            dialogueBox.resize((int) (dialogueBox.getWidth() * 0.9), (int) (dialogueBox.getHeight() * 0.9));
+            dialogueBox.resize((int) (((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int) (((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
 
             this.settingSlidersMap.put("barTransparency", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 2, WaifuBrew.getInstance().getDialogueTransparency(), "Diologue Bar Transparency"));
             this.settingSlidersMap.put("textSpeed", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 3, WaifuBrew.getInstance().getDialogueSpeed(), "Dialog Text Speed"));
-            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getFontSize() - 10) * 2, "Dialog Text Size"));
-            autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, false, false, "Auto dialog advance");
+            this.settingSlidersMap.put("textSize", new CustomSlider((windowSize.x / 10), (windowSize.y / 6) * 4, (WaifuBrew.getInstance().getPlayFontSize() - 10) * 2, "Dialog Text Size"));
+            autoDialog = new CustomSwitch((windowSize.x / 10), (windowSize.y / 6) * 5, WaifuBrew.getInstance().getAutoAdvancer(), Origin.LEFT_TOP, "Auto dialog advance");
 
             // Handlers listening to mouse like DOGS
             addMouseListener(handler);

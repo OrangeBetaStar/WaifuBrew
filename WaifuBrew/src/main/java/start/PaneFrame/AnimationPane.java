@@ -21,18 +21,20 @@ import java.util.Map;
 
 public class AnimationPane extends JPanel {
 
-    private Handlerclass handler = new Handlerclass();
-    private final String RESOURCE_PATH = WaifuBrew.getInstance().getResoucePath();
     private javaxt.io.Image dialogueBox;
     private javaxt.io.Image characterImage[] = new javaxt.io.Image[10]; // Maximum 10 characters at once.
     private double GUIScale = (double) WaifuBrew.getInstance().getSystemGUIScale();
     private boolean clickActivate = true;
 
+    // Disable text and text background to see only scenery
+    private boolean rightClickTempDisableBox = false;
+
+    // Interactive objects.
     private HashMap<String, CustomButton> aniPaneButton = new HashMap<>(4); // Save / Load / Config / Exit
     private SideBar configBar = new SideBar();
     private static Font activeFont;
 
-    // FPS maintainer
+    // String timer for each character
     private Timer stringTimer;
 
     // Advancer keeps track of which line it reads
@@ -41,16 +43,25 @@ public class AnimationPane extends JPanel {
     // [1] is resolution of program window
     private Point windowSize = WaifuBrew.getInstance().getRes()[1];
 
+    // internal mouselistener
+    private Handlerclass handler = new Handlerclass();
+
     // Retrieve String from JSON
     private String a = "Click anywhere to initiate dialog...!";
-    private String tempString = "";
+
+    private String[] stringBuilderArray;
+    private String stringBuilderTester = "";
+
+
+    private String stringBuilder = "";
+    private String stringShower = "";
     private java.util.List<java.util.List<Waifu>> e;
     private ImageDesc background;
 
     private boolean newStart = true;
 
     public AnimationPane() {
-        // parsing dialogue has to be done before on thread.
+        // parsing dialogue has to be done before this payload.
         initParseDialogue();
         initFPS();
         initFont();
@@ -59,49 +70,66 @@ public class AnimationPane extends JPanel {
     }
 
     public void triggerNext() {
-        if(advancer < e.size()) {
+        if (advancer < e.size()) {
             if (e.get(advancer).get(0).getDialogue() != null) {
-                tempString = "";
+                stringBuilder = "";
                 a = e.get(advancer).get(0).getDialogue();
+                stringBuilderArray = e.get(advancer).get(0).getDialogue().split("\\s");
+
             } else {
-                tempString = "";
+                stringBuilder = "";
                 a = "";
+
+                stringBuilderTester = "";
             }
             advancer++;
+        }
+        else {
+            // stringBuilder = "end of dialogue";
         }
     }
 
     private class Handlerclass extends MasterHandlerClass {
 
         public void mouseReleased(MouseEvent event) {
-            if (inBound(event, aniPaneButton.get("config"), true) && !configBar.isActive()) {
-                configBar.setActive(true);
-                aniPaneButton.get("config").setActiveButtonState(false);
-            } else if (inBound(event, aniPaneButton.get("load"), true) && configBar.isActive()) {
-                configBar.setActive(false);
-                WaifuBrew.getInstance().setStage(3);
-                aniPaneButton.get("config").setActiveButtonState(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-                // Ask user if save progress?
-            } else if (inBound(event, aniPaneButton.get("save"), true) && configBar.isActive()) {
-                configBar.setActive(false);
-                aniPaneButton.get("config").setActiveButtonState(true);
-            } else if (inBound(event, aniPaneButton.get("start"), true) && configBar.isActive()) {
-                // Ask user if save progress?
-                // This button will go back to startscreen
-                WaifuBrew.getInstance().setStage(0);
-                configBar.setActive(false);
-                aniPaneButton.get("config").setActiveButtonState(true);
-                WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
-            } else {
-                if (configBar.isActive()) {
-                    configBar.setActive(false);
-                    aniPaneButton.get("config").setActiveButtonState(true);
-                } else {
-                    // To avoid advancing of the dialogue when pressed other place to disable configbar.
-                    clickActivate = true;
-                    triggerNext();
+            if (event.getButton() == MouseEvent.BUTTON1) {
+                if (rightClickTempDisableBox) {
+                    rightClickTempDisableBox = false;
+                } else { // When dialogue bar hasn't been disabled for one click.
+                    if (inBound(event, aniPaneButton.get("config")) && !configBar.isActive()) {
+                        configBar.setActive(true);
+                        aniPaneButton.get("config").setActiveButtonState(false);
+                    } else if (inBound(event, aniPaneButton.get("load")) && configBar.isActive()) {
+                        configBar.setActive(false);
+                        WaifuBrew.getInstance().setStage(3);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                        // Ask user if save progress?
+                    } else if (inBound(event, aniPaneButton.get("save")) && configBar.isActive()) {
+                        configBar.setActive(false);
+                        WaifuBrew.getInstance().setStage(4);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    } else if (inBound(event, aniPaneButton.get("exit")) && configBar.isActive()) {
+                        // Ask user if save progress?
+                        // This button will go back to startscreen
+                        WaifuBrew.getInstance().setStage(0);
+                        configBar.setActive(false);
+                        aniPaneButton.get("config").setActiveButtonState(true);
+                        WaifuBrew.getInstance().getGUIInstance().revalidateGraphics();
+                    } else {
+                        if (configBar.isActive()) {
+                            configBar.setActive(false);
+                            aniPaneButton.get("config").setActiveButtonState(true);
+                        } else {
+                            // To avoid advancing of the dialogue when pressed other place to disable configbar.
+                            clickActivate = true;
+                            triggerNext();
+                        }
+                    }
                 }
+            } else if (event.getButton() == MouseEvent.BUTTON3) {
+                rightClickTempDisableBox = true;
             }
         }
     }
@@ -120,37 +148,36 @@ public class AnimationPane extends JPanel {
                     characterImage[a] = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.CHARACTERS, e.get(advancer - 1).get(a).getName().toString().toLowerCase() + "-" + e.get(advancer - 1).get(a).getMood().toString().toLowerCase()));
                     characterImage[a].resize((int) (200 * (GUIScale / 250)), 250, true);
 
-                    if(background == null) {
-                        for(int finder = 0; finder < e.get(advancer - 1).size(); finder++) {
-                            if(e.get(advancer - 1).get(a).getBackground() != null) {
-                                if(newStart) { // new / old. start / load
+                    if (background == null) {
+                        for (int finder = 0; finder < e.get(advancer - 1).size(); finder++) {
+                            if (e.get(advancer - 1).get(a).getBackground() != null) {
+                                if (newStart) { // new / old. start / load
                                     // New start needs to go from top to bottom
                                     background = new ImageDesc(e.get((advancer - 1) + finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) + finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                                     background.setImageItself(tempBackground.getBufferedImage());
-                                }
-                                else {
-                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder )
+                                } else {
+                                    // TODO: Load needs to go from bottom to top (current just mirror of above with -finder ) ["after the load scenario"]
                                     background = new ImageDesc(e.get((advancer - 1) - finder).get(a).getBackground(), WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get((advancer - 1) - finder).get(a).getBackground()));
                                     javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                                    double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                                    tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                                    double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                                    tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                                     background.setImageItself(tempBackground.getBufferedImage());
                                 }
                             }
-                            if(background != null) {
+                            if (background != null) {
                                 break;
                             }
                         }
                     }
                     // Searches for next background image and resizes it
-                    if(e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
+                    if (e.get(advancer - 1).get(a).getBackground() != null && !(background.getImageDescription().equals(e.get(advancer - 1).get(a).getBackground()))) {
                         background = new ImageDesc(e.get(advancer - 1).get(a).getBackground(), new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.BACKGROUND, e.get(advancer - 1).get(a).getBackground())));
                         javaxt.io.Image tempBackground = new javaxt.io.Image(background.getImageItself());
-                        double scale = Math.max(((double)windowSize.x / tempBackground.getWidth()), ((double)windowSize.y / tempBackground.getHeight()));
-                        tempBackground.resize((int)((scale) * tempBackground.getWidth()), (int)((scale) * tempBackground.getHeight()));
+                        double scale = Math.max(((double) windowSize.x / tempBackground.getWidth()), ((double) windowSize.y / tempBackground.getHeight()));
+                        tempBackground.resize((int) ((scale) * tempBackground.getWidth()), (int) ((scale) * tempBackground.getHeight()));
                         background.setImageItself(tempBackground.getBufferedImage());
                     }
                 }
@@ -158,7 +185,7 @@ public class AnimationPane extends JPanel {
             }
 
             // Draw background here
-            g.drawImage(background.getImageItself(),(windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
+            g.drawImage(background.getImageItself(), (windowSize.x / 2) - (background.getImageItself().getWidth() / 2), (windowSize.y / 2) - (background.getImageItself().getHeight() / 2), this);
 
             for (int b = 1; b <= e.get(advancer - 1).size(); b++) {
                 // Draw character(s) here
@@ -166,33 +193,61 @@ public class AnimationPane extends JPanel {
             }
 
             // DialogueBox
-            g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, windowSize.y - dialogueBox.getHeight() - (windowSize.x / 2 - dialogueBox.getWidth() / 2), this);
-            g.drawString(e.get(advancer - 1).get(0).getName().toString(), (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6));
+            if (!rightClickTempDisableBox) {
+                // Character name box calculator
+                g.drawImage(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "black"),
+                        (int) (windowSize.x / 9.0), (int) ((windowSize.y / 10.0) * 6) - (g.getFontMetrics(activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20)).getAscent()),
+                        g.getFontMetrics(activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20)).stringWidth(e.get(advancer - 1).get(0).getName().toString()) + (WaifuBrew.getInstance().getStringPadding() * 2),
+                        WaifuBrew.getInstance().getSystemFontSize() + 20, this);
+                g.drawImage(dialogueBox.getBufferedImage(), windowSize.x / 2 - dialogueBox.getWidth() / 2, (int) ((windowSize.y / 12.0) * 8) - (dialogueBox.getHeight() / 3), this);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(e.get(advancer - 1).get(0).getName().toString(), activeFont.deriveFont((float)WaifuBrew.getInstance().getSystemFontSize() + 20), frc);
+                Shape outline = textTl.getOutline(null);
+
+                // FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((int) (windowSize.x / 9.0) + WaifuBrew.getInstance().getStringPadding(), (int) ((windowSize.y / 10.0) * 6));// + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
+            }
             // Run once. Different from initStage. initStory runs after very first dialogue while initStage runs right after stage has been entered.
             g.setFont(activeFont);
             g.setColor(new Color(0, 0, 0));
         } else {
             // What
         }
+        if (!rightClickTempDisableBox) {
+            if (stringShower != "") {
+                // Dialogue text rendering with boundary shading
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        if (tempString != "") {
-            // Dialogue text rendering with boundary shading
-            Graphics2D g2d = (Graphics2D) g.create();
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                FontRenderContext frc = g2d.getFontRenderContext();
+                TextLayout textTl = new TextLayout(stringShower, activeFont, frc);
+                Shape outline = textTl.getOutline(null);
 
-            FontRenderContext frc = g2d.getFontRenderContext();
-            TextLayout textTl = new TextLayout(tempString, activeFont, frc);
-            Shape outline = textTl.getOutline(null);
+                // FontMetrics fm = g2d.getFontMetrics(activeFont);
+                g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8));// + fm.getAscent());
+                g2d.setColor(Color.WHITE);
+                g2d.fill(outline);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.setColor(Color.BLACK);
+                g2d.draw(outline);
+                g2d.dispose();
 
-            FontMetrics fm = g2d.getFontMetrics(activeFont);
-            g2d.translate((windowSize.x / 9.0), ((windowSize.y / 12.0) * 8) + fm.getAscent());
-            g2d.setColor(Color.WHITE);
-            g2d.fill(outline);
-            g2d.setStroke(new BasicStroke(1));
-            g2d.setColor(Color.BLACK);
-            g2d.draw(outline);
-            g2d.dispose();
+                /*
+                if(g2d.getFontMetrics().stringWidth(stringShower) >= windowSize.x - ((windowSize.x / 9.0) * 2)) {
+                    // add enter
+                }
+                */
+            }
         }
 
         // Buttons will paint over this Panel
@@ -210,15 +265,14 @@ public class AnimationPane extends JPanel {
                 aniPaneButton.get("config").paintComponent(g);
                 break;
             }
-
         }
     }
 
-    public void stageChange() {
+    public void stageChange(int lastStage) {
         // Reload anything that can have settings changed.
 
         // Renew Font (Font and Size)
-        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
 
         // Renew FPS
         stringTimer = null;
@@ -226,8 +280,13 @@ public class AnimationPane extends JPanel {
 
         // Renew dialogueBox
         dialogueBox = new javaxt.io.Image(WaifuBrew.getInstance().getImageByName(ImageSelector.VECTOR, "dialogbar"));
-        dialogueBox.resize((int) (dialogueBox.getWidth() * 0.85), (int) (dialogueBox.getHeight() * 0.85), true);
+        dialogueBox.resize((int) (((dialogueBox.getWidth() * 0.85) / 1280) * WaifuBrew.getInstance().getRes()[1].x), (int) (((dialogueBox.getHeight() * 0.85) / 720) * WaifuBrew.getInstance().getRes()[1].y), false);
         dialogueBox.setOpacity(WaifuBrew.getInstance().getDialogueTransparency());
+
+        if(!(lastStage == 0 || lastStage == 10)) {
+            // Have to select correct route as well.
+            advancer = WaifuBrew.getInstance().getCurrentSave().getAdvancerDialogue();
+        }
     }
 
     private void initFPS() {
@@ -250,7 +309,7 @@ public class AnimationPane extends JPanel {
 
         this.aniPaneButton.put("save", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 3, "save_button", Origin.MIDDLE_CENTRE, 0, true));
         this.aniPaneButton.put("load", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 4, "load_button", Origin.MIDDLE_CENTRE, 0, true));
-        this.aniPaneButton.put("start", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "start_button", Origin.MIDDLE_CENTRE, 0, true));
+        this.aniPaneButton.put("exit", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "exit_button", Origin.MIDDLE_CENTRE, 0, true));
         // Remake this as options, rather than config
         this.aniPaneButton.put("config", new CustomButton((windowSize.x / 8) * 7, (windowSize.y / 6) * 5, "options_button", Origin.MIDDLE_TOP, 0, true));
 
@@ -265,7 +324,7 @@ public class AnimationPane extends JPanel {
     }
 
     private void initFont() {
-        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getFontSize());
+        activeFont = new Font(WaifuBrew.getInstance().getDialogueFont(), Font.BOLD, WaifuBrew.getInstance().getPlayFontSize());
     }
 
     private void initParseDialogue() {
@@ -277,18 +336,36 @@ public class AnimationPane extends JPanel {
         // Add stage check to disable auto dialogue to start without being in the correct stage
         stringTimer = new Timer(WaifuBrew.getInstance().getDialogueSpeed(), new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+
+                if(stringBuilderArray != null) {
+                    if (stringBuilderArray.length != 0) {
+                        // check if stringBuilderTester contains everything that stringBuilderArray has. (true == skip)
+
+                        /*for (int buildingString = 0; buildingString < stringBuilderArray.length; buildingString++) {
+                            stringBuilderTester = stringBuilderTester.concat(" " + stringBuilderArray[buildingString]);
+
+                            System.out.println(stringBuilderTester);
+                        }*/
+                    }
+                }
+
+
                 if (!a.isEmpty()) {
-                    if (tempString.length() != a.length()) {
-                        tempString = tempString + a.charAt(tempString.length());
-                    } else { // TODO: Check if this works
-                        /*
-                            System.out.println("The current advancer: " + WaifuBrew.getInstance().getAutoAdvancer());
-                            System.out.println("The transparency: " + WaifuBrew.getInstance().getDialogueTransparency());
-                            */
+                    if (stringBuilder.length() != a.length()) {
+                        stringBuilder = stringBuilder + a.charAt(stringBuilder.length());
+
+                        stringShower = stringBuilder;
+
+                        // add enter here (fix length too) perhaps use string array?
+
+                        // use regex to split up the string into array and use array to build the shit
+
+                    } else {
                         if (WaifuBrew.getInstance().getAutoAdvancer()) {
                             clickActivate = true;
-                            // TODO: NEEDS AWAIT
-                            // TODO: FIX TRANSPARENCY
+                            // TODO: NEEDS AWAIT (Used another timer, but did not work...)
+                            // TODO: FIX TRANSPARENCY (Seems to be fixed...?)
                             if (WaifuBrew.getInstance().getStage() == 1) {
                                 triggerNext();
                             }

@@ -4,7 +4,9 @@ public enum ImageSelector {
     BUTTONS(0),
     VECTOR(1),
     BACKGROUND(2),
-    CHARACTERS(3); // Not implemented yet
+    CHARACTERS(3),
+    EFFECTS(4),
+    THUMBNAILS(5);
 
     private int value;
 

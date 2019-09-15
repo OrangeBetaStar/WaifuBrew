@@ -41,16 +41,6 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     }
 
     @Override
-    public int getAbsoluteX() {
-        return x + (length / 2);
-    }
-
-    @Override
-    public int getAbsoluteY() {
-        return y + (height / 2);
-    }
-
-    @Override
     public int getWidth() {
         return length;
     }
@@ -58,6 +48,21 @@ public class SideBar extends InteractiveObjects implements ActionListener {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public int getActivePosX() {
+        return x;
+    }
+
+    @Override
+    public int getActivePosY() {
+        return y;
+    }
+
+    @Override
+    public Origin getOrigin() {
+        return Origin.MIDDLE_CENTRE;
     }
 
     public boolean isMoving() {
@@ -85,7 +90,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Open
         if (isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), (x + length) - (int)(movement[movementCounter] * length), y, this);
+                g.drawImage(imageBlock.getBufferedImage(), (x + length) - (int) (movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;
@@ -97,7 +102,7 @@ public class SideBar extends InteractiveObjects implements ActionListener {
         // Close
         else if (!isActive && movementState) {
             try {
-                g.drawImage(imageBlock.getBufferedImage(), x + (int)(movement[movementCounter] * length), y, this);
+                g.drawImage(imageBlock.getBufferedImage(), x + (int) (movement[movementCounter] * length), y, this);
                 movementCounter++;
             } catch (IndexOutOfBoundsException e) {
                 movementCounter = 0;

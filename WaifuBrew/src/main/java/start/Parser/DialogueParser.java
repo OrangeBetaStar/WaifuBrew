@@ -38,6 +38,7 @@ public class DialogueParser {
             JSONObject obj = (JSONObject) object;
             JSONArray data = (JSONArray) obj.get("route");
             Iterator i = data.iterator();
+            String stringProcessor[];
 
             this.dialogueList = new String[data.size()];
 
@@ -53,32 +54,28 @@ public class DialogueParser {
                         List<Characters> sceneCharList = new ArrayList<>();
                         List<Mood> sceneMoodList = new ArrayList<>();
                         for (String s : subNameString) {
-                            if (s.toLowerCase().contains("nico")) {
-                                sceneCharList.add(Characters.Yazawa_Nico);
-                                //    System.out.println("Added: Nico");
-                            } else if (s.toLowerCase().contains("maki")) {
-                                sceneCharList.add(Characters.Nishikino_Maki);
-                                //    System.out.println("Added: Maki");
-                            } else if (s.toLowerCase().contains("arisa")) {
-                                sceneCharList.add(Characters.Ichigaya_Arisa);
-                                //    System.out.println("Added: Arisa");
-                            } else if (s.toLowerCase().contains("kibb")) {
-                                sceneCharList.add(Characters.Kibbleru);
-                                //    System.out.println("Added: Kibb");
+                            nextChar:
+                            for(Characters chars : Characters.values()) {
+                                stringProcessor = chars.toString().split("_");
+                                for(String nameParts : stringProcessor) {
+                                    if(s.contains(nameParts)) {
+                                        sceneCharList.add(chars);
+                                        break nextChar;
+                                    }
+                                }
                             }
                         }
                         do {
                             for (String m : subMoodString) {
-                                if (m.toLowerCase().contains("happy")) {
-                                    sceneMoodList.add(Mood.HAPPY);
-                                } else if (m.toLowerCase().contains("sad")) {
-                                    sceneMoodList.add(Mood.SAD);
-                                } else if (m.toLowerCase().contains("normal")) {
-                                    sceneMoodList.add(Mood.NORMAL);
-                                } else if (m.toLowerCase().contains("angry")) {
-                                    sceneMoodList.add(Mood.ANGRY);
-                                } else {
-                                    throw new JSONException("Check JSON");
+                                nextMood:
+                                for(Mood moods : Mood.values()) {
+                                    stringProcessor = moods.toString().split("_");
+                                    for(String moodParts : stringProcessor) {
+                                        if(m.contains(moodParts)) {
+                                            sceneMoodList.add(moods);
+                                            break nextMood;
+                                        }
+                                    }
                                 }
                             }
 

@@ -7,24 +7,24 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame {
+public class GUIManager extends JFrame {
 
     // TODO: Why create them when I do not need it right now.
-    private StartScreen startPage;
+    private StartScreenPane startPage;
     private AnimationPane animationPane;
     private ConfigPane configPane;
-    private LoadPane loadPane;
+    private SaveLoadPane saveLoadPane;
 
     private int stage = WaifuBrew.getInstance().getStage();
     private int lastStage = 10; // Remembers last opened stage
     private boolean framelimiterDisable = false;
 
-    public GUI() {
+    public GUIManager() {
         super("ワイファブルー by Tailsoft");
-        startPage = new StartScreen();
+        startPage = new StartScreenPane();
         animationPane = new AnimationPane();
         configPane = new ConfigPane();
-        loadPane = new LoadPane();
+        saveLoadPane = new SaveLoadPane();
         init();
     }
 
@@ -44,7 +44,10 @@ public class GUI extends JFrame {
                 remove(configPane);
             }
             if (lastStage == 3) {
-                remove(loadPane);
+                remove(saveLoadPane);
+            }
+            if (lastStage == 4) {
+                remove(saveLoadPane);
             }
             if (lastStage == 0 || lastStage == 10) {
                 remove(startPage);
@@ -53,17 +56,23 @@ public class GUI extends JFrame {
             // Add new pane as active
             if (stage == 1) {
                 add(animationPane);
-                animationPane.stageChange();
+                animationPane.stageChange(lastStage);
                 animationPane.repaint();
             }
             if (stage == 2) {
                 add(configPane);
-                configPane.stageChange();
+                configPane.stageChange(lastStage);
                 configPane.repaint();
             }
             if (stage == 3) {
-                add(loadPane);
-                loadPane.repaint();
+                add(saveLoadPane);
+                saveLoadPane.stageChange("load");
+                saveLoadPane.repaint();
+            }
+            if (stage == 4) {
+                add(saveLoadPane);
+                saveLoadPane.stageChange("save");
+                saveLoadPane.repaint();
             }
             if (stage == 0 || stage == 10) {
                 add(startPage);

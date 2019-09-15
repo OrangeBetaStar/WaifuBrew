@@ -10,22 +10,14 @@ public class MasterHandlerClass implements MouseListener, MouseMotionListener {
 
     }
 
-    public boolean inBound(MouseEvent event, InteractiveObjects interactiveObject, boolean absoluteTrack) {
-        if(absoluteTrack) {
-            System.out.println("Event mouse - X:" + event.getX() +  " [" + interactiveObject.getX() + " ~ " + (interactiveObject.getX() + interactiveObject.getWidth()) + "] : " +
-                    "Y:" + event.getY() +  " [" + interactiveObject.getY() + " ~ " + (interactiveObject.getY() + interactiveObject.getHeight()) + "]");
-        }
-        return (absoluteTrack ?
-                event.getX() > interactiveObject.getAbsoluteX() &&
-                        event.getX() < interactiveObject.getAbsoluteX() + interactiveObject.getWidth() &&
-                        event.getY() > interactiveObject.getAbsoluteY() &&
-                        event.getY() < interactiveObject.getAbsoluteY() + interactiveObject.getHeight() :
-                event.getX() >= interactiveObject.getX() - interactiveObject.getWidth() / 2 &&
-                        event.getY() >= interactiveObject.getY() - interactiveObject.getHeight() / 2 &&
-                        event.getX() <= interactiveObject.getX() + interactiveObject.getWidth() / 2 &&
-                        event.getY() <= interactiveObject.getY() + interactiveObject.getHeight() / 2
+    public boolean inBound(MouseEvent event, InteractiveObjects interactiveObject) {
+        System.out.println("Mouse activity logging in MasterHandlerClass");
+        System.out.println("Event mouse - X:" + event.getX() + " [" + interactiveObject.getActivePosX() + " ~ " + (interactiveObject.getActivePosX() + interactiveObject.getWidth()) + "] : " + "Y:" + event.getY() + " [" + interactiveObject.getActivePosY() + " ~ " + (interactiveObject.getActivePosY() + interactiveObject.getHeight()) + "]");
 
-        );
+        return event.getX() >= interactiveObject.getActivePosX() &&
+                event.getX() <= interactiveObject.getActivePosX() + interactiveObject.getWidth() &&
+                event.getY() >= interactiveObject.getActivePosY() &&
+                event.getY() <= interactiveObject.getActivePosY() + interactiveObject.getHeight();
     }
 
     public void mouseClicked(MouseEvent e) {
